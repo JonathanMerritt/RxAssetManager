@@ -9,7 +9,7 @@
 
 #
 
-Based on the blog [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
+Inspired by the blog post [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
 
 _Any help or contribution is welcome._
 
@@ -18,8 +18,7 @@ _Any help or contribution is welcome._
 ```groovy
   repositories {
     jcenter()
-    //OR
-    mavenCentral()
+    //mavenCentral()
   }
  
   dependencies {
