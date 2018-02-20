@@ -49,7 +49,7 @@ bintray {
       }
 
       mavenCentralSync {
-        sync = true
+        sync = false
         user = dev.name
         password = dev.maven.pass
       }

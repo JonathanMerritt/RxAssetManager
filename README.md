@@ -23,7 +23,7 @@ _Any help or contribution is welcome._
   }
  
   dependencies {
-    implementation "com.github.jonathanmerritt.rxassetmanager:cor OR* core-ext:x.y.z"
+    implementation "com.github.jonathanmerritt.rxassetmanager:core OR* core-ext:x.y.z"
   }
 ```
 
