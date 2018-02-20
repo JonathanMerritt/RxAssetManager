@@ -1,0 +1,51 @@
+/*
+ *     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
+ *
+ *     Licensed under the Apache License, Version 2.0 (the "License");
+ *     you may not use this file except in compliance with the License.
+ *     You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *     Unless required by applicable law or agreed to in writing, software
+ *     distributed under the License is distributed on an "AS IS" BASIS,
+ *     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *     See the License for the specific language governing permissions and
+ *     limitations under the License.
+ */
+
+apply plugin : 'com.github.dcendents.android-maven'
+
+group = rep.id
+
+install.repositories.mavenInstaller {
+  pom.project {
+    packaging 'aar'
+    groupId rep.id
+    artifactId rep.lib.name
+    name rep.lib.name
+    description rep.lib.desc
+    url rep.lib.url
+
+    licenses {
+      license {
+        name rep.licenses.join(", ")
+        url "$rep.url/blob/master/LICENSE.txt"
+      }
+    }
+
+    developers {
+      developer {
+        id dev.name
+        name dev.name
+        email dev.email
+      }
+    }
+
+    scm {
+      connection rep.vcs.url
+      developerConnection rep.vcs.dev
+      url rep.lib.url
+    }
+  }
+}
