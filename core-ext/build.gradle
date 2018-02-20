@@ -55,8 +55,7 @@ dependencies {
   implementation dep.rxjava2Ext
   implementation dep.guava
 
-  androidTestImplementation dep.support.test.runner
-  androidTestImplementation dep.support.test.espresso
+  androidTestImplementation dep.support.test
   testImplementation dep.test.junit
 }
 

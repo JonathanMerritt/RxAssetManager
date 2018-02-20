@@ -60,7 +60,6 @@ dependencies {
   implementation dep.rxjava2
   implementation dep.timber
 
-  androidTestImplementation dep.support.test.runner
-  androidTestImplementation dep.support.test.espresso
+  androidTestImplementation dep.support.test
   testImplementation dep.test.junit
 }
