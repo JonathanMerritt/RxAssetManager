@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
   @Override protected void onPostCreate(@Nullable Bundle savedInstanceState) {
     super.onPostCreate(savedInstanceState);
     if (binding != null && manager != null) binding.setClicks(
-        view -> getObserverable(view.getId())
-            .subscribeOn(Schedulers.io())
+        view -> getObserverable(view.getId()).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(o -> Timber.i("next(%s)", o), t -> Timber.e(t, t.getMessage()),
                 () -> Timber.i("complete()"), disposables::add));

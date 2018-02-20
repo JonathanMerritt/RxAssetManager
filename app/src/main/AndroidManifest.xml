@@ -19,6 +19,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.github.jonathanmerritt.rxassetmanager"
     >
+
   <application
       android:name=".MainApplication"
       android:allowBackup="true"

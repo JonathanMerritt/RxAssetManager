@@ -17,10 +17,11 @@
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.github.jonathanmerritt.rxassetmanager"
+    package="com.github.jonathanmerritt.rxassetmanager.ext"
     >
+
   <application
-      android:name=".ext.MainApplication"
+      android:name=".MainApplication"
       android:allowBackup="true"
       android:fullBackupContent="@xml/backup_descriptor"
       android:icon="@mipmap/ic_launcher"
@@ -31,7 +32,7 @@
       tools:ignore="GoogleAppIndexingWarning"
       >
     <activity
-        android:name=".ext.MainActivity"
+        android:name=".MainActivity"
         >
       <intent-filter>
         <action
