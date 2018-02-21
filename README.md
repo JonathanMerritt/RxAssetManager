@@ -18,6 +18,7 @@ _Any help or contribution is welcome._
 ```groovy
   repositories {
     jcenter()
+    //OR
     //mavenCentral()
   }
  
@@ -42,7 +43,27 @@ _Any help or contribution is welcome._
 
 
 ## Usage
+This example will either open or list and open any files as InputStreams.
 
+_Check the sample apps for more detailed examples._
+
+#### Core
+```java
+public class SomeActivity extends Activity {
+  private Disposable openPath() { 
+    return new RxAssetManager(this).open("Asset File Path").subscribe(inputStream -> {}); 
+  }
+}
+```
+
+#### Core-Ext
+```java
+public class SomeActivity extends Activity { 
+  private Disposable listOpenPath() { 
+    return new RxAssetManager(this).listOpen("Asset Folder/File Path").subscribe(inputStream -> {}); 
+  }
+}
+```
 
 ## TODO
 - Finish README.
