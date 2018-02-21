@@ -74,15 +74,15 @@ public class MainActivity extends AppCompatActivity {
   private Observable<?> getObserverable(int id) {
     switch (id) {
       case R.id.open:
-        return manager.open("Folder" + "/" + "File.txt").toObservable();
+        return manager.open(getString(R.string.folder_file)).toObservable();
       case R.id.open_fd:
-        return manager.openFd("Folder" + "/" + "File2.txt").toObservable();
+        return manager.openFd(getString(R.string.folder_file_2)).toObservable();
       case R.id.list:
-        return manager.list("").toObservable();
+        return manager.list(getString(R.string.empty)).toObservable();
       case R.id.open_non_asset_fd:
-        return manager.openNonAssetFd("AndroidManifest.xml").toObservable();
+        return manager.openNonAssetFd(getString(R.string.manifest)).toObservable();
       case R.id.open_xml_resource_parser:
-        return manager.openXmlResourceParser("AndroidManifest.xml").toObservable();
+        return manager.openXmlResourceParser(getString(R.string.manifest)).toObservable();
       default:
         return manager.getLocales().toObservable();
     }

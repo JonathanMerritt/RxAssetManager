@@ -74,28 +74,27 @@ public class MainActivity extends AppCompatActivity {
   private Observable<?> getObserverable(int id) {
     switch (id) {
       case R.id.open_string:
-        return manager.openString("Folder" + "/" + "File.txt").toObservable();
+        return manager.openString(getString(R.string.folder_file)).toObservable();
       case R.id.open_bytes:
-        return manager.openBytes("Folder" + "/" + "File2.txt").toObservable();
+        return manager.openBytes(getString(R.string.folder_file_2)).toObservable();
       case R.id.open_save:
-        return manager.openSave("Folder" + "/" + "Folder2" + "/" + "File.txt", getCacheDir().getAbsolutePath())
-            .toObservable();
+        return manager.openSave(getString(R.string.folder_folder_2_file), getCacheDir().getAbsolutePath()).toObservable();
       case R.id.list_all:
-        return manager.listAll("").toObservable();
+        return manager.listAll(getString(R.string.empty)).toObservable();
       case R.id.list_open:
-        return manager.listOpen("").toObservable();
+        return manager.listOpen(getString(R.string.empty)).toObservable();
       case R.id.list_open_string:
-        return manager.listOpenString("Folder" + "/" + "Folder2").toObservable();
+        return manager.listOpenString(getString(R.string.folder_folder_2)).toObservable();
       case R.id.list_open_bytes:
-        return manager.listOpenBytes("Folder", false).toObservable();
+        return manager.listOpenBytes(getString(R.string.folder), false).toObservable();
       case R.id.list_open_save:
-        return manager.listOpenSave("Folder", getCacheDir().getAbsolutePath()).toObservable();
+        return manager.listOpenSave(getString(R.string.folder), getCacheDir().getAbsolutePath()).toObservable();
       case R.id.list_open_fd:
-        return manager.listOpenFd("").toObservable();
+        return manager.listOpenFd(getString(R.string.empty)).toObservable();
       case R.id.list_open_non_asset_fd:
-        return manager.listOpenNonAssetFd("/", false).toObservable();
+        return manager.listOpenNonAssetFd(getString(R.string.root), false).toObservable();
       default:
-        return manager.listOpenXmlResourceParser("/").toObservable();
+        return manager.listOpenXmlResourceParser(getString(R.string.root)).toObservable();
     }
   }
 }
