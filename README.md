@@ -19,7 +19,7 @@ _Any help or contribution is welcome._
   repositories {
     jcenter()
     //OR
-    //mavenCentral()
+    mavenCentral()
   }
  
   dependencies {
@@ -66,7 +66,7 @@ public class SomeActivity extends Activity {
 ```
 
 ## TODO
-- Finish README.
+- Add javadoc.
 - ...
 
 ## License
