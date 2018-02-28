@@ -34,7 +34,10 @@ public class RxAssetManager implements IsRxAssetManager {
   private final AssetManager manager;
 
   public RxAssetManager(@Nonnull Context context) {
-    this.manager = Utilities.checkNotNull(context.getAssets());
+    if (context == null) throw new RuntimeException("Context cannot be null!");
+    final AssetManager manager = context.getAssets();
+    if (manager == null) throw new RuntimeException("AssetManager cannot be null!");
+    this.manager = manager;
   }
 
   @Override public Completable close() {
