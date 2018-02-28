@@ -54,11 +54,11 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   }
 
   default Flowable<InputStream> listOpen(String folderName, int accessMode) {
-    return listOpen(folderName, accessMode, true);
+    return listOpen(folderName, accessMode, false);
   }
 
   default Flowable<InputStream> listOpen(String folderName) {
-    return listOpen(folderName, true);
+    return listOpen(folderName, false);
   }
 
   Flowable<String> listOpenString(String folderName, int accessMode, boolean listAll);
@@ -68,11 +68,11 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   }
 
   default Flowable<String> listOpenString(String folderName, int accessMode) {
-    return listOpenString(folderName, accessMode, true);
+    return listOpenString(folderName, accessMode, false);
   }
 
   default Flowable<String> listOpenString(String folderName) {
-    return listOpenString(folderName, true);
+    return listOpenString(folderName, false);
   }
 
   Flowable<byte[]> listOpenBytes(String folderName, int accessMode, boolean listAll);
@@ -82,11 +82,11 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   }
 
   default Flowable<byte[]> listOpenBytes(String folderName, int accessMode) {
-    return listOpenBytes(folderName, accessMode, true);
+    return listOpenBytes(folderName, accessMode, false);
   }
 
   default Flowable<byte[]> listOpenBytes(String folderName) {
-    return listOpenBytes(folderName, true);
+    return listOpenBytes(folderName, false);
   }
 
   Flowable<File> listOpenSave(String folderName, int accessMode, String saveFolder, boolean listAll);
@@ -96,17 +96,17 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   }
 
   default Flowable<File> listOpenSave(String folderName, int accessMode, String saveFolder) {
-    return listOpenSave(folderName, accessMode, saveFolder, true);
+    return listOpenSave(folderName, accessMode, saveFolder, false);
   }
 
   default Flowable<File> listOpenSave(String folderName, String saveFolder) {
-    return listOpenSave(folderName, saveFolder, true);
+    return listOpenSave(folderName, saveFolder, false);
   }
 
   Flowable<AssetFileDescriptor> listOpenFd(String folderName, boolean listAll);
 
   default Flowable<AssetFileDescriptor> listOpenFd(String folderName) {
-    return listOpenFd(folderName, true);
+    return listOpenFd(folderName, false);
   }
 
   Flowable<AssetFileDescriptor> listOpenNonAssetFd(int cookie, String folderName, boolean listAll);
@@ -116,11 +116,11 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   }
 
   default Flowable<AssetFileDescriptor> listOpenNonAssetFd(int cookie, String folderName) {
-    return listOpenNonAssetFd(cookie, folderName, true);
+    return listOpenNonAssetFd(cookie, folderName, false);
   }
 
   default Flowable<AssetFileDescriptor> listOpenNonAssetFd(String folderName) {
-    return listOpenNonAssetFd(folderName, true);
+    return listOpenNonAssetFd(folderName, false);
   }
 
   Flowable<XmlResourceParser> listOpenXmlResourceParser(int cookie, String folderName, boolean listAll);
@@ -130,10 +130,10 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   }
 
   default Flowable<XmlResourceParser> listOpenXmlResourceParser(int cookie, String folderName) {
-    return listOpenXmlResourceParser(cookie, folderName, true);
+    return listOpenXmlResourceParser(cookie, folderName, false);
   }
 
   default Flowable<XmlResourceParser> listOpenXmlResourceParser(String folderName) {
-    return listOpenXmlResourceParser(folderName, true);
+    return listOpenXmlResourceParser(folderName, false);
   }
 }
