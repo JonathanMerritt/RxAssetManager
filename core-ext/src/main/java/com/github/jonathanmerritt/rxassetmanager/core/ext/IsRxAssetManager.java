@@ -17,32 +17,31 @@
 package com.github.jonathanmerritt.rxassetmanager.core.ext;
 
 import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import java.io.File;
 import java.io.InputStream;
 
-import static android.content.res.AssetManager.ACCESS_STREAMING;
-
 public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager {
 
   Maybe<String> openString(String fileName, int accessMode);
 
   default Maybe<String> openString(String fileName) {
-    return openString(fileName, ACCESS_STREAMING);
+    return openString(fileName, AssetManager.ACCESS_STREAMING);
   }
 
   Maybe<byte[]> openBytes(String fileName, int accessMode);
 
   default Maybe<byte[]> openBytes(String fileName) {
-    return openBytes(fileName, ACCESS_STREAMING);
+    return openBytes(fileName, AssetManager.ACCESS_STREAMING);
   }
 
   Maybe<File> openSave(String fileName, int accessMode, String saveFolder);
 
   default Maybe<File> openSave(String fileName, String saveFolder) {
-    return openSave(fileName, ACCESS_STREAMING, saveFolder);
+    return openSave(fileName, AssetManager.ACCESS_STREAMING, saveFolder);
   }
 
   Flowable<String> listAll(String folderName);
@@ -50,7 +49,7 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   Flowable<InputStream> listOpen(String folderName, int accessMode, boolean listAll);
 
   default Flowable<InputStream> listOpen(String folderName, boolean listAll) {
-    return listOpen(folderName, ACCESS_STREAMING, listAll);
+    return listOpen(folderName, AssetManager.ACCESS_STREAMING, listAll);
   }
 
   default Flowable<InputStream> listOpen(String folderName, int accessMode) {
@@ -64,7 +63,7 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   Flowable<String> listOpenString(String folderName, int accessMode, boolean listAll);
 
   default Flowable<String> listOpenString(String folderName, boolean listAll) {
-    return listOpenString(folderName, ACCESS_STREAMING, listAll);
+    return listOpenString(folderName, AssetManager.ACCESS_STREAMING, listAll);
   }
 
   default Flowable<String> listOpenString(String folderName, int accessMode) {
@@ -78,7 +77,7 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   Flowable<byte[]> listOpenBytes(String folderName, int accessMode, boolean listAll);
 
   default Flowable<byte[]> listOpenBytes(String folderName, boolean listAll) {
-    return listOpenBytes(folderName, ACCESS_STREAMING, listAll);
+    return listOpenBytes(folderName, AssetManager.ACCESS_STREAMING, listAll);
   }
 
   default Flowable<byte[]> listOpenBytes(String folderName, int accessMode) {
@@ -92,7 +91,7 @@ public interface IsRxAssetManager extends com.github.jonathanmerritt.rxassetmana
   Flowable<File> listOpenSave(String folderName, int accessMode, String saveFolder, boolean listAll);
 
   default Flowable<File> listOpenSave(String folderName, String saveFolder, boolean listAll) {
-    return listOpenSave(folderName, ACCESS_STREAMING, saveFolder, listAll);
+    return listOpenSave(folderName, AssetManager.ACCESS_STREAMING, saveFolder, listAll);
   }
 
   default Flowable<File> listOpenSave(String folderName, int accessMode, String saveFolder) {

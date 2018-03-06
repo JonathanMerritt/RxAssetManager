@@ -17,14 +17,13 @@
 package com.github.jonathanmerritt.rxassetmanager.core;
 
 import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import java.io.InputStream;
-
-import static android.content.res.AssetManager.ACCESS_STREAMING;
 
 public interface IsRxAssetManager {
 
@@ -33,7 +32,7 @@ public interface IsRxAssetManager {
   Maybe<InputStream> open(String fileName, int accessMode);
 
   default Maybe<InputStream> open(String fileName) {
-    return open(fileName, ACCESS_STREAMING);
+    return open(fileName, AssetManager.ACCESS_STREAMING);
   }
 
   Single<AssetFileDescriptor> openFd(String fileName);

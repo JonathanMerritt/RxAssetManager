@@ -19,18 +19,15 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.XmlResourceParser;
+import com.google.common.base.Charsets;
 import com.google.common.io.ByteSource;
 import com.google.common.io.Files;
+import hu.akarnokd.rxjava2.operators.FlowableTransformers;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import java.io.File;
 import java.io.InputStream;
 import javax.annotation.Nonnull;
-
-import static com.google.common.base.Charsets.UTF_8;
-import static com.google.common.io.Files.getFileExtension;
-import static hu.akarnokd.rxjava2.operators.FlowableTransformers.expand;
-import static java.lang.String.format;
 
 public class RxAssetManager extends com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
     implements IsRxAssetManager {
@@ -41,7 +38,10 @@ public class RxAssetManager extends com.github.jonathanmerritt.rxassetmanager.co
 
   @Override public Maybe<String> openString(String fileName, int accessMode) {
     return open(fileName, accessMode).map(input -> new ByteSource() {
-      @Override public InputStream openStream() { return input; }}.asCharSource(UTF_8).read());
+      @Override public InputStream openStream() {
+        return input;
+      }
+    }.asCharSource(Charsets.UTF_8).read());
   }
 
   @Override public Maybe<byte[]> openBytes(String fileName, int accessMode) {
@@ -54,7 +54,7 @@ public class RxAssetManager extends com.github.jonathanmerritt.rxassetmanager.co
 
   @Override public Maybe<File> openSave(String fileName, int accessMode, String saveFolder) {
     return openBytes(fileName, accessMode).map(bytes -> {
-      final File file = new File(format("%s/%s", saveFolder, fileName));
+      final File file = new File(String.format("%s/%s", saveFolder, fileName));
       Files.createParentDirs(file);
       Files.write(bytes, file);
       return file;
@@ -62,7 +62,7 @@ public class RxAssetManager extends com.github.jonathanmerritt.rxassetmanager.co
   }
 
   @Override public Flowable<String> listAll(String folderName) {
-    return listPath(folderName).compose(expand(this::listPath));
+    return listPath(folderName).compose(FlowableTransformers.expand(this::listPath));
   }
 
   @Override public Flowable<InputStream> listOpen(String folderName, int accessMode, boolean listAll) {
@@ -93,18 +93,19 @@ public class RxAssetManager extends com.github.jonathanmerritt.rxassetmanager.co
 
   @Override
   public Flowable<XmlResourceParser> listOpenXmlResourceParser(int cookie, String folderName, boolean listAll) {
-    return listFiles(folderName, listAll).filter(fileName1 -> getFileExtension(fileName1).equals("xml"))
+    return listFiles(folderName, listAll).filter(fileName1 -> Files.getFileExtension(fileName1).equals("xml"))
         .flatMapSingle(fileName -> openXmlResourceParser(cookie, fileName));
   }
 
   private Flowable<String> listPath(String folderName) {
     return list(folderName).map(name -> {
-      final String path = format("%s/%s", folderName, name);
+      final String path = String.format("%s/%s", folderName, name);
       return path.length() > 1 && path.substring(0, 1).equals("/") ? path.replace(path.substring(0, 1), "") : path;
     });
   }
 
   private Flowable<String> listFiles(String folderName, boolean listAll) {
-    return (listAll ? listAll(folderName) : listPath(folderName)).filter(path -> !getFileExtension(path).isEmpty());
+    return (listAll ? listAll(folderName) : listPath(folderName)).filter(
+        path -> !Files.getFileExtension(path).isEmpty());
   }
 }

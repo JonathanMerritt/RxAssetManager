@@ -27,8 +27,6 @@ import io.reactivex.Single;
 import java.io.InputStream;
 import javax.annotation.Nonnull;
 
-import static io.reactivex.Completable.fromAction;
-
 public class RxAssetManager implements IsRxAssetManager {
 
   private final AssetManager manager;
@@ -42,7 +40,7 @@ public class RxAssetManager implements IsRxAssetManager {
   }
 
   @Override public Completable close() {
-    return fromAction(manager::close);
+    return Completable.fromAction(manager::close);
   }
 
   @Override public Maybe<InputStream> open(String fileName, int accessMode) {
