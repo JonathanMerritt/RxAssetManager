@@ -59,6 +59,6 @@ dependencies {
   testImplementation dep.test.junit
 }
 
-apply from : rootProject.file("gradle/android-tasks.gradle")
-apply from : rootProject.file("gradle/bintray-config.gradle")
-apply from : rootProject.file("gradle/maven-install.gradle")
+apply from : "../gradle/android-tasks.gradle"
+apply from : "../gradle/bintray-config.gradle"
+apply from : "../gradle/maven-install.gradle"
