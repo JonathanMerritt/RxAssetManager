@@ -1,4 +1,4 @@
-<img src="/app/src/main/ic_launcher-web.png" width="156" align="left"/>
+<img src="https://raw.githubusercontent.com/JonathanMerritt/RxAssetManager/master/app/src/main/ic_launcher-web.png" width="156" align="left"/>
 
 # Rx AssetManager
 [![JCenter][J-CENTER-SVG]][J-CENTER]
