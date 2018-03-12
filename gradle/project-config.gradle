@@ -69,7 +69,7 @@ ext {
   rep.sdk = [
       compile : 27,
       min     : 17,
-      tools   : '27.0.3'
+      tools   : '28.0.0-rc1'
   ]
 
   dep = [
@@ -79,7 +79,7 @@ ext {
   ]
 
   def support = [
-      group  : "com.android.support",
+      group   : "com.android.support",
       version : "27.0.2"
   ]
   dep.support = [
@@ -89,7 +89,7 @@ ext {
   ]
 
   support.constraint = [
-      group  : "${support.group}.constraint",
+      group   : "${support.group}.constraint",
       version : "1.1.0-beta5"
   ]
   dep.support.constraint = [
