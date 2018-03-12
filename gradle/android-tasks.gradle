@@ -17,14 +17,12 @@
 //TODO Figure out why this doesn't include local library projects.
 task androidJavadoc(type : Javadoc) {
   source = android.sourceSets.main.java.srcDirs
-  classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+  classpath += files(android.getBootClasspath().join(File.pathSeparator))
   failOnError = false
 }
 
 afterEvaluate {
-  androidJavadoc.classpath += files(android.libraryVariants.collect {variant ->
-    variant.javaCompile.classpath
-  })
+  androidJavadoc.classpath += files(android.libraryVariants.collect {it.javaCompile.classpath})
 }
 
 task javadocJar(type : Jar, dependsOn : androidJavadoc) {
