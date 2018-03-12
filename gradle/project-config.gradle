@@ -80,7 +80,7 @@ ext {
 
   def support = [
       group   : "com.android.support",
-      version : "27.0.2"
+      version : "27.1.0"
   ]
   dep.support = [
       appcompat : "$support.group:appcompat-v7:$support.version",
