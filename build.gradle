@@ -22,6 +22,9 @@ buildscript {
   }
 
   dependencies {
+    // Last version to not cause Android Studio gradle editor bug.
+    // Issue link https://issuetracker.google.com/issues/74489623
+    // noinspection all
     classpath 'com.android.tools.build:gradle:3.2.0-alpha01'
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
