@@ -67,9 +67,9 @@ ext {
   ]
 
   rep.sdk = [
-      compile : 27,
+      compile : 'android-P',
       min     : 17,
-      tools   : '28.0.0-rc1'
+      tools   : '28.0.0 rc1'
   ]
 
   dep = [
@@ -80,7 +80,7 @@ ext {
 
   def support = [
       group   : "com.android.support",
-      version : "27.1.0"
+      version : "28.0.0-alpha1"
   ]
   dep.support = [
       appcompat : "$support.group:appcompat-v7:$support.version",
