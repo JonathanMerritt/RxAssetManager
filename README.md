@@ -4,6 +4,7 @@
 [![JCenter][J-CENTER-SVG]][J-CENTER]
 [![Maven Central][MAVEN-SVG]][MAVEN]
 [![Travis][TRAVIS-CI-SVG]][TRAVIS-CI]
+[![Android Arsenal][ANDROID-ARSENAL-SVG]][ANDROID-ARSENAL]
 
 **An RxJava2 implementation of the Android AssetManager.**
 
@@ -21,7 +22,7 @@ _Any help or contribution is welcome._
     //OR
     mavenCentral()
   }
- 
+
   dependencies {
     implementation "com.github.jonathanmerritt.rxassetmanager:core OR* core-ext:x.y.z"
   }
@@ -50,18 +51,14 @@ _Check the sample apps for more detailed examples._
 #### Core
 ```java
 public class SomeActivity extends Activity {
-  private Disposable openPath() { 
-    return new RxAssetManager(this).open("Asset File Path").subscribe(inputStream -> {}); 
-  }
+  private Disposable openPath() { return new RxAssetManager(this).open("Asset").subscribe(is -> {}); }
 }
 ```
 
 #### Core-Ext
 ```java
 public class SomeActivity extends Activity { 
-  private Disposable listOpenPath() { 
-    return new RxAssetManager(this).listOpen("Asset Folder/File Path").subscribe(inputStream -> {}); 
-  }
+  private Disposable listOpenPath() { return new RxAssetManager(this).listOpen("Assets").subscribe(is -> {}); }
 }
 ```
 
@@ -73,7 +70,7 @@ public class SomeActivity extends Activity {
 [Apache-2.0][LICENSE]
 
     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
-    
+
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
@@ -86,12 +83,15 @@ public class SomeActivity extends Activity {
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[J-CENTER-SVG]:https://api.bintray.com/packages/jonathanmerritt/RxAssetManager/core/images/download.svg
+[J-CENTER-SVG]:https://api.bintray.com/packages/jonathanmerritt/RxAssetManager/core/images/download.svg?style=flat-square
 [J-CENTER]:https://api.bintray.com/packages/jonathanmerritt/RxAssetManager/core/
-[MAVEN-SVG]: https://maven-badges.herokuapp.com/maven-central/com.github.jonathanmerritt.rxassetmanager/core/badge.svg
+[MAVEN-SVG]: https://maven-badges.herokuapp.com/maven-central/com.github.jonathanmerritt.rxassetmanager/core/badge.svg?style=flat
 [MAVEN]: https://maven-badges.herokuapp.com/maven-central/com.github.jonathanmerritt.rxassetmanager/core/
-[TRAVIS-CI-SVG]: https://travis-ci.org/JonathanMerritt/RxAssetManager.svg?branch=master
+[TRAVIS-CI-SVG]: https://travis-ci.org/JonathanMerritt/RxAssetManager.svg?style=flat?branch=master
 [TRAVIS-CI]: https://travis-ci.org/JonathanMerritt/RxAssetManager
+[ANDROID-ARSENAL-SVG]: https://img.shields.io/badge/Android%20Arsenal-RxAssetManager-blue.svg?style=flat
+[ANDROID-ARSENAL]: https://android-arsenal.com/details/1/6855
+
 [RELEASES]: https://github.com/JonathanMerritt/RxAssetManager/releases
 [LICENSE]: https://github.com/JonathanMerritt/RxAssetManager/blob/master/LICENSE.txt
 [RX-RECIPES]: https://hackernoon.com/rxrecipes-wrap-your-way-to-rx-fd40eb5254b6
