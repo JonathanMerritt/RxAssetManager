@@ -67,9 +67,9 @@ ext {
   ]
 
   rep.sdk = [
-      compile : 'android-P',
+      compile : 27,
       min     : 17,
-      tools   : '28.0.0 rc1'
+      tools   : '27.0.3'
   ]
 
   dep = [
@@ -80,7 +80,7 @@ ext {
 
   def support = [
       group   : "com.android.support",
-      version : "28.0.0-alpha1"
+      version : "27.1.0"
   ]
   dep.support = [
       appcompat : "$support.group:appcompat-v7:$support.version",
@@ -90,7 +90,7 @@ ext {
 
   support.constraint = [
       group   : "${support.group}.constraint",
-      version : "1.1.0-beta5"
+      version : "1.1.0-beta6"
   ]
   dep.support.constraint = [
       "$support.constraint.group:constraint-layout:$support.constraint.version",
