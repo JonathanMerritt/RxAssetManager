@@ -26,7 +26,6 @@ import com.github.jonathanmerritt.rxassetmanager.databinding.ActivityMainBinding
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -40,9 +39,7 @@ public class MainActivity extends AppCompatActivity {
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
     if (manager == null) manager = new RxAssetManager(this);
   }
-  private Disposable openPath() {
-    return new RxAssetManager(this).open("Asset").subscribe(is -> {});
-  }
+
   @Override protected void onStart() {
     super.onStart();
     if (disposables == null || disposables.isDisposed()) disposables = new CompositeDisposable();
