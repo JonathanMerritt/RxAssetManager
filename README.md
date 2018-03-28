@@ -1,10 +1,10 @@
 <img src="https://raw.githubusercontent.com/JonathanMerritt/RxAssetManager/master/app/src/main/ic_launcher-web.png" width="156" align="left"/>
 
 # Rx AssetManager
-[![JCenter][J-CENTER-SVG]][J-CENTER]
-[![Maven Central][MAVEN-SVG]][MAVEN]
-[![Travis][TRAVIS-CI-SVG]][TRAVIS-CI]
-[![Android Arsenal][ANDROID-ARSENAL-SVG]][ANDROID-ARSENAL]
+[![BINTRAY][BINTRAY-SVG]][BINTRAY]
+[![MAVEN-CENTRAL][MAVEN-CENTRAL-SVG]][MAVEN-CENTRAL]
+[![TRAVIS-CI][TRAVIS-CI-SVG]][TRAVIS-CI]
+[![ANDROID-ARSENAL][ANDROID-ARSENAL-SVG]][ANDROID-ARSENAL]
 
 **An RxJava2 implementation of the Android AssetManager.**
 
@@ -83,13 +83,13 @@ public class SomeActivity extends Activity {
     See the License for the specific language governing permissions and
     limitations under the License.
 
-[J-CENTER-SVG]:https://api.bintray.com/packages/jonathanmerritt/RxAssetManager/core/images/download.svg?style=flat-square
-[J-CENTER]:https://api.bintray.com/packages/jonathanmerritt/RxAssetManager/core/
-[MAVEN-SVG]: https://maven-badges.herokuapp.com/maven-central/com.github.jonathanmerritt.rxassetmanager/core/badge.svg?style=flat
-[MAVEN]: https://maven-badges.herokuapp.com/maven-central/com.github.jonathanmerritt.rxassetmanager/core/
-[TRAVIS-CI-SVG]: https://travis-ci.org/JonathanMerritt/RxAssetManager.svg?style=flat?branch=master
+[BINTRAY-SVG]:https://img.shields.io/bintray/v/jonathanmerritt/RxAssetManager/core.svg?style=flat-square&colorB=067EC4&label=Bintray
+[BINTRAY]:https://bintray.com/jonathanmerritt/RxAssetManager/core/_latestVersion
+[MAVEN-CENTRAL-SVG]: https://img.shields.io/maven-central/v/com.github.jonathanmerritt.rxassetmanager/core.svg?style=flat-square&colorB=067EC4&label=MavenCentral
+[MAVEN-CENTRAL]: http://repo1.maven.org/maven2/com/github/jonathanmerritt/rxassetmanager/core
+[TRAVIS-CI-SVG]: https://img.shields.io/travis/JonathanMerritt/RxAssetManager.svg?style=flat-square&colorB=067EC4&label=TravisCI
 [TRAVIS-CI]: https://travis-ci.org/JonathanMerritt/RxAssetManager
-[ANDROID-ARSENAL-SVG]: https://img.shields.io/badge/Android%20Arsenal-RxAssetManager-blue.svg?style=flat
+[ANDROID-ARSENAL-SVG]: https://img.shields.io/badge/AndroidArsenal-RxAssetManager-blue.svg?style=flat-square
 [ANDROID-ARSENAL]: https://android-arsenal.com/details/1/6855
 
 [RELEASES]: https://github.com/JonathanMerritt/RxAssetManager/releases
