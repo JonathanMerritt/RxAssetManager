@@ -20,18 +20,18 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
+import android.support.annotation.NonNull;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 import io.reactivex.Single;
 import java.io.InputStream;
-import javax.annotation.Nonnull;
 
 public class RxAssetManager implements IsRxAssetManager {
 
   private final AssetManager manager;
 
-  public RxAssetManager(@Nonnull Context context) {
+  public RxAssetManager(@NonNull Context context) {
     //noinspection all
     if (context == null) throw new RuntimeException("Context cannot be null!");
     final AssetManager manager = context.getAssets();

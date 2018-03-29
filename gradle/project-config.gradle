@@ -83,9 +83,10 @@ ext {
       version : "27.1.0"
   ]
   dep.support = [
-      appcompat : "$support.group:appcompat-v7:$support.version",
-      v4        : "$support.group:support-v4:$support.version",
-      design    : "$support.group:design:$support.version"
+      appcompat   : "$support.group:appcompat-v7:$support.version",
+      v4          : "$support.group:support-v4:$support.version",
+      design      : "$support.group:design:$support.version",
+      annotations : "$support.group:support-annotations:$support.version"
   ]
 
   support.constraint = [

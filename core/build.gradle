@@ -50,9 +50,8 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
 
+  implementation dep.support.annotations
   implementation dep.rxjava2
-  implementation dep.rxjava2Ext
-  implementation dep.guava
 
   androidTestImplementation dep.support.test
   testImplementation dep.test.junit
