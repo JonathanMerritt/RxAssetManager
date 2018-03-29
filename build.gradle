@@ -15,6 +15,8 @@
  */
 
 buildscript {
+  apply from : "/gradle/project-config.gradle"
+
   repositories {
     google()
     jcenter()
@@ -34,5 +36,3 @@ buildscript {
 task clean(type : Delete) {
   delete rootProject.buildDir
 }
-
-apply from : "/gradle/project-config.gradle"

@@ -37,7 +37,7 @@ ext {
       name : rootProject.name
   ]
   rep += [
-      id   : "com.github.${dev.name}.${rep.name.toLowerCase()}",
+      id   : "com.github.${dev.name}.${rep.name}",
       root : "$dev.name/$rep.name"
   ]
   rep += [
