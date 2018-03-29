@@ -78,6 +78,16 @@ ext {
       timber     : "com.jakewharton.timber:timber:4.5.1"
   ]
 
+  def gradle = [
+      group   : "com.android.tools.build:gradle",
+      // Last version to not cause Android Studio gradle editor bug.
+      // Issue link https://issuetracker.google.com/issues/74489623
+      version : "3.2.0-alpha01"
+  ]
+  dep.gradle = "$gradle.group:$gradle.version"
+
+  dep.databinding = "com.android.databinding:compiler:$gradle.version"
+
   def support = [
       group   : "com.android.support",
       version : "27.1.0"
@@ -101,6 +111,15 @@ ext {
   dep.support.test = [
       "$support.test:runner:1.0.1",
       "${support.test}.espresso:espresso-core:3.0.1"
+  ]
+
+  def kotlin = [
+      group   : "org.jetbrains.kotlin",
+      version : "1.2.31"
+  ]
+  dep.kotlin = [
+      gradle : "$kotlin.group:kotlin-gradle-plugin:$kotlin.version",
+      stdlib : "$kotlin.group:kotlin-stdlib-jdk7:$kotlin.version"
   ]
 
   def rxjava2 = "io.reactivex.rxjava2"

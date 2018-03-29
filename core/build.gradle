@@ -15,6 +15,7 @@
  */
 
 apply plugin : 'com.android.library'
+apply plugin : 'kotlin-android'
 
 android {
   compileSdkVersion rep.sdk.compile
@@ -49,6 +50,8 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
+
+  implementation dep.kotlin.stdlib
 
   implementation dep.rxjava2
   implementation dep.rxjava2Ext

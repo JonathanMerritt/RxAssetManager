@@ -15,6 +15,7 @@
  */
 
 apply plugin : 'com.android.application'
+apply plugin : 'kotlin-android'
 
 android {
   compileSdkVersion rep.sdk.compile
@@ -54,6 +55,9 @@ dependencies {
   implementation dep.support.v4
   implementation dep.support.design
   implementation dep.support.constraint
+
+  implementation dep.kotlin.stdlib
+  kapt dep.databinding
 
   implementation dep.rxjava2
   implementation dep.timber
