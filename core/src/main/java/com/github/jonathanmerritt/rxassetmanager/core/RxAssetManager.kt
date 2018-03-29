@@ -18,7 +18,6 @@ package com.github.jonathanmerritt.rxassetmanager.core
 
 import android.content.Context
 import android.content.res.AssetFileDescriptor
-import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -28,7 +27,7 @@ import java.io.InputStream
 
 open class RxAssetManager(context: Context) : IsRxAssetManager {
 
-  private val manager: AssetManager = context.assets ?: throw RuntimeException("AssetManager cannot be null!")
+  private val manager = context.assets!!
 
   override val locales: Flowable<String>
     get() = Flowable.fromArray(*manager.locales)
