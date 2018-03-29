@@ -15,6 +15,7 @@
  */
 
 apply plugin : 'com.android.library'
+apply plugin : 'kotlin-android'
 
 android {
   compileSdkVersion rep.sdk.compile
@@ -52,6 +53,7 @@ dependencies {
 
   implementation dep.support.annotations
   implementation dep.rxjava2
+  implementation dep.kotlin.stdlib
 
   androidTestImplementation dep.support.test
   testImplementation dep.test.junit
