@@ -28,7 +28,7 @@ import io.reactivex.Maybe
 import java.io.File
 import java.io.InputStream
 
-open class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager(
+class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager(
     context), IsRxAssetManager {
 
   override fun openString(fileName: String, accessMode: Int): Maybe<String> {

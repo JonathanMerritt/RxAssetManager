@@ -50,8 +50,8 @@ class MainActivity : AppCompatActivity() {
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
     when {
-      binding != null && manager != null -> binding!!.setClicks { view ->
-        getObserverable(view.id).subscribeOn(Schedulers.io())
+      binding != null && manager != null -> binding!!.setClicks {
+        getObserverable(it.id).subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ Timber.i("next(%s)", it) }, { Timber.e(it, it.message) },
                 { Timber.i("complete()") }, { disposables!!.add(it) })

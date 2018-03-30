@@ -25,7 +25,7 @@ import io.reactivex.Maybe
 import io.reactivex.Single
 import java.io.InputStream
 
-open class RxAssetManager(context: Context) : IsRxAssetManager {
+class RxAssetManager(context: Context) : IsRxAssetManager {
 
   private val manager = context.assets!!
 

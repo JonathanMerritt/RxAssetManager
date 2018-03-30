@@ -16,6 +16,7 @@
 
 apply plugin : 'com.android.application'
 apply plugin : 'kotlin-android'
+apply plugin : 'kotlin-kapt'
 
 android {
   compileSdkVersion rep.sdk.compile
@@ -31,7 +32,9 @@ android {
 
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
-
+  kapt {
+    mapDiagnosticLocations = true
+  }
   dataBinding.enabled = true
 
   buildTypes {
