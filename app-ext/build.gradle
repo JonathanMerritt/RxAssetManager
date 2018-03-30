@@ -15,6 +15,7 @@
  */
 
 apply plugin : 'com.android.application'
+apply plugin : 'kotlin-android'
 
 android {
   compileSdkVersion rep.sdk.compile
@@ -40,6 +41,10 @@ android {
     }
   }
 
+  sourceSets {
+    main.java.srcDirs += 'src/main/kotlin'
+  }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
@@ -54,6 +59,9 @@ dependencies {
   implementation dep.support.v4
   implementation dep.support.design
   implementation dep.support.constraint
+
+  implementation dep.kotlin.stdlib
+  kapt dep.databinding
 
   implementation dep.rxjava2
   implementation dep.timber
