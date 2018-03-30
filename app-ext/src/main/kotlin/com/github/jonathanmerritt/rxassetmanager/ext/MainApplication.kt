@@ -14,15 +14,17 @@
  *     limitations under the License.
  */
 
-package com.github.jonathanmerritt.rxassetmanager.ext;
+package com.github.jonathanmerritt.rxassetmanager.ext
 
-import android.app.Application;
-import timber.log.Timber;
+import android.app.Application
+import timber.log.Timber
 
-public class MainApplication extends Application {
+class MainApplication : Application() {
 
-  @Override public void onCreate() {
-    super.onCreate();
-    if (BuildConfig.DEBUG) Timber.plant(new Timber.DebugTree());
+  override fun onCreate() {
+    super.onCreate()
+    when {
+      BuildConfig.DEBUG -> Timber.plant(Timber.DebugTree())
+    }
   }
 }
