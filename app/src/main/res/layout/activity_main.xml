@@ -1,99 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<android.support.constraint.ConstraintLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
-  <data>
-    <variable
-        name="clicks"
-        type="android.view.View.OnClickListener"
-        />
-  </data>
+  <Button
+      android:id="@+id/open"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="@dimen/layout_2"
+      android:text="@string/open"
+      app:layout_constraintBottom_toTopOf="@+id/open_fd"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
 
-  <android.support.constraint.ConstraintLayout
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
+      app:layout_constraintVertical_chainStyle="packed"
+      />
 
-    <Button
-        android:id="@+id/open"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/layout_2"
-        android:onClick="@{clicks}"
-        android:text="@string/open"
-        app:layout_constraintBottom_toTopOf="@+id/open_fd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+  <Button
+      android:id="@+id/open_fd"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="@dimen/layout_2"
+      android:text="@string/open_fd"
+      app:layout_constraintBottom_toTopOf="@+id/list"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/open"
+      />
 
-        app:layout_constraintVertical_chainStyle="packed"
-        />
+  <Button
+      android:id="@+id/list"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="@dimen/layout_2"
+      android:text="@string/list"
+      app:layout_constraintBottom_toTopOf="@+id/open_non_asset_fd"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/open_fd"
+      />
 
-    <Button
-        android:id="@+id/open_fd"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/layout_2"
-        android:onClick="@{clicks}"
-        android:text="@string/open_fd"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open"
-        />
+  <Button
+      android:id="@+id/open_non_asset_fd"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="@dimen/layout_2"
+      android:text="@string/open_non_asset_fd"
+      app:layout_constraintBottom_toTopOf="@+id/open_xml_resource_parser"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/list"
+      />
 
-    <Button
-        android:id="@+id/list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/layout_2"
-        android:onClick="@{clicks}"
-        android:text="@string/list"
-        app:layout_constraintBottom_toTopOf="@+id/open_non_asset_fd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_fd"
-        />
+  <Button
+      android:id="@+id/open_xml_resource_parser"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="@dimen/layout_2"
+      android:text="@string/open_xml_resource_parser"
+      app:layout_constraintBottom_toTopOf="@+id/get_locales"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/open_non_asset_fd"
+      />
 
-    <Button
-        android:id="@+id/open_non_asset_fd"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/layout_2"
-        android:onClick="@{clicks}"
-        android:text="@string/open_non_asset_fd"
-        app:layout_constraintBottom_toTopOf="@+id/open_xml_resource_parser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list"
-        />
-
-    <Button
-        android:id="@+id/open_xml_resource_parser"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/layout_2"
-        android:onClick="@{clicks}"
-        android:text="@string/open_xml_resource_parser"
-        app:layout_constraintBottom_toTopOf="@+id/get_locales"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_non_asset_fd"
-        />
-
-    <Button
-        android:id="@+id/get_locales"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="@dimen/layout_2"
-        android:onClick="@{clicks}"
-        android:text="@string/get_locales"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open_xml_resource_parser"
-        />
-  </android.support.constraint.ConstraintLayout>
-</layout>
+  <Button
+      android:id="@+id/get_locales"
+      android:layout_width="0dp"
+      android:layout_height="0dp"
+      android:layout_margin="@dimen/layout_2"
+      android:text="@string/get_locales"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/open_xml_resource_parser"
+      />
+</android.support.constraint.ConstraintLayout>

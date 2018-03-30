@@ -16,25 +16,29 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
-import com.github.jonathanmerritt.rxassetmanager.databinding.ActivityMainBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.get_locales
+import kotlinx.android.synthetic.main.activity_main.list
+import kotlinx.android.synthetic.main.activity_main.open
+import kotlinx.android.synthetic.main.activity_main.open_fd
+import kotlinx.android.synthetic.main.activity_main.open_non_asset_fd
+import kotlinx.android.synthetic.main.activity_main.open_xml_resource_parser
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
   private var manager: IsRxAssetManager? = null
-  private var binding: ActivityMainBinding? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+    setContentView(R.layout.activity_main)
     when (manager) {
       null -> manager = RxAssetManager(this)
     }
@@ -49,13 +53,23 @@ class MainActivity : AppCompatActivity() {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    when {
-      binding != null && manager != null -> binding!!.setClicks {
-        getObserverable(it.id).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ Timber.i("next(%s)", it) }, { Timber.e(it, it.message) },
-                { Timber.i("complete()") }, { disposables!!.add(it) })
-      }
+    open.setOnClickListener {
+      manager!!.open(getString(R.string.folder_file)).toObservable().observe
+    }
+    open_fd.setOnClickListener {
+      manager!!.openFd(getString(R.string.folder_file_2)).toObservable().observe
+    }
+    list.setOnClickListener {
+      manager!!.list(getString(R.string.empty)).toObservable().observe
+    }
+    open_non_asset_fd.setOnClickListener {
+      manager!!.openNonAssetFd(getString(R.string.manifest)).toObservable().observe
+    }
+    open_xml_resource_parser.setOnClickListener {
+      manager!!.openXmlResourceParser(getString(R.string.manifest)).toObservable().observe
+    }
+    get_locales.setOnClickListener {
+      manager!!.locales.toObservable().observe
     }
   }
 
@@ -72,29 +86,22 @@ class MainActivity : AppCompatActivity() {
   override fun onDestroy() {
     super.onDestroy()
     when {
-      binding != null -> {
-        binding!!.unbind()
-        binding = null
-      }
-    }
-    when {
       manager != null -> manager = null
     }
   }
 
-  private fun getObserverable(id: Int): Observable<*> {
-    return when (id) {
-      R.id.open -> manager!!.open(getString(R.string.folder_file)).toObservable()
-      R.id.open_fd -> manager!!.openFd(getString(R.string.folder_file_2)).toObservable()
-      R.id.list -> manager!!.list(getString(R.string.empty)).toObservable()
-      R.id.open_non_asset_fd -> manager!!.openNonAssetFd(getString(R.string.manifest)).toObservable()
-      R.id.open_xml_resource_parser -> manager!!.openXmlResourceParser(
-          getString(R.string.manifest)).toObservable()
-      else -> manager!!.locales.toObservable()
-    }
-  }
-
   companion object {
-    private var disposables: CompositeDisposable? = null
+    internal var disposables: CompositeDisposable? = null
   }
 }
+
+private val <T> Observable<T>.observe: Disposable
+  get() {
+    return subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .doOnNext { Timber.i("next(%s)", it) }
+        .doOnError { Timber.e(it, it.message) }
+        .doOnComplete { Timber.i("complete()") }
+        .doOnSubscribe { MainActivity.disposables!!.add(it) }
+        .subscribe()
+  }
