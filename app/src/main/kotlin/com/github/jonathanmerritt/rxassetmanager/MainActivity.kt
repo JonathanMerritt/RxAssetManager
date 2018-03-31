@@ -34,74 +34,40 @@ import kotlinx.android.synthetic.main.activity_main.open_xml_resource_parser
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
-  private var manager: IsRxAssetManager? = null
+  private lateinit var manager: IsRxAssetManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-    when (manager) {
-      null -> manager = RxAssetManager(this)
-    }
+    manager = RxAssetManager(this)
   }
 
   override fun onStart() {
     super.onStart()
-    when {
-      disposables == null || disposables!!.isDisposed -> disposables = CompositeDisposable()
-    }
+    if (disposables.isDisposed) disposables = CompositeDisposable()
   }
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    open.setOnClickListener {
-      manager!!.open(getString(R.string.folder_file)).toObservable().observe
-    }
-    open_fd.setOnClickListener {
-      manager!!.openFd(getString(R.string.folder_file_2)).toObservable().observe
-    }
-    list.setOnClickListener {
-      manager!!.list(getString(R.string.empty)).toObservable().observe
-    }
-    open_non_asset_fd.setOnClickListener {
-      manager!!.openNonAssetFd(getString(R.string.manifest)).toObservable().observe
-    }
+    open.setOnClickListener { manager.open("Folder/File.txt").toObservable().subscribe }
+    open_fd.setOnClickListener { manager.openFd("Folder/File2.txt").toObservable().subscribe }
+    list.setOnClickListener { manager.list("").toObservable().subscribe }
+    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd("AndroidManifest.xml").toObservable().subscribe }
     open_xml_resource_parser.setOnClickListener {
-      manager!!.openXmlResourceParser(getString(R.string.manifest)).toObservable().observe
+      manager.openXmlResourceParser("AndroidManifest.xml").toObservable().subscribe
     }
-    get_locales.setOnClickListener {
-      manager!!.locales.toObservable().observe
-    }
+    get_locales.setOnClickListener { manager.locales.toObservable().subscribe }
   }
 
   override fun onStop() {
     super.onStop()
-    when {
-      disposables != null && !disposables!!.isDisposed -> {
-        disposables!!.dispose()
-        disposables = null
-      }
-    }
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    when {
-      manager != null -> manager = null
-    }
-  }
-
-  companion object {
-    internal var disposables: CompositeDisposable? = null
+    if (!disposables.isDisposed) disposables.dispose()
   }
 }
 
-private val <T> Observable<T>.observe: Disposable
-  get() {
-    return subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .doOnNext { Timber.i("next(%s)", it) }
-        .doOnError { Timber.e(it, it.message) }
-        .doOnComplete { Timber.i("complete()") }
-        .doOnSubscribe { MainActivity.disposables!!.add(it) }
-        .subscribe()
-  }
+private var disposables = CompositeDisposable().also { it.dispose() }
+
+private val <T> Observable<T>.subscribe: Disposable
+  get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+      { Timber.i("next(%s)", it) }, { Timber.e(it, it.message) }, { Timber.i("complete()") },
+      { disposables.add(it) })

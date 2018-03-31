@@ -23,9 +23,4 @@
   <string name="open_non_asset_fd">Open Non-Asset Fd</string>
   <string name="open_xml_resource_parser">Open Xml Resource Parser</string>
   <string name="get_locales">Get Locales</string>
-
-  <string name="empty"/>
-  <string name="manifest">AndroidManifest.xml</string>
-  <string name="folder_file">Folder/File.txt</string>
-  <string name="folder_file_2">Folder/File2.txt</string>
 </resources>
