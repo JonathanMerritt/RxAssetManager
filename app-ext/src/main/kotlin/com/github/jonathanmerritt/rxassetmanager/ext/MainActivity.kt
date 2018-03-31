@@ -16,91 +16,75 @@
 
 package com.github.jonathanmerritt.rxassetmanager.ext
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
-import com.github.jonathanmerritt.rxassetmanager.ext.databinding.ActivityMainBinding
+import com.github.jonathanmerritt.rxassetmanager.ext.MainActivity.Companion.disposables
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_main.list_all
+import kotlinx.android.synthetic.main.activity_main.list_open
+import kotlinx.android.synthetic.main.activity_main.list_open_bytes
+import kotlinx.android.synthetic.main.activity_main.list_open_fd
+import kotlinx.android.synthetic.main.activity_main.list_open_non_asset_fd
+import kotlinx.android.synthetic.main.activity_main.list_open_save
+import kotlinx.android.synthetic.main.activity_main.list_open_string
+import kotlinx.android.synthetic.main.activity_main.list_open_xml_resource_parser
+import kotlinx.android.synthetic.main.activity_main.open_bytes
+import kotlinx.android.synthetic.main.activity_main.open_save
+import kotlinx.android.synthetic.main.activity_main.open_string
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
-  private var manager: IsRxAssetManager? = null
-  private var binding: ActivityMainBinding? = null
+  private lateinit var manager: IsRxAssetManager
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-    when (manager) {
-      null -> manager = RxAssetManager(this)
-    }
+    setContentView(R.layout.activity_main)
+    manager = RxAssetManager(this)
   }
 
   override fun onStart() {
     super.onStart()
-    when {
-      disposables == null || disposables!!.isDisposed -> disposables = CompositeDisposable()
-    }
+    if (disposables.isDisposed) disposables = CompositeDisposable()
   }
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    when {
-      binding != null && manager != null -> binding!!.setClicks {
-        getObserverable(it.id).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ Timber.i("next(%s)", it) }, { Timber.e(it, it.message) },
-                { Timber.i("complete()") }, { disposables!!.add(it) })
-      }
+    open_string.setOnClickListener { manager.openString("Folder/File.txt").toObservable().subscribe }
+    open_bytes.setOnClickListener { manager.openBytes("Folder/File2.txt").toObservable().subscribe }
+    open_save.setOnClickListener {
+      manager.openSave("Folder/Folder2/File.txt", cacheDir.absolutePath).toObservable().subscribe
+    }
+    list_all.setOnClickListener { manager.listAll("").toObservable().subscribe }
+    list_open.setOnClickListener { manager.listOpen("").toObservable().subscribe }
+    list_open_string.setOnClickListener { manager.listOpenString("Folder/Folder2").toObservable().subscribe }
+    list_open_bytes.setOnClickListener { manager.listOpenBytes("Folder", false).toObservable().subscribe }
+    list_open_save.setOnClickListener {
+      manager.listOpenSave("Folder", cacheDir.absolutePath).toObservable().subscribe
+    }
+    list_open_fd.setOnClickListener { manager.listOpenFd("").toObservable().subscribe }
+    list_open_non_asset_fd.setOnClickListener { manager.listOpenNonAssetFd("/", false).toObservable().subscribe }
+    list_open_xml_resource_parser.setOnClickListener {
+      manager.listOpenXmlResourceParser("/").toObservable().subscribe
     }
   }
 
   override fun onStop() {
     super.onStop()
-    when {
-      disposables != null && !disposables!!.isDisposed -> {
-        disposables!!.dispose()
-        disposables = null
-      }
-    }
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    when {
-      binding != null -> {
-        binding!!.unbind()
-        binding = null
-      }
-    }
-    when {
-      manager != null -> manager = null
-    }
-  }
-
-  private fun getObserverable(id: Int): Observable<*> {
-    return when (id) {
-      R.id.open_string -> manager!!.openString(getString(R.string.folder_file)).toObservable()
-      R.id.open_bytes -> manager!!.openBytes(getString(R.string.folder_file_2)).toObservable()
-      R.id.open_save -> manager!!.openSave(getString(R.string.folder_folder_2_file),
-          cacheDir.absolutePath).toObservable()
-      R.id.list_all -> manager!!.listAll(getString(R.string.empty)).toObservable()
-      R.id.list_open -> manager!!.listOpen(getString(R.string.empty)).toObservable()
-      R.id.list_open_string -> manager!!.listOpenString(getString(R.string.folder_folder_2)).toObservable()
-      R.id.list_open_bytes -> manager!!.listOpenBytes(getString(R.string.folder), false).toObservable()
-      R.id.list_open_save -> manager!!.listOpenSave(getString(R.string.folder),
-          cacheDir.absolutePath).toObservable()
-      R.id.list_open_fd -> manager!!.listOpenFd(getString(R.string.empty)).toObservable()
-      R.id.list_open_non_asset_fd -> manager!!.listOpenNonAssetFd(getString(R.string.root), false).toObservable()
-      else -> manager!!.listOpenXmlResourceParser(getString(R.string.root)).toObservable()
-    }
+    if (!disposables.isDisposed) disposables.dispose()
   }
 
   companion object {
-    private var disposables: CompositeDisposable? = null
+    internal var disposables = CompositeDisposable().also { it.dispose() }
   }
 }
+
+private val <T> Observable<T>.subscribe: Disposable
+  get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
+      { Timber.i("next(%s)", it) }, { Timber.e(it, it.message) }, { Timber.i("complete()") },
+      { disposables.add(it) })

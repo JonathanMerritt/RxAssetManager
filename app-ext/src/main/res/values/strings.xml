@@ -29,12 +29,4 @@
   <string name="list_open_non_asset_fd">List And Open Non-Asset Fd</string>
   <string name="list_open_xml_resource_parser">List And Open Xml Resource Parser</string>
 
-  <string name="empty"/>
-  <string name="root">/</string>
-  <string name="manifest">AndroidManifest.xml</string>
-  <string name="folder">Folder</string>
-  <string name="folder_file">Folder/File.txt</string>
-  <string name="folder_file_2">Folder/File2.txt</string>
-  <string name="folder_folder_2">Folder/Folder2</string>
-  <string name="folder_folder_2_file">Folder/Folder2/File.txt</string>
 </resources>

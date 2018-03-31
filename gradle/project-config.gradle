@@ -78,16 +78,6 @@ ext {
       timber     : "com.jakewharton.timber:timber:4.5.1"
   ]
 
-  def gradle = [
-      group   : "com.android.tools.build:gradle",
-      // Last version to not cause Android Studio gradle editor bug.
-      // Issue link https://issuetracker.google.com/issues/74489623
-      version : "3.2.0-alpha01"
-  ]
-  dep.gradle = "$gradle.group:$gradle.version"
-
-  dep.databinding = "com.android.databinding:compiler:$gradle.version"
-
   def support = [
       group   : "com.android.support",
       version : "27.1.0"

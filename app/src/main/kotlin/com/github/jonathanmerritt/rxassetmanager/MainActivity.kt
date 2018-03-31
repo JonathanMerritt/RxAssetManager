@@ -18,6 +18,7 @@ package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import com.github.jonathanmerritt.rxassetmanager.MainActivity.Companion.disposables
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import io.reactivex.Observable
@@ -63,9 +64,11 @@ class MainActivity : AppCompatActivity() {
     super.onStop()
     if (!disposables.isDisposed) disposables.dispose()
   }
-}
 
-private var disposables = CompositeDisposable().also { it.dispose() }
+  companion object {
+    internal var disposables = CompositeDisposable().also { it.dispose() }
+  }
+}
 
 private val <T> Observable<T>.subscribe: Disposable
   get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
