@@ -58,19 +58,23 @@ class MainActivity : AppCompatActivity() {
     open_string.setOnClickListener { manager.openString("Folder/File.txt").toObservable().subscribe }
     open_bytes.setOnClickListener { manager.openBytes("Folder/File2.txt").toObservable().subscribe }
     open_save.setOnClickListener {
-      manager.openSave("Folder/Folder2/File.txt", cacheDir.absolutePath).toObservable().subscribe
+      manager.openSave("Folder/Folder2/File.txt", saveFolder = cacheDir.absolutePath).toObservable().subscribe
     }
     list_all.setOnClickListener { manager.listAll("").toObservable().subscribe }
-    list_open.setOnClickListener { manager.listOpen("").toObservable().subscribe }
-    list_open_string.setOnClickListener { manager.listOpenString("Folder/Folder2").toObservable().subscribe }
-    list_open_bytes.setOnClickListener { manager.listOpenBytes("Folder", false).toObservable().subscribe }
-    list_open_save.setOnClickListener {
-      manager.listOpenSave("Folder", cacheDir.absolutePath).toObservable().subscribe
+    list_open.setOnClickListener { manager.listOpen("", listAll = true).toObservable().subscribe }
+    list_open_string.setOnClickListener {
+      manager.listOpenString("Folder/Folder2", listAll = true).toObservable().subscribe
     }
-    list_open_fd.setOnClickListener { manager.listOpenFd("").toObservable().subscribe }
-    list_open_non_asset_fd.setOnClickListener { manager.listOpenNonAssetFd("/", false).toObservable().subscribe }
+    list_open_bytes.setOnClickListener { manager.listOpenBytes("Folder").toObservable().subscribe }
+    list_open_save.setOnClickListener {
+      manager.listOpenSave("Folder", saveFolder = cacheDir.absolutePath, listAll = true).toObservable().subscribe
+    }
+    list_open_fd.setOnClickListener { manager.listOpenFd("", listAll = true).toObservable().subscribe }
+    list_open_non_asset_fd.setOnClickListener {
+      manager.listOpenNonAssetFd(folderName = "/").toObservable().subscribe
+    }
     list_open_xml_resource_parser.setOnClickListener {
-      manager.listOpenXmlResourceParser("/").toObservable().subscribe
+      manager.listOpenXmlResourceParser(folderName = "/", listAll = true).toObservable().subscribe
     }
   }
 

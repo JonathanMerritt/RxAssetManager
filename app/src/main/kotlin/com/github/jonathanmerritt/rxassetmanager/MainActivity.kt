@@ -53,9 +53,11 @@ class MainActivity : AppCompatActivity() {
     open.setOnClickListener { manager.open("Folder/File.txt").toObservable().subscribe }
     open_fd.setOnClickListener { manager.openFd("Folder/File2.txt").toObservable().subscribe }
     list.setOnClickListener { manager.list("").toObservable().subscribe }
-    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd("AndroidManifest.xml").toObservable().subscribe }
+    open_non_asset_fd.setOnClickListener {
+      manager.openNonAssetFd(fileName = "AndroidManifest.xml").toObservable().subscribe
+    }
     open_xml_resource_parser.setOnClickListener {
-      manager.openXmlResourceParser("AndroidManifest.xml").toObservable().subscribe
+      manager.openXmlResourceParser(fileName = "AndroidManifest.xml").toObservable().subscribe
     }
     get_locales.setOnClickListener { manager.locales.toObservable().subscribe }
   }
