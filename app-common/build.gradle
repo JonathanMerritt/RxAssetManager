@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-apply plugin : 'com.android.application'
+apply plugin : 'com.android.library'
 apply plugin : 'kotlin-android'
 apply plugin : 'kotlin-android-extensions'
 
@@ -28,15 +28,18 @@ android {
     versionCode rep.version.code
     versionName rep.version.name
 
-    applicationId rep.id
-
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
     release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      postprocessing {
+        removeUnusedCode false
+        removeUnusedResources false
+        obfuscate false
+        optimizeCode false
+        proguardFile 'proguard-rules.pro'
+      }
     }
   }
 
@@ -52,8 +55,15 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
-  implementation project(":app-common")
+  api project(":core-ext")
 
-  androidTestImplementation dep.support.test
-  testImplementation dep.test.junit
+  api dep.support.appcompat
+  api dep.support.v4
+  api dep.support.design
+  api dep.support.constraint
+
+  api dep.kotlin.stdlib
+
+  api dep.rxjava2
+  api dep.timber
 }

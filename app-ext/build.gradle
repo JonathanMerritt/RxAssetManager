@@ -52,17 +52,7 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
-  implementation project(":core-ext")
-
-  implementation dep.support.appcompat
-  implementation dep.support.v4
-  implementation dep.support.design
-  implementation dep.support.constraint
-
-  implementation dep.kotlin.stdlib
-
-  implementation dep.rxjava2
-  implementation dep.timber
+  implementation project(":app-common")
 
   androidTestImplementation dep.support.test
   testImplementation dep.test.junit
