@@ -17,15 +17,8 @@
 package com.github.jonathanmerritt.rxassetmanager.common
 
 import android.support.v7.app.AppCompatActivity
-import io.reactivex.Flowable
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 
 abstract class DisposingActivity : AppCompatActivity() {
   private var disposables = CompositeDisposable().also { it.dispose() }
@@ -40,15 +33,5 @@ abstract class DisposingActivity : AppCompatActivity() {
     if (!disposables.isDisposed) disposables.dispose()
   }
 
-  protected val <T> Flowable<T>.dispose get() = toObservable().dispose
-
-  protected val <T> Maybe<T>.dispose get() = toObservable().dispose
-
-  protected val <T> Single<T>.dispose get() = toObservable().dispose
-
-  private val <T> Observable<T>.dispose: Disposable
-    get() = subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
-        .subscribe({ Timber.i("next(%s)", it) }, { Timber.e(it, it.message) }, { Timber.i("complete()") },
-            { disposables.add(it) }
-        )
+  protected fun add(disposable: Disposable) { disposables.add(disposable) }
 }

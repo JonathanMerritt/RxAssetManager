@@ -18,6 +18,8 @@ package com.github.jonathanmerritt.rxassetmanager.ext
 
 import android.os.Bundle
 import com.github.jonathanmerritt.rxassetmanager.common.DisposingActivity
+import com.github.jonathanmerritt.rxassetmanager.common.schedule
+import com.github.jonathanmerritt.rxassetmanager.common.subscribeAnd
 import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.list_all
@@ -43,26 +45,40 @@ class MainActivity : DisposingActivity() {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    open_string.setOnClickListener { manager.openString("Folder/File.txt").dispose }
-    open_bytes.setOnClickListener { manager.openBytes("Folder/File2.txt").dispose }
+    open_string.setOnClickListener {
+      manager.openString("Folder/File.txt").toObservable().schedule.subscribeAnd { add(it) }
+    }
+    open_bytes.setOnClickListener {
+      manager.openBytes("Folder/File2.txt").toObservable().schedule.subscribeAnd { add(it) }
+    }
     open_save.setOnClickListener {
-      manager.openSave("Folder/Folder2/File.txt", saveFolder = cacheDir.absolutePath).dispose
+      manager.openSave("Folder/Folder2/File.txt",
+          saveFolder = cacheDir.absolutePath).toObservable().schedule.subscribeAnd { add(it) }
     }
-    list_all.setOnClickListener { manager.listAll("").dispose }
-    list_open.setOnClickListener { manager.listOpen("", listAll = true).dispose }
+    list_all.setOnClickListener { manager.listAll("").toObservable().schedule.subscribeAnd { add(it) } }
+    list_open.setOnClickListener {
+      manager.listOpen("", listAll = true).toObservable().schedule.subscribeAnd { add(it) }
+    }
     list_open_string.setOnClickListener {
-      manager.listOpenString("Folder/Folder2", listAll = true).dispose
+      manager.listOpenString("Folder/Folder2", listAll = true).toObservable().schedule.subscribeAnd { add(it) }
     }
-    list_open_bytes.setOnClickListener { manager.listOpenBytes("Folder").dispose }
+    list_open_bytes.setOnClickListener {
+      manager.listOpenBytes("Folder").toObservable().schedule.subscribeAnd { add(it) }
+    }
     list_open_save.setOnClickListener {
-      manager.listOpenSave("Folder", saveFolder = cacheDir.absolutePath, listAll = true).dispose
+      manager.listOpenSave("Folder", saveFolder = cacheDir.absolutePath,
+          listAll = true).toObservable().schedule.subscribeAnd { add(it) }
     }
-    list_open_fd.setOnClickListener { manager.listOpenFd("", listAll = true).dispose }
+    list_open_fd.setOnClickListener {
+      manager.listOpenFd("", listAll = true).toObservable().schedule.subscribeAnd { add(it) }
+    }
     list_open_non_asset_fd.setOnClickListener {
-      manager.listOpenNonAssetFd(folderName = "/").dispose
+      manager.listOpenNonAssetFd(folderName = "/").toObservable().schedule.subscribeAnd { add(it) }
     }
     list_open_xml_resource_parser.setOnClickListener {
-      manager.listOpenXmlResourceParser(folderName = "/", listAll = true).dispose
+      manager.listOpenXmlResourceParser(folderName = "/",
+          listAll = true).toObservable().schedule.subscribeAnd { add(it) }
     }
   }
 }
+
