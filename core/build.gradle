@@ -16,7 +16,6 @@
 
 apply plugin : 'com.android.library'
 apply plugin : 'kotlin-android'
-apply plugin : 'org.jetbrains.dokka-android'
 
 android {
   compileSdkVersion rep.sdk.compile
@@ -64,6 +63,6 @@ dependencies {
   //testImplementation dep.test.junit
 }
 
-apply from : "../gradle/android-tasks.gradle"
-apply from : "../gradle/bintray-config.gradle"
-apply from : "../gradle/maven-install.gradle"
+apply from : "../gradle/dokka.gradle"
+apply from : "../gradle/bintray.gradle"
+apply from : "../gradle/maven.gradle"
