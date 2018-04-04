@@ -27,8 +27,6 @@ android {
     targetSdkVersion rep.sdk.compile
     versionCode rep.version.code
     versionName rep.version.name
-
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {

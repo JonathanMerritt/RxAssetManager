@@ -27,7 +27,7 @@ android {
     versionCode rep.version.code
     versionName rep.version.name
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -59,8 +59,8 @@ dependencies {
   implementation dep.rxjava2
   implementation dep.kotlin.stdlib
 
-  androidTestImplementation dep.support.test
-  testImplementation dep.test.junit
+  //androidTestImplementation dep.support.test
+  //testImplementation dep.test.junit
 }
 
 apply from : "../gradle/android-tasks.gradle"

@@ -30,7 +30,7 @@ android {
 
     applicationId rep.id
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -54,6 +54,6 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   implementation project(":app-common")
 
-  androidTestImplementation dep.support.test
-  testImplementation dep.test.junit
+  //androidTestImplementation dep.support.test
+  //testImplementation dep.test.junit
 }
