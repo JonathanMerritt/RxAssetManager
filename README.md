@@ -37,16 +37,12 @@ _Check the sample apps for more detailed examples._
 
 #### Core
 ```kotlin
- class SomeActivity: Activity {
-  fun open() = RxAssetManager(this).open("Asset").subscribe {  }
-}
+val open = RxAssetManager(context).open("Asset").subscribe {  }
 ```
 
 #### Core-Ext
 ```kotlin
- class SomeActivity: Activity {
-  fun listOpen() = RxAssetManager(this).listOpen("Assets").subscribe {  }
-}
+val listOpen = RxAssetManager(context).listOpen("Assets").subscribe {  }
 ```
 
 ## TODO

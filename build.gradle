@@ -32,6 +32,7 @@ buildscript {
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
     classpath dep.kotlin.gradle
+    classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16"
   }
 }
 

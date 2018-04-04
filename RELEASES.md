@@ -1,3 +1,10 @@
+
+### Patch: v0.5.1
+_April 4, 2018_
+
+- Add dokka and task updates.
+
+
 ### Minor: v0.5.0
 _April 3, 2018_
 
