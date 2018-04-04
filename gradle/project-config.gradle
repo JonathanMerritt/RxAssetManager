@@ -141,7 +141,7 @@ subprojects {
       ]
 
       rep.version = [
-          name : rep.lib.name.contains('app') ? "1.0.0" : "0.5.0"
+          name : rep.lib.name.contains('app') ? "1.0.0" : "0.5.2"
       ]
       rep.version += [
           code : rep.version.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()

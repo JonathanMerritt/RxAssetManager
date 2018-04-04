@@ -1,3 +1,8 @@
+### Patch: v0.5.2
+_April 4, 2018_
+
+- Refactor and update copyright.
+
 
 ### Patch: v0.5.1
 _April 4, 2018_
