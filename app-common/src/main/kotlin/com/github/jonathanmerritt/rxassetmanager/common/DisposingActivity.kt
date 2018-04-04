@@ -33,5 +33,7 @@ abstract class DisposingActivity : AppCompatActivity() {
     if (!disposables.isDisposed) disposables.dispose()
   }
 
-  protected fun add(disposable: Disposable) { disposables.add(disposable) }
+  protected fun add(disposable: Disposable) {
+    disposables.add(disposable)
+  }
 }

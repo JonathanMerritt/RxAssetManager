@@ -31,7 +31,9 @@ open class RxAssetManager(context: Context) : IsRxAssetManager {
 
   override val locales: Flowable<String> get() = Flowable.fromArray(*manager.locales)
 
-  override fun close(): Completable { return Completable.fromAction(manager::close) }
+  override fun close(): Completable {
+    return Completable.fromAction(manager::close)
+  }
 
   override fun open(fileName: String, accessMode: Int): Maybe<InputStream> {
     return Maybe.defer { Maybe.fromCallable { manager.open(fileName, accessMode) } }
