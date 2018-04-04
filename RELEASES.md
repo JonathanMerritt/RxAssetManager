@@ -1,19 +1,9 @@
-### Patch: v0.5.2
+### Minor: v0.6.0
 _April 4, 2018_
-
-- Refactor and update copyright.
-
-
-### Patch: v0.5.1
-_April 4, 2018_
-
-- Add dokka and task updates.
-
-
-### Minor: v0.5.0
-_April 3, 2018_
 
 - Use kotlin.
+- Add dokka and task updates.
+- Refactor and update copyright.
 
 
 ### Patch: v0.0.1
