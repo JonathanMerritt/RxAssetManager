@@ -18,8 +18,6 @@ package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
 import com.github.jonathanmerritt.rxassetmanager.common.DisposingActivity
-import com.github.jonathanmerritt.rxassetmanager.common.schedule
-import com.github.jonathanmerritt.rxassetmanager.common.subscribed
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.get_locales
@@ -40,19 +38,15 @@ class MainActivity : DisposingActivity() {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    open.setOnClickListener { manager.open("Folder/File.txt").toObservable().schedule().subscribed { add(it) } }
-    open_fd.setOnClickListener {
-      manager.openFd("Folder/File2.txt").toObservable().schedule().subscribed { add(it) }
-    }
-    list.setOnClickListener { manager.list("").toObservable().schedule().subscribed { add(it) } }
-    open_non_asset_fd.setOnClickListener {
-      manager.openNonAssetFd(fileName = "AndroidManifest.xml").toObservable().schedule().subscribed { add(it) }
-    }
+    open.setOnClickListener { manager.open("Folder/File.txt").dispose() }
+    open_fd.setOnClickListener { manager.openFd("Folder/File2.txt").dispose() }
+    list.setOnClickListener { manager.list("").dispose() }
+    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd(fileName = "AndroidManifest.xml").dispose() }
     open_xml_resource_parser.setOnClickListener {
-      manager.openXmlResourceParser(fileName = "AndroidManifest.xml").toObservable().schedule().subscribed {
-        add(it)
-      }
+      manager.openXmlResourceParser(fileName = "AndroidManifest.xml").dispose()
     }
-    get_locales.setOnClickListener { manager.locales.toObservable().schedule().subscribed { add(it) } }
+    get_locales.setOnClickListener { manager.locales.dispose() }
   }
 }
+
+
