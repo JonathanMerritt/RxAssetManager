@@ -15,7 +15,6 @@ Inspired by the blog post [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott
 _Any help or contribution is welcome._
 
 ## Download
-#### Gradle
 ```groovy
   repositories {
     jcenter()
@@ -28,18 +27,6 @@ _Any help or contribution is welcome._
   }
 ```
 
-#### Maven
-```xml
-<dependencies>
- <dependency>
-   <groupId>com.github.jonathanmerritt.rxassetmanager</groupId>
-   <artifactId>core OR* core-ext</artifactId>
-   <version>x.y.z</version>
-   <type>pom</type>
- </dependency>
-</dependencies>
-```
-
 *`core-ext` will include `core` automatically.
 
 
@@ -49,21 +36,22 @@ This example will either open or list and open any files as InputStreams.
 _Check the sample apps for more detailed examples._
 
 #### Core
-```java
-public class SomeActivity extends Activity {
-  private Disposable openPath() { return new RxAssetManager(this).open("Asset").subscribe(is -> {}); }
+```kotlin
+ class SomeActivity: Activity {
+  fun open() = RxAssetManager(this).open("Asset").subscribe {  }
 }
 ```
 
 #### Core-Ext
-```java
-public class SomeActivity extends Activity { 
-  private Disposable listOpenPath() { return new RxAssetManager(this).listOpen("Assets").subscribe(is -> {}); }
+```kotlin
+ class SomeActivity: Activity {
+  fun listOpen() = RxAssetManager(this).listOpen("Assets").subscribe {  }
 }
 ```
 
 ## TODO
 - Add javadoc.
+- Add tests.
 - ...
 
 ## License
