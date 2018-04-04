@@ -19,7 +19,6 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
 import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.content.res.XmlResourceParser
-import com.google.common.io.Files
 import hu.akarnokd.rxjava2.operators.FlowableTransformers
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -41,13 +40,13 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
     return open(fileName, accessMode).map {
       val file = File(String.format("%s/%s", saveFolder, fileName))
       file.parentFile!!.mkdirs()
-      it.use { file.outputStream().use { out -> it.copyTo(out) } }
+      file.outputStream().use { out -> it.copyTo(out) }
       file
     }
   }
 
   override fun listAll(folderName: String): Flowable<String> {
-    return listPath(folderName).compose(FlowableTransformers.expand({ this.listPath(it) }))
+    return listPath(folderName).compose(FlowableTransformers.expand(::listPath))
   }
 
   override fun listOpen(folderName: String, accessMode: Int, listAll: Boolean): Flowable<InputStream> {
@@ -68,7 +67,7 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
   }
 
   override fun listOpenFd(folderName: String, listAll: Boolean): Flowable<AssetFileDescriptor> {
-    return listFiles(folderName, listAll).flatMapSingle({ this.openFd(it) })
+    return listFiles(folderName, listAll).flatMapSingle(::openFd)
   }
 
   override fun listOpenNonAssetFd(cookie: Int, folderName: String,
@@ -78,7 +77,7 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
 
   override fun listOpenXmlResourceParser(cookie: Int, folderName: String,
       listAll: Boolean): Flowable<XmlResourceParser> {
-    return listFiles(folderName, listAll).filter { Files.getFileExtension(it) == "xml" }
+    return listFiles(folderName, listAll).filter { it.endsWith(".xml") }
         .flatMapSingle { openXmlResourceParser(cookie, it) }
   }
 
@@ -90,8 +89,6 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
   }
 
   private fun listFiles(folderName: String, listAll: Boolean): Flowable<String> {
-    return (if (listAll) listAll(folderName) else listPath(folderName)).filter { path ->
-      !Files.getFileExtension(path).isEmpty()
-    }
+    return (if (listAll) listAll(folderName) else listPath(folderName)).filter { it.contains(".") }
   }
 }

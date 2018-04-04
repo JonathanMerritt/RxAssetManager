@@ -58,7 +58,6 @@ dependencies {
 
   implementation dep.rxjava2
   implementation dep.rxjava2Ext
-  implementation dep.guava
   implementation dep.kotlin.stdlib
 
   androidTestImplementation dep.support.test
