@@ -73,6 +73,7 @@ buildscript {
         tools   : '27.0.3'
     ]
 
+
     dep = [
         rxjava2Ext : "com.github.akarnokd:rxjava2-extensions:0.17.0",
         timber     : "com.jakewharton.timber:timber:4.5.1"
