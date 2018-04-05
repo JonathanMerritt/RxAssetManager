@@ -121,7 +121,7 @@ subprojects {
     Version configuration
     */
     def ver = [:]
-    ver.name = lib.name.contains('app') ? "1.0.0" : "0.6.1"
+    ver.name = lib.name.contains('app') ? "1.0.0" : "0.6.0"
     ver.code = ver.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
     ext.ver = ver
   }
