@@ -41,9 +41,9 @@ class MainActivity : DisposingActivity() {
     open.setOnClickListener { manager.open("Folder/File.txt").dispose() }
     open_fd.setOnClickListener { manager.openFd("Folder/File2.txt").dispose() }
     list.setOnClickListener { manager.list("").dispose() }
-    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd(fileName = "AndroidManifest.xml").dispose() }
+    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd(name = "AndroidManifest.xml").dispose() }
     open_xml_resource_parser.setOnClickListener {
-      manager.openXmlResourceParser(fileName = "AndroidManifest.xml").dispose()
+      manager.openXmlResourceParser(name = "AndroidManifest.xml").dispose()
     }
     get_locales.setOnClickListener { manager.locales.dispose() }
   }

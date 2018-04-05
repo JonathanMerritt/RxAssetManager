@@ -29,15 +29,15 @@ interface IsRxAssetManager {
 
   val locales: Flowable<String>
 
-  fun close(): Completable
+  val close: Completable
 
-  fun open(fileName: String, accessMode: Int = ACCESS_STREAMING): Maybe<InputStream>
+  fun open(name: String, mode: Int = ACCESS_STREAMING): Maybe<InputStream>
 
-  fun openFd(fileName: String): Single<AssetFileDescriptor>
+  fun openFd(name: String): Single<AssetFileDescriptor>
 
-  fun list(folderName: String): Flowable<String>
+  fun list(name: String): Flowable<String>
 
-  fun openNonAssetFd(cookie: Int = 0, fileName: String): Single<AssetFileDescriptor>
+  fun openNonAssetFd(cookie: Int = 0, name: String): Single<AssetFileDescriptor>
 
-  fun openXmlResourceParser(cookie: Int = 0, fileName: String): Single<XmlResourceParser>
+  fun openXmlResourceParser(cookie: Int = 0, name: String): Single<XmlResourceParser>
 }

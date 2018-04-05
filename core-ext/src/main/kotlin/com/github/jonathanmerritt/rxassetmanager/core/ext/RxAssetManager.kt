@@ -28,52 +28,48 @@ import java.io.InputStream
 class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager(
     context), IsRxAssetManager {
 
-  override fun openString(fileName: String, accessMode: Int): Maybe<String> =
-      open(fileName, accessMode).map { it.bufferedReader().use { it.readText() } }
+  override fun openString(name: String, mode: Int): Maybe<String> =
+      open(name, mode).map { it.bufferedReader().use { it.readText() } }
 
-  override fun openBytes(fileName: String, accessMode: Int): Maybe<ByteArray> =
-      open(fileName, accessMode).map { it.readBytes() }
+  override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
-  override fun openSave(fileName: String, accessMode: Int, saveFolder: String): Maybe<File> =
-      open(fileName, accessMode).map {
-        val file = File(String.format("%s/%s", saveFolder, fileName))
+  override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
+      open(name, mode).map {
+        val file = File(String.format("%s/%s", to, name))
         file.parentFile!!.mkdirs()
         file.outputStream().use { out -> it.copyTo(out) }
         file
       }
 
-  override fun listAll(folderName: String): Flowable<String> =
-      listPath(folderName).compose(FlowableTransformers.expand(::listPath))
+  override fun listAll(name: String): Flowable<String> =
+      listPath(name).compose(FlowableTransformers.expand(::listPath))
 
-  override fun listOpen(folderName: String, accessMode: Int, listAll: Boolean): Flowable<InputStream> =
-      listFiles(folderName, listAll).flatMapMaybe { open(it, accessMode) }
+  override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
+      listFiles(name, all).flatMapMaybe { open(it, mode) }
 
-  override fun listOpenString(folderName: String, accessMode: Int, listAll: Boolean): Flowable<String> =
-      listFiles(folderName, listAll).flatMapMaybe { openString(it, accessMode) }
+  override fun listOpenString(name: String, mode: Int, all: Boolean): Flowable<String> =
+      listFiles(name, all).flatMapMaybe { openString(it, mode) }
 
-  override fun listOpenBytes(folderName: String, accessMode: Int, listAll: Boolean): Flowable<ByteArray> =
-      listFiles(folderName, listAll).flatMapMaybe { openBytes(it, accessMode) }
+  override fun listOpenBytes(name: String, mode: Int, all: Boolean): Flowable<ByteArray> =
+      listFiles(name, all).flatMapMaybe { openBytes(it, mode) }
 
-  override fun listOpenSave(folderName: String, accessMode: Int, saveFolder: String,
-      listAll: Boolean): Flowable<File> =
-      listFiles(folderName, listAll).flatMapMaybe { openSave(it, accessMode, saveFolder) }
+  override fun listOpenSave(name: String, mode: Int, to: String, all: Boolean): Flowable<File> =
+      listFiles(name, all).flatMapMaybe { openSave(it, mode, to) }
 
-  override fun listOpenFd(folderName: String, listAll: Boolean): Flowable<AssetFileDescriptor> =
-      listFiles(folderName, listAll).flatMapSingle(::openFd)
+  override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
+      listFiles(name, all).flatMapSingle(::openFd)
 
-  override fun listOpenNonAssetFd(cookie: Int, folderName: String,
-      listAll: Boolean): Flowable<AssetFileDescriptor> =
-      listFiles(folderName, listAll).flatMapSingle { openNonAssetFd(cookie, it) }
+  override fun listOpenNonAssetFd(cookie: Int, name: String, all: Boolean): Flowable<AssetFileDescriptor> =
+      listFiles(name, all).flatMapSingle { openNonAssetFd(cookie, it) }
 
-  override fun listOpenXmlResourceParser(cookie: Int, folderName: String,
-      listAll: Boolean): Flowable<XmlResourceParser> =
-      listFiles(folderName, listAll).filter { it.endsWith(".xml") }
-          .flatMapSingle { openXmlResourceParser(cookie, it) }
+  override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
+      listFiles(name, all).filter { it.endsWith(".xml") }.flatMapSingle { openXmlResourceParser(cookie, it) }
 
-  private fun listPath(folderName: String): Flowable<String> = list(folderName).map {
-    val path = String.format("%s/%s", folderName, it)
-    if (path.length > 1 && path.substring(0, 1) == "/") path.replace(path.substring(0, 1), "") else path
-  }
+  private fun listPath(folderName: String): Flowable<String> =
+      list(folderName).map {
+        val path = String.format("%s/%s", folderName, it)
+        if (path.length > 1 && path.substring(0, 1) == "/") path.replace(path.substring(0, 1), "") else path
+      }
 
   private fun listFiles(folderName: String, listAll: Boolean): Flowable<String> =
       (if (listAll) listAll(folderName) else listPath(folderName)).filter { it.contains(".") }

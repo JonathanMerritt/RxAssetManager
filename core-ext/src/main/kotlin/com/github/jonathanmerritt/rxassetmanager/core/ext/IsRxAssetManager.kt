@@ -26,31 +26,25 @@ import java.io.InputStream
 
 interface IsRxAssetManager : com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager {
 
-  fun openString(fileName: String, accessMode: Int = ACCESS_STREAMING): Maybe<String>
+  fun openString(name: String, mode: Int = ACCESS_STREAMING): Maybe<String>
 
-  fun openBytes(fileName: String, accessMode: Int = ACCESS_STREAMING): Maybe<ByteArray>
+  fun openBytes(name: String, mode: Int = ACCESS_STREAMING): Maybe<ByteArray>
 
-  fun openSave(fileName: String, accessMode: Int = ACCESS_STREAMING, saveFolder: String): Maybe<File>
+  fun openSave(name: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<File>
 
-  fun listAll(folderName: String): Flowable<String>
+  fun listAll(name: String): Flowable<String>
 
-  fun listOpen(folderName: String, accessMode: Int = ACCESS_STREAMING,
-      listAll: Boolean = false): Flowable<InputStream>
+  fun listOpen(name: String, mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream>
 
-  fun listOpenString(folderName: String, accessMode: Int = ACCESS_STREAMING,
-      listAll: Boolean = false): Flowable<String>
+  fun listOpenString(name: String, mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<String>
 
-  fun listOpenBytes(folderName: String, accessMode: Int = ACCESS_STREAMING,
-      listAll: Boolean = false): Flowable<ByteArray>
+  fun listOpenBytes(name: String, mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray>
 
-  fun listOpenSave(folderName: String, accessMode: Int = ACCESS_STREAMING, saveFolder: String,
-      listAll: Boolean = false): Flowable<File>
+  fun listOpenSave(name: String, mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false): Flowable<File>
 
-  fun listOpenFd(folderName: String, listAll: Boolean = false): Flowable<AssetFileDescriptor>
+  fun listOpenFd(name: String, all: Boolean = false): Flowable<AssetFileDescriptor>
 
-  fun listOpenNonAssetFd(cookie: Int = 0, folderName: String,
-      listAll: Boolean = false): Flowable<AssetFileDescriptor>
+  fun listOpenNonAssetFd(cookie: Int = 0, name: String, all: Boolean = false): Flowable<AssetFileDescriptor>
 
-  fun listOpenXmlResourceParser(cookie: Int = 0, folderName: String,
-      listAll: Boolean = false): Flowable<XmlResourceParser>
+  fun listOpenXmlResourceParser(cookie: Int = 0, name: String, all: Boolean = false): Flowable<XmlResourceParser>
 }

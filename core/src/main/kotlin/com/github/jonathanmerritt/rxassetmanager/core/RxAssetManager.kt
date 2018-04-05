@@ -29,22 +29,21 @@ open class RxAssetManager(context: Context) : IsRxAssetManager {
 
   private val manager = context.assets!!
 
-  override val locales: Flowable<String> get() = Flowable.fromArray(*manager.locales)
+  final override val locales: Flowable<String> = Flowable.fromArray(*manager.locales)
 
-  override fun close(): Completable = Completable.fromAction(manager::close)
+  final override val close: Completable = Completable.fromAction(manager::close)
 
-  override fun open(fileName: String, accessMode: Int): Maybe<InputStream> =
-      Maybe.defer { Maybe.fromCallable { manager.open(fileName, accessMode) } }
+  override fun open(name: String, mode: Int): Maybe<InputStream> =
+      Maybe.defer { Maybe.fromCallable { manager.open(name, mode) } }
 
-  override fun openFd(fileName: String): Single<AssetFileDescriptor> =
-      Single.defer { Single.fromCallable { manager.openFd(fileName) } }
+  override fun openFd(name: String): Single<AssetFileDescriptor> =
+      Single.defer { Single.fromCallable { manager.openFd(name) } }
 
-  override fun list(folderName: String): Flowable<String> =
-      Flowable.defer { Flowable.fromArray(*manager.list(folderName)) }
+  override fun list(name: String): Flowable<String> = Flowable.defer { Flowable.fromArray(*manager.list(name)) }
 
-  override fun openNonAssetFd(cookie: Int, fileName: String): Single<AssetFileDescriptor> =
-      Single.defer { Single.fromCallable { manager.openNonAssetFd(fileName) } }
+  override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
+      Single.defer { Single.fromCallable { manager.openNonAssetFd(name) } }
 
-  override fun openXmlResourceParser(cookie: Int, fileName: String): Single<XmlResourceParser> =
-      Single.defer { Single.fromCallable { manager.openXmlResourceParser(cookie, fileName) } }
+  override fun openXmlResourceParser(cookie: Int, name: String): Single<XmlResourceParser> =
+      Single.defer { Single.fromCallable { manager.openXmlResourceParser(cookie, name) } }
 }

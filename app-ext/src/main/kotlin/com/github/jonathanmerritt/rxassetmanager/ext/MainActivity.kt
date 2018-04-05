@@ -46,20 +46,19 @@ class MainActivity : DisposingActivity() {
     open_string.setOnClickListener { manager.openString("Folder/File.txt").dispose() }
     open_bytes.setOnClickListener { manager.openBytes("Folder/File2.txt").dispose() }
     open_save.setOnClickListener {
-      manager.openSave("Folder/Folder2/File.txt", saveFolder = cacheDir.absolutePath).dispose()
+      manager.openSave("Folder/Folder2/File.txt", to = cacheDir.absolutePath).dispose()
     }
     list_all.setOnClickListener { manager.listAll("").dispose() }
-    list_open.setOnClickListener { manager.listOpen("", listAll = true).dispose() }
-    list_open_string.setOnClickListener { manager.listOpenString("Folder/Folder2", listAll = true).dispose() }
+    list_open.setOnClickListener { manager.listOpen("", all = true).dispose() }
+    list_open_string.setOnClickListener { manager.listOpenString("Folder/Folder2", all = true).dispose() }
     list_open_bytes.setOnClickListener { manager.listOpenBytes("Folder").dispose() }
     list_open_save.setOnClickListener {
-      manager.listOpenSave("Folder", saveFolder = cacheDir.absolutePath, listAll = true).dispose()
+      manager.listOpenSave("Folder", to = cacheDir.absolutePath, all = true).dispose()
     }
-    list_open_fd.setOnClickListener { manager.listOpenFd("", listAll = true).dispose() }
-    list_open_non_asset_fd.setOnClickListener { manager.listOpenNonAssetFd(folderName = "/").dispose() }
+    list_open_fd.setOnClickListener { manager.listOpenFd("", all = true).dispose() }
+    list_open_non_asset_fd.setOnClickListener { manager.listOpenNonAssetFd(name = "/").dispose() }
     list_open_xml_resource_parser.setOnClickListener {
-      manager.listOpenXmlResourceParser(folderName = "/", listAll = true).dispose()
+      manager.listOpenXmlResourceParser(name = "/", all = true).dispose()
     }
   }
 }
-
