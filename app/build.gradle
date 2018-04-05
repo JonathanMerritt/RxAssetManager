@@ -19,14 +19,14 @@ apply plugin : 'kotlin-android'
 apply plugin : 'kotlin-android-extensions'
 
 android {
-  compileSdkVersion rep.sdk.compile
-  buildToolsVersion rep.sdk.tools
+  compileSdkVersion sdk.compile
+  buildToolsVersion sdk.tools
 
   defaultConfig {
-    minSdkVersion rep.sdk.min
-    targetSdkVersion rep.sdk.compile
-    versionCode rep.version.code
-    versionName rep.version.name
+    minSdkVersion sdk.min
+    targetSdkVersion sdk.compile
+    versionCode ver.code
+    versionName ver.name
 
     applicationId rep.id
 
@@ -53,7 +53,4 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   implementation project(":app-common")
-
-  //androidTestImplementation dep.support.test
-  //testImplementation dep.test.junit
 }

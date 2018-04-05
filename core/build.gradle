@@ -18,14 +18,14 @@ apply plugin : 'com.android.library'
 apply plugin : 'kotlin-android'
 
 android {
-  compileSdkVersion rep.sdk.compile
-  buildToolsVersion rep.sdk.tools
+  compileSdkVersion sdk.compile
+  buildToolsVersion sdk.tools
 
   defaultConfig {
-    minSdkVersion rep.sdk.min
-    targetSdkVersion rep.sdk.compile
-    versionCode rep.version.code
-    versionName rep.version.name
+    minSdkVersion sdk.min
+    targetSdkVersion sdk.compile
+    versionCode ver.code
+    versionName ver.name
 
     //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
   }
@@ -55,12 +55,9 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
 
-  implementation dep.support.annotations
-  implementation dep.rxjava2
   implementation dep.kotlin.stdlib
 
-  //androidTestImplementation dep.support.test
-  //testImplementation dep.test.junit
+  implementation dep.rx2
 }
 
 apply from : "../gradle/dokka.gradle"

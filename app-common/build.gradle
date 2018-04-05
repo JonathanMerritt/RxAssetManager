@@ -18,14 +18,14 @@ apply plugin : 'com.android.library'
 apply plugin : 'kotlin-android'
 
 android {
-  compileSdkVersion rep.sdk.compile
-  buildToolsVersion rep.sdk.tools
+  compileSdkVersion sdk.compile
+  buildToolsVersion sdk.tools
 
   defaultConfig {
-    minSdkVersion rep.sdk.min
-    targetSdkVersion rep.sdk.compile
-    versionCode rep.version.code
-    versionName rep.version.name
+    minSdkVersion sdk.min
+    targetSdkVersion sdk.compile
+    versionCode ver.code
+    versionName ver.name
   }
 
   buildTypes {
@@ -54,6 +54,8 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   api project(":core-ext")
 
+  api dep.timber
+
   api dep.support.appcompat
   api dep.support.v4
   api dep.support.design
@@ -61,6 +63,5 @@ dependencies {
 
   api dep.kotlin.stdlib
 
-  api dep.rxjava2
-  api dep.timber
+  api dep.rx2
 }

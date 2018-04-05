@@ -22,15 +22,15 @@ install.repositories.mavenInstaller {
   pom.project {
     packaging 'aar'
     groupId rep.id
-    artifactId rep.lib.name
-    name rep.lib.name
-    description rep.lib.desc
-    url rep.lib.url
+    artifactId lib.name
+    name lib.name
+    description lib.desc
+    url "https://github.com/$dev.name/$rep.name/tree/master/$lib.name"
 
     licenses {
       license {
         name rep.licenses.join(", ")
-        url "$rep.url/blob/master/LICENSE.txt"
+        url "https://github.com/$dev.name/$rep.name/blob/master/LICENSE.txt"
       }
     }
 
@@ -43,9 +43,9 @@ install.repositories.mavenInstaller {
     }
 
     scm {
-      connection rep.vcs.url
-      developerConnection rep.vcs.dev
-      url rep.lib.url
+      connection "scm:git:git://github.com/$dev.name/${rep.name}.git"
+      developerConnection "scm:git:git@github.com/$dev.name/${rep.name}.git"
+      url "https://github.com/$dev.name/$rep.name/tree/master/$lib.name"
     }
   }
 }

@@ -16,42 +16,42 @@
 
 apply plugin : 'com.jfrog.bintray'
 
-version = rep.version.name
+version = ver.name
 
 bintray {
   user = dev.name
-  key = dev.bintray.key
+  key = dev.pass.bintray
   configurations = ['archives']
   publish = true
 
   pkg {
     repo = rep.name
-    name = rep.lib.name
-    desc = rep.lib.desc
-    websiteUrl = rep.lib.url
-    issueTrackerUrl = "$rep.url/issues"
-    vcsUrl = rep.vcs.url
+    name = lib.name
+    desc = lib.desc
+    websiteUrl = "https://github.com/$dev.name/$rep.name/tree/master/$lib.name"
+    issueTrackerUrl = "https://github.com/$dev.name/$rep.name/issues"
+    vcsUrl = "scm:git:git://github.com/$dev.name/${rep.name}.git"
     licenses = rep.licenses
     labels = rep.labels
     publicDownloadNumbers = true
-    githubRepo = rep.root
+    githubRepo = "$dev.name/$rep.name"
     githubReleaseNotesFile = "RELEASES.md"
 
     version {
-      name = rep.version.name
+      name = ver.name
       released = new Date()
-      desc = "Check - $rep.url/releases"
-      vcsTag = rep.version.name
+      desc = "Check - https://github.com/$dev.name/$rep.name/releases"
+      vcsTag = ver.name
 
       gpg {
         sign = true
-        passphrase = dev.gpg.pass
+        passphrase = dev.pass.gpg
       }
 
       mavenCentralSync {
-        sync = true
+        sync = false
         user = dev.name
-        password = dev.maven.pass
+        password = dev.pass.maven
       }
     }
   }

@@ -15,115 +15,72 @@
  */
 
 buildscript {
-  ext {
-    dev = [
-        name  : "jonathanmerritt",
-        email : "11R00TT00RR11@GMAIL.COM"
-    ]
+  /*
+  Developer configuration
+  */
+  def dev = [:]
+  dev.name = "jonathanmerritt"
+  dev.email = "11R00TT00RR11@GMAIL.COM"
+  ext.dev = dev
 
-    def local = new Properties()
-    local.load(file("local.properties").newDataInputStream())
-    dev.bintray = [
-        key : local.getProperty("bintray.key")
-    ]
-    dev.gpg = [
-        pass : local.getProperty("gpg.pass")
-    ]
-    dev.maven = [
-        pass : local.getProperty("maven.pass")
-    ]
+  def pass = [:]
+  def local = new Properties()
+  local.load(file("local.properties").newDataInputStream())
+  pass.bintray = local.getProperty("pass.bintray")
+  pass.gpg = local.getProperty("pass.gpg")
+  pass.maven = local.getProperty("pass.maven")
+  ext.dev.pass = pass
 
+  /*
+  Repository configuration
+  */
+  def rep = [:]
+  rep.name = rootProject.name
+  rep.id = "com.github.${dev.name}.${rep.name.toLowerCase()}"
+  rep.labels = ["android", "android-library", "asset", "assets", "assetmanager", "assetsmanager", "android-asset",
+                "android-assets", "android-asset-manager", "android-assets-manager"]
+  rep.licenses = ["Apache-2.0"]
+  ext.rep = rep
 
-    rep = [
-        name : rootProject.name
-    ]
-    rep += [
-        id   : "com.github.${dev.name}.${rep.name.toLowerCase()}",
-        root : "$dev.name/$rep.name"
-    ]
-    rep += [
-        url : "https://github.com/$rep.root"
-    ]
+  /*
+  Sdk configuration
+  */
+  def sdk = [:]
+  sdk.compile = 27
+  sdk.min = 17
+  sdk.tools = '27.0.3'
+  ext.sdk = sdk
 
-    rep.vcs = [
-        url : "scm:git:git://github.com/${rep.root}.git",
-        dev : "scm:git:git@github.com/${rep.root}.git"
-    ]
+  /*
+  Dependency configuration
+  */
+  def dep = [:]
+  dep.rxjava2Ext = "com.github.akarnokd:rxjava2-extensions:0.17.0"
+  dep.timber = "com.jakewharton.timber:timber:4.5.1"
+  ext.dep = dep
 
-    rep.labels = [
-        "android",
-        "android-library",
-        "asset",
-        "assets",
-        "assetmanager",
-        "assetsmanager",
-        "android-asset",
-        "android-assets",
-        "android-asset-manager",
-        "android-assets-manager"
-    ]
+  ext.dep.test = ["junit:junit:4.12"]
 
-    rep.licenses = [
-        "Apache-2.0"
-    ]
+  def ver_support = "27.1.0"
+  def ver_constraint = "1.1.0-beta6"
+  def ver_kotlin = "1.2.31"
 
-    rep.sdk = [
-        compile : 27,
-        min     : 17,
-        tools   : '27.0.3'
-    ]
+  def support = [:]
+  support.appcompat = "com.android.support:appcompat-v7:$ver_support"
+  support.v4 = "com.android.support:support-v4:$ver_support"
+  support.design = "com.android.support:design:$ver_support"
+  support.constraint = ["com.android.support.constraint:constraint-layout:$ver_constraint",
+      "${"com.android.support"}.constraint:constraint-layout-solver:$ver_constraint"]
+  support.test = ["com.android.support.test:runner:1.0.1", "com.android.support.test.espresso:espresso-core:3.0.1"]
+  ext.dep.support = support
 
+  def kotlin = [:]
+  kotlin.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver_kotlin"
+  kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$ver_kotlin"
+  ext.dep.kotlin = kotlin
 
-    dep = [
-        rxjava2Ext : "com.github.akarnokd:rxjava2-extensions:0.17.0",
-        timber     : "com.jakewharton.timber:timber:4.5.1"
-    ]
+  ext.dep.rx2 = ["io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1"]
 
-    def support = [
-        group   : "com.android.support",
-        version : "27.1.0"
-    ]
-    dep.support = [
-        appcompat   : "$support.group:appcompat-v7:$support.version",
-        v4          : "$support.group:support-v4:$support.version",
-        design      : "$support.group:design:$support.version",
-        annotations : "$support.group:support-annotations:$support.version"
-    ]
-
-    support.constraint = [
-        group   : "${support.group}.constraint",
-        version : "1.1.0-beta6"
-    ]
-    dep.support.constraint = [
-        "$support.constraint.group:constraint-layout:$support.constraint.version",
-        "$support.constraint.group:constraint-layout-solver:$support.constraint.version"
-    ]
-
-    support.test = "${support.group}.test"
-    dep.support.test = [
-        "$support.test:runner:1.0.1",
-        "${support.test}.espresso:espresso-core:3.0.1"
-    ]
-
-    def kotlin = [
-        group   : "org.jetbrains.kotlin",
-        version : "1.2.31"
-    ]
-    dep.kotlin = [
-        gradle : "$kotlin.group:kotlin-gradle-plugin:$kotlin.version",
-        stdlib : "$kotlin.group:kotlin-stdlib-jdk7:$kotlin.version"
-    ]
-
-    def rxjava2 = "io.reactivex.rxjava2"
-    dep.rxjava2 = [
-        "$rxjava2:rxjava:2.1.7",
-        "$rxjava2:rxandroid:2.0.1"
-    ]
-
-    dep.test = [
-        junit : "junit:junit:4.12"
-    ]
-  }
 
   repositories {
     google()
@@ -152,22 +109,21 @@ subprojects {
   }
 
   beforeEvaluate {
-    ext {
-      rep.lib = [
-          name : name
-      ]
-      rep.lib += [
-          url  : "$rep.url/tree/master/$rep.lib.name",
-          desc : "${rep.name}s' $rep.lib.name library"
-      ]
+    /*
+    Library configuration
+    */
+    def lib = [:]
+    lib.name = name
+    lib.desc = "${rep.name}s' $lib.name library"
+    ext.lib = lib
 
-      rep.version = [
-          name : rep.lib.name.contains('app') ? "1.0.0" : "0.6.0"
-      ]
-      rep.version += [
-          code : rep.version.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
-      ]
-    }
+    /*
+    Version configuration
+    */
+    def ver = [:]
+    ver.name = lib.name.contains('app') ? "1.0.0" : "0.6.1"
+    ver.code = ver.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
+    ext.ver = ver
   }
 }
 
