@@ -17,6 +17,7 @@
 package com.github.jonathanmerritt.rxassetmanager.common
 
 import android.support.v7.app.AppCompatActivity
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
@@ -24,36 +25,33 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 abstract class DisposingActivity : AppCompatActivity() {
-  private var disposables = CompositeDisposable().also { it.dispose() }
+  private var disposables = CompositeDisposable()
 
   override fun onStart() {
     super.onStart()
-    if (disposables.isDisposed) disposables = CompositeDisposable()
+    disposables = disposables.run { if (isDisposed) CompositeDisposable() else this }
   }
 
   override fun onStop() {
     super.onStop()
-    if (!disposables.isDisposed) disposables.dispose()
+    disposables.run { if (!isDisposed) dispose() }
   }
 
   protected fun Any.dispose(): Disposable = when {
+    this is Completable -> toObservable()
     this is Single<*> -> toObservable()
     this is Maybe<*> -> toObservable()
     this is Flowable<*> -> toObservable()
-    else -> {
-      Timber.i("never()")
-      Observable.never()
-    }
+    else -> Observable.never()
   }
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
-      .doOnSubscribe { Timber.i("start()"); disposables.add(it) }
-      .doOnNext { Timber.i("next(%s)", it) }
-      .doOnComplete { Timber.i("complete()") }
-      .doOnError { Timber.e(it, it.message) }
-      .subscribe()
+      .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete()") }, { Timber.i("next(%s)", it) })
+      .addTo(disposables)
 }
