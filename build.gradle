@@ -79,7 +79,7 @@ buildscript {
   kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$ver_kotlin"
   ext.dep.kotlin = kotlin
 
-  ext.dep.rx2 = ["io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1"]
+  ext.dep.rx2 = ["io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1", "io.reactivex.rxjava2:rxkotlin:2.2.0"]
 
 
   repositories {
