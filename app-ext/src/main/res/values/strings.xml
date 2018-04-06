@@ -26,7 +26,7 @@
   <string name="list_open_bytes">List And Open Bytes</string>
   <string name="list_open_fd">List And Open Fd</string>
   <string name="list_open_save">List, Open And Save</string>
-  <string name="list_open_non_asset_fd">List And Open Non-Asset Fd</string>
+  <string name="list_open_non_asset_fd">List And Open Non Asset Fd</string>
   <string name="list_open_xml_resource_parser">List And Open Xml Resource Parser</string>
 
 </resources>

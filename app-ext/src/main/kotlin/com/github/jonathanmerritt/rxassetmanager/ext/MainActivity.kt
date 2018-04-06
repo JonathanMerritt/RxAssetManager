@@ -34,25 +34,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
       openString.setOnClickListener { openString("Folder/File.txt").dispose() }
-
       openBytes.setOnClickListener { openBytes("Folder/File2.txt").dispose() }
-
       openSave.setOnClickListener { openSave("Folder/Folder2/File.txt", to = cacheDir.path).dispose() }
-
       listAll.setOnClickListener { listAll("").dispose() }
-
       listOpen.setOnClickListener { listOpen("", all = true).dispose() }
-
       listOpenString.setOnClickListener { listOpenString("Folder/Folder2", all = true).dispose() }
-
       listOpenBytes.setOnClickListener { listOpenBytes("Folder").dispose() }
-
       listOpenSave.setOnClickListener { listOpenSave("Folder", to = cacheDir.path, all = true).dispose() }
-
       listOpenFd.setOnClickListener { listOpenFd("", all = true).dispose() }
-
       listOpenNonAssetFd.setOnClickListener { listOpenNonAssetFd(name = "/").dispose() }
-
       listOpenXmlResourceParser.setOnClickListener { listOpenXmlResourceParser(name = "/", all = true).dispose() }
     }
   }
