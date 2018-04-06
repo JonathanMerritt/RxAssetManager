@@ -48,10 +48,10 @@ abstract class DisposingActivity : AppCompatActivity() {
     this is Single<*> -> toObservable()
     this is Maybe<*> -> toObservable()
     this is Flowable<*> -> toObservable()
-    else -> Observable.never()
+    else -> Observable.error(Throwable("${javaClass.simpleName} is not accounted for!"))
   }
       .subscribeOn(Schedulers.io())
       .observeOn(AndroidSchedulers.mainThread())
-      .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete()") }, { Timber.i("next(%s)", it) })
+      .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete()") }, { Timber.i("next($it)") })
       .addTo(disposables)
 }

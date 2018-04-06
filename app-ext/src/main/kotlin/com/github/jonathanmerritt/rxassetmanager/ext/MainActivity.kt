@@ -18,6 +18,13 @@ package com.github.jonathanmerritt.rxassetmanager.ext
 
 import android.os.Bundle
 import com.github.jonathanmerritt.rxassetmanager.common.DisposingActivity
+import com.github.jonathanmerritt.rxassetmanager.common.E
+import com.github.jonathanmerritt.rxassetmanager.common.FO1
+import com.github.jonathanmerritt.rxassetmanager.common.FO1FI1
+import com.github.jonathanmerritt.rxassetmanager.common.FO1FI2
+import com.github.jonathanmerritt.rxassetmanager.common.FO2
+import com.github.jonathanmerritt.rxassetmanager.common.FO2FI1
+import com.github.jonathanmerritt.rxassetmanager.common.S
 import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.list_all
@@ -32,6 +39,7 @@ import kotlinx.android.synthetic.main.activity_main.open_bytes
 import kotlinx.android.synthetic.main.activity_main.open_save
 import kotlinx.android.synthetic.main.activity_main.open_string
 
+
 class MainActivity : DisposingActivity() {
   private lateinit var manager: IsRxAssetManager
 
@@ -43,22 +51,19 @@ class MainActivity : DisposingActivity() {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    open_string.setOnClickListener { manager.openString("Folder/File.txt").dispose() }
-    open_bytes.setOnClickListener { manager.openBytes("Folder/File2.txt").dispose() }
-    open_save.setOnClickListener {
-      manager.openSave("Folder/Folder2/File.txt", to = cacheDir.absolutePath).dispose()
-    }
-    list_all.setOnClickListener { manager.listAll("").dispose() }
-    list_open.setOnClickListener { manager.listOpen("", all = true).dispose() }
-    list_open_string.setOnClickListener { manager.listOpenString("Folder/Folder2", all = true).dispose() }
-    list_open_bytes.setOnClickListener { manager.listOpenBytes("Folder").dispose() }
-    list_open_save.setOnClickListener {
-      manager.listOpenSave("Folder", to = cacheDir.absolutePath, all = true).dispose()
-    }
-    list_open_fd.setOnClickListener { manager.listOpenFd("", all = true).dispose() }
-    list_open_non_asset_fd.setOnClickListener { manager.listOpenNonAssetFd(name = "/").dispose() }
+
+    open_string.setOnClickListener { manager.openString(FO1FI1).dispose() }
+    open_bytes.setOnClickListener { manager.openBytes(FO1FI2).dispose() }
+    open_save.setOnClickListener { manager.openSave(FO2FI1, to = cacheDir.path).dispose() }
+    list_all.setOnClickListener { manager.listAll(E).dispose() }
+    list_open.setOnClickListener { manager.listOpen(E, all = true).dispose() }
+    list_open_string.setOnClickListener { manager.listOpenString(FO2, all = true).dispose() }
+    list_open_bytes.setOnClickListener { manager.listOpenBytes(FO1).dispose() }
+    list_open_save.setOnClickListener { manager.listOpenSave(FO1, to = cacheDir.path, all = true).dispose() }
+    list_open_fd.setOnClickListener { manager.listOpenFd(E, all = true).dispose() }
+    list_open_non_asset_fd.setOnClickListener { manager.listOpenNonAssetFd(name = S).dispose() }
     list_open_xml_resource_parser.setOnClickListener {
-      manager.listOpenXmlResourceParser(name = "/", all = true).dispose()
+      manager.listOpenXmlResourceParser(name = S, all = true).dispose()
     }
   }
 }

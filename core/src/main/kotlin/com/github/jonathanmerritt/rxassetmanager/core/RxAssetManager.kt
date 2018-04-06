@@ -19,19 +19,20 @@ package com.github.jonathanmerritt.rxassetmanager.core
 import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.content.res.XmlResourceParser
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
+import io.reactivex.rxkotlin.toCompletable
+import io.reactivex.rxkotlin.toFlowable
 import java.io.InputStream
 
 open class RxAssetManager(context: Context) : IsRxAssetManager {
 
   private val manager = context.assets!!
 
-  final override val locales: Flowable<String> = Flowable.fromArray(*manager.locales)
+  final override val locales = manager.locales.toFlowable()
 
-  final override val close: Completable = Completable.fromAction(manager::close)
+  final override val close = manager::close.toCompletable()
 
   override fun open(name: String, mode: Int): Maybe<InputStream> =
       Maybe.defer { Maybe.fromCallable { manager.open(name, mode) } }
@@ -39,7 +40,7 @@ open class RxAssetManager(context: Context) : IsRxAssetManager {
   override fun openFd(name: String): Single<AssetFileDescriptor> =
       Single.defer { Single.fromCallable { manager.openFd(name) } }
 
-  override fun list(name: String): Flowable<String> = Flowable.defer { Flowable.fromArray(*manager.list(name)) }
+  override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
 
   override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
       Single.defer { Single.fromCallable { manager.openNonAssetFd(name) } }

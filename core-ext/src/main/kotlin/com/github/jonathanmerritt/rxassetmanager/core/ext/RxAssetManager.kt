@@ -34,12 +34,10 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map {
-        val file = File(String.format("%s/%s", to, name))
-        file.parentFile!!.mkdirs()
-        file.outputStream().use { out -> it.copyTo(out) }
-        file
-      }
+      open(name, mode).map { File("$to/$name").apply {
+      parentFile.run { mkdirs() }
+      outputStream().use { (::copyTo) }
+    } }
 
   override fun listAll(name: String): Flowable<String> =
       listPath(name).compose(FlowableTransformers.expand(::listPath))
@@ -66,10 +64,9 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
       listFiles(name, all).filter { it.endsWith(".xml") }.flatMapSingle { openXmlResourceParser(cookie, it) }
 
   private fun listPath(folderName: String): Flowable<String> =
-      list(folderName).map {
-        val path = String.format("%s/%s", folderName, it)
-        if (path.length > 1 && path.substring(0, 1) == "/") path.replace(path.substring(0, 1), "") else path
-      }
+      list(folderName).map { "$folderName/$it".run {
+        if (length > 1 && substring(0, 1) == "/") replace(substring(0, 1), "") else this
+      } }
 
   private fun listFiles(folderName: String, listAll: Boolean): Flowable<String> =
       (if (listAll) listAll(folderName) else listPath(folderName)).filter { it.contains(".") }

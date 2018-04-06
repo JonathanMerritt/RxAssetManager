@@ -17,7 +17,11 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
+import com.github.jonathanmerritt.rxassetmanager.common.AM
 import com.github.jonathanmerritt.rxassetmanager.common.DisposingActivity
+import com.github.jonathanmerritt.rxassetmanager.common.E
+import com.github.jonathanmerritt.rxassetmanager.common.FO1FI1
+import com.github.jonathanmerritt.rxassetmanager.common.FO1FI2
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.get_locales
@@ -38,15 +42,11 @@ class MainActivity : DisposingActivity() {
 
   override fun onPostCreate(savedInstanceState: Bundle?) {
     super.onPostCreate(savedInstanceState)
-    open.setOnClickListener { manager.open("Folder/File.txt").dispose() }
-    open_fd.setOnClickListener { manager.openFd("Folder/File2.txt").dispose() }
-    list.setOnClickListener { manager.list("").dispose() }
-    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd(name = "AndroidManifest.xml").dispose() }
-    open_xml_resource_parser.setOnClickListener {
-      manager.openXmlResourceParser(name = "AndroidManifest.xml").dispose()
-    }
+    open.setOnClickListener { manager.open(FO1FI1).dispose() }
+    open_fd.setOnClickListener { manager.openFd(FO1FI2).dispose() }
+    list.setOnClickListener { manager.list(E).dispose() }
+    open_non_asset_fd.setOnClickListener { manager.openNonAssetFd(name = AM).dispose() }
+    open_xml_resource_parser.setOnClickListener { manager.openXmlResourceParser(name = AM).dispose() }
     get_locales.setOnClickListener { manager.locales.dispose() }
   }
 }
-
-
