@@ -16,33 +16,30 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-import android.os.Bundle
-import com.github.jonathanmerritt.rxassetmanager.common.DisposingActivity
-import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager
+import com.github.jonathanmerritt.rxassetmanager.R.layout.activity_main
+import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.list
+import kotlinx.android.synthetic.main.activity_main.locals
 import kotlinx.android.synthetic.main.activity_main.open
-import kotlinx.android.synthetic.main.activity_main.get_locales as locales
-import kotlinx.android.synthetic.main.activity_main.open_fd as openFd
-import kotlinx.android.synthetic.main.activity_main.open_non_asset_fd as openNonAssetFd
-import kotlinx.android.synthetic.main.activity_main.open_xml_resource_parser as openXmlResParser
+import kotlinx.android.synthetic.main.activity_main.openFd
+import kotlinx.android.synthetic.main.activity_main.openNonAssetFd
+import kotlinx.android.synthetic.main.activity_main.openXmlResParser
 
-class MainActivity : DisposingActivity() {
-  private lateinit var manager: IsRxAssetManager
+class MainActivity : BaseActivity(activity_main) {
+  override fun create() {
+    RxAssetManager(this).run {
+      open.setOnClickListener { open("Folder/File.txt").dispose() }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    manager = RxAssetManager(this)
-  }
+      openFd.setOnClickListener { openFd("Folder/File2.txt").dispose() }
 
-  override fun onPostCreate(savedInstanceState: Bundle?) {
-    super.onPostCreate(savedInstanceState)
-    open.setOnClickListener { manager.open("Folder/File.txt").dispose() }
-    openFd.setOnClickListener { manager.openFd("Folder/File2.txt").dispose() }
-    list.setOnClickListener { manager.list("").dispose() }
-    openNonAssetFd.setOnClickListener { manager.openNonAssetFd(name = "AndroidManifest.xml").dispose() }
-    openXmlResParser.setOnClickListener { manager.openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
-    locales.setOnClickListener { manager.locales.dispose() }
+      list.setOnClickListener { list("").dispose() }
+
+      openNonAssetFd.setOnClickListener { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
+
+      openXmlResParser.setOnClickListener { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
+
+      locals.setOnClickListener { locales.dispose() }
+    }
   }
 }
