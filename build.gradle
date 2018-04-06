@@ -67,8 +67,6 @@ buildscript {
 
   def support = [:]
   support.appcompat = "com.android.support:appcompat-v7:$ver_support"
-  support.v4 = "com.android.support:support-v4:$ver_support"
-  support.design = "com.android.support:design:$ver_support"
   support.constraint = ["com.android.support.constraint:constraint-layout:$ver_constraint",
       "${"com.android.support"}.constraint:constraint-layout-solver:$ver_constraint"]
   support.test = ["com.android.support.test:runner:1.0.1", "com.android.support.test.espresso:espresso-core:3.0.1"]

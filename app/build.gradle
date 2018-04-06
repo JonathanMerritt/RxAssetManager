@@ -53,4 +53,6 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   implementation project(":app-common")
+
+  implementation dep.support.constraint
 }
