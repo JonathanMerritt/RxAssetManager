@@ -60,8 +60,8 @@ dependencies {
   testImplementation dep.tests
 
   androidTestImplementation dep.support.tests
-  androidTestImplementation dep.support.espresso.core, {
-    exclude dep.support.espresso.exclude
+  androidTestImplementation dep.support.espresso, {
+    exclude group : 'com.android.support', module : 'support-annotations'
   }
 
   implementation dep.kotlin.stdlib

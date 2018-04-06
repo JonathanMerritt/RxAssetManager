@@ -71,15 +71,10 @@ buildscript {
   support.appcompat = "com.android.support:appcompat-v7:$ver_support"
   support.constraint = ["com.android.support.constraint:constraint-layout:$ver_constraint",
                         "com.android.support.constraint:constraint-layout-solver:$ver_constraint"]
+  support.tests = ['com.android.support.test:runner:1.0.1', 'com.android.support.test:rules:1.0.1',
+                   "com.android.support:support-annotations:$ver_support"]
+  support.espresso = 'com.android.support.test.espresso:espresso-core:3.0.1'
   ext.dep.support = support
-
-  ext.dep.support.tests = ['com.android.support.test:runner:1.0.1', 'com.android.support.test:rules:1.0.1',
-                           "com.android.support:support-annotations:$ver_support"]
-
-  def espresso = [:]
-  espresso.core = 'com.android.support.test.espresso:espresso-core:3.0.1'
-  espresso.exclude = [group : 'com.android.support', module : 'support-annotations']
-  ext.dep.support.espresso = espresso
 
   def kotlin = [:]
   kotlin.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver_kotlin"
