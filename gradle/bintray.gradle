@@ -35,7 +35,7 @@ bintray {
     labels = rep.labels
     publicDownloadNumbers = true
     githubRepo = "$dev.name/$rep.name"
-    githubReleaseNotesFile = "RELEASES.md"
+    githubReleaseNotesFile = 'RELEASES.md'
 
     version {
       name = ver.name

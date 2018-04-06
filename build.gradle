@@ -19,16 +19,16 @@ buildscript {
   Developer configuration
   */
   def dev = [:]
-  dev.name = "jonathanmerritt"
-  dev.email = "11R00TT00RR11@GMAIL.COM"
+  dev.name = 'jonathanmerritt'
+  dev.email = '11r00tt00r11@gmail.com'
   ext.dev = dev
 
   def pass = [:]
   def local = new Properties()
-  local.load(file("local.properties").newDataInputStream())
-  pass.bintray = local.getProperty("pass.bintray")
-  pass.gpg = local.getProperty("pass.gpg")
-  pass.maven = local.getProperty("pass.maven")
+  local.load(file('local.properties').newDataInputStream())
+  pass.bintray = local.getProperty('pass.bintray')
+  pass.gpg = local.getProperty('pass.gpg')
+  pass.maven = local.getProperty('pass.maven')
   ext.dev.pass = pass
 
   /*
@@ -37,9 +37,9 @@ buildscript {
   def rep = [:]
   rep.name = rootProject.name
   rep.id = "com.github.${dev.name}.${rep.name.toLowerCase()}"
-  rep.labels = ["android", "android-library", "asset", "assets", "assetmanager", "assetsmanager", "android-asset",
-                "android-assets", "android-asset-manager", "android-assets-manager"]
-  rep.licenses = ["Apache-2.0"]
+  rep.labels = ['android', 'android-library', 'asset', 'assets', 'assetmanager', 'assetsmanager', 'android-asset',
+                'android-assets', 'android-asset-manager', 'android-assets-manager']
+  rep.licenses = ['Apache-2.0']
   ext.rep = rep
 
   /*
@@ -55,29 +55,35 @@ buildscript {
   Dependency configuration
   */
   def dep = [:]
-  dep.rxjava2Ext = "com.github.akarnokd:rxjava2-extensions:0.17.0"
-  dep.timber = "com.jakewharton.timber:timber:4.5.1"
+  dep.rxjava2Ext = 'com.github.akarnokd:rxjava2-extensions:0.17.0'
+  dep.timber = 'com.jakewharton.timber:timber:4.5.1'
   ext.dep = dep
 
-  ext.dep.test = ["junit:junit:4.12"]
+  ext.dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0',
+                   'com.nhaarman:mockito-kotlin-kt1.1:1.5.0']
 
-  def ver_support = "27.1.0"
-  def ver_constraint = "1.1.0-beta6"
-  def ver_kotlin = "1.2.31"
+  /* dependency versions */
+  def ver_support = '27.1.0'
+  def ver_constraint = '1.1.0-beta6'
+  def ver_kotlin = '1.2.31'
 
   def support = [:]
   support.appcompat = "com.android.support:appcompat-v7:$ver_support"
   support.constraint = ["com.android.support.constraint:constraint-layout:$ver_constraint",
-      "${"com.android.support"}.constraint:constraint-layout-solver:$ver_constraint"]
-  support.test = ["com.android.support.test:runner:1.0.1", "com.android.support.test.espresso:espresso-core:3.0.1"]
+                        "com.android.support.constraint:constraint-layout-solver:$ver_constraint"]
+  support.tests = ['com.android.support.test:runner:1.0.1', 'com.android.support.test:rules:1.0.1',
+                   "com.android.support:support-annotations:$ver_support"]
+  support.espresso = 'com.android.support.test.espresso:espresso-core:3.0.1'
   ext.dep.support = support
 
   def kotlin = [:]
   kotlin.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver_kotlin"
-  kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$ver_kotlin"
+  kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$ver_kotlin"
+  kotlin.tests = "org.jetbrains.kotlin:kotlin-test-junit:$ver_kotlin"
   ext.dep.kotlin = kotlin
 
-  ext.dep.rx2 = ["io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1", "io.reactivex.rxjava2:rxkotlin:2.2.0"]
+  ext.dep.reactivex = ['io.reactivex.rxjava2:rxjava:2.1.7', 'io.reactivex.rxjava2:rxandroid:2.0.1',
+                       'io.reactivex.rxjava2:rxkotlin:2.2.0']
 
 
   repositories {
@@ -95,7 +101,7 @@ buildscript {
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
     classpath dep.kotlin.gradle
-    classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16"
+    classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16'
   }
 }
 
@@ -119,8 +125,8 @@ subprojects {
     Version configuration
     */
     def ver = [:]
-    ver.name = lib.name.contains('app') ? "1.0.0" : "0.6.0"
-    ver.code = ver.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
+    ver.name = lib.name.contains('app') ? '1.0.0' : '0.6.0'
+    ver.code = ver.name.replace('.', '').concat(new Date().format('MMddyy')).toBigInteger()
     ext.ver = ver
   }
 }

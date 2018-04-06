@@ -21,7 +21,7 @@ dokka {
   outputDirectory = "$buildDir/javadoc"
 }
 
-if (project.hasProperty("kotlin")) {
+if (project.hasProperty('kotlin')) {
   task sourcesJar(type : Jar) {
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs
@@ -29,7 +29,7 @@ if (project.hasProperty("kotlin")) {
 
   task javadoc(type : Javadoc, dependsOn : dokka) {
   }
-} else if (project.hasProperty("android")) {
+} else if (project.hasProperty('android')) {
   task sourcesJar(type : Jar) {
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs

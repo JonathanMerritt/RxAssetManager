@@ -27,7 +27,7 @@ android {
     versionCode ver.code
     versionName ver.name
 
-    //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
   }
 
   buildTypes {
@@ -44,6 +44,8 @@ android {
 
   sourceSets {
     main.java.srcDirs += 'src/main/kotlin'
+    test.java.srcDirs += 'src/test/kotlin'
+    androidTest.java.srcDirs += 'src/androidTest/kotlin'
   }
 
   compileOptions {
@@ -55,11 +57,19 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
 
-  implementation dep.kotlin.stdlib
+  testImplementation dep.tests
 
-  implementation dep.rx2
+  androidTestImplementation dep.support.tests
+  androidTestImplementation dep.support.espresso, {
+    exclude group : 'com.android.support', module : 'support-annotations'
+  }
+
+  implementation dep.kotlin.stdlib
+  testImplementation dep.kotlin.tests
+
+  implementation dep.reactivex
 }
 
-apply from : "../gradle/dokka.gradle"
-apply from : "../gradle/bintray.gradle"
-apply from : "../gradle/maven.gradle"
+apply from : '../gradle/dokka.gradle'
+apply from : '../gradle/bintray.gradle'
+apply from : '../gradle/maven.gradle'

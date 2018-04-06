@@ -17,6 +17,7 @@
 <resources>
 
   <!-- Base application theme. -->
+  <!--suppress AndroidDomInspection -->
   <style name="AppTheme" parent="Theme.AppCompat.Light">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
