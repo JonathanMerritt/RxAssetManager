@@ -24,9 +24,9 @@ import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.io.File
 import java.io.InputStream
+import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager as core
 
-class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager(
-    context), IsRxAssetManager {
+class RxAssetManager(context: Context) : core(context), IsRxAssetManager {
 
   override fun openString(name: String, mode: Int): Maybe<String> =
       open(name, mode).map { it.bufferedReader().use { it.readText() } }
@@ -34,10 +34,12 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map { File("$to/$name").apply {
-      parentFile.run { mkdirs() }
-      outputStream().use { (::copyTo) }
-    } }
+      open(name, mode).map {
+        File("$to/$name").apply {
+          parentFile.run { mkdirs() }
+          outputStream().use { (::copyTo) }
+        }
+      }
 
   override fun listAll(name: String): Flowable<String> =
       listPath(name).compose(FlowableTransformers.expand(::listPath))
@@ -64,9 +66,11 @@ class RxAssetManager(context: Context) : com.github.jonathanmerritt.rxassetmanag
       listFiles(name, all).filter { it.endsWith(".xml") }.flatMapSingle { openXmlResourceParser(cookie, it) }
 
   private fun listPath(folderName: String): Flowable<String> =
-      list(folderName).map { "$folderName/$it".run {
-        if (length > 1 && substring(0, 1) == "/") replace(substring(0, 1), "") else this
-      } }
+      list(folderName).map {
+        "$folderName/$it".run {
+          if (length > 1 && substring(0, 1) == "/") replace(substring(0, 1), "") else this
+        }
+      }
 
   private fun listFiles(folderName: String, listAll: Boolean): Flowable<String> =
       (if (listAll) listAll(folderName) else listPath(folderName)).filter { it.contains(".") }

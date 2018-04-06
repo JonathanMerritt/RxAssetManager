@@ -25,7 +25,6 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -44,16 +43,16 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
 
   override fun onStart() {
     super.onStart()
-    disposables = disposables.apply { if (isDisposed) CompositeDisposable() }
+    disposables = disposables.takeIf { it.isDisposed }.run { CompositeDisposable() }
   }
 
   override fun onStop() {
     super.onStop()
-    disposables.run { if (!isDisposed) dispose() }
+    disposables.takeUnless { it.isDisposed }?.dispose()
   }
 
-  protected fun Any.dispose(): Disposable {
-    return when {
+  protected fun Any.dispose() {
+    when {
       this is Completable -> toObservable()
       this is Single<*> -> toObservable()
       this is Maybe<*> -> toObservable()

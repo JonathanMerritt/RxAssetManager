@@ -23,28 +23,18 @@ import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.io.File
 import java.io.InputStream
+import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager as core
 
-interface IsRxAssetManager : com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager {
-
+interface IsRxAssetManager : core {
   fun openString(name: String, mode: Int = ACCESS_STREAMING): Maybe<String>
-
   fun openBytes(name: String, mode: Int = ACCESS_STREAMING): Maybe<ByteArray>
-
   fun openSave(name: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<File>
-
   fun listAll(name: String): Flowable<String>
-
   fun listOpen(name: String, mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream>
-
   fun listOpenString(name: String, mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<String>
-
   fun listOpenBytes(name: String, mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray>
-
   fun listOpenSave(name: String, mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false): Flowable<File>
-
   fun listOpenFd(name: String, all: Boolean = false): Flowable<AssetFileDescriptor>
-
   fun listOpenNonAssetFd(cookie: Int = 0, name: String, all: Boolean = false): Flowable<AssetFileDescriptor>
-
   fun listOpenXmlResourceParser(cookie: Int = 0, name: String, all: Boolean = false): Flowable<XmlResourceParser>
 }

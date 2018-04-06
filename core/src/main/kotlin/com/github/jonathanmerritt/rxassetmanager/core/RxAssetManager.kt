@@ -27,17 +27,13 @@ import io.reactivex.rxkotlin.toFlowable
 import java.io.InputStream
 
 open class RxAssetManager(context: Context) : IsRxAssetManager {
-
   private val manager = context.assets!!
 
   final override val locales = manager.locales.toFlowable()
-
   final override val close = manager::close.toCompletable()
 
   override fun open(name: String, mode: Int): Maybe<InputStream> = Maybe.fromCallable { manager.open(name, mode) }
-
   override fun openFd(name: String): Single<AssetFileDescriptor> = Single.fromCallable { manager.openFd(name) }
-
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
 
   override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
