@@ -43,15 +43,18 @@ abstract class DisposingActivity : AppCompatActivity() {
     disposables.run { if (!isDisposed) dispose() }
   }
 
-  protected fun Any.dispose(): Disposable = when {
-    this is Completable -> toObservable()
-    this is Single<*> -> toObservable()
-    this is Maybe<*> -> toObservable()
-    this is Flowable<*> -> toObservable()
-    else -> Observable.error(Throwable("${javaClass.simpleName} is not accounted for!"))
+  protected fun Any.dispose(): Disposable {
+    val name = javaClass.simpleName
+    return when {
+      this is Completable -> toObservable()
+      this is Single<*> -> toObservable()
+      this is Maybe<*> -> toObservable()
+      this is Flowable<*> -> toObservable()
+      else -> Observable.error(Throwable("$name is not accounted for!"))
+    }
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete($name)") }, { Timber.i("next($it)") })
+        .addTo(disposables)
   }
-      .subscribeOn(Schedulers.io())
-      .observeOn(AndroidSchedulers.mainThread())
-      .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete()") }, { Timber.i("next($it)") })
-      .addTo(disposables)
 }
