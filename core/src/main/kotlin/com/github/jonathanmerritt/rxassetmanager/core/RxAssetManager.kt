@@ -34,17 +34,15 @@ open class RxAssetManager(context: Context) : IsRxAssetManager {
 
   final override val close = manager::close.toCompletable()
 
-  override fun open(name: String, mode: Int): Maybe<InputStream> =
-      Maybe.defer { Maybe.fromCallable { manager.open(name, mode) } }
+  override fun open(name: String, mode: Int): Maybe<InputStream> = Maybe.fromCallable { manager.open(name, mode) }
 
-  override fun openFd(name: String): Single<AssetFileDescriptor> =
-      Single.defer { Single.fromCallable { manager.openFd(name) } }
+  override fun openFd(name: String): Single<AssetFileDescriptor> = Single.fromCallable { manager.openFd(name) }
 
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
 
   override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
-      Single.defer { Single.fromCallable { manager.openNonAssetFd(name) } }
+      Single.fromCallable { manager.openNonAssetFd(name) }
 
   override fun openXmlResourceParser(cookie: Int, name: String): Single<XmlResourceParser> =
-      Single.defer { Single.fromCallable { manager.openXmlResourceParser(cookie, name) } }
+      Single.fromCallable { manager.openXmlResourceParser(cookie, name) }
 }
