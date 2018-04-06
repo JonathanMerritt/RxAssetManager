@@ -16,6 +16,7 @@
 
 package com.github.jonathanmerritt.rxassetmanager.common
 
+import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import io.reactivex.Completable
 import io.reactivex.Flowable
@@ -30,12 +31,20 @@ import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
-abstract class DisposingActivity : AppCompatActivity() {
+abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
+  protected abstract fun create()
+
   private var disposables = CompositeDisposable()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(layout)
+    create()
+  }
 
   override fun onStart() {
     super.onStart()
-    disposables = disposables.run { if (isDisposed) CompositeDisposable() else this }
+    disposables = disposables.apply { if (isDisposed) CompositeDisposable() }
   }
 
   override fun onStop() {
@@ -44,17 +53,16 @@ abstract class DisposingActivity : AppCompatActivity() {
   }
 
   protected fun Any.dispose(): Disposable {
-    val name = javaClass.simpleName
     return when {
       this is Completable -> toObservable()
       this is Single<*> -> toObservable()
       this is Maybe<*> -> toObservable()
       this is Flowable<*> -> toObservable()
-      else -> Observable.error(Throwable("$name is not accounted for!"))
+      else -> Observable.error(Throwable("${javaClass.simpleName} is not accounted for!"))
     }
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete($name)") }, { Timber.i("next($it)") })
+        .subscribeBy({ Timber.e(it, it.message) }, { Timber.i("complete()") }, { Timber.i("next($it)") })
         .addTo(disposables)
   }
 }

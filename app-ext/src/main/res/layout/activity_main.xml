@@ -23,12 +23,12 @@
     >
 
   <Button
-      android:id="@+id/open_string"
+      android:id="@+id/openString"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/open_string"
-      app:layout_constraintBottom_toTopOf="@+id/open_bytes"
+      app:layout_constraintBottom_toTopOf="@+id/openBytes"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
@@ -37,115 +37,115 @@
       />
 
   <Button
-      android:id="@+id/open_bytes"
+      android:id="@+id/openBytes"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/open_bytes"
-      app:layout_constraintBottom_toTopOf="@+id/open_save"
+      app:layout_constraintBottom_toTopOf="@+id/openSave"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/open_string"
+      app:layout_constraintTop_toBottomOf="@+id/openString"
       />
 
   <Button
-      android:id="@+id/open_save"
+      android:id="@+id/openSave"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/open_save"
-      app:layout_constraintBottom_toTopOf="@+id/list_all"
+      app:layout_constraintBottom_toTopOf="@+id/listAll"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/open_bytes"
+      app:layout_constraintTop_toBottomOf="@+id/openBytes"
       />
 
   <Button
-      android:id="@+id/list_all"
+      android:id="@+id/listAll"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_all"
-      app:layout_constraintBottom_toTopOf="@+id/list_open"
+      app:layout_constraintBottom_toTopOf="@+id/listOpen"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/open_save"
+      app:layout_constraintTop_toBottomOf="@+id/openSave"
       />
 
   <Button
-      android:id="@+id/list_open"
+      android:id="@+id/listOpen"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_open"
-      app:layout_constraintBottom_toTopOf="@+id/list_open_string"
+      app:layout_constraintBottom_toTopOf="@+id/listOpenString"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_all"
+      app:layout_constraintTop_toBottomOf="@+id/listAll"
       />
 
   <Button
-      android:id="@+id/list_open_string"
+      android:id="@+id/listOpenString"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_open_string"
-      app:layout_constraintBottom_toTopOf="@+id/list_open_bytes"
+      app:layout_constraintBottom_toTopOf="@+id/listOpenBytes"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_open"
+      app:layout_constraintTop_toBottomOf="@+id/listOpen"
       />
 
   <Button
-      android:id="@+id/list_open_bytes"
+      android:id="@+id/listOpenBytes"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_open_bytes"
-      app:layout_constraintBottom_toTopOf="@+id/list_open_save"
+      app:layout_constraintBottom_toTopOf="@+id/listOpenSave"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_open_string"
+      app:layout_constraintTop_toBottomOf="@+id/listOpenString"
       />
 
   <Button
-      android:id="@+id/list_open_save"
+      android:id="@+id/listOpenSave"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_open_save"
-      app:layout_constraintBottom_toTopOf="@+id/list_open_fd"
+      app:layout_constraintBottom_toTopOf="@+id/listOpenFd"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_open_bytes"
+      app:layout_constraintTop_toBottomOf="@+id/listOpenBytes"
       />
 
   <Button
-      android:id="@+id/list_open_fd"
+      android:id="@+id/listOpenFd"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_open_fd"
-      app:layout_constraintBottom_toTopOf="@+id/list_open_non_asset_fd"
+      app:layout_constraintBottom_toTopOf="@+id/listOpenNonAssetFd"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_open_save"
+      app:layout_constraintTop_toBottomOf="@+id/listOpenSave"
       />
 
   <Button
-      android:id="@+id/list_open_non_asset_fd"
+      android:id="@+id/listOpenNonAssetFd"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
       android:text="@string/list_open_non_asset_fd"
-      app:layout_constraintBottom_toTopOf="@+id/list_open_xml_resource_parser"
+      app:layout_constraintBottom_toTopOf="@+id/listOpenXmlResourceParser"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_open_fd"
+      app:layout_constraintTop_toBottomOf="@+id/listOpenFd"
       />
 
   <Button
-      android:id="@+id/list_open_xml_resource_parser"
+      android:id="@+id/listOpenXmlResourceParser"
       android:layout_width="0dp"
       android:layout_height="0dp"
       android:layout_margin="@dimen/small_margin"
@@ -153,7 +153,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list_open_non_asset_fd"
+      app:layout_constraintTop_toBottomOf="@+id/listOpenNonAssetFd"
       />
 
 </android.support.constraint.ConstraintLayout>
