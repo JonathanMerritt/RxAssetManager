@@ -16,7 +16,6 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-import com.github.jonathanmerritt.rxassetmanager.R.layout.activity_main
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.list
@@ -26,19 +25,14 @@ import kotlinx.android.synthetic.main.activity_main.openFd
 import kotlinx.android.synthetic.main.activity_main.openNonAssetFd
 import kotlinx.android.synthetic.main.activity_main.openXmlResParser
 
-class MainActivity : BaseActivity(activity_main) {
+class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
       open.setOnClickListener { open("Folder/File.txt").dispose() }
-
       openFd.setOnClickListener { openFd("Folder/File2.txt").dispose() }
-
       list.setOnClickListener { list("").dispose() }
-
       openNonAssetFd.setOnClickListener { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
-
       openXmlResParser.setOnClickListener { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
-
       locals.setOnClickListener { locales.dispose() }
     }
   }
