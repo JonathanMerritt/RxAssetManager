@@ -52,7 +52,7 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
-  api project(":core-ext")
+  api project(':core-ext')
 
   api dep.timber
 
@@ -61,5 +61,5 @@ dependencies {
 
   api dep.kotlin.stdlib
 
-  api dep.rx2
+  api dep.reactivex
 }

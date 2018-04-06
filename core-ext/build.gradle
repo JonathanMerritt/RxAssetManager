@@ -27,7 +27,7 @@ android {
     versionCode ver.code
     versionName ver.name
 
-    //testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    //testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
   }
 
   buildTypes {
@@ -54,15 +54,15 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
-  api project(":core")
+  api project(':core')
 
   implementation dep.rxjava2Ext
 
   implementation dep.kotlin.stdlib
 
-  implementation dep.rx2
+  implementation dep.reactivex
 }
 
-apply from : "../gradle/dokka.gradle"
-apply from : "../gradle/bintray.gradle"
-apply from : "../gradle/maven.gradle"
+apply from : '../gradle/dokka.gradle'
+apply from : '../gradle/bintray.gradle'
+apply from : '../gradle/maven.gradle'
