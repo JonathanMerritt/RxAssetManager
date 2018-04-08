@@ -70,7 +70,7 @@ dependencies {
   implementation dep.kotlin.stdlib
   testImplementation dep.kotlin.tests
 
-  implementation dep.reactivex
+  implementation dep.rxjava2
 }
 
 apply from : '../gradle/dokka.gradle'
