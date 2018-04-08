@@ -61,5 +61,5 @@ dependencies {
 
   api dep.kotlin.stdlib
 
-  api dep.reactivex
+  api dep.rxjava2
 }

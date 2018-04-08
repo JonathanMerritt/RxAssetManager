@@ -57,16 +57,16 @@ buildscript {
   def dep = [:]
   dep.rxjava2Ext = 'com.github.akarnokd:rxjava2-extensions:0.17.0'
   dep.timber = 'com.jakewharton.timber:timber:4.5.1'
-  ext.dep = dep
 
-  ext.dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0',
-                   'com.nhaarman:mockito-kotlin-kt1.1:1.5.0']
+  dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0',
+               'com.nhaarman:mockito-kotlin-kt1.1:1.5.0']
 
   /* dependency versions */
   def ver_support = '27.1.0'
   def ver_constraint = '1.1.0-beta6'
   def ver_kotlin = '1.2.31'
 
+  /* android support dependencies */
   def support = [:]
   support.appcompat = "com.android.support:appcompat-v7:$ver_support"
   support.constraint = ["com.android.support.constraint:constraint-layout:$ver_constraint",
@@ -74,16 +74,19 @@ buildscript {
   support.tests = ['com.android.support.test:runner:1.0.1', 'com.android.support.test:rules:1.0.1',
                    "com.android.support:support-annotations:$ver_support"]
   support.espresso = 'com.android.support.test.espresso:espresso-core:3.0.1'
-  ext.dep.support = support
+  dep.support = support
 
+  /* jetbrains kotlin dependencies */
   def kotlin = [:]
   kotlin.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver_kotlin"
   kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$ver_kotlin"
   kotlin.tests = "org.jetbrains.kotlin:kotlin-test-junit:$ver_kotlin"
-  ext.dep.kotlin = kotlin
+  dep.kotlin = kotlin
 
-  ext.dep.reactivex = ['io.reactivex.rxjava2:rxjava:2.1.7', 'io.reactivex.rxjava2:rxandroid:2.0.1',
-                       'io.reactivex.rxjava2:rxkotlin:2.2.0']
+  /* reactivex rxjava2 dependencies */
+  dep.rxjava2 = ['io.reactivex.rxjava2:rxjava:2.1.7', 'io.reactivex.rxjava2:rxandroid:2.0.1',
+                 'io.reactivex.rxjava2:rxkotlin:2.2.0']
+  ext.dep = dep
 
 
   repositories {
