@@ -21,15 +21,18 @@ buildscript {
   def dev = [:]
   dev.name = 'jonathanmerritt'
   dev.email = '11r00tt00r11@gmail.com'
-  ext.dev = dev
 
-  def pass = [:]
+  /* load local properties */
   def local = new Properties()
   local.load(file('local.properties').newDataInputStream())
+
+  /* local developer passwords */
+  def pass = [:]
   pass.bintray = local.getProperty('pass.bintray')
   pass.gpg = local.getProperty('pass.gpg')
   pass.maven = local.getProperty('pass.maven')
-  ext.dev.pass = pass
+  dev.pass = pass
+  ext.dev = dev
 
   /*
   Repository configuration
