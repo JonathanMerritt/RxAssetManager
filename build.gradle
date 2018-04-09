@@ -16,17 +16,17 @@
 
 buildscript {
   /*
-  Developer configuration
+  Developer
   */
   def dev = [:]
   dev.name = 'jonathanmerritt'
   dev.email = '11r00tt00r11@gmail.com'
 
-  /* load local properties */
+  /* properties */
   def local = new Properties()
   local.load(file('local.properties').newDataInputStream())
 
-  /* local developer passwords */
+  /* passwords */
   def pass = [:]
   pass.bintray = local.getProperty('pass.bintray')
   pass.gpg = local.getProperty('pass.gpg')
@@ -35,7 +35,7 @@ buildscript {
   ext.dev = dev
 
   /*
-  Repository configuration
+  Repository
   */
   def rep = [:]
   rep.name = rootProject.name
@@ -46,7 +46,7 @@ buildscript {
   ext.rep = rep
 
   /*
-  Sdk configuration
+  Sdks
   */
   def sdk = [:]
   sdk.compile = 27
@@ -55,7 +55,7 @@ buildscript {
   ext.sdk = sdk
 
   /*
-  Dependency configuration
+  Dependencies
   */
   def dep = [:]
   dep.rxjava2Ext = 'com.github.akarnokd:rxjava2-extensions:0.17.0'
@@ -63,32 +63,49 @@ buildscript {
 
   dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0',
                'com.nhaarman:mockito-kotlin-kt1.1:1.5.0']
+  dep.mockitoKotlin = 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
 
-  /* dependency versions */
-  def ver_support = '27.1.0'
-  def ver_constraint = '1.1.0-beta6'
-  def ver_kotlin = '1.2.31'
+  /* groups */
+  def grp = [:]
+  grp.support = 'com.android.support'
+  grp.constraint = "${grp.support}.constraint"
+  grp.test = "${grp.support}.test"
+  grp.kotlin = 'org.jetbrains.kotlin'
+  grp.rxjava2 = 'io.reactivex.rxjava2'
+  ext.grp = grp
 
-  /* android support dependencies */
+  /* modules */
+  def mod = [:]
+  mod.layout = 'constraint-layout'
+  mod.annots = 'support-annotations'
+  mod.reflect = 'kotlin-reflect'
+  ext.mod = mod
+
+  /* versions */
+  def ver = [:]
+  ver.support = '27.1.0'
+  ver.constraint = '1.1.0-beta6'
+  ver.kotlin = '1.2.31'
+
+
+  /* android support */
   def support = [:]
-  support.appcompat = "com.android.support:appcompat-v7:$ver_support"
-  support.constraint = ["com.android.support.constraint:constraint-layout:$ver_constraint",
-                        "com.android.support.constraint:constraint-layout-solver:$ver_constraint"]
-  support.tests = ['com.android.support.test:runner:1.0.1', 'com.android.support.test:rules:1.0.1',
-                   "com.android.support:support-annotations:$ver_support"]
-  support.espresso = 'com.android.support.test.espresso:espresso-core:3.0.1'
+  support.appcompat = "$grp.support:appcompat-v7:$ver.support"
+  support.constraint = ["$grp.constraint:$mod.layout:$ver.constraint",
+                        "$grp.constraint:$mod.layout-solver:$ver.constraint"]
+  support.tests = ["$grp.test:runner:1.0.1", "$grp.test:rules:1.0.1", "$grp.support:$mod.annots:$ver.support"]
+  support.espresso = "${grp.test}.espresso:espresso-core:3.0.1"
   dep.support = support
 
-  /* jetbrains kotlin dependencies */
+  /* jetbrains kotlin */
   def kotlin = [:]
-  kotlin.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$ver_kotlin"
-  kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$ver_kotlin"
-  kotlin.tests = "org.jetbrains.kotlin:kotlin-test-junit:$ver_kotlin"
+  kotlin.gradle = "$grp.kotlin:kotlin-gradle-plugin:$ver.kotlin"
+  kotlin.stdlib = "$grp.kotlin:kotlin-stdlib:$ver.kotlin"
+  kotlin.tests = "$grp.kotlin:kotlin-test-junit:$ver.kotlin"
   dep.kotlin = kotlin
 
-  /* reactivex rxjava2 dependencies */
-  dep.rxjava2 = ['io.reactivex.rxjava2:rxjava:2.1.7', 'io.reactivex.rxjava2:rxandroid:2.0.1',
-                 'io.reactivex.rxjava2:rxkotlin:2.2.0']
+  /* reactivex rxjava2 */
+  dep.rxjava2 = ["$grp.rxjava2:rxjava:2.1.7", "$grp.rxjava2:rxandroid:2.0.1", "$grp.rxjava2:rxkotlin:2.2.0"]
   ext.dep = dep
 
 
@@ -120,7 +137,7 @@ subprojects {
 
   beforeEvaluate {
     /*
-    Library configuration
+    Library
     */
     def lib = [:]
     lib.name = name
@@ -128,7 +145,7 @@ subprojects {
     ext.lib = lib
 
     /*
-    Version configuration
+    Version
     */
     def ver = [:]
     ver.name = lib.name.contains('app') ? '1.0.0' : '0.6.0'

@@ -57,13 +57,12 @@ dependencies {
   implementation project(':app-common')
 
   testImplementation dep.tests
+  testImplementation dep.mockitoKotlin, { exclude group : grp.kotlin, module : mod.reflect }
 
   implementation dep.support.constraint
 
   androidTestImplementation dep.support.tests
-  androidTestImplementation dep.support.espresso, {
-    exclude group : 'com.android.support', module : 'support-annotations'
-  }
+  androidTestImplementation dep.support.espresso, { exclude group : grp.support, module : mod.annots }
 
   testImplementation dep.kotlin.tests
 }
