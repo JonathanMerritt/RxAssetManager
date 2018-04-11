@@ -18,31 +18,30 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
 
 import android.content.Context
 import android.content.res.AssetFileDescriptor
+import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
-import hu.akarnokd.rxjava2.operators.FlowableTransformers
+import hu.akarnokd.rxjava2.operators.FlowableTransformers.expand
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.io.File
 import java.io.InputStream
-import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager as core
+import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager as rxAssetManager
 
-class RxAssetManager(context: Context) : core(context), IsRxAssetManager {
+class RxAssetManager : rxAssetManager, IsRxAssetManager {
+
+  constructor(manager: AssetManager) : super(manager)
+  constructor(context: Context) : super(context)
 
   override fun openString(name: String, mode: Int): Maybe<String> =
       open(name, mode).map { it.bufferedReader().use { it.readText() } }
 
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
-  override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map {
-        File("$to/$name").apply {
-          parentFile.run { mkdirs() }
-          outputStream().use { (::copyTo) }
-        }
-      }
+  override fun openSave(name: String, mode: Int, to: String): Maybe<File> = open(name, mode).map { ip ->
+    File("$to/$name").apply { parentFile.mkdirs().run { outputStream().use { (ip::copyTo) } } }
+  }
 
-  override fun listAll(name: String): Flowable<String> =
-      listPath(name).compose(FlowableTransformers.expand(::listPath))
+  override fun listAll(name: String): Flowable<String> = listPath(name).compose(expand(::listPath))
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
@@ -65,13 +64,10 @@ class RxAssetManager(context: Context) : core(context), IsRxAssetManager {
   override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
       listFiles(name, all).filter { it.endsWith(".xml") }.flatMapSingle { openXmlResourceParser(cookie, it) }
 
-  private fun listPath(folderName: String): Flowable<String> =
-      list(folderName).map {
-        "$folderName/$it".run {
-          if (length > 1 && substring(0, 1) == "/") replace(substring(0, 1), "") else this
-        }
-      }
+  private fun listPath(name: String): Flowable<String> = list(name).map {
+    "$name/$it".run { if (length > 1 && substring(0, 1) == "/") replace(substring(0, 1), "") else this }
+  }
 
-  private fun listFiles(folderName: String, listAll: Boolean): Flowable<String> =
-      (if (listAll) listAll(folderName) else listPath(folderName)).filter { it.contains(".") }
+  private fun listFiles(name: String, all: Boolean): Flowable<String> =
+      (if (all) listAll(name) else listPath(name)).filter { it.contains(".") }
 }

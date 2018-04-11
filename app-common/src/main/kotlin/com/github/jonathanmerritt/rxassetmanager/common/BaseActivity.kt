@@ -51,7 +51,7 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
     disposables.takeUnless { it.isDisposed }?.dispose()
   }
 
-  protected fun Any.dispose() {
+  protected fun <T> T.dispose() {
     when {
       this is Completable -> toObservable()
       this is Single<*> -> toObservable()
