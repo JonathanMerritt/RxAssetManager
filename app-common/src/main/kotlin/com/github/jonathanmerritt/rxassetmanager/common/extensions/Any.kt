@@ -16,4 +16,4 @@
 
 package com.github.jonathanmerritt.rxassetmanager.common.extensions
 
-fun Any.tag(): String = javaClass.simpleName
+internal fun Any.tag(): String = javaClass.simpleName

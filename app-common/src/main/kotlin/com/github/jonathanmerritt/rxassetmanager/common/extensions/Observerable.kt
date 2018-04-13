@@ -24,7 +24,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-fun <T> T.observe(): Observable<*> {
+internal fun <T> T.observe(): Observable<*> {
   return when {
     this is Completable -> toObservable<Any>()
     this is Single<*> -> toObservable()
@@ -34,5 +34,5 @@ fun <T> T.observe(): Observable<*> {
   }
 }
 
-fun <T> Observable<T>.schedule(): Observable<T> =
+internal fun <T> Observable<T>.schedule(): Observable<T> =
     subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
