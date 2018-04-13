@@ -17,6 +17,7 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.getLocals
 import kotlinx.android.synthetic.main.activity_main.list
@@ -28,12 +29,12 @@ import kotlinx.android.synthetic.main.activity_main.openXmlResParser
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      open.setOnClickListener { open("Folder/File.txt").dispose() }
-      openFd.setOnClickListener { openFd("Folder/File2.txt").dispose() }
-      list.setOnClickListener { list("").dispose() }
-      openNonAssetFd.setOnClickListener { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
-      openXmlResParser.setOnClickListener { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
-      getLocals.setOnClickListener { getLocales().dispose() }
+      open.click { open("Folder/File.txt").dispose() }
+      openFd.click { openFd("Folder/File2.txt").dispose() }
+      list.click { list("").dispose() }
+      openNonAssetFd.click { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
+      openXmlResParser.click { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
+      getLocals.click { getLocales().dispose() }
     }
   }
 }

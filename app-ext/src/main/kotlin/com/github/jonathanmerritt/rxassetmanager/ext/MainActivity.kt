@@ -17,6 +17,7 @@
 package com.github.jonathanmerritt.rxassetmanager.ext
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.listAll
 import kotlinx.android.synthetic.main.activity_main.listOpen
@@ -33,17 +34,17 @@ import kotlinx.android.synthetic.main.activity_main.openString
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      openString.setOnClickListener { openString("Folder/File.txt").dispose() }
-      openBytes.setOnClickListener { openBytes("Folder/File2.txt").dispose() }
-      openSave.setOnClickListener { openSave("Folder/Folder2/File.txt", to = cacheDir.path).dispose() }
-      listAll.setOnClickListener { listAll("").dispose() }
-      listOpen.setOnClickListener { listOpen("", all = true).dispose() }
-      listOpenString.setOnClickListener { listOpenString("Folder/Folder2", all = true).dispose() }
-      listOpenBytes.setOnClickListener { listOpenBytes("Folder").dispose() }
-      listOpenSave.setOnClickListener { listOpenSave("Folder", to = cacheDir.path, all = true).dispose() }
-      listOpenFd.setOnClickListener { listOpenFd("", all = true).dispose() }
-      listOpenNonAssetFd.setOnClickListener { listOpenNonAssetFd(name = "/").dispose() }
-      listOpenXmlResourceParser.setOnClickListener { listOpenXmlResourceParser(name = "/", all = true).dispose() }
+      openString.click { openString("Folder/File.txt").dispose() }
+      openBytes.click { openBytes("Folder/File2.txt").dispose() }
+      openSave.click { openSave("Folder/Folder2/File.txt", to = cacheDir.path).dispose() }
+      listAll.click { listAll("").dispose() }
+      listOpen.click { listOpen("", all = true).dispose() }
+      listOpenString.click { listOpenString("Folder/Folder2", all = true).dispose() }
+      listOpenBytes.click { listOpenBytes("Folder").dispose() }
+      listOpenSave.click { listOpenSave("Folder", to = cacheDir.path, all = true).dispose() }
+      listOpenFd.click { listOpenFd("", all = true).dispose() }
+      listOpenNonAssetFd.click { listOpenNonAssetFd(name = "/").dispose() }
+      listOpenXmlResourceParser.click { listOpenXmlResourceParser(name = "/", all = true).dispose() }
     }
   }
 }
