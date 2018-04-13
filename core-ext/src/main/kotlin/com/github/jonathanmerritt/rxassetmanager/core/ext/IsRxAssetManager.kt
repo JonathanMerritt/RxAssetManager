@@ -26,15 +26,15 @@ import java.io.InputStream
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager as isRxAssetManager
 
 interface IsRxAssetManager : isRxAssetManager {
-  fun openString(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<String>
-  fun openBytes(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<ByteArray>
-  fun openSave(name: String = " ", mode: Int = ACCESS_STREAMING, to: String): Maybe<File>
-  fun listAll(name: String = " "): Flowable<String>
-  fun listOpen(name: String = " ", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream>
-  fun listOpenString(name: String = " ", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<String>
-  fun listOpenBytes(name: String = " ", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray>
-  fun listOpenSave(name: String = " ", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false): Flowable<File>
-  fun listOpenFd(name: String = " ", all: Boolean = false): Flowable<AssetFileDescriptor>
-  fun listOpenNonAssetFd(cookie: Int = 0, name: String = " ", all: Boolean = false): Flowable<AssetFileDescriptor>
-  fun listOpenXmlResourceParser(cookie: Int = 0, name: String = " ", all: Boolean = false): Flowable<XmlResourceParser>
+  fun openString(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<String> = Maybe.empty()
+  fun openBytes(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<ByteArray> = Maybe.empty()
+  fun openSave(name: String = " ", mode: Int = ACCESS_STREAMING, to: String): Maybe<File> = Maybe.empty()
+  fun listAll(name: String = " "): Flowable<String> = Flowable.empty()
+  fun listOpen(name: String = " ", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> = Flowable.empty()
+  fun listOpenString(name: String = " ", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<String> = Flowable.empty()
+  fun listOpenBytes(name: String = " ", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray> = Flowable.empty()
+  fun listOpenSave(name: String = " ", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false): Flowable<File> = Flowable.empty()
+  fun listOpenFd(name: String = " ", all: Boolean = false): Flowable<AssetFileDescriptor> = Flowable.empty()
+  fun listOpenNonAssetFd(cookie: Int = 0, name: String = " ", all: Boolean = false): Flowable<AssetFileDescriptor> = Flowable.empty()
+  fun listOpenXmlResourceParser(cookie: Int = 0, name: String = " ", all: Boolean = false): Flowable<XmlResourceParser> = Flowable.empty()
 }
