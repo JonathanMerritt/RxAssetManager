@@ -16,13 +16,6 @@
 
 package com.github.jonathanmerritt.rxassetmanager.ext
 
-import android.app.Application
-import timber.log.Timber
+import com.github.jonathanmerritt.rxassetmanager.common.BaseApplication
 
-class MainApplication : Application() {
-
-  override fun onCreate() {
-    super.onCreate()
-    if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
-  }
-}
+class MainApplication : BaseApplication()

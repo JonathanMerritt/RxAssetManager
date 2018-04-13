@@ -1,5 +1,5 @@
 /*
- *     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
+ *     Copyright 2018 Jonathan Merritt
  *
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -14,8 +14,15 @@
  *     limitations under the License.
  */
 
-package com.github.jonathanmerritt.rxassetmanager
+package com.github.jonathanmerritt.rxassetmanager.common
 
-import com.github.jonathanmerritt.rxassetmanager.common.BaseApplication
+import android.app.Application
+import timber.log.Timber
 
-class MainApplication : BaseApplication()
+open class BaseApplication : Application() {
+
+  override fun onCreate() {
+    super.onCreate()
+    if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+  }
+}

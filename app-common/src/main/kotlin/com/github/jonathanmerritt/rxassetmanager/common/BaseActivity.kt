@@ -37,8 +37,8 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
   }
 
   override fun onStop() {
-    super.onStop()
     disposables.clear()
+    super.onStop()
   }
 
   protected fun <T> T.dispose() = observe().schedule().subscribeBy(

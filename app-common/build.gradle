@@ -54,7 +54,7 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   api project(':core-ext')
 
-  api dep.timber
+  implementation dep.timber
 
   api dep.support.appcompat
 
