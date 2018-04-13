@@ -27,7 +27,7 @@ import java.io.InputStream
 
 interface IsRxAssetManager {
   fun getLocales(): Flowable<String> = Flowable.never()
-  fun close(): Completable  = Completable.never()
+  fun close(): Completable = Completable.never()
   fun open(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<InputStream> = Maybe.never()
   fun openFd(name: String = " "): Single<AssetFileDescriptor> = Single.never()
   fun list(name: String = " "): Flowable<String> = Flowable.never()
