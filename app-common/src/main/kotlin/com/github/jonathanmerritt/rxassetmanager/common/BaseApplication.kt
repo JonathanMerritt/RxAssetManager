@@ -19,7 +19,7 @@ package com.github.jonathanmerritt.rxassetmanager.common
 import android.app.Application
 import timber.log.Timber
 
-open class BaseApplication : Application() {
+abstract class BaseApplication : Application() {
 
   override fun onCreate() {
     super.onCreate()

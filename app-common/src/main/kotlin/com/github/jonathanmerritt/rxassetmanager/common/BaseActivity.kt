@@ -41,8 +41,6 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
     super.onStop()
   }
 
-  protected fun <T> T.dispose() = observe().schedule().subscribeBy(
-      { Timber.e(it, it.message) },
-      { Timber.i("complete()") },
-      { Timber.i("next(${it as? String ?: it.tag()})") }).addTo(disposables)
+  protected fun <T> T.dispose() = observe().schedule().subscribeBy({ Timber.e(it, it.message) },
+      { Timber.i("complete()") }, { Timber.i("next(${it as? String ?: it.tag()})") }).addTo(disposables)
 }
