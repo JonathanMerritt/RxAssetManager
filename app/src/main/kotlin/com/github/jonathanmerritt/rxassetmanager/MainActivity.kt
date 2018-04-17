@@ -29,8 +29,8 @@ import kotlinx.android.synthetic.main.activity_main.openXmlResParser
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      open.click { open("Folder/File.txt").dispose() }
-      openFd.click { openFd("Folder/File2.txt").dispose() }
+      open.click { open("F/F.txt").dispose() }
+      openFd.click { openFd("F/F1/F1.txt").dispose() }
       list.click { list("").dispose() }
       openNonAssetFd.click { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
       openXmlResParser.click { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }

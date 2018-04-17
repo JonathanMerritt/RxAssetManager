@@ -34,15 +34,15 @@ import kotlinx.android.synthetic.main.activity_main.openString
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      openString.click { openString("Folder/File.txt").dispose() }
-      openBytes.click { openBytes("Folder/File2.txt").dispose() }
-      openSave.click { openSave("Folder/Folder2/File.txt", to = cacheDir.path).dispose() }
+      openString.click { openString("F/F.txt").dispose() }
+      openBytes.click { openBytes("F/F1/F1.txt").dispose() }
+      openSave.click { openSave("F/F1/F2/F2.txt", to = cacheDir.path).dispose() }
       listAll.click { listAll("").dispose() }
-      listOpen.click { listOpen("", all = true).dispose() }
-      listOpenString.click { listOpenString("Folder/Folder2", all = true).dispose() }
-      listOpenBytes.click { listOpenBytes("Folder").dispose() }
-      listOpenSave.click { listOpenSave("Folder", to = cacheDir.path, all = true).dispose() }
-      listOpenFd.click { listOpenFd("", all = true).dispose() }
+      listOpen.click { listOpen("F", all = true).dispose() }
+      listOpenString.click { listOpenString("F", all = true).dispose() }
+      listOpenBytes.click { listOpenBytes("F", all = true).dispose() }
+      listOpenSave.click { listOpenSave("F", to = cacheDir.path, all = true).dispose() }
+      listOpenFd.click { listOpenFd("F", all = true).dispose() }
       listOpenNonAssetFd.click { listOpenNonAssetFd(name = "/").dispose() }
       listOpenXmlResourceParser.click { listOpenXmlResourceParser(name = "/", all = true).dispose() }
     }
