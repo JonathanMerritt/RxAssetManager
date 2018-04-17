@@ -26,11 +26,11 @@ import io.reactivex.Single
 import java.io.InputStream
 
 interface IsRxAssetManager {
-  fun getLocales(): Flowable<String> = Flowable.never()
-  fun close(): Completable = Completable.never()
-  fun open(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<InputStream> = Maybe.never()
+  fun getLocales(): Flowable<String> = Flowable.empty()
+  fun close(): Completable = Completable.complete()
+  fun open(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<InputStream> = Maybe.empty()
   fun openFd(name: String = " "): Single<AssetFileDescriptor> = Single.never()
-  fun list(name: String = " "): Flowable<String> = Flowable.never()
+  fun list(name: String = " "): Flowable<String> = Flowable.empty()
   fun openNonAssetFd(cookie: Int = 0, name: String = " "): Single<AssetFileDescriptor> = Single.never()
   fun openXmlResourceParser(cookie: Int = 0, name: String = " "): Single<XmlResourceParser> = Single.never()
 }
