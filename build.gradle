@@ -50,7 +50,6 @@ buildscript {
 
   /* DEPENDENCIES */
   def dep = [:]
-  dep.rxjava2Ext = 'com.github.akarnokd:rxjava2-extensions:0.17.0'
   dep.timber = 'com.jakewharton.timber:timber:4.5.1'
 
   dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0',
@@ -107,7 +106,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.0-alpha10'
+    classpath 'com.android.tools.build:gradle:3.2.0-alpha11'
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
     classpath dep.kotlin.gradle
