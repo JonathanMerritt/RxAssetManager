@@ -58,14 +58,7 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   api project(':core')
 
-  testImplementation dep.tests
-  testImplementation dep.mockitoKotlin, {exclude group : grp.kotlin, module : mod.reflect}
-
-  androidTestImplementation dep.support.tests
-  androidTestImplementation dep.support.espresso, {exclude group : grp.support, module : mod.annots}
-
   implementation dep.kotlin.stdlib
-  testImplementation dep.kotlin.tests
 
   implementation dep.rxjava2
 }
