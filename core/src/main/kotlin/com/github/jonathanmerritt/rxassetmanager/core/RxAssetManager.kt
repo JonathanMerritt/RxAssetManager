@@ -46,4 +46,17 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
 
   override fun openXmlResourceParser(cookie: Int, name: String): Single<XmlResourceParser> =
       Single.fromCallable { manager.openXmlResourceParser(cookie, name) }
+
+
+  override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
+      Maybe.fromCallable { Pair(name, manager.open(name, mode)) }
+
+  override fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> =
+      Single.fromCallable { Pair(name, manager.openFd(name)) }
+
+  override fun openNonAssetFdPair(cookie: Int, name: String): Single<Pair<String, AssetFileDescriptor>> =
+      Single.fromCallable { Pair(name, manager.openNonAssetFd(cookie, name)) }
+
+  override fun openXmlResourceParserPair(cookie: Int, name: String): Single<Pair<String, XmlResourceParser>> =
+      Single.fromCallable { Pair(name, manager.openXmlResourceParser(cookie, name)) }
 }

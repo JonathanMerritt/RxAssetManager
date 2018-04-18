@@ -17,7 +17,6 @@
 package com.github.jonathanmerritt.rxassetmanager.core
 
 import android.content.res.AssetFileDescriptor
-import android.content.res.AssetManager
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import io.reactivex.Completable
@@ -35,16 +34,11 @@ interface IsRxAssetManager {
   fun openNonAssetFd(cookie: Int = 0, name: String = " "): Single<AssetFileDescriptor> = Single.never()
   fun openXmlResourceParser(cookie: Int = 0, name: String = " "): Single<XmlResourceParser> = Single.never()
 
-  fun openPair(name: String = " ", mode: Int = AssetManager.ACCESS_STREAMING): Maybe<Pair<String, InputStream>> =
-      open(name, mode).map { Pair(name, it) }
-
-  fun openFdPair(name: String = " "): Single<Pair<String, AssetFileDescriptor>> = openFd(name).map {
-    Pair(name, it)
-  }
-
+  fun openPair(name: String = " ", mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = Maybe.empty()
+  fun openFdPair(name: String = " "): Single<Pair<String, AssetFileDescriptor>> = Single.never()
   fun openNonAssetFdPair(cookie: Int = 0, name: String = " "): Single<Pair<String, AssetFileDescriptor>> =
-      openNonAssetFd(cookie, name).map { Pair(name, it) }
+      Single.never()
 
   fun openXmlResourceParserPair(cookie: Int = 0, name: String = " "): Single<Pair<String, XmlResourceParser>> =
-      openXmlResourceParser(cookie, name).map { Pair(name, it) }
+      Single.never()
 }
