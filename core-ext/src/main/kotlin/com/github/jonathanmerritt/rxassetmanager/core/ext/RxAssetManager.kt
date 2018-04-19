@@ -82,24 +82,24 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).flatMapMaybe { openPair(it, mode) }
 
   override fun listOpenStringPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, String>> =
-      listFiles(name, all).flatMapMaybe { openStringPair(name, mode) }
+      listFiles(name, all).flatMapMaybe { openStringPair(it, mode) }
 
   override fun listOpenBytesPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, ByteArray>> =
-      listFiles(name, all).flatMapMaybe { openBytesPair(name, mode) }
+      listFiles(name, all).flatMapMaybe { openBytesPair(it, mode) }
 
   override fun listOpenSavePair(name: String, mode: Int, to: String, all: Boolean): Flowable<Pair<String, File>> =
-      listFiles(name, all).flatMapMaybe { openSavePair(name, mode, to) }
+      listFiles(name, all).flatMapMaybe { openSavePair(it, mode, to) }
 
   override fun listOpenFdPair(name: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
-      listFiles(name, all).flatMapSingle { openFdPair(name) }
+      listFiles(name, all).flatMapSingle { openFdPair(it) }
 
   override fun listOpenNonAssetFdPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, AssetFileDescriptor>> =
-      listFiles(name, all).flatMapSingle { openNonAssetFdPair(cookie, name) }
+      listFiles(name, all).flatMapSingle { openNonAssetFdPair(cookie, it) }
 
   override fun listOpenXmlResourceParserPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, XmlResourceParser>> =
-      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParserPair(cookie, name) }
+      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParserPair(cookie, it) }
 
 
   private fun listExpand(name: String, next: (String) -> Unit, error: (Throwable) -> Unit): Flowable<String> =
