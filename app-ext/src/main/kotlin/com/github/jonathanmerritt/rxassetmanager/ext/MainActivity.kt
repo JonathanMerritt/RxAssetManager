@@ -17,6 +17,11 @@
 package com.github.jonathanmerritt.rxassetmanager.ext
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
+import com.github.jonathanmerritt.rxassetmanager.common.F1_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.F2_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.F_DIR
+import com.github.jonathanmerritt.rxassetmanager.common.F_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.ROOT
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.listAll
@@ -44,27 +49,27 @@ import kotlinx.android.synthetic.main.activity_main.openStringPair
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      openString.click { openString("F/F.txt").dispose() }
-      openStringPair.click { openStringPair("F/F.txt").dispose() }
-      openBytes.click { openBytes("F/F1/F1.txt").dispose() }
-      openBytesPair.click { openBytesPair("F/F1/F1.txt").dispose() }
-      openSave.click { openSave("F/F1/F2/F2.txt", to = cacheDir.path).dispose() }
-      openSavePair.click { openSavePair("F/F1/F2/F2.txt", to = cacheDir.path).dispose() }
+      openString.click { openString(F_TXT).dispose() }
+      openStringPair.click { openStringPair(F_TXT).dispose() }
+      openBytes.click { openBytes(F1_TXT).dispose() }
+      openBytesPair.click { openBytesPair(F1_TXT).dispose() }
+      openSave.click { openSave(F2_TXT, to = cacheDir.path).dispose() }
+      openSavePair.click { openSavePair(F2_TXT, to = cacheDir.path).dispose() }
       listAll.click { listAll("").dispose() }
-      listOpen.click { listOpen("F", all = true).dispose() }
-      listOpenPair.click { listOpenPair("F", all = true).dispose() }
-      listOpenString.click { listOpenString("F", all = true).dispose() }
-      listOpenStringPair.click { listOpenStringPair("F", all = true).dispose() }
-      listOpenBytes.click { listOpenBytes("F", all = true).dispose() }
-      listOpenBytesPair.click { listOpenBytesPair("F", all = true).dispose() }
-      listOpenSave.click { listOpenSave("F", to = cacheDir.path, all = true).dispose() }
-      listOpenSavePair.click { listOpenSavePair("F", to = cacheDir.path, all = true).dispose() }
-      listOpenFd.click { listOpenFd("F", all = true).dispose() }
-      listOpenFdPair.click { listOpenFdPair("F", all = true).dispose() }
-      listOpenNonAssetFd.click { listOpenNonAssetFd(name = "/").dispose() }
-      listOpenNonAssetFdPair.click { listOpenNonAssetFdPair(name = "/").dispose() }
-      listOpenXmlResourceParser.click { listOpenXmlResourceParser(name = "/", all = true).dispose() }
-      listOpenXmlResourceParserPair.click { listOpenXmlResourceParserPair(name = "/", all = true).dispose() }
+      listOpen.click { listOpen(F_DIR, all = true).dispose() }
+      listOpenPair.click { listOpenPair(F_DIR, all = true).dispose() }
+      listOpenString.click { listOpenString(F_DIR, all = true).dispose() }
+      listOpenStringPair.click { listOpenStringPair(F_DIR, all = true).dispose() }
+      listOpenBytes.click { listOpenBytes(F_DIR, all = true).dispose() }
+      listOpenBytesPair.click { listOpenBytesPair(F_DIR, all = true).dispose() }
+      listOpenSave.click { listOpenSave(F_DIR, to = cacheDir.path, all = true).dispose() }
+      listOpenSavePair.click { listOpenSavePair(F_DIR, to = cacheDir.path, all = true).dispose() }
+      listOpenFd.click { listOpenFd(F_DIR, all = true).dispose() }
+      listOpenFdPair.click { listOpenFdPair(F_DIR, all = true).dispose() }
+      listOpenNonAssetFd.click { listOpenNonAssetFd(name = ROOT).dispose() }
+      listOpenNonAssetFdPair.click { listOpenNonAssetFdPair(name = ROOT).dispose() }
+      listOpenXmlResourceParser.click { listOpenXmlResourceParser(name = ROOT, all = true).dispose() }
+      listOpenXmlResourceParserPair.click { listOpenXmlResourceParserPair(name = ROOT, all = true).dispose() }
     }
   }
 }

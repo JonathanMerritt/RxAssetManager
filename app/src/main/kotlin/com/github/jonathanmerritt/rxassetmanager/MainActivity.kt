@@ -17,6 +17,9 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
+import com.github.jonathanmerritt.rxassetmanager.common.F1_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.F_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.MANI
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.getLocals
@@ -34,15 +37,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
       getLocals.click { getLocales().dispose() }
-      open.click { open("F/F.txt").dispose() }
-      openPair.click { openPair("F/F.txt").dispose() }
-      openFd.click { openFd("F/F1/F1.txt").dispose() }
-      openFdPair.click { openFdPair("F/F1/F1.txt").dispose() }
+      open.click { open(F_TXT).dispose() }
+      openPair.click { openPair(F_TXT).dispose() }
+      openFd.click { openFd(F1_TXT).dispose() }
+      openFdPair.click { openFdPair(F1_TXT).dispose() }
       list.click { list("").dispose() }
-      openNonAssetFd.click { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
-      openNonAssetFdPair.click { openNonAssetFdPair(name = "AndroidManifest.xml").dispose() }
-      openXmlResParser.click { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
-      openXmlResParserPair.click { openXmlResourceParserPair(name = "AndroidManifest.xml").dispose() }
+      openNonAssetFd.click { openNonAssetFd(name = MANI).dispose() }
+      openNonAssetFdPair.click { openNonAssetFdPair(name = MANI).dispose() }
+      openXmlResParser.click { openXmlResourceParser(name = MANI).dispose() }
+      openXmlResParserPair.click { openXmlResourceParserPair(name = MANI).dispose() }
     }
   }
 }
