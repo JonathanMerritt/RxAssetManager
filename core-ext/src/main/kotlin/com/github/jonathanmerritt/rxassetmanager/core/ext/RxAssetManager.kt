@@ -43,10 +43,10 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
       open(name, mode).map { it.save("$to/$name") }
 
-  override fun listAll(name: String): Flowable<String> =
-      Flowable.create({
+  override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
+      Flowable.create<String>({
         it.setDisposable(listExpand(name, it::onNext, it::onError).doOnComplete(it::onComplete).subscribe())
-      }, BUFFER)
+      }, BUFFER).sorted(strategy::compare)
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
