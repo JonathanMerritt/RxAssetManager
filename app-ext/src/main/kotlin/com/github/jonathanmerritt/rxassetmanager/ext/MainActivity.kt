@@ -55,7 +55,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
       openBytesPair.click { openBytesPair(F1_TXT).dispose() }
       openSave.click { openSave(F2_TXT, to = cacheDir.path).dispose() }
       openSavePair.click { openSavePair(F2_TXT, to = cacheDir.path).dispose() }
-      listAll.click { listAll("").dispose() }
+      listAll.click { listAll().dispose() }
       listOpen.click { listOpen(F_DIR, all = true).dispose() }
       listOpenPair.click { listOpenPair(F_DIR, all = true).dispose() }
       listOpenString.click { listOpenString(F_DIR, all = true).dispose() }

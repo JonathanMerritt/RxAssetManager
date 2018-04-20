@@ -41,7 +41,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
       openPair.click { openPair(F_TXT).dispose() }
       openFd.click { openFd(F1_TXT).dispose() }
       openFdPair.click { openFdPair(F1_TXT).dispose() }
-      list.click { list("").dispose() }
+      list.click { list().dispose() }
       openNonAssetFd.click { openNonAssetFd(name = MANI).dispose() }
       openNonAssetFdPair.click { openNonAssetFdPair(name = MANI).dispose() }
       openXmlResParser.click { openXmlResourceParser(name = MANI).dispose() }
