@@ -52,12 +52,10 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
-  api project(':core-ext')
 
   implementation dep.timber
 
   api dep.support.appcompat
-  api dep.support.constraint
 
   api dep.kotlin.stdlib
 
