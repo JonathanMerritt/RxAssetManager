@@ -19,6 +19,7 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
+import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.NORMAL
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.io.File
@@ -29,7 +30,7 @@ interface IsRxAssetManager : isRxAssetManager {
   fun openString(name: String, mode: Int = ACCESS_STREAMING): Maybe<String> = Maybe.empty()
   fun openBytes(name: String, mode: Int = ACCESS_STREAMING): Maybe<ByteArray> = Maybe.empty()
   fun openSave(name: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<File> = Maybe.empty()
-  fun listAll(name: String = ""): Flowable<String> = Flowable.empty()
+  fun listAll(name: String = "", strategy: ListAllStrategy = NORMAL): Flowable<String> = Flowable.empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
       Flowable.empty()
 
@@ -39,14 +40,16 @@ interface IsRxAssetManager : isRxAssetManager {
   fun listOpenBytes(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray> =
       Flowable.empty()
 
-  fun listOpenSave(name: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false): Flowable<File> =
+  fun listOpenSave(name: String = "", mode: Int = ACCESS_STREAMING, to: String,
+      all: Boolean = false): Flowable<File> =
       Flowable.empty()
 
   fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = Flowable.empty()
   fun listOpenNonAssetFd(cookie: Int = 0, name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> =
       Flowable.empty()
 
-  fun listOpenXmlResourceParser(cookie: Int = 0, name: String = "", all: Boolean = false): Flowable<XmlResourceParser> =
+  fun listOpenXmlResourceParser(cookie: Int = 0, name: String = "",
+      all: Boolean = false): Flowable<XmlResourceParser> =
       Flowable.empty()
 
 
