@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isBlankOrPath
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readString
@@ -110,5 +111,6 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   private fun listFiles(name: String, all: Boolean): Flowable<String> =
       (if (all) listAll(name) else listPath(name)).filter { it.isFile() }
 
-  private fun listPath(name: String): Flowable<String> = list(name).map { if (name.isEmpty()) it else "$name/$it" }
+  private fun listPath(name: String): Flowable<String> =
+      list(name).map { if (name.isBlankOrPath()) it else "$name/$it" }
 }
