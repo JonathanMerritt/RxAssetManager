@@ -32,18 +32,26 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
   constructor(context: Context) : this(context.assets)
 
   override fun getLocales() = manager.locales.toFlowable()
-
   override fun close() = manager::close.toCompletable()
-
   override fun open(name: String, mode: Int): Maybe<InputStream> = Maybe.fromCallable { manager.open(name, mode) }
-
   override fun openFd(name: String): Single<AssetFileDescriptor> = Single.fromCallable { manager.openFd(name) }
-
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
-
   override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
       Single.fromCallable { manager.openNonAssetFd(name) }
 
   override fun openXmlResourceParser(cookie: Int, name: String): Single<XmlResourceParser> =
       Single.fromCallable { manager.openXmlResourceParser(cookie, name) }
+
+
+  override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
+      Maybe.fromCallable { name to manager.open(name, mode) }
+
+  override fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> =
+      Single.fromCallable { name to manager.openFd(name) }
+
+  override fun openNonAssetFdPair(cookie: Int, name: String): Single<Pair<String, AssetFileDescriptor>> =
+      Single.fromCallable { name to manager.openNonAssetFd(cookie, name) }
+
+  override fun openXmlResourceParserPair(cookie: Int, name: String): Single<Pair<String, XmlResourceParser>> =
+      Single.fromCallable { name to manager.openXmlResourceParser(cookie, name) }
 }

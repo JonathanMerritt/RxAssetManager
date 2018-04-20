@@ -20,6 +20,10 @@ import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readString
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.save
 import io.reactivex.BackpressureStrategy.BUFFER
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -32,15 +36,11 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   constructor(manager: AssetManager) : super(manager)
   constructor(context: Context) : super(context)
 
-  override fun openString(name: String, mode: Int): Maybe<String> =
-      open(name, mode).map { it.bufferedReader().use { it.readText() } }
-
+  override fun openString(name: String, mode: Int): Maybe<String> = open(name, mode).map { it.readString() }
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map { ip ->
-        File("$to/$name").apply { parentFile.mkdirs().run { outputStream().use { (ip::copyTo) } } }
-      }
+      open(name, mode).map { it.save("$to/$name") }
 
   override fun listAll(name: String): Flowable<String> =
       Flowable.create({
@@ -66,21 +66,49 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).flatMapSingle { openNonAssetFd(cookie, it) }
 
   override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
-      listFiles(name, all).filter { it.endsWith(".xml") }.flatMapSingle { openXmlResourceParser(cookie, it) }
+      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParser(cookie, it) }
+
+
+  override fun openStringPair(name: String, mode: Int): Maybe<Pair<String, String>> =
+      open(name, mode).map { name to it.readString() }
+
+  override fun openBytesPair(name: String, mode: Int): Maybe<Pair<String, ByteArray>> =
+      open(name, mode).map { name to it.readBytes() }
+
+  override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
+      open(name, mode).map { name to it.save("$to/$name") }
+
+  override fun listOpenPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, InputStream>> =
+      listFiles(name, all).flatMapMaybe { openPair(it, mode) }
+
+  override fun listOpenStringPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, String>> =
+      listFiles(name, all).flatMapMaybe { openStringPair(it, mode) }
+
+  override fun listOpenBytesPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, ByteArray>> =
+      listFiles(name, all).flatMapMaybe { openBytesPair(it, mode) }
+
+  override fun listOpenSavePair(name: String, mode: Int, to: String, all: Boolean): Flowable<Pair<String, File>> =
+      listFiles(name, all).flatMapMaybe { openSavePair(it, mode, to) }
+
+  override fun listOpenFdPair(name: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
+      listFiles(name, all).flatMapSingle { openFdPair(it) }
+
+  override fun listOpenNonAssetFdPair(cookie: Int, name: String, all: Boolean):
+      Flowable<Pair<String, AssetFileDescriptor>> =
+      listFiles(name, all).flatMapSingle { openNonAssetFdPair(cookie, it) }
+
+  override fun listOpenXmlResourceParserPair(cookie: Int, name: String, all: Boolean):
+      Flowable<Pair<String, XmlResourceParser>> =
+      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParserPair(cookie, it) }
 
 
   private fun listExpand(name: String, next: (String) -> Unit, error: (Throwable) -> Unit): Flowable<String> =
       listPath(name).doOnNext(next).doOnError(error).flatMap {
-        if (it.contains(".")) Flowable.empty() else listExpand(it, next, error)
+        if (it.isFile()) Flowable.empty() else listExpand(it, next, error)
       }
 
   private fun listFiles(name: String, all: Boolean): Flowable<String> =
-      (if (all) listAll(name) else listPath(name)).filter { it.contains(".") }
+      (if (all) listAll(name) else listPath(name)).filter { it.isFile() }
 
-  private fun listPath(name: String): Flowable<String> =
-      list(name).map {
-        "$name/$it".run { if (length > 1 && substring(0, 1) == "/") replace(substring(0, 1), "") else this }
-      }
-
-
+  private fun listPath(name: String): Flowable<String> = list(name).map { if (name.isEmpty()) it else "$name/$it" }
 }

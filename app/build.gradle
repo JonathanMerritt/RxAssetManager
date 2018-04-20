@@ -55,11 +55,12 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   implementation project(':app-common')
+  implementation project(':core')
+
+  implementation dep.support.constraint
 
   testImplementation dep.tests
   testImplementation dep.mockitoKotlin, { exclude group : grp.kotlin, module : mod.reflect }
-
-  implementation dep.support.constraint
 
   androidTestImplementation dep.support.tests
   androidTestImplementation dep.support.espresso, { exclude group : grp.support, module : mod.annots }

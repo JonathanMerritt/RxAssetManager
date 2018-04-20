@@ -17,10 +17,15 @@
 <resources>
   <string name="app_name">RxAssetManager</string>
 
+  <string name="get_locales">Get Locals</string>
   <string name="open">Open</string>
   <string name="open_fd">Open Fd</string>
   <string name="list">List</string>
   <string name="open_non_asset_fd">Open Non Asset Fd</string>
   <string name="open_xml_resource_parser">Open Xml Resource Parser</string>
-  <string name="get_locales">Get Locals</string>
+
+  <string name="open_pair">Open Pair</string>
+  <string name="open_fd_pair">Open Fd Pair</string>
+  <string name="open_non_asset_fd_pair">Open Non Asset Fd Pair</string>
+  <string name="open_xml_resource_parser_pair">Open Xml Resource Parser Pair</string>
 </resources>

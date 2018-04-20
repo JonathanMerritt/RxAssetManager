@@ -23,18 +23,26 @@ import kotlinx.android.synthetic.main.activity_main.getLocals
 import kotlinx.android.synthetic.main.activity_main.list
 import kotlinx.android.synthetic.main.activity_main.open
 import kotlinx.android.synthetic.main.activity_main.openFd
+import kotlinx.android.synthetic.main.activity_main.openFdPair
 import kotlinx.android.synthetic.main.activity_main.openNonAssetFd
+import kotlinx.android.synthetic.main.activity_main.openNonAssetFdPair
+import kotlinx.android.synthetic.main.activity_main.openPair
 import kotlinx.android.synthetic.main.activity_main.openXmlResParser
+import kotlinx.android.synthetic.main.activity_main.openXmlResParserPair
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
+      getLocals.click { getLocales().dispose() }
       open.click { open("F/F.txt").dispose() }
+      openPair.click { openPair("F/F.txt").dispose() }
       openFd.click { openFd("F/F1/F1.txt").dispose() }
+      openFdPair.click { openFdPair("F/F1/F1.txt").dispose() }
       list.click { list("").dispose() }
       openNonAssetFd.click { openNonAssetFd(name = "AndroidManifest.xml").dispose() }
+      openNonAssetFdPair.click { openNonAssetFdPair(name = "AndroidManifest.xml").dispose() }
       openXmlResParser.click { openXmlResourceParser(name = "AndroidManifest.xml").dispose() }
-      getLocals.click { getLocales().dispose() }
+      openXmlResParserPair.click { openXmlResourceParserPair(name = "AndroidManifest.xml").dispose() }
     }
   }
 }

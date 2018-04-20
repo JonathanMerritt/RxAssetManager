@@ -52,7 +52,6 @@ android {
 
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
-  api project(':core-ext')
 
   implementation dep.timber
 
