@@ -53,8 +53,6 @@ android {
 dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
 
-  implementation dep.timber
-
   api dep.support.appcompat
 
   api dep.kotlin.stdlib

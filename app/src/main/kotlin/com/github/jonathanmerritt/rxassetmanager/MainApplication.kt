@@ -16,6 +16,6 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-import com.github.jonathanmerritt.rxassetmanager.common.BaseApplication
+import android.app.Application
 
-class MainApplication : BaseApplication()
+class MainApplication : Application()

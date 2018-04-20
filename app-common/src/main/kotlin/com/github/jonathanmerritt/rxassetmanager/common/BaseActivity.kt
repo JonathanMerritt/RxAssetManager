@@ -18,12 +18,13 @@ package com.github.jonathanmerritt.rxassetmanager.common
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.observe
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.schedule
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.tag
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
-import timber.log.Timber
 
 abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
   protected abstract fun create()
@@ -42,6 +43,6 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
 
   protected fun <T> T.dispose() =
       observe().schedule().subscribeBy(
-          { Timber.e(it, it.message) }, { Timber.i("complete()") }, { Timber.i("next($it)") }
+          { Log.e(tag(), it.message, it) }, { Log.i(tag(), "complete()") }, { Log.i(tag(), "next($it)") }
       ).addTo(disposables)
 }

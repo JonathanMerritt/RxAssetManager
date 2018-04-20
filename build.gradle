@@ -50,8 +50,6 @@ buildscript {
 
   /* DEPENDENCIES */
   def dep = [:]
-  dep.timber = 'com.jakewharton.timber:timber:4.5.1'
-
   dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0',
                'com.nhaarman:mockito-kotlin-kt1.1:1.5.0']
   dep.mockitoKotlin = 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
