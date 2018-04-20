@@ -57,6 +57,7 @@ dependencies {
   implementation dep.timber
 
   api dep.support.appcompat
+  api dep.support.constraint
 
   api dep.kotlin.stdlib
 

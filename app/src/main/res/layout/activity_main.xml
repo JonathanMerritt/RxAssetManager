@@ -15,79 +15,117 @@
   ~     limitations under the License.
   -->
 
-<android.support.constraint.ConstraintLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-  <Button
-      android:id="@+id/open"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:text="@string/open"
-      app:layout_constraintBottom_toTopOf="@+id/openFd"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      >
 
-      app:layout_constraintVertical_chainStyle="packed"
-      />
+    <Button
+        android:id="@+id/getLocals"
+        android:text="@string/get_locales"
+        app:layout_constraintBottom_toTopOf="@+id/open"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Button"
+        />
 
-  <Button
-      android:id="@+id/openFd"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:text="@string/open_fd"
-      app:layout_constraintBottom_toTopOf="@+id/list"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/open"
-      />
+    <Button
+        android:id="@+id/open"
+        android:text="@string/open"
+        app:layout_constraintBottom_toTopOf="@+id/openFd"
+        app:layout_constraintEnd_toStartOf="@+id/openPair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/getLocals"
+        style="@style/Button"
+        />
 
-  <Button
-      android:id="@+id/list"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:text="@string/list"
-      app:layout_constraintBottom_toTopOf="@+id/openNonAssetFd"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/openFd"
-      />
+    <Button
+        android:id="@+id/openPair"
+        android:text="@string/open_pair"
+        app:layout_constraintBottom_toTopOf="@+id/openFd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/open"
+        app:layout_constraintTop_toBottomOf="@+id/getLocals"
+        style="@style/Button"
+        />
 
-  <Button
-      android:id="@+id/openNonAssetFd"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:text="@string/open_non_asset_fd"
-      app:layout_constraintBottom_toTopOf="@+id/openXmlResParser"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/list"
-      />
+    <Button
+        android:id="@+id/openFd"
+        android:text="@string/open_fd"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintEnd_toStartOf="@+id/openFdPair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/open"
+        style="@style/Button"
+        />
 
-  <Button
-      android:id="@+id/openXmlResParser"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:text="@string/open_xml_resource_parser"
-      app:layout_constraintBottom_toTopOf="@+id/getLocals"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/openNonAssetFd"
-      />
+    <Button
+        android:id="@+id/openFdPair"
+        android:text="@string/open_fd_pair"
+        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/openFd"
+        app:layout_constraintTop_toBottomOf="@+id/open"
+        style="@style/Button"
+        />
 
-  <Button
-      android:id="@+id/getLocals"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:text="@string/get_locales"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@+id/openXmlResParser"
-      />
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/list"
+        android:text="@string/list"
+        app:layout_constraintBottom_toTopOf="@+id/openNonAssetFd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openFd"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/openNonAssetFd"
+        android:text="@string/open_non_asset_fd"
+        app:layout_constraintBottom_toTopOf="@+id/openXmlResParser"
+        app:layout_constraintEnd_toStartOf="@+id/openNonAssetFdPair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/openNonAssetFdPair"
+        android:text="@string/open_non_asset_fd_pair"
+        app:layout_constraintBottom_toTopOf="@+id/openXmlResParser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/openNonAssetFd"
+        app:layout_constraintTop_toBottomOf="@+id/list"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/openXmlResParser"
+        android:text="@string/open_xml_resource_parser"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/openXmlResParserPair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openNonAssetFd"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/openXmlResParserPair"
+        android:text="@string/open_xml_resource_parser_pair"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/openXmlResParser"
+        app:layout_constraintTop_toBottomOf="@+id/openNonAssetFd"
+        style="@style/Button"
+        />
+
+  </android.support.constraint.ConstraintLayout>
+</ScrollView>

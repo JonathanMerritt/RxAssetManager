@@ -59,8 +59,6 @@ dependencies {
   testImplementation dep.tests
   testImplementation dep.mockitoKotlin, { exclude group : grp.kotlin, module : mod.reflect }
 
-  implementation dep.support.constraint
-
   androidTestImplementation dep.support.tests
   androidTestImplementation dep.support.espresso, { exclude group : grp.support, module : mod.annots }
 
