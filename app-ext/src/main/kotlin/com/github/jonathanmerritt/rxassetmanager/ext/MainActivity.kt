@@ -21,11 +21,14 @@ import com.github.jonathanmerritt.rxassetmanager.common.F1_TXT
 import com.github.jonathanmerritt.rxassetmanager.common.F2_TXT
 import com.github.jonathanmerritt.rxassetmanager.common.F_DIR
 import com.github.jonathanmerritt.rxassetmanager.common.F_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.I_PNG
 import com.github.jonathanmerritt.rxassetmanager.common.ROOT
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.listAll
 import kotlinx.android.synthetic.main.activity_main.listOpen
+import kotlinx.android.synthetic.main.activity_main.listOpenBitmap
+import kotlinx.android.synthetic.main.activity_main.listOpenBitmapPair
 import kotlinx.android.synthetic.main.activity_main.listOpenBytes
 import kotlinx.android.synthetic.main.activity_main.listOpenBytesPair
 import kotlinx.android.synthetic.main.activity_main.listOpenFd
@@ -39,6 +42,8 @@ import kotlinx.android.synthetic.main.activity_main.listOpenString
 import kotlinx.android.synthetic.main.activity_main.listOpenStringPair
 import kotlinx.android.synthetic.main.activity_main.listOpenXmlResourceParser
 import kotlinx.android.synthetic.main.activity_main.listOpenXmlResourceParserPair
+import kotlinx.android.synthetic.main.activity_main.openBitmap
+import kotlinx.android.synthetic.main.activity_main.openBitmapPair
 import kotlinx.android.synthetic.main.activity_main.openBytes
 import kotlinx.android.synthetic.main.activity_main.openBytesPair
 import kotlinx.android.synthetic.main.activity_main.openSave
@@ -55,6 +60,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
       openBytesPair.click { openBytesPair(F1_TXT).dispose() }
       openSave.click { openSave(F2_TXT, to = cacheDir.path).dispose() }
       openSavePair.click { openSavePair(F2_TXT, to = cacheDir.path).dispose() }
+      openBitmap.click { openBitmap(I_PNG).dispose() }
+      openBitmapPair.click { openBitmapPair(I_PNG).dispose() }
       listAll.click { listAll().dispose() }
       listOpen.click { listOpen(F_DIR, all = true).dispose() }
       listOpenPair.click { listOpenPair(F_DIR, all = true).dispose() }
@@ -64,6 +71,8 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
       listOpenBytesPair.click { listOpenBytesPair(F_DIR, all = true).dispose() }
       listOpenSave.click { listOpenSave(F_DIR, to = cacheDir.path, all = true).dispose() }
       listOpenSavePair.click { listOpenSavePair(F_DIR, to = cacheDir.path, all = true).dispose() }
+      listOpenBitmap.click { listOpenBitmap(F_DIR, all = true).dispose() }
+      listOpenBitmapPair.click { listOpenBitmapPair(F_DIR, all = true).dispose() }
       listOpenFd.click { listOpenFd(F_DIR, all = true).dispose() }
       listOpenFdPair.click { listOpenFdPair(F_DIR, all = true).dispose() }
       listOpenNonAssetFd.click { listOpenNonAssetFd(name = ROOT).dispose() }

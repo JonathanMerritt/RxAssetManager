@@ -82,72 +82,89 @@ class MainActivityTest {
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 5)))
     appCompatButton6.perform(scrollTo(), click())
 
-    val appCompatButton7 = onView(allOf(withId(R.id.listAll), withText("List All"),
+    val appCompatButton7 = onView(allOf(withId(R.id.openBitmap), withText("Open Bitmap"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 6)))
     appCompatButton7.perform(scrollTo(), click())
 
-    val appCompatButton8 = onView(allOf(withId(R.id.listOpen), withText("List And Open"),
+    val appCompatButton8 = onView(allOf(withId(R.id.openBitmapPair), withText("Open Bitmap Pair"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 7)))
     appCompatButton8.perform(scrollTo(), click())
 
-    val appCompatButton9 = onView(allOf(withId(R.id.listOpenPair), withText("List And Open Pair"),
+    val appCompatButton9 = onView(allOf(withId(R.id.listAll), withText("List All"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 8)))
     appCompatButton9.perform(scrollTo(), click())
 
-    val appCompatButton10 = onView(allOf(withId(R.id.listOpenString), withText("List And Open String"),
+    val appCompatButton10 = onView(allOf(withId(R.id.listOpen), withText("List And Open"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 9)))
     appCompatButton10.perform(scrollTo(), click())
 
-    val appCompatButton11 = onView(
-        allOf(withId(R.id.listOpenStringPair), withText("List And Open String Pair"),
-            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 10)))
+    val appCompatButton11 = onView(allOf(withId(R.id.listOpenPair), withText("List And Open Pair"),
+        childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 10)))
     appCompatButton11.perform(scrollTo(), click())
 
-    val appCompatButton12 = onView(allOf(withId(R.id.listOpenBytes), withText("List And Open Bytes"),
+    val appCompatButton12 = onView(allOf(withId(R.id.listOpenString), withText("List And Open String"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 11)))
     appCompatButton12.perform(scrollTo(), click())
 
     val appCompatButton13 = onView(
-        allOf(withId(R.id.listOpenBytesPair), withText("List And Open Bytes Pair"),
+        allOf(withId(R.id.listOpenStringPair), withText("List And Open String Pair"),
             childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 12)))
     appCompatButton13.perform(scrollTo(), click())
 
-    val appCompatButton14 = onView(allOf(withId(R.id.listOpenSave), withText("List, Open And Save"),
+    val appCompatButton14 = onView(allOf(withId(R.id.listOpenBytes), withText("List And Open Bytes"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 13)))
     appCompatButton14.perform(scrollTo(), click())
 
     val appCompatButton15 = onView(
-        allOf(withId(R.id.listOpenSavePair), withText("List, Open And Save Pair"),
+        allOf(withId(R.id.listOpenBytesPair), withText("List And Open Bytes Pair"),
             childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 14)))
     appCompatButton15.perform(scrollTo(), click())
 
-    val appCompatButton16 = onView(allOf(withId(R.id.listOpenFd), withText("List And Open Fd"),
+    val appCompatButton16 = onView(allOf(withId(R.id.listOpenSave), withText("List, Open And Save"),
         childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 15)))
     appCompatButton16.perform(scrollTo(), click())
 
     val appCompatButton17 = onView(
-        allOf(withId(R.id.listOpenFdPair), withText("List And Open Fd Pair"),
+        allOf(withId(R.id.listOpenSavePair), withText("List, Open And Save Pair"),
             childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 16)))
     appCompatButton17.perform(scrollTo(), click())
 
-    val appCompatButton18 = onView(
-        allOf(withId(R.id.listOpenNonAssetFd), withText("List And Open Non Asset Fd"),
-            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 17)))
+    val appCompatButton18 = onView(allOf(withId(R.id.listOpenBitmap), withText("List Open Bitmap"),
+        childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 17)))
     appCompatButton18.perform(scrollTo(), click())
 
     val appCompatButton19 = onView(
-        allOf(withId(R.id.listOpenNonAssetFdPair), withText("List And Open Non Asset Fd Pair"),
+        allOf(withId(R.id.listOpenBitmapPair), withText("List Open Bitmap Pair"),
             childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 18)))
     appCompatButton19.perform(scrollTo(), click())
 
-    val appCompatButton20 = onView(
-        allOf(withId(R.id.listOpenXmlResourceParser), withText("List And Open Xml Resource Parser"),
-            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 19)))
+    val appCompatButton20 = onView(allOf(withId(R.id.listOpenFd), withText("List And Open Fd"),
+        childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 19)))
     appCompatButton20.perform(scrollTo(), click())
 
     val appCompatButton21 = onView(
-        allOf(withId(R.id.listOpenXmlResourceParserPair), withText("List And Open Xml Resource Parser Pair"),
+        allOf(withId(R.id.listOpenFdPair), withText("List And Open Fd Pair"),
             childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 20)))
     appCompatButton21.perform(scrollTo(), click())
+
+    val appCompatButton22 = onView(
+        allOf(withId(R.id.listOpenNonAssetFd), withText("List And Open Non Asset Fd"),
+            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 21)))
+    appCompatButton22.perform(scrollTo(), click())
+
+    val appCompatButton23 = onView(
+        allOf(withId(R.id.listOpenNonAssetFdPair), withText("List And Open Non Asset Fd Pair"),
+            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 22)))
+    appCompatButton23.perform(scrollTo(), click())
+
+    val appCompatButton24 = onView(
+        allOf(withId(R.id.listOpenXmlResourceParser), withText("List And Open Xml Resource Parser"),
+            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 23)))
+    appCompatButton24.perform(scrollTo(), click())
+
+    val appCompatButton25 = onView(
+        allOf(withId(R.id.listOpenXmlResourceParserPair), withText("List And Open Xml Resource Parser Pair"),
+            childAtPosition(childAtPosition(withClassName(`is`("android.widget.ScrollView")), 0), 24)))
+    appCompatButton25.perform(scrollTo(), click())
   }
 }
