@@ -16,6 +16,7 @@
 
 <resources>
   <string name="app_name">RxAssetManager-Ext</string>
+
   <string name="open_string">Open String</string>
   <string name="open_string_pair">Open String Pair</string>
   <string name="open_bytes">Open Bytes</string>
@@ -31,12 +32,12 @@
   <string name="list_open_string_pair">List And Open String Pair</string>
   <string name="list_open_bytes">List And Open Bytes</string>
   <string name="list_open_bytes_pair">List And Open Bytes Pair</string>
-  <string name="list_open_fd">List And Open Fd</string>
-  <string name="list_open_fd_pair">List And Open Fd Pair</string>
   <string name="list_open_save">List, Open And Save</string>
   <string name="list_open_save_pair">List, Open And Save Pair</string>
   <string name="list_open_bitmap">List Open Bitmap</string>
   <string name="list_open_bitmap_pair">List Open Bitmap Pair</string>
+  <string name="list_open_fd">List And Open Fd</string>
+  <string name="list_open_fd_pair">List And Open Fd Pair</string>
   <string name="list_open_non_asset_fd">List And Open Non Asset Fd</string>
   <string name="list_open_non_asset_fd_pair">List And Open Non Asset Fd Pair</string>
   <string name="list_open_xml_resource_parser">List And Open Xml Resource Parser</string>

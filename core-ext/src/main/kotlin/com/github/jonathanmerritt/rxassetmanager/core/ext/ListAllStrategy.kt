@@ -22,8 +22,8 @@ enum class ListAllStrategy {
   NORMAL, FOLDERS_FIRST, FILES_FIRST;
 
   fun compare(one: String, two: String): Int = when (this) {
-      FOLDERS_FIRST -> if (one.isFile() || !two.isFile()) 1 else -1
-      FILES_FIRST -> if (one.isFile() && !two.isFile()) -1 else 1
-      NORMAL -> 0
+    FOLDERS_FIRST -> if (one.isFile() || !two.isFile()) 1 else -1
+    FILES_FIRST -> if (one.isFile() && !two.isFile()) -1 else 1
+    NORMAL -> 0
   }
 }

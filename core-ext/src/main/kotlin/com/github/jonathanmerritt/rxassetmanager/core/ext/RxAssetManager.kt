@@ -27,7 +27,7 @@ import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readBitmap
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readString
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.save
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.saveFile
 import io.reactivex.BackpressureStrategy.BUFFER
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -44,7 +44,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map { it.save("$to/$name") }
+      open(name, mode).map { it.saveFile("$to/$name") }
 
   override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
       open(name, mode).filter { name.isImage() }.map { it.readBitmap() }
@@ -86,7 +86,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       open(name, mode).map { name to it.readBytes() }
 
   override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
-      open(name, mode).map { name to it.save("$to/$name") }
+      open(name, mode).map { name to it.saveFile("$to/$name") }
 
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
       open(name, mode).filter { name.isImage() }.map { name to it.readBitmap() }
