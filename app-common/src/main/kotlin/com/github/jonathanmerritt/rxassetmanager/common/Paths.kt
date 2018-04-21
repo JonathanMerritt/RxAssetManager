@@ -18,8 +18,8 @@ package com.github.jonathanmerritt.rxassetmanager.common
 
 const val ROOT = "/"
 const val MANI = "AndroidManifest.xml"
-const val F_DIR = "F"
-const val F_TXT = "F/F.txt"
-const val I_PNG = "F/I.png"
-const val F1_TXT = "F/F1/F1.txt"
-const val F2_TXT = "F/F1/F2/F2.txt"
+const val FOLDER = "folder"
+const val FILE = "folder/file.txt"
+const val ICON = "folder/icon.png"
+const val FILE1 = "folder/folder1/file1.txt"
+const val FILE2 = "folder/folder1/folder2/file2.txt"

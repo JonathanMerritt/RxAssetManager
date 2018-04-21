@@ -17,13 +17,13 @@
 package com.github.jonathanmerritt.rxassetmanager.ext
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
-import com.github.jonathanmerritt.rxassetmanager.common.F1_TXT
-import com.github.jonathanmerritt.rxassetmanager.common.F2_TXT
-import com.github.jonathanmerritt.rxassetmanager.common.F_DIR
-import com.github.jonathanmerritt.rxassetmanager.common.F_TXT
-import com.github.jonathanmerritt.rxassetmanager.common.I_PNG
+import com.github.jonathanmerritt.rxassetmanager.common.FILE
+import com.github.jonathanmerritt.rxassetmanager.common.FILE1
+import com.github.jonathanmerritt.rxassetmanager.common.FILE2
+import com.github.jonathanmerritt.rxassetmanager.common.FOLDER
+import com.github.jonathanmerritt.rxassetmanager.common.ICON
 import com.github.jonathanmerritt.rxassetmanager.common.ROOT
-import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.onClick
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.listAll
 import kotlinx.android.synthetic.main.activity_main.listOpen
@@ -54,31 +54,33 @@ import kotlinx.android.synthetic.main.activity_main.openStringPair
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      openString.click { openString(F_TXT).dispose() }
-      openStringPair.click { openStringPair(F_TXT).dispose() }
-      openBytes.click { openBytes(F1_TXT).dispose() }
-      openBytesPair.click { openBytesPair(F1_TXT).dispose() }
-      openSave.click { openSave(F2_TXT, to = cacheDir.path).dispose() }
-      openSavePair.click { openSavePair(F2_TXT, to = cacheDir.path).dispose() }
-      openBitmap.click { openBitmap(I_PNG).dispose() }
-      openBitmapPair.click { openBitmapPair(I_PNG).dispose() }
-      listAll.click { listAll().dispose() }
-      listOpen.click { listOpen(F_DIR, all = true).dispose() }
-      listOpenPair.click { listOpenPair(F_DIR, all = true).dispose() }
-      listOpenString.click { listOpenString(F_DIR, all = true).dispose() }
-      listOpenStringPair.click { listOpenStringPair(F_DIR, all = true).dispose() }
-      listOpenBytes.click { listOpenBytes(F_DIR, all = true).dispose() }
-      listOpenBytesPair.click { listOpenBytesPair(F_DIR, all = true).dispose() }
-      listOpenSave.click { listOpenSave(F_DIR, to = cacheDir.path, all = true).dispose() }
-      listOpenSavePair.click { listOpenSavePair(F_DIR, to = cacheDir.path, all = true).dispose() }
-      listOpenBitmap.click { listOpenBitmap(F_DIR, all = true).dispose() }
-      listOpenBitmapPair.click { listOpenBitmapPair(F_DIR, all = true).dispose() }
-      listOpenFd.click { listOpenFd(F_DIR, all = true).dispose() }
-      listOpenFdPair.click { listOpenFdPair(F_DIR, all = true).dispose() }
-      listOpenNonAssetFd.click { listOpenNonAssetFd(name = ROOT).dispose() }
-      listOpenNonAssetFdPair.click { listOpenNonAssetFdPair(name = ROOT).dispose() }
-      listOpenXmlResourceParser.click { listOpenXmlResourceParser(name = ROOT, all = true).dispose() }
-      listOpenXmlResourceParserPair.click { listOpenXmlResourceParserPair(name = ROOT, all = true).dispose() }
+      openString.onClick { openString(FILE).toSubscribe() }
+      openStringPair.onClick { openStringPair(FILE).toSubscribe() }
+      openBytes.onClick { openBytes(FILE1).toSubscribe() }
+      openBytesPair.onClick { openBytesPair(FILE1).toSubscribe() }
+      openSave.onClick { openSave(FILE2, to = cacheDir.path).toSubscribe() }
+      openSavePair.onClick { openSavePair(FILE2, to = cacheDir.path).toSubscribe() }
+      openBitmap.onClick { openBitmap(ICON).toSubscribe() }
+      openBitmapPair.onClick { openBitmapPair(ICON).toSubscribe() }
+      listAll.onClick { listAll().toSubscribe() }
+      listOpen.onClick { listOpen(FOLDER, all = true).toSubscribe() }
+      listOpenPair.onClick { listOpenPair(FOLDER, all = true).toSubscribe() }
+      listOpenString.onClick { listOpenString(FOLDER, all = true).toSubscribe() }
+      listOpenStringPair.onClick { listOpenStringPair(FOLDER, all = true).toSubscribe() }
+      listOpenBytes.onClick { listOpenBytes(FOLDER, all = true).toSubscribe() }
+      listOpenBytesPair.onClick { listOpenBytesPair(FOLDER, all = true).toSubscribe() }
+      listOpenSave.onClick { listOpenSave(FOLDER, to = cacheDir.path, all = true).toSubscribe() }
+      listOpenSavePair.onClick { listOpenSavePair(FOLDER, to = cacheDir.path, all = true).toSubscribe() }
+      listOpenBitmap.onClick { listOpenBitmap(FOLDER, all = true).toSubscribe() }
+      listOpenBitmapPair.onClick { listOpenBitmapPair(FOLDER, all = true).toSubscribe() }
+      listOpenFd.onClick { listOpenFd(FOLDER, all = true).toSubscribe() }
+      listOpenFdPair.onClick { listOpenFdPair(FOLDER, all = true).toSubscribe() }
+      listOpenNonAssetFd.onClick { listOpenNonAssetFd(name = ROOT).toSubscribe() }
+      listOpenNonAssetFdPair.onClick { listOpenNonAssetFdPair(name = ROOT).toSubscribe() }
+      listOpenXmlResourceParser.onClick { listOpenXmlResourceParser(name = ROOT, all = true).toSubscribe() }
+      listOpenXmlResourceParserPair.onClick {
+        listOpenXmlResourceParserPair(name = ROOT, all = true).toSubscribe()
+      }
     }
   }
 }

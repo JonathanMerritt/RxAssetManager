@@ -17,10 +17,10 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
-import com.github.jonathanmerritt.rxassetmanager.common.F1_TXT
-import com.github.jonathanmerritt.rxassetmanager.common.F_TXT
+import com.github.jonathanmerritt.rxassetmanager.common.FILE
+import com.github.jonathanmerritt.rxassetmanager.common.FILE1
 import com.github.jonathanmerritt.rxassetmanager.common.MANI
-import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.onClick
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.getLocals
 import kotlinx.android.synthetic.main.activity_main.list
@@ -36,16 +36,16 @@ import kotlinx.android.synthetic.main.activity_main.openXmlResParserPair
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      getLocals.click { getLocales().dispose() }
-      open.click { open(F_TXT).dispose() }
-      openPair.click { openPair(F_TXT).dispose() }
-      openFd.click { openFd(F1_TXT).dispose() }
-      openFdPair.click { openFdPair(F1_TXT).dispose() }
-      list.click { list().dispose() }
-      openNonAssetFd.click { openNonAssetFd(name = MANI).dispose() }
-      openNonAssetFdPair.click { openNonAssetFdPair(name = MANI).dispose() }
-      openXmlResParser.click { openXmlResourceParser(name = MANI).dispose() }
-      openXmlResParserPair.click { openXmlResourceParserPair(name = MANI).dispose() }
+      getLocals.onClick { getLocales().toSubscribe() }
+      open.onClick { open(FILE).toSubscribe() }
+      openPair.onClick { openPair(FILE).toSubscribe() }
+      openFd.onClick { openFd(FILE1).toSubscribe() }
+      openFdPair.onClick { openFdPair(FILE1).toSubscribe() }
+      list.onClick { list().toSubscribe() }
+      openNonAssetFd.onClick { openNonAssetFd(name = MANI).toSubscribe() }
+      openNonAssetFdPair.onClick { openNonAssetFdPair(name = MANI).toSubscribe() }
+      openXmlResParser.onClick { openXmlResourceParser(name = MANI).toSubscribe() }
+      openXmlResParserPair.onClick { openXmlResourceParserPair(name = MANI).toSubscribe() }
     }
   }
 }

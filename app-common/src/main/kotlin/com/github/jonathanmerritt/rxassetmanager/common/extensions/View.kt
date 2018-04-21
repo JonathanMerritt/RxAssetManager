@@ -18,5 +18,5 @@ package com.github.jonathanmerritt.rxassetmanager.common.extensions
 
 import android.view.View
 
-fun View.click(then: () -> Unit) = setOnClickListener { then.invoke() }
+fun View.onClick(then: () -> Unit) = setOnClickListener { then.invoke() }
 

@@ -24,15 +24,15 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-internal fun <T> T.observe(): Observable<*> {
+internal fun <T> T.toObserve(): Observable<*> {
   return when {
     this is Completable -> toObservable<Any>()
     this is Single<*> -> toObservable()
     this is Maybe<*> -> toObservable()
     this is Flowable<*> -> toObservable()
-    else -> Observable.error<Throwable>(Throwable("${this?.tag()} is not accounted for!"))
+    else -> Observable.error<Throwable>(Throwable("${this?.TAG} is not accounted for!"))
   }
 }
 
-internal fun <T> Observable<T>.schedule(): Observable<T> =
+internal fun <T> Observable<T>.ioMainScheduler(): Observable<T> =
     subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

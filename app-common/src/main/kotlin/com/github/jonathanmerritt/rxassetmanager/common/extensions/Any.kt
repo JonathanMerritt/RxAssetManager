@@ -16,4 +16,4 @@
 
 package com.github.jonathanmerritt.rxassetmanager.common.extensions
 
-internal fun Any.tag(): String = javaClass.simpleName
+internal val Any.TAG: String get() = javaClass.simpleName
