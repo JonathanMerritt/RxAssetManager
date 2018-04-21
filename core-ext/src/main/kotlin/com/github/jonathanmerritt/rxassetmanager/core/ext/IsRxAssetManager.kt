@@ -19,6 +19,7 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
+import android.graphics.Bitmap
 import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.NORMAL
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -30,6 +31,7 @@ interface IsRxAssetManager : isRxAssetManager {
   fun openString(name: String, mode: Int = ACCESS_STREAMING): Maybe<String> = Maybe.empty()
   fun openBytes(name: String, mode: Int = ACCESS_STREAMING): Maybe<ByteArray> = Maybe.empty()
   fun openSave(name: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<File> = Maybe.empty()
+  fun openBitmap(name: String, mode: Int = ACCESS_STREAMING): Maybe<Bitmap> = Maybe.empty()
   fun listAll(name: String = "", strategy: ListAllStrategy = NORMAL): Flowable<String> = Flowable.empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
       Flowable.empty()
@@ -41,7 +43,9 @@ interface IsRxAssetManager : isRxAssetManager {
       Flowable.empty()
 
   fun listOpenSave(name: String = "", mode: Int = ACCESS_STREAMING, to: String,
-      all: Boolean = false): Flowable<File> =
+      all: Boolean = false): Flowable<File> = Flowable.empty()
+
+  fun listOpenBitmap(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<Bitmap> =
       Flowable.empty()
 
   fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = Flowable.empty()
@@ -58,6 +62,7 @@ interface IsRxAssetManager : isRxAssetManager {
   fun openSavePair(name: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<Pair<String, File>> =
       Maybe.empty()
 
+  fun openBitmapPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
   fun listOpenPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
       Flowable<Pair<String, InputStream>> = Flowable.empty()
 
@@ -69,6 +74,9 @@ interface IsRxAssetManager : isRxAssetManager {
 
   fun listOpenSavePair(name: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false):
       Flowable<Pair<String, File>> = Flowable.empty()
+
+  fun listOpenBitmapPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
+      Flowable<Pair<String, Bitmap>> = Flowable.empty()
 
   fun listOpenFdPair(name: String = "", all: Boolean = false): Flowable<Pair<String, AssetFileDescriptor>> =
       Flowable.empty()
