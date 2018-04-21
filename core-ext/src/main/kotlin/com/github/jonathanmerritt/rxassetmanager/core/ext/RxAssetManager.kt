@@ -27,7 +27,7 @@ import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readBitmap
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readString
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.saveFile
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.save
 import io.reactivex.BackpressureStrategy.BUFFER
 import io.reactivex.Flowable
 import io.reactivex.Maybe
@@ -44,7 +44,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map { it.saveFile("$to/$name") }
+      open(name, mode).map { it save "$to/$name" }
 
   override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
       open(name, mode).filter { name.isImage() }.map { it.readBitmap() }
@@ -52,7 +52,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
       Flowable.create<String>({
         it.setDisposable(listExpand(name, it::onNext, it::onError).doOnComplete(it::onComplete).subscribe())
-      }, BUFFER).sorted(strategy::compare)
+      }, BUFFER).sorted(strategy::compareFor)
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
@@ -86,7 +86,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       open(name, mode).map { name to it.readBytes() }
 
   override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
-      open(name, mode).map { name to it.saveFile("$to/$name") }
+      open(name, mode).map { name to (it save "$to/$name") }
 
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
       open(name, mode).filter { name.isImage() }.map { name to it.readBitmap() }

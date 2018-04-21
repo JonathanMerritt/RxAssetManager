@@ -20,7 +20,7 @@ import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
 import com.github.jonathanmerritt.rxassetmanager.common.FILE
 import com.github.jonathanmerritt.rxassetmanager.common.FILE1
 import com.github.jonathanmerritt.rxassetmanager.common.MANI
-import com.github.jonathanmerritt.rxassetmanager.common.extensions.onClick
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.getLocals
 import kotlinx.android.synthetic.main.activity_main.list
@@ -36,16 +36,16 @@ import kotlinx.android.synthetic.main.activity_main.openXmlResParserPair
 class MainActivity : BaseActivity(R.layout.activity_main) {
   override fun create() {
     RxAssetManager(this).run {
-      getLocals.onClick { getLocales().toSubscribe() }
-      open.onClick { open(FILE).toSubscribe() }
-      openPair.onClick { openPair(FILE).toSubscribe() }
-      openFd.onClick { openFd(FILE1).toSubscribe() }
-      openFdPair.onClick { openFdPair(FILE1).toSubscribe() }
-      list.onClick { list().toSubscribe() }
-      openNonAssetFd.onClick { openNonAssetFd(name = MANI).toSubscribe() }
-      openNonAssetFdPair.onClick { openNonAssetFdPair(name = MANI).toSubscribe() }
-      openXmlResParser.onClick { openXmlResourceParser(name = MANI).toSubscribe() }
-      openXmlResParserPair.onClick { openXmlResourceParserPair(name = MANI).toSubscribe() }
+      getLocals click { getLocales().toSubscribe() }
+      open click { open(FILE).toSubscribe() }
+      openPair click { openPair(FILE).toSubscribe() }
+      openFd click { openFd(FILE1).toSubscribe() }
+      openFdPair click { openFdPair(FILE1).toSubscribe() }
+      list click { list().toSubscribe() }
+      openNonAssetFd click { openNonAssetFd(name = MANI).toSubscribe() }
+      openNonAssetFdPair click { openNonAssetFdPair(name = MANI).toSubscribe() }
+      openXmlResParser click { openXmlResourceParser(name = MANI).toSubscribe() }
+      openXmlResParserPair click { openXmlResourceParserPair(name = MANI).toSubscribe() }
     }
   }
 }

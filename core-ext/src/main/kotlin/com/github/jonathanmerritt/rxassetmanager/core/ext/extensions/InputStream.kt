@@ -21,8 +21,8 @@ import android.graphics.BitmapFactory
 import java.io.File
 import java.io.InputStream
 
-fun InputStream.readString(): String = bufferedReader().use { it.readText() }
-fun InputStream.saveFile(path: String): File =
-    File(path).apply { parentFile.mkdirs().run { outputStream().use { (this@saveFile::copyTo) } } }
+internal fun InputStream.readString(): String = bufferedReader().use { it.readText() }
+internal infix fun InputStream.save(path: String): File =
+    File(path).apply { parentFile.mkdirs().run { outputStream().use { (this@save::copyTo) } } }
 
-fun InputStream.readBitmap(): Bitmap = BitmapFactory.decodeStream(this)
+internal fun InputStream.readBitmap(): Bitmap = BitmapFactory.decodeStream(this)
