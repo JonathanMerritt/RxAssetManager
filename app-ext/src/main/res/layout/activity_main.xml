@@ -70,7 +70,7 @@
     <Button
         android:id="@+id/openSave"
         android:text="@string/open_save"
-        app:layout_constraintBottom_toTopOf="@+id/listAll"
+        app:layout_constraintBottom_toTopOf="@+id/openBitmap"
         app:layout_constraintEnd_toStartOf="@+id/openSavePair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/openBytes"
@@ -80,10 +80,30 @@
     <Button
         android:id="@+id/openSavePair"
         android:text="@string/open_save_pair"
-        app:layout_constraintBottom_toTopOf="@+id/listAll"
+        app:layout_constraintBottom_toTopOf="@+id/openBitmap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/openSave"
         app:layout_constraintTop_toBottomOf="@+id/openBytes"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/openBitmap"
+        android:text="@string/open_bitmap"
+        app:layout_constraintBottom_toTopOf="@+id/listAll"
+        app:layout_constraintEnd_toStartOf="@+id/openBitmapPair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/openSave"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/openBitmapPair"
+        android:text="@string/open_bitmap_pair"
+        app:layout_constraintBottom_toTopOf="@+id/listAll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/openBitmap"
+        app:layout_constraintTop_toBottomOf="@+id/openSave"
         style="@style/Button"
         />
 
@@ -93,7 +113,7 @@
         app:layout_constraintBottom_toTopOf="@+id/listOpen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openSave"
+        app:layout_constraintTop_toBottomOf="@+id/openBitmap"
         style="@style/Button"
         />
 
@@ -160,7 +180,7 @@
     <Button
         android:id="@+id/listOpenSave"
         android:text="@string/list_open_save"
-        app:layout_constraintBottom_toTopOf="@+id/listOpenFd"
+        app:layout_constraintBottom_toTopOf="@+id/listOpenBitmap"
         app:layout_constraintEnd_toStartOf="@+id/listOpenSavePair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listOpenBytes"
@@ -170,10 +190,30 @@
     <Button
         android:id="@+id/listOpenSavePair"
         android:text="@string/list_open_save_pair"
-        app:layout_constraintBottom_toTopOf="@+id/listOpenFd"
+        app:layout_constraintBottom_toTopOf="@+id/listOpenBitmap"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/listOpenSave"
         app:layout_constraintTop_toBottomOf="@+id/listOpenBytes"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/listOpenBitmap"
+        android:text="@string/list_open_bitmap"
+        app:layout_constraintBottom_toTopOf="@+id/listOpenFd"
+        app:layout_constraintEnd_toStartOf="@+id/listOpenBitmapPair"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/listOpenSave"
+        style="@style/Button"
+        />
+
+    <Button
+        android:id="@+id/listOpenBitmapPair"
+        android:text="@string/list_open_bitmap_pair"
+        app:layout_constraintBottom_toTopOf="@+id/listOpenFd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/listOpenBitmap"
+        app:layout_constraintTop_toBottomOf="@+id/listOpenSave"
         style="@style/Button"
         />
 
@@ -183,7 +223,7 @@
         app:layout_constraintBottom_toTopOf="@+id/listOpenNonAssetFd"
         app:layout_constraintEnd_toStartOf="@+id/listOpenFdPair"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listOpenSave"
+        app:layout_constraintTop_toBottomOf="@+id/listOpenBitmap"
         style="@style/Button"
         />
 
@@ -193,7 +233,7 @@
         app:layout_constraintBottom_toTopOf="@+id/listOpenNonAssetFd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/listOpenFd"
-        app:layout_constraintTop_toBottomOf="@+id/listOpenSave"
+        app:layout_constraintTop_toBottomOf="@+id/listOpenBitmap"
         style="@style/Button"
         />
 
