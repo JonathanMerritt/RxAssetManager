@@ -41,13 +41,24 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   constructor(context: Context) : super(context)
 
   override fun openString(name: String, mode: Int): Maybe<String> = open(name, mode).map { it.readString() }
+  override fun openStringPair(name: String, mode: Int): Maybe<Pair<String, String>> =
+      open(name, mode).map { name to it.readString() }
+
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
+  override fun openBytesPair(name: String, mode: Int): Maybe<Pair<String, ByteArray>> =
+      open(name, mode).map { name to it.readBytes() }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
       open(name, mode).map { it save "$to/$name" }
 
+  override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
+      open(name, mode).map { name to (it save "$to/$name") }
+
   override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
       open(name, mode).filter { name.isImage() }.map { it.readBitmap() }
+
+  override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
+      open(name, mode).filter { name.isImage() }.map { name to it.readBitmap() }
 
   override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
       Flowable.create<String>({
@@ -57,61 +68,48 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
 
-  override fun listOpenString(name: String, mode: Int, all: Boolean): Flowable<String> =
-      listFiles(name, all).flatMapMaybe { openString(it, mode) }
-
-  override fun listOpenBytes(name: String, mode: Int, all: Boolean): Flowable<ByteArray> =
-      listFiles(name, all).flatMapMaybe { openBytes(it, mode) }
-
-  override fun listOpenSave(name: String, mode: Int, to: String, all: Boolean): Flowable<File> =
-      listFiles(name, all).flatMapMaybe { openSave(it, mode, to) }
-
-  override fun listOpenBitmap(name: String, mode: Int, all: Boolean): Flowable<Bitmap> =
-      listFiles(name, all).flatMapMaybe { openBitmap(it, mode) }
-
-  override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      listFiles(name, all).flatMapSingle(::openFd)
-
-  override fun listOpenNonAssetFd(cookie: Int, name: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      listFiles(name, all).flatMapSingle { openNonAssetFd(cookie, it) }
-
-  override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
-      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParser(cookie, it) }
-
-
-  override fun openStringPair(name: String, mode: Int): Maybe<Pair<String, String>> =
-      open(name, mode).map { name to it.readString() }
-
-  override fun openBytesPair(name: String, mode: Int): Maybe<Pair<String, ByteArray>> =
-      open(name, mode).map { name to it.readBytes() }
-
-  override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
-      open(name, mode).map { name to (it save "$to/$name") }
-
-  override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
-      open(name, mode).filter { name.isImage() }.map { name to it.readBitmap() }
-
   override fun listOpenPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, InputStream>> =
       listFiles(name, all).flatMapMaybe { openPair(it, mode) }
+
+  override fun listOpenString(name: String, mode: Int, all: Boolean): Flowable<String> =
+      listFiles(name, all).flatMapMaybe { openString(it, mode) }
 
   override fun listOpenStringPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, String>> =
       listFiles(name, all).flatMapMaybe { openStringPair(it, mode) }
 
+  override fun listOpenBytes(name: String, mode: Int, all: Boolean): Flowable<ByteArray> =
+      listFiles(name, all).flatMapMaybe { openBytes(it, mode) }
+
   override fun listOpenBytesPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, ByteArray>> =
       listFiles(name, all).flatMapMaybe { openBytesPair(it, mode) }
+
+  override fun listOpenSave(name: String, mode: Int, to: String, all: Boolean): Flowable<File> =
+      listFiles(name, all).flatMapMaybe { openSave(it, mode, to) }
 
   override fun listOpenSavePair(name: String, mode: Int, to: String, all: Boolean): Flowable<Pair<String, File>> =
       listFiles(name, all).flatMapMaybe { openSavePair(it, mode, to) }
 
+  override fun listOpenBitmap(name: String, mode: Int, all: Boolean): Flowable<Bitmap> =
+      listFiles(name, all).flatMapMaybe { openBitmap(it, mode) }
+
   override fun listOpenBitmapPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, Bitmap>> =
       listFiles(name, all).flatMapMaybe { openBitmapPair(it, mode) }
+
+  override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
+      listFiles(name, all).flatMapSingle(::openFd)
 
   override fun listOpenFdPair(name: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
       listFiles(name, all).flatMapSingle { openFdPair(it) }
 
+  override fun listOpenNonAssetFd(cookie: Int, name: String, all: Boolean): Flowable<AssetFileDescriptor> =
+      listFiles(name, all).flatMapSingle { openNonAssetFd(cookie, it) }
+
   override fun listOpenNonAssetFdPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, AssetFileDescriptor>> =
       listFiles(name, all).flatMapSingle { openNonAssetFdPair(cookie, it) }
+
+  override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
+      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParser(cookie, it) }
 
   override fun listOpenXmlResourceParserPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, XmlResourceParser>> =

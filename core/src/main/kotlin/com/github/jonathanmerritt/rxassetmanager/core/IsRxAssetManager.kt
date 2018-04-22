@@ -29,14 +29,13 @@ interface IsRxAssetManager {
   fun getLocales(): Flowable<String> = Flowable.empty()
   fun close(): Completable = Completable.complete()
   fun open(name: String, mode: Int = ACCESS_STREAMING): Maybe<InputStream> = Maybe.empty()
+  fun openPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = Maybe.empty()
   fun openFd(name: String): Single<AssetFileDescriptor> = Single.never()
+  fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> = Single.never()
   fun list(name: String = ""): Flowable<String> = Flowable.empty()
   fun openNonAssetFd(cookie: Int = 0, name: String): Single<AssetFileDescriptor> = Single.never()
-  fun openXmlResourceParser(cookie: Int = 0, name: String): Single<XmlResourceParser> = Single.never()
-
-  fun openPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = Maybe.empty()
-  fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> = Single.never()
   fun openNonAssetFdPair(cookie: Int = 0, name: String): Single<Pair<String, AssetFileDescriptor>> = Single.never()
+  fun openXmlResourceParser(cookie: Int = 0, name: String): Single<XmlResourceParser> = Single.never()
   fun openXmlResourceParserPair(cookie: Int = 0, name: String): Single<Pair<String, XmlResourceParser>> =
       Single.never()
 }
