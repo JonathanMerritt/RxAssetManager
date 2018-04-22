@@ -20,8 +20,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.TAG
-import com.github.jonathanmerritt.rxassetmanager.common.extensions.ioMainScheduler
-import com.github.jonathanmerritt.rxassetmanager.common.extensions.toObserve
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.asObservable
+import com.github.jonathanmerritt.rxassetmanager.common.extensions.scheduleIoMain
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
@@ -41,6 +41,6 @@ abstract class BaseActivity(private val layout: Int) : AppCompatActivity() {
     super.onStop()
   }
 
-  protected fun <T> T.toSubscribe() = toObserve().ioMainScheduler().subscribeBy(
+  protected fun <T> T.toSubscribe() = asObservable().scheduleIoMain().subscribeBy(
       { Log.e(TAG, it.message, it) }, { Log.i(TAG, "complete()") }, { Log.i(TAG, "next($it)") }).addTo(disposables)
 }

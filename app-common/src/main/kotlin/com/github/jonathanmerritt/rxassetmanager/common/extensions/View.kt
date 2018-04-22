@@ -17,7 +17,5 @@
 package com.github.jonathanmerritt.rxassetmanager.common.extensions
 
 import android.view.View
-import io.reactivex.disposables.Disposable
 
-inline infix fun View.click(crossinline then: () -> Disposable) = setOnClickListener { then.invoke() }
-
+inline infix fun View.click(crossinline then: () -> Any) = setOnClickListener { then.invoke() }
