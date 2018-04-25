@@ -63,7 +63,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
       Flowable.create<String>({
         it.setDisposable(listExpand(name, it::onNext, it::onError).doOnComplete(it::onComplete).subscribe())
-      }, BUFFER).sorted(strategy::compareFor)
+      }, BUFFER).sorted(strategy::compare)
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }

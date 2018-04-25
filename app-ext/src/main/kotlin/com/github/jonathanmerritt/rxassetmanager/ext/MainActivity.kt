@@ -24,6 +24,7 @@ import com.github.jonathanmerritt.rxassetmanager.common.FOLDER
 import com.github.jonathanmerritt.rxassetmanager.common.ICON
 import com.github.jonathanmerritt.rxassetmanager.common.ROOT
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
+import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.FilesFirst
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import kotlinx.android.synthetic.main.activity_main.listAll
 import kotlinx.android.synthetic.main.activity_main.listOpen
@@ -62,7 +63,7 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
       openSavePair click { openSavePair(FILE2, to = cacheDir.path).toSubscribe() }
       openBitmap click { openBitmap(ICON).toSubscribe() }
       openBitmapPair click { openBitmapPair(ICON).toSubscribe() }
-      listAll click { listAll().toSubscribe() }
+      listAll click { listAll(strategy = FilesFirst()).toSubscribe() }
       listOpen click { listOpen(FOLDER, all = true).toSubscribe() }
       listOpenPair click { listOpenPair(FOLDER, all = true).toSubscribe() }
       listOpenString click { listOpenString(FOLDER, all = true).toSubscribe() }

@@ -18,12 +18,15 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
 
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 
-enum class ListAllStrategy {
-  NORMAL, FOLDERS_FIRST, FILES_FIRST;
+sealed class ListAllStrategy: Comparator<String> {
+  class Normal: ListAllStrategy()
+  class FoldersFirst: ListAllStrategy()
+  class FilesFirst: ListAllStrategy()
 
-  fun compareFor(one: String, two: String): Int = when (this) {
-    NORMAL -> 0
-    FOLDERS_FIRST -> if (one.isFile() || !two.isFile()) 1 else -1
-    FILES_FIRST -> if (one.isFile() && !two.isFile()) -1 else 1
+  override fun compare(o1: String?, o2: String?) = if (o1 != null && o2 != null) when(this) {
+    is FoldersFirst -> if (o1.isFile() || !o2.isFile()) 1 else -1
+    is FilesFirst -> if (o1.isFile() && !o2.isFile()) -1 else 1
+    else -> 0
   }
+  else 0
 }

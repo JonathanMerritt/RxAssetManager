@@ -20,7 +20,7 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
-import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.NORMAL
+import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.Normal
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.io.File
@@ -39,7 +39,7 @@ interface IsRxAssetManager : isRxAssetManager {
 
   fun openBitmap(name: String, mode: Int = ACCESS_STREAMING): Maybe<Bitmap> = Maybe.empty()
   fun openBitmapPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
-  fun listAll(name: String = "", strategy: ListAllStrategy = NORMAL): Flowable<String> = Flowable.empty()
+  fun listAll(name: String = "", strategy: ListAllStrategy = Normal()): Flowable<String> = Flowable.empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
       Flowable.empty()
 
