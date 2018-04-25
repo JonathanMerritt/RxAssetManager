@@ -21,18 +21,15 @@ import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
 import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
+import io.reactivex.schedulers.Schedulers.io
 
-internal fun <T> T.asObservable(): Observable<*> {
-  return when {
-    this is Completable -> toObservable<Any>()
-    this is Single<*> -> toObservable()
-    this is Maybe<*> -> toObservable()
-    this is Flowable<*> -> toObservable()
-    else -> Observable.error<Throwable>(Throwable("${this?.TAG} is not accounted for!"))
-  }
+internal fun <T> T.asObservable() = when(this) {
+  is Completable -> toObservable()
+  is Single<*> -> toObservable()
+  is Maybe<*> -> toObservable()
+  is Flowable<*> -> toObservable()
+  else -> Observable.error(TypeCastException("${this?.TAG} must be Completable, Single, Maybe or Flowable!"))
 }
 
-internal fun <T> Observable<T>.scheduleIoMain(): Observable<T> =
-    subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+internal fun <T> Observable<T>.scheduleIoMain() = subscribeOn(io()).observeOn(mainThread())
