@@ -99,7 +99,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).flatMapSingle(::openFd)
 
   override fun listOpenFdPair(name: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
-      listFiles(name, all).flatMapSingle { openFdPair(it) }
+      listFiles(name, all).flatMapSingle(::openFdPair)
 
   override fun listOpenNonAssetFd(cookie: Int, name: String, all: Boolean): Flowable<AssetFileDescriptor> =
       listFiles(name, all).flatMapSingle { openNonAssetFd(cookie, it) }
