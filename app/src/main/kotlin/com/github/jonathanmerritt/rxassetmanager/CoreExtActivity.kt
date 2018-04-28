@@ -1,5 +1,5 @@
 /*
- *     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
+ *     Copyright 2018 Jonathan Merritt
  *
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-package com.github.jonathanmerritt.rxassetmanager.ext
+package com.github.jonathanmerritt.rxassetmanager
 
 import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
 import com.github.jonathanmerritt.rxassetmanager.common.FILE
@@ -26,33 +26,33 @@ import com.github.jonathanmerritt.rxassetmanager.common.ROOT
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.FilesFirst
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
-import kotlinx.android.synthetic.main.activity_main.listAll
-import kotlinx.android.synthetic.main.activity_main.listOpen
-import kotlinx.android.synthetic.main.activity_main.listOpenBitmap
-import kotlinx.android.synthetic.main.activity_main.listOpenBitmapPair
-import kotlinx.android.synthetic.main.activity_main.listOpenBytes
-import kotlinx.android.synthetic.main.activity_main.listOpenBytesPair
-import kotlinx.android.synthetic.main.activity_main.listOpenFd
-import kotlinx.android.synthetic.main.activity_main.listOpenFdPair
-import kotlinx.android.synthetic.main.activity_main.listOpenNonAssetFd
-import kotlinx.android.synthetic.main.activity_main.listOpenNonAssetFdPair
-import kotlinx.android.synthetic.main.activity_main.listOpenPair
-import kotlinx.android.synthetic.main.activity_main.listOpenSave
-import kotlinx.android.synthetic.main.activity_main.listOpenSavePair
-import kotlinx.android.synthetic.main.activity_main.listOpenString
-import kotlinx.android.synthetic.main.activity_main.listOpenStringPair
-import kotlinx.android.synthetic.main.activity_main.listOpenXmlResourceParser
-import kotlinx.android.synthetic.main.activity_main.listOpenXmlResourceParserPair
-import kotlinx.android.synthetic.main.activity_main.openBitmap
-import kotlinx.android.synthetic.main.activity_main.openBitmapPair
-import kotlinx.android.synthetic.main.activity_main.openBytes
-import kotlinx.android.synthetic.main.activity_main.openBytesPair
-import kotlinx.android.synthetic.main.activity_main.openSave
-import kotlinx.android.synthetic.main.activity_main.openSavePair
-import kotlinx.android.synthetic.main.activity_main.openString
-import kotlinx.android.synthetic.main.activity_main.openStringPair
+import kotlinx.android.synthetic.main.activity_core_ext.listAll
+import kotlinx.android.synthetic.main.activity_core_ext.listOpen
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenBitmap
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenBitmapPair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenBytes
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenBytesPair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenFd
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenFdPair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenNonAssetFd
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenNonAssetFdPair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenPair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenSave
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenSavePair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenString
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenStringPair
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenXmlResourceParser
+import kotlinx.android.synthetic.main.activity_core_ext.listOpenXmlResourceParserPair
+import kotlinx.android.synthetic.main.activity_core_ext.openBitmap
+import kotlinx.android.synthetic.main.activity_core_ext.openBitmapPair
+import kotlinx.android.synthetic.main.activity_core_ext.openBytes
+import kotlinx.android.synthetic.main.activity_core_ext.openBytesPair
+import kotlinx.android.synthetic.main.activity_core_ext.openSave
+import kotlinx.android.synthetic.main.activity_core_ext.openSavePair
+import kotlinx.android.synthetic.main.activity_core_ext.openString
+import kotlinx.android.synthetic.main.activity_core_ext.openStringPair
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class CoreExtActivity : BaseActivity(R.layout.activity_core_ext) {
   override fun create() {
     RxAssetManager(this).run {
       openString click { openString(FILE).toSubscribe() }

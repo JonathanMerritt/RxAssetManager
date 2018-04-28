@@ -22,18 +22,18 @@ import com.github.jonathanmerritt.rxassetmanager.common.FILE1
 import com.github.jonathanmerritt.rxassetmanager.common.MANI
 import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
-import kotlinx.android.synthetic.main.activity_main.getLocals
-import kotlinx.android.synthetic.main.activity_main.list
-import kotlinx.android.synthetic.main.activity_main.open
-import kotlinx.android.synthetic.main.activity_main.openFd
-import kotlinx.android.synthetic.main.activity_main.openFdPair
-import kotlinx.android.synthetic.main.activity_main.openNonAssetFd
-import kotlinx.android.synthetic.main.activity_main.openNonAssetFdPair
-import kotlinx.android.synthetic.main.activity_main.openPair
-import kotlinx.android.synthetic.main.activity_main.openXmlResParser
-import kotlinx.android.synthetic.main.activity_main.openXmlResParserPair
+import kotlinx.android.synthetic.main.activity_core.getLocals
+import kotlinx.android.synthetic.main.activity_core.list
+import kotlinx.android.synthetic.main.activity_core.open
+import kotlinx.android.synthetic.main.activity_core.openFd
+import kotlinx.android.synthetic.main.activity_core.openFdPair
+import kotlinx.android.synthetic.main.activity_core.openNonAssetFd
+import kotlinx.android.synthetic.main.activity_core.openNonAssetFdPair
+import kotlinx.android.synthetic.main.activity_core.openPair
+import kotlinx.android.synthetic.main.activity_core.openXmlResParser
+import kotlinx.android.synthetic.main.activity_core.openXmlResParserPair
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class CoreActivity : BaseActivity(R.layout.activity_core) {
   override fun create() {
     RxAssetManager(this).run {
       getLocals click { getLocales().toSubscribe() }
