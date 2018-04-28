@@ -25,9 +25,8 @@
     <item name="colorAccent">@color/colorAccent</item>
   </style>
 
-  <style name="Button" >
-    <item name="android:layout_width">0dp</item>
-    <item name="android:layout_height">wrap_content</item>
+  <style name="Button" parent="Widget.AppCompat.Button.Borderless.Colored">
+    <item name="android:layout_margin">6dp</item>
     <item name="android:minLines">4</item>
   </style>
 </resources>

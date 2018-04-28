@@ -29,6 +29,8 @@
 
     <Button
         android:id="@+id/getLocals"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/get_locales"
         app:layout_constraintBottom_toTopOf="@+id/open"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +41,8 @@
 
     <Button
         android:id="@+id/open"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open"
         app:layout_constraintBottom_toTopOf="@+id/openFd"
         app:layout_constraintEnd_toStartOf="@+id/openPair"
@@ -49,16 +53,20 @@
 
     <Button
         android:id="@+id/openPair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_pair"
-        app:layout_constraintBottom_toTopOf="@+id/openFd"
+        app:layout_constraintBottom_toBottomOf="@+id/open"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/open"
-        app:layout_constraintTop_toBottomOf="@+id/getLocals"
+        app:layout_constraintTop_toTopOf="@+id/open"
         style="@style/Button"
         />
 
     <Button
         android:id="@+id/openFd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_fd"
         app:layout_constraintBottom_toTopOf="@+id/list"
         app:layout_constraintEnd_toStartOf="@+id/openFdPair"
@@ -69,16 +77,20 @@
 
     <Button
         android:id="@+id/openFdPair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_fd_pair"
-        app:layout_constraintBottom_toTopOf="@+id/list"
+        app:layout_constraintBottom_toBottomOf="@+id/openFd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/openFd"
-        app:layout_constraintTop_toBottomOf="@+id/open"
+        app:layout_constraintTop_toTopOf="@+id/openFd"
         style="@style/Button"
         />
 
     <Button
         android:id="@+id/list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/list"
         app:layout_constraintBottom_toTopOf="@+id/openNonAssetFd"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,6 +101,8 @@
 
     <Button
         android:id="@+id/openNonAssetFd"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_non_asset_fd"
         app:layout_constraintBottom_toTopOf="@+id/openXmlResParser"
         app:layout_constraintEnd_toStartOf="@+id/openNonAssetFdPair"
@@ -99,16 +113,20 @@
 
     <Button
         android:id="@+id/openNonAssetFdPair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_non_asset_fd_pair"
-        app:layout_constraintBottom_toTopOf="@+id/openXmlResParser"
+        app:layout_constraintBottom_toBottomOf="@+id/openNonAssetFd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/openNonAssetFd"
-        app:layout_constraintTop_toBottomOf="@+id/list"
+        app:layout_constraintTop_toTopOf="@+id/openNonAssetFd"
         style="@style/Button"
         />
 
     <Button
         android:id="@+id/openXmlResParser"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_xml_resource_parser"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/openXmlResParserPair"
@@ -119,11 +137,13 @@
 
     <Button
         android:id="@+id/openXmlResParserPair"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:text="@string/open_xml_resource_parser_pair"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/openXmlResParser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/openXmlResParser"
-        app:layout_constraintTop_toBottomOf="@+id/openNonAssetFd"
+        app:layout_constraintTop_toTopOf="@+id/openXmlResParser"
         style="@style/Button"
         />
 
