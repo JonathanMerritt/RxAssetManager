@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
+  ~     Copyright 2018 Jonathan Merritt
   ~
   ~     Licensed under the Apache License, Version 2.0 (the "License");
   ~     you may not use this file except in compliance with the License.
@@ -15,137 +15,41 @@
   ~     limitations under the License.
   -->
 
-<ScrollView
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     >
 
-  <android.support.constraint.ConstraintLayout
+  <android.support.design.widget.AppBarLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      android:theme="@style/AppBarOverlay"
       >
 
-    <Button
-        android:id="@+id/getLocals"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/get_locales"
-        app:layout_constraintBottom_toTopOf="@+id/open"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        style="@style/Button"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@color/colorPrimary"
         />
 
-    <Button
-        android:id="@+id/open"
-        android:layout_width="0dp"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/open"
-        app:layout_constraintBottom_toTopOf="@+id/openFd"
-        app:layout_constraintEnd_toStartOf="@+id/openPair"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getLocals"
-        style="@style/Button"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
         />
 
-    <Button
-        android:id="@+id/openPair"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_pair"
-        app:layout_constraintBottom_toBottomOf="@+id/open"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/open"
-        app:layout_constraintTop_toTopOf="@+id/open"
-        style="@style/Button"
-        />
+  </android.support.design.widget.AppBarLayout>
 
-    <Button
-        android:id="@+id/openFd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_fd"
-        app:layout_constraintBottom_toTopOf="@+id/list"
-        app:layout_constraintEnd_toStartOf="@+id/openFdPair"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/open"
-        style="@style/Button"
-        />
+  <android.support.v4.view.ViewPager
+      android:id="@+id/pager"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      />
 
-    <Button
-        android:id="@+id/openFdPair"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_fd_pair"
-        app:layout_constraintBottom_toBottomOf="@+id/openFd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/openFd"
-        app:layout_constraintTop_toTopOf="@+id/openFd"
-        style="@style/Button"
-        />
-
-    <Button
-        android:id="@+id/list"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/list"
-        app:layout_constraintBottom_toTopOf="@+id/openNonAssetFd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openFd"
-        style="@style/Button"
-        />
-
-    <Button
-        android:id="@+id/openNonAssetFd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_non_asset_fd"
-        app:layout_constraintBottom_toTopOf="@+id/openXmlResParser"
-        app:layout_constraintEnd_toStartOf="@+id/openNonAssetFdPair"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/list"
-        style="@style/Button"
-        />
-
-    <Button
-        android:id="@+id/openNonAssetFdPair"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_non_asset_fd_pair"
-        app:layout_constraintBottom_toBottomOf="@+id/openNonAssetFd"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/openNonAssetFd"
-        app:layout_constraintTop_toTopOf="@+id/openNonAssetFd"
-        style="@style/Button"
-        />
-
-    <Button
-        android:id="@+id/openXmlResParser"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_xml_resource_parser"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/openXmlResParserPair"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openNonAssetFd"
-        style="@style/Button"
-        />
-
-    <Button
-        android:id="@+id/openXmlResParserPair"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_xml_resource_parser_pair"
-        app:layout_constraintBottom_toBottomOf="@+id/openXmlResParser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/openXmlResParser"
-        app:layout_constraintTop_toTopOf="@+id/openXmlResParser"
-        style="@style/Button"
-        />
-
-  </android.support.constraint.ConstraintLayout>
-</ScrollView>
+</android.support.design.widget.CoordinatorLayout>

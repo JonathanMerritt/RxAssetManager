@@ -1,5 +1,5 @@
 /*
- *     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
+ *     Copyright 2018 Jonathan Merritt
  *
  *     Licensed under the Apache License, Version 2.0 (the "License");
  *     you may not use this file except in compliance with the License.
@@ -16,36 +16,38 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-import com.github.jonathanmerritt.rxassetmanager.common.BaseActivity
-import com.github.jonathanmerritt.rxassetmanager.common.FILE
-import com.github.jonathanmerritt.rxassetmanager.common.FILE1
-import com.github.jonathanmerritt.rxassetmanager.common.MANI
-import com.github.jonathanmerritt.rxassetmanager.common.extensions.click
-import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager
-import kotlinx.android.synthetic.main.activity_main.getLocals
-import kotlinx.android.synthetic.main.activity_main.list
-import kotlinx.android.synthetic.main.activity_main.open
-import kotlinx.android.synthetic.main.activity_main.openFd
-import kotlinx.android.synthetic.main.activity_main.openFdPair
-import kotlinx.android.synthetic.main.activity_main.openNonAssetFd
-import kotlinx.android.synthetic.main.activity_main.openNonAssetFdPair
-import kotlinx.android.synthetic.main.activity_main.openPair
-import kotlinx.android.synthetic.main.activity_main.openXmlResParser
-import kotlinx.android.synthetic.main.activity_main.openXmlResParserPair
+import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
+import android.support.v7.app.AppCompatActivity
+import com.github.jonathanmerritt.rxassetmanager.RxAssetManagerFragment.Core
+import com.github.jonathanmerritt.rxassetmanager.RxAssetManagerFragment.CoreExt
+import com.github.jonathanmerritt.rxassetmanager.extensions.TAG
+import kotlinx.android.synthetic.main.activity_main.pager
+import kotlinx.android.synthetic.main.activity_main.tablayout
+import kotlinx.android.synthetic.main.activity_main.toolbar
 
-class MainActivity : BaseActivity(R.layout.activity_main) {
-  override fun create() {
-    RxAssetManager(this).run {
-      getLocals click { getLocales().toSubscribe() }
-      open click { open(FILE).toSubscribe() }
-      openPair click { openPair(FILE).toSubscribe() }
-      openFd click { openFd(FILE1).toSubscribe() }
-      openFdPair click { openFdPair(FILE1).toSubscribe() }
-      list click { list().toSubscribe() }
-      openNonAssetFd click { openNonAssetFd(name = MANI).toSubscribe() }
-      openNonAssetFdPair click { openNonAssetFdPair(name = MANI).toSubscribe() }
-      openXmlResParser click { openXmlResourceParser(name = MANI).toSubscribe() }
-      openXmlResParserPair click { openXmlResourceParserPair(name = MANI).toSubscribe() }
+class MainActivity: AppCompatActivity() {
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setContentView(R.layout.activity_main)
+
+    toolbar.run {
+      title = getString(R.string.app_name)
+      setSupportActionBar(this)
     }
+
+    pager.run {
+      adapter = PagerAdapter(supportFragmentManager)
+      tablayout.setupWithViewPager(this)
+    }
+  }
+
+  class PagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
+    override fun getCount(): Int = 2
+    override fun getItem(position: Int): Fragment = if (position == 0) Core() else CoreExt()
+    override fun getPageTitle(position: Int): CharSequence? = getItem(position).TAG
   }
 }

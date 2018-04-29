@@ -14,6 +14,6 @@
  *     limitations under the License.
  */
 
-package com.github.jonathanmerritt.rxassetmanager.common.extensions
+package com.github.jonathanmerritt.rxassetmanager.extensions
 
 internal val Any.TAG: String get() = javaClass.simpleName

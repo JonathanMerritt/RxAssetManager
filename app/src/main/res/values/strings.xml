@@ -1,5 +1,5 @@
 <!--
-  ~     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
+  ~     Copyright 2018 Jonathan Merritt
   ~
   ~     Licensed under the Apache License, Version 2.0 (the "License");
   ~     you may not use this file except in compliance with the License.
@@ -27,4 +27,31 @@
   <string name="open_non_asset_fd_pair">Open Non Asset Fd Pair</string>
   <string name="open_xml_resource_parser">Open Xml Resource Parser</string>
   <string name="open_xml_resource_parser_pair">Open Xml Resource Parser Pair</string>
+
+
+  <string name="open_string">Open String</string>
+  <string name="open_string_pair">Open String Pair</string>
+  <string name="open_bytes">Open Bytes</string>
+  <string name="open_bytes_pair">Open Bytes Pair</string>
+  <string name="open_save">Open And Save</string>
+  <string name="open_save_pair">Open And Save Pair</string>
+  <string name="open_bitmap">Open Bitmap</string>
+  <string name="open_bitmap_pair">Open Bitmap Pair</string>
+  <string name="list_all">List All</string>
+  <string name="list_open">List And Open</string>
+  <string name="list_open_pair">List And Open Pair</string>
+  <string name="list_open_string">List And Open String</string>
+  <string name="list_open_string_pair">List And Open String Pair</string>
+  <string name="list_open_bytes">List And Open Bytes</string>
+  <string name="list_open_bytes_pair">List And Open Bytes Pair</string>
+  <string name="list_open_save">List, Open And Save</string>
+  <string name="list_open_save_pair">List, Open And Save Pair</string>
+  <string name="list_open_bitmap">List Open Bitmap</string>
+  <string name="list_open_bitmap_pair">List Open Bitmap Pair</string>
+  <string name="list_open_fd">List And Open Fd</string>
+  <string name="list_open_fd_pair">List And Open Fd Pair</string>
+  <string name="list_open_non_asset_fd">List And Open Non Asset Fd</string>
+  <string name="list_open_non_asset_fd_pair">List And Open Non Asset Fd Pair</string>
+  <string name="list_open_xml_resource_parser">List And Open Xml Resource Parser</string>
+  <string name="list_open_xml_resource_parser_pair">List And Open Xml Resource Parser Pair</string>
 </resources>

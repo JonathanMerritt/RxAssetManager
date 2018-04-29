@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-package com.github.jonathanmerritt.rxassetmanager.common.extensions
+package com.github.jonathanmerritt.rxassetmanager.extensions
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
