@@ -81,6 +81,8 @@ buildscript {
   support.appcompat = "$grp.support:appcompat-v7:$ver.support"
   support.constraint = ["$grp.constraint:$mod.layout:$ver.constraint",
                         "$grp.constraint:$mod.layout-solver:$ver.constraint"]
+  support.design = "$grp.support:design:$ver.support"
+
   support.tests = ["$grp.test:runner:1.0.1", "$grp.test:rules:1.0.1", "$grp.support:$mod.annots:$ver.support"]
   support.espresso = "${grp.test}.espresso:espresso-core:3.0.1"
   dep.support = support

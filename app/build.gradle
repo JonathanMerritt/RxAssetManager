@@ -58,6 +58,7 @@ dependencies {
 
   implementation dep.support.appcompat
   implementation dep.support.constraint
+  implementation dep.support.design
 
   implementation dep.kotlin.stdlib
 

@@ -14,7 +14,7 @@
  *     limitations under the License.
  */
 
-package com.github.jonathanmerritt.rxassetmanager.common
+package com.github.jonathanmerritt.rxassetmanager
 
 const val ROOT = "/"
 const val MANI = "AndroidManifest.xml"
