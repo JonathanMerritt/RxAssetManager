@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
-import com.github.jonathanmerritt.rxassetmanager.extensions.TAG
 import kotlinx.android.synthetic.main.activity_main.pager
 import kotlinx.android.synthetic.main.activity_main.tablayout
 import kotlinx.android.synthetic.main.activity_main.toolbar
@@ -46,6 +45,6 @@ class MainActivity : AppCompatActivity() {
   class PagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
     override fun getCount(): Int = 2
     override fun getItem(position: Int): Fragment = if (position == 0) Core() else CoreExt()
-    override fun getPageTitle(position: Int): CharSequence? = getItem(position).TAG
+    override fun getPageTitle(position: Int): CharSequence? = if (position == 0) "Core" else "Core-Ext"
   }
 }
