@@ -40,7 +40,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   constructor(manager: AssetManager) : super(manager)
   constructor(context: Context) : super(context)
 
-  override fun openString(name: String, mode: Int): Maybe<String> = open(name, mode).map { it.readString() }
+  override fun openString(name: String, mode: Int): Maybe<String> = open(name, mode).map(InputStream::readString)
   override fun openStringPair(name: String, mode: Int): Maybe<Pair<String, String>> =
       open(name, mode).map { name to it.readString() }
 
@@ -55,7 +55,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       open(name, mode).map { name to (it save "$to/$name") }
 
   override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
-      open(name, mode).filter { name.isImage() }.map { it.readBitmap() }
+      open(name, mode).filter { name.isImage() }.map(InputStream::readBitmap)
 
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
       open(name, mode).filter { name.isImage() }.map { name to it.readBitmap() }
@@ -109,11 +109,11 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).flatMapSingle { openNonAssetFdPair(cookie, it) }
 
   override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
-      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParser(cookie, it) }
+      listFiles(name, all).filter(String::isXml).flatMapSingle { openXmlResourceParser(cookie, it) }
 
   override fun listOpenXmlResourceParserPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, XmlResourceParser>> =
-      listFiles(name, all).filter { it.isXml() }.flatMapSingle { openXmlResourceParserPair(cookie, it) }
+      listFiles(name, all).filter(String::isXml).flatMapSingle { openXmlResourceParserPair(cookie, it) }
 
 
   private fun listExpand(name: String, next: (String) -> Unit, error: (Throwable) -> Unit): Flowable<String> =
@@ -122,7 +122,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       }
 
   private fun listFiles(name: String, all: Boolean): Flowable<String> =
-      (if (all) listAll(name) else listPath(name)).filter { it.isFile() }
+      (if (all) listAll(name) else listPath(name)).filter(String::isFile)
 
   private fun listPath(name: String): Flowable<String> =
       list(name).map { if (name.isBlankOrPath()) it else "$name/$it" }

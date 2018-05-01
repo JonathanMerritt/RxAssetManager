@@ -21,14 +21,12 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
-import com.github.jonathanmerritt.rxassetmanager.RxAssetManagerFragment.Core
-import com.github.jonathanmerritt.rxassetmanager.RxAssetManagerFragment.CoreExt
 import com.github.jonathanmerritt.rxassetmanager.extensions.TAG
 import kotlinx.android.synthetic.main.activity_main.pager
 import kotlinx.android.synthetic.main.activity_main.tablayout
 import kotlinx.android.synthetic.main.activity_main.toolbar
 
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

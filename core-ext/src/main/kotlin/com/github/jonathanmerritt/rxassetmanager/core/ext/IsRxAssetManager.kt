@@ -20,7 +20,6 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
-import com.github.jonathanmerritt.rxassetmanager.core.ext.ListAllStrategy.Normal
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import java.io.File

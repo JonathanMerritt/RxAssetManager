@@ -24,7 +24,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
 
-internal fun <T> T.asObservable() = when(this) {
+internal fun <T> T.asObservable() = when (this) {
   is Completable -> toObservable()
   is Single<*> -> toObservable()
   is Maybe<*> -> toObservable()

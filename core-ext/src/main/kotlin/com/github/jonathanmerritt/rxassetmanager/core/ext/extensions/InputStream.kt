@@ -17,11 +17,12 @@
 package com.github.jonathanmerritt.rxassetmanager.core.ext.extensions
 
 import android.graphics.BitmapFactory
+import java.io.BufferedReader
 import java.io.File
 import java.io.InputStream
 
-internal fun InputStream.readString() = bufferedReader().use { it.readText() }
+internal fun InputStream.readString() = bufferedReader().use(BufferedReader::readText)
 internal infix fun InputStream.save(path: String) =
-    File(path).apply { parentFile.mkdirs().run { outputStream().use { (this@save::copyTo) } } }
+    File(path).apply { parentFile.mkdirs().run { outputStream().use { (::copyTo) } } }
 
 internal fun InputStream.readBitmap() = BitmapFactory.decodeStream(this)
