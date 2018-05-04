@@ -16,6 +16,8 @@
 
 <resources>
   <string name="app_name">RxAssetManager</string>
+  <string name="core">Core</string>
+  <string name="core_ext">Core-Ext</string>
 
   <string name="get_locales">Get Locals</string>
   <string name="open">Open</string>
@@ -27,7 +29,6 @@
   <string name="open_non_asset_fd_pair">Open Non Asset Fd Pair</string>
   <string name="open_xml_resource_parser">Open Xml Resource Parser</string>
   <string name="open_xml_resource_parser_pair">Open Xml Resource Parser Pair</string>
-
 
   <string name="open_string">Open String</string>
   <string name="open_string_pair">Open String Pair</string>

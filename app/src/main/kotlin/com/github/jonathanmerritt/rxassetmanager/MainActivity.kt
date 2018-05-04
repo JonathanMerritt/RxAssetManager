@@ -17,8 +17,6 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.pager
@@ -37,14 +35,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     pager.run {
-      adapter = PagerAdapter(supportFragmentManager)
+      adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
+        override fun getCount() = 2
+        override fun getItem(position: Int) = if (position == 0) CoreFragment() else CoreExtFragment()
+        override fun getPageTitle(position: Int) =
+            getString(if (position == 0) R.string.core else R.string.core_ext)
+      }
       tablayout.setupWithViewPager(this)
     }
-  }
-
-  class PagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
-    override fun getCount(): Int = 2
-    override fun getItem(position: Int): Fragment = if (position == 0) Core() else CoreExt()
-    override fun getPageTitle(position: Int): CharSequence? = if (position == 0) "Core" else "Core-Ext"
   }
 }
