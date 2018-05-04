@@ -43,7 +43,7 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
 
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
   override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
-      Single.fromCallable { manager.openNonAssetFd(name) }
+      Single.fromCallable { manager.openNonAssetFd(cookie, name) }
 
   override fun openNonAssetFdPair(cookie: Int, name: String): Single<Pair<String, AssetFileDescriptor>> =
       Single.fromCallable { name to manager.openNonAssetFd(cookie, name) }
