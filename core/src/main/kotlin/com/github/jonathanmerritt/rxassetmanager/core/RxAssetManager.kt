@@ -22,7 +22,7 @@ import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Single
+import io.reactivex.Maybe.fromCallable
 import io.reactivex.rxkotlin.toCompletable
 import io.reactivex.rxkotlin.toFlowable
 import java.io.InputStream
@@ -33,27 +33,25 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
 
   override fun getLocales() = manager.locales.toFlowable()
   override fun close() = manager::close.toCompletable()
-  override fun open(name: String, mode: Int): Maybe<InputStream> = Maybe.fromCallable { manager.open(name, mode) }
+  override fun open(name: String, mode: Int): Maybe<InputStream> = fromCallable { manager.open(name, mode) }
   override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
-      Maybe.fromCallable { name to manager.open(name, mode) }
+      fromCallable { name to manager.open(name, mode) }
 
-  override infix fun openFd(name: String): Single<AssetFileDescriptor> = Single.fromCallable {
-    manager.openFd(name)
-  }
+  override infix fun openFd(name: String): Maybe<AssetFileDescriptor> = fromCallable { manager.openFd(name) }
 
-  override infix fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> =
-      Single.fromCallable { name to manager.openFd(name) }
+  override infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> =
+      fromCallable { name to manager.openFd(name) }
 
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
-  override fun openNonAssetFd(cookie: Int, name: String): Single<AssetFileDescriptor> =
-      Single.fromCallable { manager.openNonAssetFd(cookie, name) }
+  override fun openNonAssetFd(cookie: Int, name: String): Maybe<AssetFileDescriptor> =
+      fromCallable { manager.openNonAssetFd(cookie, name) }
 
-  override fun openNonAssetFdPair(cookie: Int, name: String): Single<Pair<String, AssetFileDescriptor>> =
-      Single.fromCallable { name to manager.openNonAssetFd(cookie, name) }
+  override fun openNonAssetFdPair(cookie: Int, name: String): Maybe<Pair<String, AssetFileDescriptor>> =
+      fromCallable { name to manager.openNonAssetFd(cookie, name) }
 
-  override fun openXmlResourceParser(cookie: Int, name: String): Single<XmlResourceParser> =
-      Single.fromCallable { manager.openXmlResourceParser(cookie, name) }
+  override fun openXmlResourceParser(cookie: Int, name: String): Maybe<XmlResourceParser> =
+      fromCallable { manager.openXmlResourceParser(cookie, name) }
 
-  override fun openXmlResourceParserPair(cookie: Int, name: String): Single<Pair<String, XmlResourceParser>> =
-      Single.fromCallable { name to manager.openXmlResourceParser(cookie, name) }
+  override fun openXmlResourceParserPair(cookie: Int, name: String): Maybe<Pair<String, XmlResourceParser>> =
+      fromCallable { name to manager.openXmlResourceParser(cookie, name) }
 }

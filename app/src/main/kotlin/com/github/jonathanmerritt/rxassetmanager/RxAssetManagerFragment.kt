@@ -28,7 +28,6 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
-import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -62,7 +61,6 @@ abstract class RxAssetManagerFragment(
       val tag = this@RxAssetManagerFragment.javaClass.simpleName
       return when (this) {
         is Completable -> toObservable()
-        is Single<*> -> toObservable()
         is Maybe<*> -> toObservable()
         is Flowable<*> -> toObservable()
         else -> Observable.never()

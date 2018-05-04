@@ -21,6 +21,7 @@ import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
 import io.reactivex.Flowable
+import io.reactivex.Flowable.empty
 import io.reactivex.Maybe
 import java.io.File
 import java.io.InputStream
@@ -37,51 +38,50 @@ interface IsRxAssetManager : isRxAssetManager {
 
   fun openBitmap(name: String, mode: Int = ACCESS_STREAMING): Maybe<Bitmap> = Maybe.empty()
   fun openBitmapPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
-  fun listAll(name: String = "", strategy: ListAllStrategy = Normal()): Flowable<String> = Flowable.empty()
+  fun listAll(name: String = "", strategy: ListAllStrategy = Normal()): Flowable<String> = empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
-      Flowable.empty()
+      empty()
 
   fun listOpenPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
-      Flowable<Pair<String, InputStream>> = Flowable.empty()
+      Flowable<Pair<String, InputStream>> = empty()
 
   fun listOpenString(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<String> =
-      Flowable.empty()
+      empty()
 
   fun listOpenStringPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
-      Flowable<Pair<String, String>> = Flowable.empty()
+      Flowable<Pair<String, String>> = empty()
 
   fun listOpenBytes(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray> =
-      Flowable.empty()
+      empty()
 
   fun listOpenBytesPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
-      Flowable<Pair<String, ByteArray>> = Flowable.empty()
+      Flowable<Pair<String, ByteArray>> = empty()
 
   fun listOpenSave(name: String = "", mode: Int = ACCESS_STREAMING, to: String,
-      all: Boolean = false): Flowable<File> = Flowable.empty()
+      all: Boolean = false): Flowable<File> = empty()
 
   fun listOpenSavePair(name: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false):
-      Flowable<Pair<String, File>> = Flowable.empty()
+      Flowable<Pair<String, File>> = empty()
 
   fun listOpenBitmap(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<Bitmap> =
-      Flowable.empty()
+      empty()
 
   fun listOpenBitmapPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
-      Flowable<Pair<String, Bitmap>> = Flowable.empty()
+      Flowable<Pair<String, Bitmap>> = empty()
 
-  fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = Flowable.empty()
+  fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = empty()
   fun listOpenFdPair(name: String = "", all: Boolean = false): Flowable<Pair<String, AssetFileDescriptor>> =
-      Flowable.empty()
+      empty()
 
   fun listOpenNonAssetFd(cookie: Int = 0, name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> =
-      Flowable.empty()
+      empty()
 
   fun listOpenNonAssetFdPair(cookie: Int = 0, name: String = "", all: Boolean = false):
-      Flowable<Pair<String, AssetFileDescriptor>> = Flowable.empty()
+      Flowable<Pair<String, AssetFileDescriptor>> = empty()
 
-  fun listOpenXmlResourceParser(cookie: Int = 0, name: String = "",
-      all: Boolean = false): Flowable<XmlResourceParser> =
-      Flowable.empty()
+  fun listOpenXmlResourceParser(cookie: Int = 0, name: String = "", all: Boolean = false):
+      Flowable<XmlResourceParser> = empty()
 
   fun listOpenXmlResourceParserPair(cookie: Int = 0, name: String = "", all: Boolean = false):
-      Flowable<Pair<String, XmlResourceParser>> = Flowable.empty()
+      Flowable<Pair<String, XmlResourceParser>> = empty()
 }

@@ -20,22 +20,22 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import io.reactivex.Completable
+import io.reactivex.Completable.complete
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Single
+import io.reactivex.Maybe.empty
 import java.io.InputStream
 
 interface IsRxAssetManager {
   fun getLocales(): Flowable<String> = Flowable.empty()
-  fun close(): Completable = Completable.complete()
-  fun open(name: String, mode: Int = ACCESS_STREAMING): Maybe<InputStream> = Maybe.empty()
-  fun openPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = Maybe.empty()
-  infix fun openFd(name: String): Single<AssetFileDescriptor> = Single.never()
-  infix fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> = Single.never()
+  fun close(): Completable = complete()
+  fun open(name: String, mode: Int = ACCESS_STREAMING): Maybe<InputStream> = empty()
+  fun openPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = empty()
+  infix fun openFd(name: String): Maybe<AssetFileDescriptor> = empty()
+  infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()
   fun list(name: String = ""): Flowable<String> = Flowable.empty()
-  fun openNonAssetFd(cookie: Int = 0, name: String): Single<AssetFileDescriptor> = Single.never()
-  fun openNonAssetFdPair(cookie: Int = 0, name: String): Single<Pair<String, AssetFileDescriptor>> = Single.never()
-  fun openXmlResourceParser(cookie: Int = 0, name: String): Single<XmlResourceParser> = Single.never()
-  fun openXmlResourceParserPair(cookie: Int = 0, name: String): Single<Pair<String, XmlResourceParser>> =
-      Single.never()
+  fun openNonAssetFd(cookie: Int = 0, name: String): Maybe<AssetFileDescriptor> = empty()
+  fun openNonAssetFdPair(cookie: Int = 0, name: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()
+  fun openXmlResourceParser(cookie: Int = 0, name: String): Maybe<XmlResourceParser> = empty()
+  fun openXmlResourceParserPair(cookie: Int = 0, name: String): Maybe<Pair<String, XmlResourceParser>> = empty()
 }

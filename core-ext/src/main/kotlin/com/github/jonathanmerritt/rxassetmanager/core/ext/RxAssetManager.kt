@@ -96,24 +96,24 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).flatMapMaybe { openBitmapPair(it, mode) }
 
   override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      listFiles(name, all).flatMapSingle(::openFd)
+      listFiles(name, all).flatMapMaybe(::openFd)
 
   override fun listOpenFdPair(name: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
-      listFiles(name, all).flatMapSingle(::openFdPair)
+      listFiles(name, all).flatMapMaybe(::openFdPair)
 
   override fun listOpenNonAssetFd(cookie: Int, name: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      listFiles(name, all).flatMapSingle { openNonAssetFd(cookie, it) }
+      listFiles(name, all).flatMapMaybe { openNonAssetFd(cookie, it) }
 
   override fun listOpenNonAssetFdPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, AssetFileDescriptor>> =
-      listFiles(name, all).flatMapSingle { openNonAssetFdPair(cookie, it) }
+      listFiles(name, all).flatMapMaybe { openNonAssetFdPair(cookie, it) }
 
   override fun listOpenXmlResourceParser(cookie: Int, name: String, all: Boolean): Flowable<XmlResourceParser> =
-      listFiles(name, all).filter(String::isXml).flatMapSingle { openXmlResourceParser(cookie, it) }
+      listFiles(name, all).filter(String::isXml).flatMapMaybe { openXmlResourceParser(cookie, it) }
 
   override fun listOpenXmlResourceParserPair(cookie: Int, name: String, all: Boolean):
       Flowable<Pair<String, XmlResourceParser>> =
-      listFiles(name, all).filter(String::isXml).flatMapSingle { openXmlResourceParserPair(cookie, it) }
+      listFiles(name, all).filter(String::isXml).flatMapMaybe { openXmlResourceParserPair(cookie, it) }
 
 
   private fun listExpand(name: String, next: (String) -> Unit, error: (Throwable) -> Unit): Flowable<String> =
