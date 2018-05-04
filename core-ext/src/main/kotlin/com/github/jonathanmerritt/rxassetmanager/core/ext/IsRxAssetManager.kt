@@ -27,7 +27,6 @@ import java.io.InputStream
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager as isRxAssetManager
 
 interface IsRxAssetManager : isRxAssetManager {
-
   fun openString(name: String, mode: Int = ACCESS_STREAMING): Maybe<String> = Maybe.empty()
   fun openStringPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, String>> = Maybe.empty()
   fun openBytes(name: String, mode: Int = ACCESS_STREAMING): Maybe<ByteArray> = Maybe.empty()

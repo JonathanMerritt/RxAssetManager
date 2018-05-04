@@ -37,8 +37,11 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
   override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
       Maybe.fromCallable { name to manager.open(name, mode) }
 
-  override fun openFd(name: String): Single<AssetFileDescriptor> = Single.fromCallable { manager.openFd(name) }
-  override fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> =
+  override infix fun openFd(name: String): Single<AssetFileDescriptor> = Single.fromCallable {
+    manager.openFd(name)
+  }
+
+  override infix fun openFdPair(name: String): Single<Pair<String, AssetFileDescriptor>> =
       Single.fromCallable { name to manager.openFd(name) }
 
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()

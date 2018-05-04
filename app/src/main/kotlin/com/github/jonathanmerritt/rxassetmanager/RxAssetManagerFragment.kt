@@ -31,6 +31,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.rxkotlin.subscribeBy
 import io.reactivex.schedulers.Schedulers
@@ -72,86 +73,65 @@ import kotlinx.android.synthetic.main.fragment_core_ext.openStringPair
 
 
 const val ROOT = "/"
-const val MANI = "AndroidManifest.xml"
+const val MANIFEST = "AndroidManifest.xml"
 const val FOLDER = "folder"
 const val FILE = "folder/file.txt"
 const val ICON = "folder/icon.png"
 const val FILE1 = "folder/folder1/file1.txt"
 const val FILE2 = "folder/folder1/folder2/file2.txt"
 
-class Core : RxAssetManagerFragment(R.layout.fragment_core, { manager ->
-  getLocals subscribe manager.getLocales()
-
-  open subscribe manager.open(FILE)
-  openPair subscribe manager.openPair(FILE)
-
-  openFd subscribe manager.openFd(FILE1)
-  openFdPair subscribe manager.openFdPair(FILE1)
-
-  list subscribe manager.list()
-
-  openNonAssetFd subscribe manager.openNonAssetFd(name = MANI)
-  openNonAssetFdPair subscribe manager.openNonAssetFdPair(name = MANI)
-
-  openXmlResParser subscribe manager.openXmlResourceParser(name = MANI)
-  openXmlResParserPair subscribe manager.openXmlResourceParserPair(name = MANI)
+class Core : RxAssetManagerFragment(R.layout.fragment_core, {
+  getLocals click { it.getLocales().subscribe }
+  open click { it.open(FILE).subscribe }
+  openPair click { it.openPair(FILE).subscribe }
+  openFd click { (it openFd FILE1).subscribe }
+  openFdPair click { (it openFdPair FILE1).subscribe }
+  list click { it.list().subscribe }
+  openNonAssetFd click { it.openNonAssetFd(name = MANIFEST).subscribe }
+  openNonAssetFdPair click { it.openNonAssetFdPair(name = MANIFEST).subscribe }
+  openXmlResParser click { it.openXmlResourceParser(name = MANIFEST).subscribe }
+  openXmlResParserPair click { it.openXmlResourceParserPair(name = MANIFEST).subscribe }
 })
 
-class CoreExt : RxAssetManagerFragment(R.layout.fragment_core_ext, { manager ->
-  openString subscribe manager.openString(FILE)
-  openStringPair subscribe manager.openStringPair(FILE)
-
-  openBytes subscribe manager.openBytes(FILE1)
-  openBytesPair subscribe manager.openBytesPair(FILE1)
-
-  openSave subscribe manager.openSave(FILE2, to = context!!.cacheDir.path)
-  openSavePair subscribe manager.openSavePair(FILE2, to = context!!.cacheDir.path)
-
-  openBitmap subscribe manager.openBitmap(ICON)
-  openBitmapPair subscribe manager.openBitmapPair(ICON)
-
-  listAll subscribe manager.listAll()
-
-  listOpen subscribe manager.listOpen(FOLDER, all = true)
-  listOpenPair subscribe manager.listOpenPair(FOLDER, all = true)
-
-  listOpenString subscribe manager.listOpenString(FOLDER, all = true)
-  listOpenStringPair subscribe manager.listOpenStringPair(FOLDER, all = true)
-
-  listOpenBytes subscribe manager.listOpenBytes(FOLDER, all = true)
-  listOpenBytesPair subscribe manager.listOpenBytesPair(FOLDER, all = true)
-
-  listOpenSave subscribe manager.listOpenSave(FOLDER, to = context!!.cacheDir.path, all = true)
-  listOpenSavePair subscribe manager.listOpenSavePair(FOLDER, to = context!!.cacheDir.path, all = true)
-
-  listOpenBitmap subscribe manager.listOpenBitmap(FOLDER, all = true)
-  listOpenBitmapPair subscribe manager.listOpenBitmapPair(FOLDER, all = true)
-
-  listOpenFd subscribe manager.listOpenFd(FOLDER, all = true)
-  listOpenFdPair subscribe manager.listOpenFdPair(FOLDER, all = true)
-
-  listOpenNonAssetFd subscribe manager.listOpenNonAssetFd(name = ROOT)
-  listOpenNonAssetFdPair subscribe manager.listOpenNonAssetFdPair(name = ROOT)
-
-  listOpenXmlResourceParser subscribe manager.listOpenXmlResourceParser(name = ROOT, all = true)
-  listOpenXmlResourceParserPair subscribe manager.listOpenXmlResourceParserPair(name = ROOT, all = true)
+class CoreExt : RxAssetManagerFragment(R.layout.fragment_core_ext, {
+  openString click { it.openString(FILE).subscribe }
+  openStringPair click { it.openStringPair(FILE).subscribe }
+  openBytes click { it.openBytes(FILE1).subscribe }
+  openBytesPair click { it.openBytesPair(FILE1).subscribe }
+  openSave click { it.openSave(FILE2, to = context!!.cacheDir.path).subscribe }
+  openSavePair click { it.openSavePair(FILE2, to = context!!.cacheDir.path).subscribe }
+  openBitmap click { it.openBitmap(ICON).subscribe }
+  openBitmapPair click { it.openBitmapPair(ICON).subscribe }
+  listAll click { it.listAll().subscribe }
+  listOpen click { it.listOpen(FOLDER, all = true).subscribe }
+  listOpenPair click { it.listOpenPair(FOLDER, all = true).subscribe }
+  listOpenString click { it.listOpenString(FOLDER, all = true).subscribe }
+  listOpenStringPair click { it.listOpenStringPair(FOLDER, all = true).subscribe }
+  listOpenBytes click { it.listOpenBytes(FOLDER, all = true).subscribe }
+  listOpenBytesPair click { it.listOpenBytesPair(FOLDER, all = true).subscribe }
+  listOpenSave click { it.listOpenSave(FOLDER, to = context!!.cacheDir.path, all = true).subscribe }
+  listOpenSavePair click { it.listOpenSavePair(FOLDER, to = context!!.cacheDir.path, all = true).subscribe }
+  listOpenBitmap click { it.listOpenBitmap(FOLDER, all = true).subscribe }
+  listOpenBitmapPair click { it.listOpenBitmapPair(FOLDER, all = true).subscribe }
+  listOpenFd click { it.listOpenFd(FOLDER, all = true).subscribe }
+  listOpenFdPair click { it.listOpenFdPair(FOLDER, all = true).subscribe }
+  listOpenNonAssetFd click { it.listOpenNonAssetFd(name = ROOT).subscribe }
+  listOpenNonAssetFdPair click { it.listOpenNonAssetFdPair(name = ROOT).subscribe }
+  listOpenXmlResourceParser click { it.listOpenXmlResourceParser(name = ROOT, all = true).subscribe }
+  listOpenXmlResourceParserPair click { it.listOpenXmlResourceParserPair(name = ROOT, all = true).subscribe }
 })
 
 sealed class RxAssetManagerFragment(
     private val layout: Int,
     private val created: RxAssetManagerFragment.(IsRxAssetManager) -> Unit,
-    private val disposables: CompositeDisposable = CompositeDisposable()) : Fragment() {
+    private val disposables: CompositeDisposable = CompositeDisposable(),
+    private var manager: IsRxAssetManager = object : IsRxAssetManager {}) : Fragment() {
 
-  companion object {
-    val TAG: String = this::class.java.simpleName
-  }
-
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(layout, container, false)
-  }
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+      inflater.inflate(layout, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    created.invoke(this, RxAssetManager(context!!))
+    manager = RxAssetManager(context!!).also { created(this, it) }
     super.onViewCreated(view, savedInstanceState)
   }
 
@@ -160,20 +140,24 @@ sealed class RxAssetManagerFragment(
     super.onStop()
   }
 
-  infix fun <T> View.subscribe(t: T) = setOnClickListener {
-    when (t) {
-      is Completable -> t.toObservable()
-      is Single<*> -> t.toObservable()
-      is Maybe<*> -> t.toObservable()
-      is Flowable<*> -> t.toObservable()
-      else -> Observable.never()
+  inline infix fun View.click(crossinline then: () -> Unit) = setOnClickListener { then() }
+
+  val <T> T.subscribe: Disposable
+    get() {
+      val tag = this@RxAssetManagerFragment.javaClass.simpleName
+      return when (this) {
+        is Completable -> toObservable()
+        is Single<*> -> toObservable()
+        is Maybe<*> -> toObservable()
+        is Flowable<*> -> toObservable()
+        else -> Observable.never()
+      }
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribeBy(
+              { Log.e(tag, it.message, it) },
+              { Log.i(tag, "complete()") },
+              { Log.i(tag, "next($it)") })
+          .addTo(disposables)
     }
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribeBy(
-            { Log.e(TAG, it.message, it) },
-            { Log.i(TAG, "complete()") },
-            { Log.i(TAG, "next($it)") }
-        ).addTo(disposables)
-  }
 }
