@@ -55,10 +55,10 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       open(name, mode).map { name to (it save "$to/$name") }
 
   override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
-      open(name, mode).filter { name.isImage() }.map(InputStream::readBitmap)
+      open(name, mode).map(InputStream::readBitmap)
 
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
-      open(name, mode).filter { name.isImage() }.map { name to it.readBitmap() }
+      open(name, mode).map { name to it.readBitmap() }
 
   override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
       Flowable.create<String>({
@@ -90,10 +90,10 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).flatMapMaybe { openSavePair(it, mode, to) }
 
   override fun listOpenBitmap(name: String, mode: Int, all: Boolean): Flowable<Bitmap> =
-      listFiles(name, all).flatMapMaybe { openBitmap(it, mode) }
+      listFiles(name, all).filter(String::isImage).flatMapMaybe { openBitmap(it, mode) }
 
   override fun listOpenBitmapPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, Bitmap>> =
-      listFiles(name, all).flatMapMaybe { openBitmapPair(it, mode) }
+      listFiles(name, all).filter(String::isImage).flatMapMaybe { openBitmapPair(it, mode) }
 
   override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
       listFiles(name, all).flatMapMaybe(::openFd)
