@@ -21,6 +21,7 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.graphics.Typeface.createFromAsset
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isBlankOrPath
@@ -28,13 +29,11 @@ import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFont
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readBitmap
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readString
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.save
 import io.reactivex.BackpressureStrategy.BUFFER
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Maybe.fromCallable
+import java.io.BufferedReader
 import java.io.File
 import java.io.InputStream
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager as rxAssetManager
@@ -44,21 +43,28 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   constructor(manager: AssetManager) : super(manager)
   constructor(context: Context) : super(context)
 
-  override fun openString(name: String, mode: Int): Maybe<String> = open(name, mode).map(InputStream::readString)
+  override fun openString(name: String, mode: Int): Maybe<String> =
+      open(name, mode).map { it.bufferedReader().use(BufferedReader::readText) }
+
   override fun openStringPair(name: String, mode: Int): Maybe<Pair<String, String>> =
       openString(name, mode).map { name to it }
 
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
+
   override fun openBytesPair(name: String, mode: Int): Maybe<Pair<String, ByteArray>> =
       openBytes(name, mode).map { name to it }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
-      open(name, mode).map { it save "$to/$name" }
+      open(name, mode).map { i ->
+        File("$to/$name").apply { parentFile.mkdirs().run { outputStream().use { (i::copyTo) } } }
+      }
 
   override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
       openSave(name, mode, to).map { name to it }
 
-  override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> = open(name, mode).map(InputStream::readBitmap)
+  override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
+      open(name, mode).map(BitmapFactory::decodeStream)
+
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
       openBitmap(name, mode).map { name to it }
 
