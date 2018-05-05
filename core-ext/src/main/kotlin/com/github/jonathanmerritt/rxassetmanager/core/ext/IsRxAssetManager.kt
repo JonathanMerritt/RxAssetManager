@@ -20,6 +20,7 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
+import android.graphics.Typeface
 import io.reactivex.Flowable
 import io.reactivex.Flowable.empty
 import io.reactivex.Maybe
@@ -38,6 +39,8 @@ interface IsRxAssetManager : isRxAssetManager {
 
   fun openBitmap(name: String, mode: Int = ACCESS_STREAMING): Maybe<Bitmap> = Maybe.empty()
   fun openBitmapPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
+  infix fun openFont(name: String): Maybe<Typeface> = Maybe.empty()
+  infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = Maybe.empty()
   fun listAll(name: String = "", strategy: ListAllStrategy = Normal()): Flowable<String> = empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
       empty()
@@ -68,6 +71,12 @@ interface IsRxAssetManager : isRxAssetManager {
 
   fun listOpenBitmapPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
       Flowable<Pair<String, Bitmap>> = empty()
+
+  fun listOpenFont(name: String = "", all: Boolean = false): Flowable<Typeface> =
+      empty()
+
+  fun listOpenFontPair(name: String = "", all: Boolean = false):
+      Flowable<Pair<String, Typeface>> = empty()
 
   fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = empty()
   fun listOpenFdPair(name: String = "", all: Boolean = false): Flowable<Pair<String, AssetFileDescriptor>> =

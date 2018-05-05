@@ -27,7 +27,7 @@ import io.reactivex.rxkotlin.toCompletable
 import io.reactivex.rxkotlin.toFlowable
 import java.io.InputStream
 
-open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager {
+open class RxAssetManager(protected val manager: AssetManager) : IsRxAssetManager {
 
   constructor(context: Context) : this(context.assets)
 

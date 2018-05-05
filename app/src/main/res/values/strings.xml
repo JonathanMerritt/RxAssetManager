@@ -38,6 +38,8 @@
   <string name="open_save_pair">Open And Save Pair</string>
   <string name="open_bitmap">Open Bitmap</string>
   <string name="open_bitmap_pair">Open Bitmap Pair</string>
+  <string name="open_font">Open Font</string>
+  <string name="open_font_pair">Open Font Pair</string>
   <string name="list_all">List All</string>
   <string name="list_open">List And Open</string>
   <string name="list_open_pair">List And Open Pair</string>
@@ -49,6 +51,8 @@
   <string name="list_open_save_pair">List, Open And Save Pair</string>
   <string name="list_open_bitmap">List Open Bitmap</string>
   <string name="list_open_bitmap_pair">List Open Bitmap Pair</string>
+  <string name="list_open_font">List Open Font</string>
+  <string name="list_open_font_pair">List Open Font Pair</string>
   <string name="list_open_fd">List And Open Fd</string>
   <string name="list_open_fd_pair">List And Open Fd Pair</string>
   <string name="list_open_non_asset_fd">List And Open Non Asset Fd</string>

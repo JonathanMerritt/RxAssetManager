@@ -24,6 +24,8 @@ import kotlinx.android.synthetic.main.fragment_core_ext.listOpenBytes
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenBytesPair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFd
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFdPair
+import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFont
+import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFontPair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenNonAssetFd
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenNonAssetFdPair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenPair
@@ -37,6 +39,8 @@ import kotlinx.android.synthetic.main.fragment_core_ext.openBitmap
 import kotlinx.android.synthetic.main.fragment_core_ext.openBitmapPair
 import kotlinx.android.synthetic.main.fragment_core_ext.openBytes
 import kotlinx.android.synthetic.main.fragment_core_ext.openBytesPair
+import kotlinx.android.synthetic.main.fragment_core_ext.openFont
+import kotlinx.android.synthetic.main.fragment_core_ext.openFontPair
 import kotlinx.android.synthetic.main.fragment_core_ext.openSave
 import kotlinx.android.synthetic.main.fragment_core_ext.openSavePair
 import kotlinx.android.synthetic.main.fragment_core_ext.openString
@@ -55,6 +59,9 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
   openBitmap click { it.openBitmap(ICON).subscribe }
   openBitmapPair click { it.openBitmapPair(ICON).subscribe }
 
+  openFont click { (it openFont FONT).subscribe }
+  openFontPair click { (it openFontPair FONT1).subscribe }
+
   listAll click { it.listAll().subscribe }
 
   listOpen click { it.listOpen(FOLDER, all = true).subscribe }
@@ -71,6 +78,9 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
 
   listOpenBitmap click { it.listOpenBitmap(FOLDER, all = true).subscribe }
   listOpenBitmapPair click { it.listOpenBitmapPair(FOLDER, all = true).subscribe }
+
+  listOpenFont click { it.listOpenFont(FOLDER, all = true).subscribe }
+  listOpenFontPair click { it.listOpenFontPair(FOLDER, all = true).subscribe }
 
   listOpenFd click { it.listOpenFd(FOLDER, all = true).subscribe }
   listOpenFdPair click { it.listOpenFdPair(FOLDER, all = true).subscribe }

@@ -21,8 +21,11 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
+import android.graphics.Typeface
+import android.graphics.Typeface.createFromAsset
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isBlankOrPath
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFont
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.readBitmap
@@ -31,6 +34,7 @@ import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.save
 import io.reactivex.BackpressureStrategy.BUFFER
 import io.reactivex.Flowable
 import io.reactivex.Maybe
+import io.reactivex.Maybe.fromCallable
 import java.io.File
 import java.io.InputStream
 import com.github.jonathanmerritt.rxassetmanager.core.RxAssetManager as rxAssetManager
@@ -42,24 +46,24 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
 
   override fun openString(name: String, mode: Int): Maybe<String> = open(name, mode).map(InputStream::readString)
   override fun openStringPair(name: String, mode: Int): Maybe<Pair<String, String>> =
-      open(name, mode).map { name to it.readString() }
+      openString(name, mode).map { name to it }
 
   override fun openBytes(name: String, mode: Int): Maybe<ByteArray> = open(name, mode).map { it.readBytes() }
   override fun openBytesPair(name: String, mode: Int): Maybe<Pair<String, ByteArray>> =
-      open(name, mode).map { name to it.readBytes() }
+      openBytes(name, mode).map { name to it }
 
   override fun openSave(name: String, mode: Int, to: String): Maybe<File> =
       open(name, mode).map { it save "$to/$name" }
 
   override fun openSavePair(name: String, mode: Int, to: String): Maybe<Pair<String, File>> =
-      open(name, mode).map { name to (it save "$to/$name") }
+      openSave(name, mode, to).map { name to it }
 
-  override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> =
-      open(name, mode).map(InputStream::readBitmap)
-
+  override fun openBitmap(name: String, mode: Int): Maybe<Bitmap> = open(name, mode).map(InputStream::readBitmap)
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
-      open(name, mode).map { name to it.readBitmap() }
+      openBitmap(name, mode).map { name to it }
 
+  override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
+  override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
   override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
       Flowable.create<String>({
         it.setDisposable(listExpand(name, it::onNext, it::onError).doOnComplete(it::onComplete).subscribe())
@@ -94,6 +98,12 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
 
   override fun listOpenBitmapPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, Bitmap>> =
       listFiles(name, all).filter(String::isImage).flatMapMaybe { openBitmapPair(it, mode) }
+
+  override fun listOpenFont(name: String, all: Boolean): Flowable<Typeface> =
+      listFiles(name, all).filter(String::isFont).flatMapMaybe(::openFont)
+
+  override fun listOpenFontPair(name: String, all: Boolean): Flowable<Pair<String, Typeface>> =
+      listFiles(name, all).filter(String::isFont).flatMapMaybe(::openFontPair)
 
   override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
       listFiles(name, all).flatMapMaybe(::openFd)
