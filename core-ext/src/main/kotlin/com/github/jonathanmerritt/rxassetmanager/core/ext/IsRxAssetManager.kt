@@ -41,7 +41,7 @@ interface IsRxAssetManager : isRxAssetManager {
   fun openBitmapPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
   infix fun openFont(name: String): Maybe<Typeface> = Maybe.empty()
   infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = Maybe.empty()
-  fun listAll(name: String = "", strategy: ListAllStrategy = Normal()): Flowable<String> = empty()
+  fun listAll(name: String = ""): Flowable<String> = empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
       empty()
 
@@ -60,8 +60,8 @@ interface IsRxAssetManager : isRxAssetManager {
   fun listOpenBytesPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
       Flowable<Pair<String, ByteArray>> = empty()
 
-  fun listOpenSave(name: String = "", mode: Int = ACCESS_STREAMING, to: String,
-      all: Boolean = false): Flowable<File> = empty()
+  fun listOpenSave(name: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false):
+      Flowable<File> = empty()
 
   fun listOpenSavePair(name: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false):
       Flowable<Pair<String, File>> = empty()
@@ -72,12 +72,8 @@ interface IsRxAssetManager : isRxAssetManager {
   fun listOpenBitmapPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
       Flowable<Pair<String, Bitmap>> = empty()
 
-  fun listOpenFont(name: String = "", all: Boolean = false): Flowable<Typeface> =
-      empty()
-
-  fun listOpenFontPair(name: String = "", all: Boolean = false):
-      Flowable<Pair<String, Typeface>> = empty()
-
+  fun listOpenFont(name: String = "", all: Boolean = false): Flowable<Typeface> = empty()
+  fun listOpenFontPair(name: String = "", all: Boolean = false): Flowable<Pair<String, Typeface>> = empty()
   fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = empty()
   fun listOpenFdPair(name: String = "", all: Boolean = false): Flowable<Pair<String, AssetFileDescriptor>> =
       empty()

@@ -58,6 +58,8 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   api project(':core')
 
+  implementation dep.rxJava2Extensions
+
   implementation dep.kotlin.stdlib
 
   implementation dep.rxjava2

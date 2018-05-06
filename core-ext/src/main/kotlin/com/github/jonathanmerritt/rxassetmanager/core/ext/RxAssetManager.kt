@@ -24,12 +24,12 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.graphics.Typeface.createFromAsset
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isBlankOrPath
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFont
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
-import io.reactivex.BackpressureStrategy.BUFFER
+import hu.akarnokd.rxjava2.operators.ExpandStrategy.BREADTH_FIRST
+import hu.akarnokd.rxjava2.operators.FlowableTransformers.expand
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Maybe.fromCallable
@@ -70,10 +70,8 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
 
   override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
   override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
-  override fun listAll(name: String, strategy: ListAllStrategy): Flowable<String> =
-      Flowable.create<String>({
-        it.setDisposable(listExpand(name, it::onNext, it::onError).doOnComplete(it::onComplete).subscribe())
-      }, BUFFER).sorted(strategy::compare)
+  override fun listAll(name: String): Flowable<String> = listPath(name).compose(expand({
+    if (it.isFile()) Flowable.empty() else listPath(it) }, BREADTH_FIRST))
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
@@ -131,15 +129,9 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       Flowable<Pair<String, XmlResourceParser>> =
       listFiles(name, all).filter(String::isXml).flatMapMaybe { openXmlResourceParserPair(cookie, it) }
 
-
-  private fun listExpand(name: String, next: (String) -> Unit, error: (Throwable) -> Unit): Flowable<String> =
-      listPath(name).doOnNext(next).doOnError(error).flatMap {
-        if (it.isFile()) Flowable.empty() else listExpand(it, next, error)
-      }
-
   private fun listFiles(name: String, all: Boolean): Flowable<String> =
       (if (all) listAll(name) else listPath(name)).filter(String::isFile)
 
   private fun listPath(name: String): Flowable<String> =
-      list(name).map { if (name.isBlankOrPath()) it else "$name/$it" }
+      list(name).map { if (name.isBlank() || name == "/") it else "$name/$it" }
 }
