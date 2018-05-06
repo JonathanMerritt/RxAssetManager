@@ -24,13 +24,13 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.graphics.Typeface.createFromAsset
+import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.depth
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFont
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
-import hu.akarnokd.rxjava2.operators.ExpandStrategy.BREADTH_FIRST
-import hu.akarnokd.rxjava2.operators.FlowableTransformers.expand
 import io.reactivex.Flowable
+import io.reactivex.Flowable.just
 import io.reactivex.Maybe
 import io.reactivex.Maybe.fromCallable
 import java.io.BufferedReader
@@ -70,8 +70,14 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
 
   override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
   override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
-  override fun listAll(name: String): Flowable<String> = listPath(name).compose(expand({
-    if (it.isFile()) Flowable.empty() else listPath(it) }, BREADTH_FIRST))
+  override fun listAll(name: String): Flowable<String> =
+      listPath(name).flatMap { if (it.isFile()) just(it) else listAll(it) }.sorted { s, s1 ->
+        when {
+          s.depth == s1.depth -> 1
+          s.depth < s1.depth -> -1
+          else -> 0
+        }
+      }
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
