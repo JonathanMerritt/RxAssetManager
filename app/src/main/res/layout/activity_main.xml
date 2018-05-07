@@ -40,7 +40,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="fill"
+        app:tabGravity="center"
         app:tabMode="fixed"
         />
 
@@ -50,6 +50,7 @@
       android:id="@+id/pager"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:layout_marginTop="100dp"
       />
 
 </android.support.design.widget.CoordinatorLayout>
