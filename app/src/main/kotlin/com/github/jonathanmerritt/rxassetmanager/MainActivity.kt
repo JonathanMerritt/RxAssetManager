@@ -28,20 +28,13 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
-
-    toolbar.run {
-      title = getString(R.string.app_name)
-      setSupportActionBar(this)
-    }
-
-    pager.run {
+    setSupportActionBar(toolbar.apply { title = getString(R.string.app_name) })
+    tablayout.setupWithViewPager(pager.apply {
       adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
         override fun getCount() = 2
-        override fun getItem(position: Int) = if (position == 0) CoreFragment() else CoreExtFragment()
-        override fun getPageTitle(position: Int) =
-            getString(if (position == 0) R.string.core else R.string.core_ext)
+        override fun getItem(i: Int) = if (i == 0) CoreFragment() else CoreExtFragment()
+        override fun getPageTitle(i: Int) = getString(if (i == 0) R.string.core else R.string.core_ext)
       }
-      tablayout.setupWithViewPager(this)
-    }
+    })
   }
 }
