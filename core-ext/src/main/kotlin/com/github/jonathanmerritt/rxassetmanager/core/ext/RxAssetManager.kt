@@ -24,7 +24,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
 import android.graphics.Typeface.createFromAsset
-import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.depth
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFont
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
@@ -70,14 +69,8 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
 
   override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
   override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
-  override fun listAll(name: String): Flowable<String> =
-      listPath(name).flatMap { if (it.isFile()) just(it) else listAll(it) }.sorted { s, s1 ->
-        when {
-          s.depth == s1.depth -> 1
-          s.depth < s1.depth -> -1
-          else -> 0
-        }
-      }
+  override fun listAll(name: String, sorting: Sorting): Flowable<String> =
+      listPath(name).flatMap { if (it.isFile()) just(it) else listAll(it, sorting) }.sorted(sorting::compare)
 
   override fun listOpen(name: String, mode: Int, all: Boolean): Flowable<InputStream> =
       listFiles(name, all).flatMapMaybe { open(it, mode) }
@@ -136,7 +129,7 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(name, all).filter(String::isXml).flatMapMaybe { openXmlResourceParserPair(cookie, it) }
 
   private fun listFiles(name: String, all: Boolean): Flowable<String> =
-      (if (all) listAll(name) else listPath(name)).filter(String::isFile)
+      (if (all) listAll(name, Depth) else listPath(name)).filter(String::isFile)
 
   private fun listPath(name: String): Flowable<String> =
       list(name).map { if (name.isBlank() || name == "/") it else "$name/$it" }

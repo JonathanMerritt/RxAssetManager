@@ -41,7 +41,7 @@ interface IsRxAssetManager : isRxAssetManager {
   fun openBitmapPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
   infix fun openFont(name: String): Maybe<Typeface> = Maybe.empty()
   infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = Maybe.empty()
-  fun listAll(name: String = ""): Flowable<String> = empty()
+  fun listAll(name: String = "", sorting: Sorting = Normal): Flowable<String> = empty()
   fun listOpen(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
       empty()
 

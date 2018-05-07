@@ -16,6 +16,7 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
+import com.github.jonathanmerritt.rxassetmanager.core.ext.Depth
 import kotlinx.android.synthetic.main.fragment_core_ext.listAll
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpen
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenBitmap
@@ -62,7 +63,7 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
   openFont click { (it openFont FONT).subscribe }
   openFontPair click { (it openFontPair FONT1).subscribe }
 
-  listAll click { it.listAll().subscribe }
+  listAll click { it.listAll(sorting = Depth).subscribe }
 
   listOpen click { it.listOpen(FOLDER, all = true).subscribe }
   listOpenPair click { it.listOpenPair(FOLDER, all = true).subscribe }
