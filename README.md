@@ -1,14 +1,13 @@
-<img src="https://raw.githubusercontent.com/JonathanMerritt/RxAssetManager/master/app/src/main/ic_launcher-web.png" width="156" align="left"/>
+![logo](./app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
 
-# Rx AssetManager
 [![BINTRAY][BINTRAY-SVG]][BINTRAY]
 [![MAVEN-CENTRAL][MAVEN-CENTRAL-SVG]][MAVEN-CENTRAL]
 [![TRAVIS-CI][TRAVIS-CI-SVG]][TRAVIS-CI]
 [![ANDROID-ARSENAL][ANDROID-ARSENAL-SVG]][ANDROID-ARSENAL]
 
-**An RxJava2 implementation of the Android AssetManager.**
+## What is RxAssetManager?
 
-#
+**An RxJava2 implementation of the Android AssetManager.**
 
 Inspired by the blog post [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
 
@@ -33,16 +32,16 @@ _Any help or contribution is welcome._
 ## Usage
 This example will either open or list and open any files as InputStreams.
 
-_Check the sample apps for more detailed examples._
+_Check the sample app for more detailed examples._
 
 #### Core
 ```kotlin
-val open = RxAssetManager(context).open("Asset").subscribe {  }
+RxAssetManager(context).open("assets/file.txt").subscribe {  }
 ```
 
 #### Core-Ext
 ```kotlin
-val listOpen = RxAssetManager(context).listOpen("Assets").subscribe {  }
+RxAssetManager(context).listOpen("assets/folder").subscribe {  }
 ```
 
 ## TODO
@@ -50,8 +49,7 @@ val listOpen = RxAssetManager(context).listOpen("Assets").subscribe {  }
 - Add tests.
 - ...
 
-## License
-[Apache-2.0][LICENSE]
+## [Apache-2.0][LICENSE]
 
     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
 
