@@ -18,22 +18,22 @@ package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
+import android.support.v7.app.AlertDialog.Builder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast.LENGTH_LONG
+import android.widget.Toast.makeText
 import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.schedulers.Schedulers.io
 
 abstract class RxAssetManagerFragment(
     private val layout: Int,
@@ -54,20 +54,21 @@ abstract class RxAssetManagerFragment(
     super.onStop()
   }
 
-  inline infix fun View.click(crossinline then: () -> Unit) = setOnClickListener { then() }
+  infix fun View.click(disposable: () -> Disposable) = setOnClickListener { disposables.add(disposable()) }
 
   val <T> T.subscribe: Disposable
-    get() {
-      val tag = this@RxAssetManagerFragment.javaClass.simpleName
-      return when (this) {
-        is Completable -> toObservable()
-        is Maybe<*> -> toObservable()
-        is Flowable<*> -> toObservable()
-        else -> Observable.never()
-      }
-          .subscribeOn(Schedulers.io())
-          .observeOn(AndroidSchedulers.mainThread())
-          .subscribeBy({ Log.e(tag, it.message, it) }, { Log.i(tag, "complete()") }, { Log.i(tag, "next($it)") })
-          .addTo(disposables)
+    get() = when (this) {
+      is Completable -> toObservable()
+      is Maybe<*> -> toObservable()
+      is Flowable<*> -> toObservable()
+      else -> Observable.never()
     }
+        .map(Any::toString)
+        .toList()
+        .subscribeOn(io())
+        .observeOn(mainThread())
+        .subscribe(
+            { Builder(context!!).setItems(it.toTypedArray(), { d, _ -> d.dismiss() }).show() },
+            { makeText(context, it.message, LENGTH_LONG).show() }
+        )
 }
