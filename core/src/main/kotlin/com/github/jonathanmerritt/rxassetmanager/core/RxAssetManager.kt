@@ -21,7 +21,6 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import android.graphics.Typeface
-import android.graphics.Typeface.createFromAsset
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Maybe.fromCallable
@@ -39,13 +38,17 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
   override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
       fromCallable { name to manager.open(name, mode) }
 
+  override infix fun openTypeface(name: String): Maybe<Typeface> = fromCallable {
+    Typeface.createFromAsset(manager, name)
+  }
+  override infix fun openTypefacePair(name: String): Maybe<Pair<String, Typeface>> =
+      openTypeface(name).map { name to it }
+
   override infix fun openFd(name: String): Maybe<AssetFileDescriptor> = fromCallable { manager.openFd(name) }
 
   override infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> =
       fromCallable { name to manager.openFd(name) }
 
-  override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
-  override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
   override fun openNonAssetFd(cookie: Int, name: String): Maybe<AssetFileDescriptor> =
       fromCallable { manager.openNonAssetFd(cookie, name) }

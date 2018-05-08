@@ -71,8 +71,8 @@ interface IsRxAssetManager : isRxAssetManager {
   fun listOpenBitmapPair(name: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
       Flowable<Pair<String, Bitmap>> = empty()
 
-  fun listOpenFont(name: String = "", all: Boolean = false): Flowable<Typeface> = empty()
-  fun listOpenFontPair(name: String = "", all: Boolean = false): Flowable<Pair<String, Typeface>> = empty()
+  fun listOpenTypeface(name: String = "", all: Boolean = false): Flowable<Typeface> = empty()
+  fun listOpenTypefacePair(name: String = "", all: Boolean = false): Flowable<Pair<String, Typeface>> = empty()
   fun listOpenFd(name: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = empty()
   fun listOpenFdPair(name: String = "", all: Boolean = false): Flowable<Pair<String, AssetFileDescriptor>> =
       empty()

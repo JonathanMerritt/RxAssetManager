@@ -25,8 +25,6 @@ import kotlinx.android.synthetic.main.fragment_core_ext.listOpenBytes
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenBytesPair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFd
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFdPair
-import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFont
-import kotlinx.android.synthetic.main.fragment_core_ext.listOpenFontPair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenNonAssetFd
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenNonAssetFdPair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenPair
@@ -34,6 +32,8 @@ import kotlinx.android.synthetic.main.fragment_core_ext.listOpenSave
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenSavePair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenString
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenStringPair
+import kotlinx.android.synthetic.main.fragment_core_ext.listOpenTypeface
+import kotlinx.android.synthetic.main.fragment_core_ext.listOpenTypefacePair
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenXmlResourceParser
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenXmlResourceParserPair
 import kotlinx.android.synthetic.main.fragment_core_ext.openBitmap
@@ -75,8 +75,8 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
   listOpenBitmap click { it.listOpenBitmap(FOLDER, all = true).subscribe }
   listOpenBitmapPair click { it.listOpenBitmapPair(FOLDER, all = true).subscribe }
 
-  listOpenFont click { it.listOpenFont(FOLDER, all = true).subscribe }
-  listOpenFontPair click { it.listOpenFontPair(FOLDER, all = true).subscribe }
+  listOpenTypeface click { it.listOpenTypeface(FOLDER, all = true).subscribe }
+  listOpenTypefacePair click { it.listOpenTypefacePair(FOLDER, all = true).subscribe }
 
   listOpenFd click { it.listOpenFd(FOLDER, all = true).subscribe }
   listOpenFdPair click { it.listOpenFdPair(FOLDER, all = true).subscribe }

@@ -236,7 +236,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/list_open_bitmap"
-        app:layout_constraintBottom_toTopOf="@+id/listOpenFont"
+        app:layout_constraintBottom_toTopOf="@+id/listOpenTypeface"
         app:layout_constraintEnd_toStartOf="@+id/listOpenBitmapPair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listOpenSave"
@@ -256,26 +256,26 @@
         />
 
     <Button
-        android:id="@+id/listOpenFont"
+        android:id="@+id/listOpenTypeface"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/list_open_font"
+        android:text="@string/list_open_typeface"
         app:layout_constraintBottom_toTopOf="@+id/listOpenFd"
-        app:layout_constraintEnd_toStartOf="@+id/listOpenFontPair"
+        app:layout_constraintEnd_toStartOf="@+id/listOpenTypefacePair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listOpenBitmap"
         style="@style/Button"
         />
 
     <Button
-        android:id="@+id/listOpenFontPair"
+        android:id="@+id/listOpenTypefacePair"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/list_open_font_pair"
-        app:layout_constraintBottom_toBottomOf="@+id/listOpenFont"
+        android:text="@string/list_open_typeface_pair"
+        app:layout_constraintBottom_toBottomOf="@+id/listOpenTypeface"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/listOpenFont"
-        app:layout_constraintTop_toTopOf="@+id/listOpenFont"
+        app:layout_constraintStart_toEndOf="@+id/listOpenTypeface"
+        app:layout_constraintTop_toTopOf="@+id/listOpenTypeface"
         style="@style/Button"
         />
 
@@ -287,7 +287,7 @@
         app:layout_constraintBottom_toTopOf="@+id/listOpenNonAssetFd"
         app:layout_constraintEnd_toStartOf="@+id/listOpenFdPair"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listOpenFont"
+        app:layout_constraintTop_toBottomOf="@+id/listOpenTypeface"
         style="@style/Button"
         />
 

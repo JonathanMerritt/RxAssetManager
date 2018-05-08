@@ -98,11 +98,11 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun listOpenBitmapPair(name: String, mode: Int, all: Boolean): Flowable<Pair<String, Bitmap>> =
       listFiles(name, all).filter(String::isImage).flatMapMaybe { openBitmapPair(it, mode) }
 
-  override fun listOpenFont(name: String, all: Boolean): Flowable<Typeface> =
-      listFiles(name, all).filter(String::isFont).flatMapMaybe(::openFont)
+  override fun listOpenTypeface(name: String, all: Boolean): Flowable<Typeface> =
+      listFiles(name, all).filter(String::isFont).flatMapMaybe(::openTypeface)
 
-  override fun listOpenFontPair(name: String, all: Boolean): Flowable<Pair<String, Typeface>> =
-      listFiles(name, all).filter(String::isFont).flatMapMaybe(::openFontPair)
+  override fun listOpenTypefacePair(name: String, all: Boolean): Flowable<Pair<String, Typeface>> =
+      listFiles(name, all).filter(String::isFont).flatMapMaybe(::openTypefacePair)
 
   override fun listOpenFd(name: String, all: Boolean): Flowable<AssetFileDescriptor> =
       listFiles(name, all).flatMapMaybe(::openFd)
