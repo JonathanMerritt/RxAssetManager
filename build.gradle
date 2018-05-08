@@ -94,7 +94,7 @@ buildscript {
   dep.kotlin = kotlin
 
   // reactivex rxjava2
-  dep.rxjava2 = ["$grp.rxjava2:rxjava:2.1.7", "$grp.rxjava2:rxandroid:2.0.1", "$grp.rxjava2:rxkotlin:2.2.0"]
+  dep.rxjava2 = ["$grp.rxjava2:rxjava:2.1.7", "$grp.rxjava2:rxandroid:2.0.1"]
   ext.dep = dep
 
 

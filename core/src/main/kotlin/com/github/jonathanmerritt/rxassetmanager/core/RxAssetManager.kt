@@ -21,35 +21,34 @@ import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
 import android.graphics.Typeface
+import android.graphics.Typeface.createFromAsset
+import io.reactivex.Completable
+import io.reactivex.Completable.fromAction
 import io.reactivex.Flowable
+import io.reactivex.Flowable.fromIterable
 import io.reactivex.Maybe
 import io.reactivex.Maybe.fromCallable
-import io.reactivex.rxkotlin.toCompletable
-import io.reactivex.rxkotlin.toFlowable
 import java.io.InputStream
 
 open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager {
 
   constructor(context: Context) : this(context.assets)
 
-  override fun getLocales() = manager.locales.toFlowable()
-  override fun close() = manager::close.toCompletable()
+  override fun getLocales(): Flowable<String> = fromIterable(manager.locales.asIterable())
+  override fun close(): Completable = fromAction(manager::close)
   override fun open(name: String, mode: Int): Maybe<InputStream> = fromCallable { manager.open(name, mode) }
   override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
       fromCallable { name to manager.open(name, mode) }
 
-  override infix fun openTypeface(name: String): Maybe<Typeface> = fromCallable {
-    Typeface.createFromAsset(manager, name)
-  }
+  override infix fun openTypeface(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
   override infix fun openTypefacePair(name: String): Maybe<Pair<String, Typeface>> =
       openTypeface(name).map { name to it }
 
   override infix fun openFd(name: String): Maybe<AssetFileDescriptor> = fromCallable { manager.openFd(name) }
-
   override infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> =
       fromCallable { name to manager.openFd(name) }
 
-  override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
+  override fun list(name: String): Flowable<String> = fromIterable(manager.list(name).asIterable())
   override fun openNonAssetFd(cookie: Int, name: String): Maybe<AssetFileDescriptor> =
       fromCallable { manager.openNonAssetFd(cookie, name) }
 
