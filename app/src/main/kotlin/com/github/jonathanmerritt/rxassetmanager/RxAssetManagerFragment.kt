@@ -29,24 +29,22 @@ import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Maybe
-import io.reactivex.Observable
+import io.reactivex.Observable.never
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers.io
 
 abstract class RxAssetManagerFragment(
     private val layout: Int,
-    private val created: RxAssetManagerFragment.(IsRxAssetManager) -> Unit,
-    private val disposables: CompositeDisposable = CompositeDisposable(),
-    private var manager: IsRxAssetManager = object : IsRxAssetManager {}) : Fragment() {
+    private val disposables: CompositeDisposable = CompositeDisposable()) : Fragment() {
+  abstract fun onCreated(manager: IsRxAssetManager)
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
       inflater.inflate(layout, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    manager = RxAssetManager(context!!).also { created(this, it) }
     super.onViewCreated(view, savedInstanceState)
+    onCreated(RxAssetManager(context!!))
   }
 
   override fun onStop() {
@@ -54,21 +52,18 @@ abstract class RxAssetManagerFragment(
     super.onStop()
   }
 
-  infix fun View.click(disposable: () -> Disposable) = setOnClickListener { disposables.add(disposable()) }
-
-  val <T> T.subscribe: Disposable
-    get() = when (this) {
-      is Completable -> toObservable()
-      is Maybe<*> -> toObservable()
-      is Flowable<*> -> toObservable()
-      else -> Observable.never()
-    }
-        .map(Any::toString)
-        .toList()
-        .subscribeOn(io())
-        .observeOn(mainThread())
-        .subscribe(
-            { Builder(context!!).setItems(it.toTypedArray(), { d, _ -> d.dismiss() }).show() },
-            { makeText(context, it.message, LENGTH_LONG).show() }
-        )
+  fun <T> T.subscribed() = disposables.add(when (this) {
+    is Completable -> toObservable()
+    is Maybe<*> -> toObservable()
+    is Flowable<*> -> toObservable()
+    else -> never()
+  }
+      .map(Any::toString)
+      .toList()
+      .subscribeOn(io())
+      .observeOn(mainThread())
+      .subscribe(
+          { Builder(context!!).setItems(it.toTypedArray(), { d, _ -> d.dismiss() }).show() },
+          { makeText(context, it.message, LENGTH_LONG).show() }
+      ))
 }

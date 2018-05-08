@@ -17,6 +17,8 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import com.github.jonathanmerritt.rxassetmanager.core.ext.Depth
+import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
+import com.github.jonathanmerritt.rxassetmanager.extensions.click
 import kotlinx.android.synthetic.main.fragment_core_ext.listAll
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpen
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpenBitmap
@@ -45,45 +47,51 @@ import kotlinx.android.synthetic.main.fragment_core_ext.openSavePair
 import kotlinx.android.synthetic.main.fragment_core_ext.openString
 import kotlinx.android.synthetic.main.fragment_core_ext.openStringPair
 
-class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
-  openString click { it.openString(FILE).subscribe }
-  openStringPair click { it.openStringPair(FILE).subscribe }
+class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext) {
+  override fun onCreated(manager: IsRxAssetManager) {
+    openString click { manager.openString(FILE).subscribed() }
+    openStringPair click { manager.openStringPair(FILE).subscribed() }
 
-  openBytes click { it.openBytes(FILE1).subscribe }
-  openBytesPair click { it.openBytesPair(FILE1).subscribe }
+    openBytes click { manager.openBytes(FILE1).subscribed() }
+    openBytesPair click { manager.openBytesPair(FILE1).subscribed() }
 
-  openSave click { it.openSave(FILE2, to = context!!.cacheDir.path).subscribe }
-  openSavePair click { it.openSavePair(FILE2, to = context!!.cacheDir.path).subscribe }
+    openSave click { manager.openSave(FILE2, to = context!!.cacheDir.path).subscribed() }
+    openSavePair click { manager.openSavePair(FILE2, to = context!!.cacheDir.path).subscribed() }
 
-  openBitmap click { it.openBitmap(ICON).subscribe }
-  openBitmapPair click { it.openBitmapPair(ICON).subscribe }
+    openBitmap click { manager.openBitmap(ICON).subscribed() }
+    openBitmapPair click { manager.openBitmapPair(ICON).subscribed() }
 
-  listAll click { it.listAll(sorting = Depth).subscribe }
+    listAll click { manager.listAll(sorting = Depth).subscribed() }
 
-  listOpen click { it.listOpen(FOLDER, all = true).subscribe }
-  listOpenPair click { it.listOpenPair(FOLDER, all = true).subscribe }
+    listOpen click { manager.listOpen(FOLDER, all = true).subscribed() }
+    listOpenPair click { manager.listOpenPair(FOLDER, all = true).subscribed() }
 
-  listOpenString click { it.listOpenString(FOLDER, all = true).subscribe }
-  listOpenStringPair click { it.listOpenStringPair(FOLDER, all = true).subscribe }
+    listOpenString click { manager.listOpenString(FOLDER, all = true).subscribed() }
+    listOpenStringPair click { manager.listOpenStringPair(FOLDER, all = true).subscribed() }
 
-  listOpenBytes click { it.listOpenBytes(FOLDER, all = true).subscribe }
-  listOpenBytesPair click { it.listOpenBytesPair(FOLDER, all = true).subscribe }
+    listOpenBytes click { manager.listOpenBytes(FOLDER, all = true).subscribed() }
+    listOpenBytesPair click { manager.listOpenBytesPair(FOLDER, all = true).subscribed() }
 
-  listOpenSave click { it.listOpenSave(FOLDER, to = context!!.cacheDir.path, all = true).subscribe }
-  listOpenSavePair click { it.listOpenSavePair(FOLDER, to = context!!.cacheDir.path, all = true).subscribe }
+    listOpenSave click { manager.listOpenSave(FOLDER, to = context!!.cacheDir.path, all = true).subscribed() }
+    listOpenSavePair click {
+      manager.listOpenSavePair(FOLDER, to = context!!.cacheDir.path, all = true).subscribed()
+    }
 
-  listOpenBitmap click { it.listOpenBitmap(FOLDER, all = true).subscribe }
-  listOpenBitmapPair click { it.listOpenBitmapPair(FOLDER, all = true).subscribe }
+    listOpenBitmap click { manager.listOpenBitmap(FOLDER, all = true).subscribed() }
+    listOpenBitmapPair click { manager.listOpenBitmapPair(FOLDER, all = true).subscribed() }
 
-  listOpenTypeface click { it.listOpenTypeface(FOLDER, all = true).subscribe }
-  listOpenTypefacePair click { it.listOpenTypefacePair(FOLDER, all = true).subscribe }
+    listOpenTypeface click { manager.listOpenTypeface(FOLDER, all = true).subscribed() }
+    listOpenTypefacePair click { manager.listOpenTypefacePair(FOLDER, all = true).subscribed() }
 
-  listOpenFd click { it.listOpenFd(FOLDER, all = true).subscribe }
-  listOpenFdPair click { it.listOpenFdPair(FOLDER, all = true).subscribe }
+    listOpenFd click { manager.listOpenFd(FOLDER, all = true).subscribed() }
+    listOpenFdPair click { manager.listOpenFdPair(FOLDER, all = true).subscribed() }
 
-  listOpenNonAssetFd click { it.listOpenNonAssetFd(name = ROOT).subscribe }
-  listOpenNonAssetFdPair click { it.listOpenNonAssetFdPair(name = ROOT).subscribe }
+    listOpenNonAssetFd click { manager.listOpenNonAssetFd(name = ROOT).subscribed() }
+    listOpenNonAssetFdPair click { manager.listOpenNonAssetFdPair(name = ROOT).subscribed() }
 
-  listOpenXmlResourceParser click { it.listOpenXmlResourceParser(name = ROOT, all = true).subscribe }
-  listOpenXmlResourceParserPair click { it.listOpenXmlResourceParserPair(name = ROOT, all = true).subscribe }
-})
+    listOpenXmlResourceParser click { manager.listOpenXmlResourceParser(name = ROOT, all = true).subscribed() }
+    listOpenXmlResourceParserPair click {
+      manager.listOpenXmlResourceParserPair(name = ROOT, all = true).subscribed()
+    }
+  }
+}
