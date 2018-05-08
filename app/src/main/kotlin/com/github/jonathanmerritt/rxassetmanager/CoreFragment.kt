@@ -26,6 +26,8 @@ import kotlinx.android.synthetic.main.fragment_core.openNonAssetFdPair
 import kotlinx.android.synthetic.main.fragment_core.openPair
 import kotlinx.android.synthetic.main.fragment_core.openXmlResParser
 import kotlinx.android.synthetic.main.fragment_core.openXmlResParserPair
+import kotlinx.android.synthetic.main.fragment_core.openFont
+import kotlinx.android.synthetic.main.fragment_core.openFontPair
 
 class CoreFragment : RxAssetManagerFragment(R.layout.fragment_core, {
   getLocals click { it.getLocales().subscribe }
@@ -35,6 +37,9 @@ class CoreFragment : RxAssetManagerFragment(R.layout.fragment_core, {
 
   openFd click { (it openFd FILE1).subscribe }
   openFdPair click { (it openFdPair FILE1).subscribe }
+
+  openFont click { (it openFont FONT).subscribe }
+  openFontPair click { (it openFontPair FONT1).subscribe }
 
   list click { it.list().subscribe }
 

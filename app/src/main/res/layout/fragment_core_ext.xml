@@ -104,7 +104,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/open_bitmap"
-        app:layout_constraintBottom_toTopOf="@+id/openFont"
+        app:layout_constraintBottom_toTopOf="@+id/listAll"
         app:layout_constraintEnd_toStartOf="@+id/openBitmapPair"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/openSave"
@@ -124,30 +124,6 @@
         />
 
     <Button
-        android:id="@+id/openFont"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_font"
-        app:layout_constraintBottom_toTopOf="@+id/listAll"
-        app:layout_constraintEnd_toStartOf="@+id/openFontPair"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openBitmap"
-        style="@style/Button"
-        />
-
-    <Button
-        android:id="@+id/openFontPair"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/open_font_pair"
-        app:layout_constraintBottom_toBottomOf="@+id/openFont"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/openFont"
-        app:layout_constraintTop_toTopOf="@+id/openFont"
-        style="@style/Button"
-        />
-
-    <Button
         android:id="@+id/listAll"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -155,7 +131,7 @@
         app:layout_constraintBottom_toTopOf="@+id/listOpen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/openFont"
+        app:layout_constraintTop_toBottomOf="@+id/openBitmap"
         style="@style/Button"
         />
 

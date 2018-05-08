@@ -20,6 +20,8 @@ import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager
 import android.content.res.XmlResourceParser
+import android.graphics.Typeface
+import android.graphics.Typeface.createFromAsset
 import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Maybe.fromCallable
@@ -27,7 +29,7 @@ import io.reactivex.rxkotlin.toCompletable
 import io.reactivex.rxkotlin.toFlowable
 import java.io.InputStream
 
-open class RxAssetManager(protected val manager: AssetManager) : IsRxAssetManager {
+open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager {
 
   constructor(context: Context) : this(context.assets)
 
@@ -42,6 +44,8 @@ open class RxAssetManager(protected val manager: AssetManager) : IsRxAssetManage
   override infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> =
       fromCallable { name to manager.openFd(name) }
 
+  override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
+  override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
   override fun list(name: String): Flowable<String> = manager.list(name).toFlowable()
   override fun openNonAssetFd(cookie: Int, name: String): Maybe<AssetFileDescriptor> =
       fromCallable { manager.openNonAssetFd(cookie, name) }

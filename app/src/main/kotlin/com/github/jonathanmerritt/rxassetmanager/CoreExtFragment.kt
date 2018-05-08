@@ -40,8 +40,6 @@ import kotlinx.android.synthetic.main.fragment_core_ext.openBitmap
 import kotlinx.android.synthetic.main.fragment_core_ext.openBitmapPair
 import kotlinx.android.synthetic.main.fragment_core_ext.openBytes
 import kotlinx.android.synthetic.main.fragment_core_ext.openBytesPair
-import kotlinx.android.synthetic.main.fragment_core_ext.openFont
-import kotlinx.android.synthetic.main.fragment_core_ext.openFontPair
 import kotlinx.android.synthetic.main.fragment_core_ext.openSave
 import kotlinx.android.synthetic.main.fragment_core_ext.openSavePair
 import kotlinx.android.synthetic.main.fragment_core_ext.openString
@@ -59,9 +57,6 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
 
   openBitmap click { it.openBitmap(ICON).subscribe }
   openBitmapPair click { it.openBitmapPair(ICON).subscribe }
-
-  openFont click { (it openFont FONT).subscribe }
-  openFontPair click { (it openFontPair FONT1).subscribe }
 
   listAll click { it.listAll(sorting = Depth).subscribe }
 

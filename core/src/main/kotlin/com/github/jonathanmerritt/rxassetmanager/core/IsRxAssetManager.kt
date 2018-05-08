@@ -19,6 +19,7 @@ package com.github.jonathanmerritt.rxassetmanager.core
 import android.content.res.AssetFileDescriptor
 import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
+import android.graphics.Typeface
 import io.reactivex.Completable
 import io.reactivex.Completable.complete
 import io.reactivex.Flowable
@@ -33,6 +34,8 @@ interface IsRxAssetManager {
   fun openPair(name: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = empty()
   infix fun openFd(name: String): Maybe<AssetFileDescriptor> = empty()
   infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()
+  infix fun openFont(name: String): Maybe<Typeface> = Maybe.empty()
+  infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = Maybe.empty()
   fun list(name: String = ""): Flowable<String> = Flowable.empty()
   fun openNonAssetFd(cookie: Int = 0, name: String): Maybe<AssetFileDescriptor> = empty()
   fun openNonAssetFdPair(cookie: Int = 0, name: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()

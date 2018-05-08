@@ -23,7 +23,6 @@ import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Typeface
-import android.graphics.Typeface.createFromAsset
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFile
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isFont
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isImage
@@ -31,7 +30,6 @@ import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.isXml
 import io.reactivex.Flowable
 import io.reactivex.Flowable.just
 import io.reactivex.Maybe
-import io.reactivex.Maybe.fromCallable
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStream
@@ -67,8 +65,6 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
   override fun openBitmapPair(name: String, mode: Int): Maybe<Pair<String, Bitmap>> =
       openBitmap(name, mode).map { name to it }
 
-  override infix fun openFont(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
-  override infix fun openFontPair(name: String): Maybe<Pair<String, Typeface>> = openFont(name).map { name to it }
   override fun listAll(name: String, sorting: Sorting): Flowable<String> =
       listPath(name).flatMap { if (it.isFile()) just(it) else listAll(it, sorting) }.sorted(sorting::compare)
 
