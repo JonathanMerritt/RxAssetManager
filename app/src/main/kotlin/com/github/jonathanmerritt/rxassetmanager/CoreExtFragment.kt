@@ -83,9 +83,9 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
   listOpenFd click { it.listOpenFd(FOLDER, all = true).subscribed() }
   listOpenFdPair click { it.listOpenFdPair(FOLDER, all = true).subscribed() }
 
-  listOpenNonAssetFd click { it.listOpenNonAssetFd(name = ROOT).subscribed() }
-  listOpenNonAssetFdPair click { it.listOpenNonAssetFdPair(name = ROOT).subscribed() }
+  listOpenNonAssetFd click { it.listOpenNonAssetFd(path = ROOT).subscribed() }
+  listOpenNonAssetFdPair click { it.listOpenNonAssetFdPair(path = ROOT).subscribed() }
 
-  listOpenXmlResourceParser click { it.listOpenXmlResourceParser(name = ROOT, all = true).subscribed() }
-  listOpenXmlResourceParserPair click { it.listOpenXmlResourceParserPair(name = ROOT, all = true).subscribed() }
+  listOpenXmlResourceParser click { it.listOpenXmlResourceParser(path = ROOT, all = true).subscribed() }
+  listOpenXmlResourceParserPair click { it.listOpenXmlResourceParserPair(path = ROOT, all = true).subscribed() }
 })

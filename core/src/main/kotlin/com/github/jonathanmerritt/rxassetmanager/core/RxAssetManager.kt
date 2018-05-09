@@ -60,91 +60,91 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
 
   /**
    * Opens an asset file.
-   * @param name the assets file path.
+   * @param path the assets file path.
    * @param mode the access mode for the file.
    * @return an input stream maybe.
    */
-  override fun open(name: String, mode: Int): Maybe<InputStream> = fromCallable { manager.open(name, mode) }
+  override fun open(path: String, mode: Int): Maybe<InputStream> = fromCallable { manager.open(path, mode) }
 
   /**
    * Opens an asset file.
-   * @param name the assets file path.
+   * @param path the assets file path.
    * @param mode the access mode for the file.
    * @return a string input stream pair maybe.
    */
-  override fun openPair(name: String, mode: Int): Maybe<Pair<String, InputStream>> =
-      fromCallable { name to manager.open(name, mode) }
+  override fun openPair(path: String, mode: Int): Maybe<Pair<String, InputStream>> =
+      fromCallable { path to manager.open(path, mode) }
 
   /**
    * Opens an asset font.
-   * @param name the assets file path.
+   * @param path the assets file path.
    * @return a typeface maybe.
    */
-  override infix fun openTypeface(name: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, name) }
+  override infix fun openTypeface(path: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, path) }
 
   /**
    * Opens an asset font.
-   * @param name the assets file path.
+   * @param path the assets file path.
    * @return a string typeface pair maybe.
    */
-  override infix fun openTypefacePair(name: String): Maybe<Pair<String, Typeface>> =
-      openTypeface(name).map { name to it }
+  override infix fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> =
+      openTypeface(path).map { path to it }
 
   /**
    * Opens an asset file.
-   * @param name the assets file path.
+   * @param path the assets file path.
    * @return an asset file descriptor maybe.
    */
-  override infix fun openFd(name: String): Maybe<AssetFileDescriptor> = fromCallable { manager.openFd(name) }
+  override infix fun openFd(path: String): Maybe<AssetFileDescriptor> = fromCallable { manager.openFd(path) }
 
   /**
    * Opens an asset file.
-   * @param name the assets file path.
+   * @param path the assets file path.
    * @return a string asset file descriptor pair maybe.
    */
-  override infix fun openFdPair(name: String): Maybe<Pair<String, AssetFileDescriptor>> =
-      fromCallable { name to manager.openFd(name) }
+  override infix fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> =
+      fromCallable { path to manager.openFd(path) }
 
   /**
    * Lists asset files.
-   * @param name the assets folder path.
+   * @param path the assets folder path.
    * @return a string flowable.
    */
-  override fun list(name: String): Flowable<String> = fromIterable(manager.list(name).asIterable())
+  override fun list(path: String): Flowable<String> = fromIterable(manager.list(path).asIterable())
 
   /**
    * Opens a non asset file.
    * @param cookie cookie for the non assets file.
-   * @param name the non assets file path.
+   * @param path the non assets file path.
    * @return an asset file descriptor maybe.
    */
-  override fun openNonAssetFd(cookie: Int, name: String): Maybe<AssetFileDescriptor> =
-      fromCallable { manager.openNonAssetFd(cookie, name) }
+  override fun openNonAssetFd(cookie: Int, path: String): Maybe<AssetFileDescriptor> =
+      fromCallable { manager.openNonAssetFd(cookie, path) }
 
   /**
    * Opens a non asset file.
    * @param cookie cookie for the non assets file.
-   * @param name the non assets file path.
+   * @param path the non assets file path.
    * @return a string asset file descriptor pair maybe.
    */
-  override fun openNonAssetFdPair(cookie: Int, name: String): Maybe<Pair<String, AssetFileDescriptor>> =
-      fromCallable { name to manager.openNonAssetFd(cookie, name) }
+  override fun openNonAssetFdPair(cookie: Int, path: String): Maybe<Pair<String, AssetFileDescriptor>> =
+      fromCallable { path to manager.openNonAssetFd(cookie, path) }
 
   /**
    * Opens a xml file.
    * @param cookie cookie for the xml file.
-   * @param name the xml file path.
+   * @param path the xml file path.
    * @return an xml resource parser maybe.
    */
-  override fun openXmlResourceParser(cookie: Int, name: String): Maybe<XmlResourceParser> =
-      fromCallable { manager.openXmlResourceParser(cookie, name) }
+  override fun openXmlResourceParser(cookie: Int, path: String): Maybe<XmlResourceParser> =
+      fromCallable { manager.openXmlResourceParser(cookie, path) }
 
   /**
    * Opens a xml file.
    * @param cookie cookie for the xml file.
-   * @param name the xml file path.
+   * @param path the xml file path.
    * @return a string xml resource parser pair maybe.
    */
-  override fun openXmlResourceParserPair(cookie: Int, name: String): Maybe<Pair<String, XmlResourceParser>> =
-      fromCallable { name to manager.openXmlResourceParser(cookie, name) }
+  override fun openXmlResourceParserPair(cookie: Int, path: String): Maybe<Pair<String, XmlResourceParser>> =
+      fromCallable { path to manager.openXmlResourceParser(cookie, path) }
 }

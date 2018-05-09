@@ -44,9 +44,9 @@ class CoreFragment : RxAssetManagerFragment(R.layout.fragment_core, {
 
   list click { it.list().subscribed() }
 
-  openNonAssetFd click { it.openNonAssetFd(name = MANIFEST).subscribed() }
-  openNonAssetFdPair click { it.openNonAssetFdPair(name = MANIFEST).subscribed() }
+  openNonAssetFd click { it.openNonAssetFd(path = MANIFEST).subscribed() }
+  openNonAssetFdPair click { it.openNonAssetFdPair(path = MANIFEST).subscribed() }
 
-  openXmlResParser click { it.openXmlResourceParser(name = MANIFEST).subscribed() }
-  openXmlResParserPair click { it.openXmlResourceParserPair(name = MANIFEST).subscribed() }
+  openXmlResParser click { it.openXmlResourceParser(path = MANIFEST).subscribed() }
+  openXmlResParserPair click { it.openXmlResourceParserPair(path = MANIFEST).subscribed() }
 })
