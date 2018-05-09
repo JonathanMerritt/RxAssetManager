@@ -24,13 +24,13 @@ android {
 
   defaultConfig {
     minSdkVersion sdk.min
-    targetSdkVersion sdk.compile
+    targetSdkVersion sdk.target
     versionCode ver.code
     versionName ver.name
 
     applicationId rep.id
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -56,9 +56,11 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   implementation project(':core-ext')
 
-  implementation dep.support.appcompat
-  implementation dep.support.constraint
-  implementation dep.support.design
+  implementation dep.androidx.appcompat
+  implementation dep.androidx.viewpager
+  implementation dep.androidx.coordinator
+  implementation dep.androidx.material
+  implementation dep.androidx.constraint
 
   implementation dep.kotlin.stdlib
 
@@ -66,9 +68,6 @@ dependencies {
 
   testImplementation dep.tests
   testImplementation dep.mockitoKotlin, { exclude group : grp.kotlin, module : mod.reflect }
-
-  androidTestImplementation dep.support.tests
-  androidTestImplementation dep.support.espresso, { exclude group : grp.support, module : mod.annots }
 
   testImplementation dep.kotlin.tests
 }

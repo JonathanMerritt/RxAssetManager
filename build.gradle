@@ -43,9 +43,10 @@ buildscript {
 
   /* SDKS */
   def sdk = [:]
-  sdk.compile = 27
+  sdk.compile = 'android-P'
+  sdk.target = 27
   sdk.min = 17
-  sdk.tools = '27.0.3'
+  sdk.tools = '28.0.0-rc2'
   ext.sdk = sdk
 
   /* DEPENDENCIES */
@@ -55,36 +56,35 @@ buildscript {
 
   // groups
   def grp = [:]
-  grp.support = 'com.android.support'
-  grp.constraint = "${grp.support}.constraint"
-  grp.test = "${grp.support}.test"
+  grp.constraint = 'androidx.constraintlayout'
   grp.kotlin = 'org.jetbrains.kotlin'
   grp.rxjava2 = 'io.reactivex.rxjava2'
   ext.grp = grp
 
   // modules
   def mod = [:]
-  mod.layout = 'constraint-layout'
-  mod.annots = 'support-annotations'
   mod.reflect = 'kotlin-reflect'
   ext.mod = mod
 
   // versions
   def ver = [:]
-  ver.support = '27.1.0'
+  ver.androidx = '1.0.0-alpha1'
+  ver.appcompat = ver.androidx
+  ver.viewpager = ver.androidx
+  ver.coordinator = ver.androidx
+  ver.material = ver.androidx
   ver.constraint = '1.1.0'
   ver.kotlin = '1.2.41'
 
-  // android support
-  def support = [:]
-  support.appcompat = "$grp.support:appcompat-v7:$ver.support"
-  support.constraint = ["$grp.constraint:$mod.layout:$ver.constraint",
-                        "$grp.constraint:$mod.layout-solver:$ver.constraint"]
-  support.design = "$grp.support:design:$ver.support"
-
-  support.tests = ["$grp.test:runner:1.0.1", "$grp.test:rules:1.0.1", "$grp.support:$mod.annots:$ver.support"]
-  support.espresso = "${grp.test}.espresso:espresso-core:3.0.1"
-  dep.support = support
+  // androidx
+  def androidx = [:]
+  androidx.appcompat = "androidx.appcompat:appcompat:$ver.appcompat"
+  androidx.viewpager = "androidx.viewpager:viewpager:$ver.viewpager"
+  androidx.coordinator = "androidx.coordinatorlayout:coordinatorlayout:$ver.coordinator"
+  androidx.material = "com.google.android.material:material:$ver.material"
+  androidx.constraint = ["$grp.constraint:constraintlayout:$ver.constraint",
+                         "$grp.constraint:constraintlayout-solver:$ver.constraint"]
+  dep.androidx = androidx
 
   // jetbrains kotlin
   def kotlin = [:]
@@ -105,7 +105,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.0-alpha13'
+    classpath 'com.android.tools.build:gradle:3.2.0-alpha14'
     classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
     classpath dep.kotlin.gradle

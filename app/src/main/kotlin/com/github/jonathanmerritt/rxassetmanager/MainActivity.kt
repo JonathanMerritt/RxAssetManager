@@ -17,8 +17,8 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
-import android.support.v4.app.FragmentStatePagerAdapter
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentStatePagerAdapter
 import kotlinx.android.synthetic.main.activity_main.pager
 import kotlinx.android.synthetic.main.activity_main.tablayout
 import kotlinx.android.synthetic.main.activity_main.toolbar

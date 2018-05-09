@@ -17,13 +17,13 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AlertDialog.Builder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
+import androidx.appcompat.app.AlertDialog.Builder
+import androidx.fragment.app.Fragment
 import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.ext.RxAssetManager
 import io.reactivex.Completable

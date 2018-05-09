@@ -23,11 +23,11 @@ android {
 
   defaultConfig {
     minSdkVersion sdk.min
-    targetSdkVersion sdk.compile
+    targetSdkVersion sdk.target
     versionCode ver.code
     versionName ver.name
 
-    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
   }
 
   buildTypes {
