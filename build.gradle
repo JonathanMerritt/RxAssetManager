@@ -56,10 +56,7 @@ buildscript {
 
   // groups
   def grp = [:]
-  grp.appcompat = 'androidx.appcompat'
   grp.constraint = 'androidx.constraintlayout'
-  grp.viewpager = 'androidx.viewpager'
-  grp.coordinator = 'androidx.coordinatorlayout'
   grp.kotlin = 'org.jetbrains.kotlin'
   grp.rxjava2 = 'io.reactivex.rxjava2'
   ext.grp = grp
@@ -81,9 +78,9 @@ buildscript {
 
   // androidx
   def androidx = [:]
-  androidx.appcompat = "$grp.appcompat:appcompat:$ver.appcompat"
-  androidx.viewpager = "$grp.viewpager:viewpager:$ver.viewpager"
-  androidx.coordinator = "$grp.coordinator:coordinatorlayout:$ver.coordinator"
+  androidx.appcompat = "androidx.appcompat:appcompat:$ver.appcompat"
+  androidx.viewpager = "androidx.viewpager:viewpager:$ver.viewpager"
+  androidx.coordinator = "androidx.coordinatorlayout:coordinatorlayout:$ver.coordinator"
   androidx.material = "com.google.android.material:material:$ver.material"
   androidx.constraint = ["$grp.constraint:constraintlayout:$ver.constraint",
                          "$grp.constraint:constraintlayout-solver:$ver.constraint"]
