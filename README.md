@@ -1,4 +1,4 @@
-![logo](./app/src/main/res/mipmap-xxxhdpi/ic_launcher.png)
+ <img align="center" width="512" height="192" src="./promo/banner.png">
 
 [![BINTRAY][BINTRAY-SVG]][BINTRAY]
 [![MAVEN-CENTRAL][MAVEN-CENTRAL-SVG]][MAVEN-CENTRAL]
@@ -20,7 +20,6 @@ You can use the `jcenter()` or `mavenCentral()` repository.
     mavenCentral()
   }
 ```
-####
 
 Then pick a module.
 ##### CORE:
@@ -54,7 +53,6 @@ manager.open("file.txt").subscribe {  }
 
 ## What does it *DO*?
 _soon_
-####
 
 ## TODO
 - Add javadoc.
