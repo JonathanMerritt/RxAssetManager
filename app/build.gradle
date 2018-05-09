@@ -57,10 +57,10 @@ dependencies {
   implementation project(':core-ext')
 
   implementation dep.androidx.appcompat
-  implementation dep.androidx.constraint
-  implementation dep.androidx.material
   implementation dep.androidx.viewpager
-  implementation dep.androidx.coordinatorlayout
+  implementation dep.androidx.coordinator
+  implementation dep.androidx.material
+  implementation dep.androidx.constraint
 
   implementation dep.kotlin.stdlib
 
