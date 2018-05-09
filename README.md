@@ -1,4 +1,4 @@
- <img align="center" width="512" height="192" src="./promo/banner.png">
+![banner](./promo/banner.png)
 
 [![BINTRAY][BINTRAY-SVG]][BINTRAY]
 [![MAVEN-CENTRAL][MAVEN-CENTRAL-SVG]][MAVEN-CENTRAL]
