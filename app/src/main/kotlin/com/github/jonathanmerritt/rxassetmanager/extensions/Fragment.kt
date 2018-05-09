@@ -16,6 +16,6 @@
 
 package com.github.jonathanmerritt.rxassetmanager.extensions
 
-import android.view.View
+import androidx.fragment.app.Fragment
 
-internal infix fun View.click(action: () -> Boolean) = setOnClickListener { action() }
+internal inline val Fragment.cacheDir: String get() = context!!.cacheDir.absolutePath

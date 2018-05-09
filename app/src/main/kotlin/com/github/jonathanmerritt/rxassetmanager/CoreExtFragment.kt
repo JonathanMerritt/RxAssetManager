@@ -17,6 +17,7 @@
 package com.github.jonathanmerritt.rxassetmanager
 
 import com.github.jonathanmerritt.rxassetmanager.core.ext.Depth
+import com.github.jonathanmerritt.rxassetmanager.extensions.cacheDir
 import com.github.jonathanmerritt.rxassetmanager.extensions.click
 import kotlinx.android.synthetic.main.fragment_core_ext.listAll
 import kotlinx.android.synthetic.main.fragment_core_ext.listOpen
@@ -53,8 +54,8 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
   openBytes click { it.openBytes(FILE1).subscribed() }
   openBytesPair click { it.openBytesPair(FILE1).subscribed() }
 
-  openSave click { it.openSave(FILE2, to = context!!.cacheDir.path).subscribed() }
-  openSavePair click { it.openSavePair(FILE2, to = context!!.cacheDir.path).subscribed() }
+  openSave click { it.openSave(FILE2, to = cacheDir).subscribed() }
+  openSavePair click { it.openSavePair(FILE2, to = cacheDir).subscribed() }
 
   openBitmap click { it.openBitmap(ICON).subscribed() }
   openBitmapPair click { it.openBitmapPair(ICON).subscribed() }
@@ -70,8 +71,8 @@ class CoreExtFragment : RxAssetManagerFragment(R.layout.fragment_core_ext, {
   listOpenBytes click { it.listOpenBytes(FOLDER, all = true).subscribed() }
   listOpenBytesPair click { it.listOpenBytesPair(FOLDER, all = true).subscribed() }
 
-  listOpenSave click { it.listOpenSave(FOLDER, to = context!!.cacheDir.path, all = true).subscribed() }
-  listOpenSavePair click { it.listOpenSavePair(FOLDER, to = context!!.cacheDir.path, all = true).subscribed() }
+  listOpenSave click { it.listOpenSave(FOLDER, to = cacheDir, all = true).subscribed() }
+  listOpenSavePair click { it.listOpenSavePair(FOLDER, to = cacheDir, all = true).subscribed() }
 
   listOpenBitmap click { it.listOpenBitmap(FOLDER, all = true).subscribed() }
   listOpenBitmapPair click { it.listOpenBitmapPair(FOLDER, all = true).subscribed() }

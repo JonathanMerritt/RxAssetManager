@@ -16,12 +16,12 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-const val ROOT = "/"
-const val MANIFEST = "AndroidManifest.xml"
-const val FOLDER = "folder"
-const val FILE = "folder/file.txt"
-const val ICON = "folder/icon.png"
-const val FONT = "folder/font.ttf"
-const val FILE1 = "folder/folder1/file1.txt"
-const val FONT1 = "folder/folder1/font1.ttf"
-const val FILE2 = "folder/folder1/folder2/file2.txt"
+internal const val ROOT = "/"
+internal const val MANIFEST = "AndroidManifest.xml"
+internal const val FOLDER = "folder"
+internal const val FILE = "folder/file.txt"
+internal const val ICON = "folder/icon.png"
+internal const val FONT = "folder/font.ttf"
+internal const val FILE1 = "folder/folder1/file1.txt"
+internal const val FONT1 = "folder/folder1/font1.ttf"
+internal const val FILE2 = "folder/folder1/folder2/file2.txt"
