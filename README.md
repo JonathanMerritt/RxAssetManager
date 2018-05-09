@@ -5,16 +5,15 @@
 [![TRAVIS-CI][TRAVIS-CI-SVG]][TRAVIS-CI]
 [![ANDROID-ARSENAL][ANDROID-ARSENAL-SVG]][ANDROID-ARSENAL]
 
-## What is *RXASSETMANAGER*?
-**An RxJava2 implementation of the Android AssetManager.**
 
-Inspired by the blog post [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
+## What is *RXASSETMANAGER*?
+An RxJava2 implementation of the Android AssetManager.
 
 _Any help or contribution is welcome._
 
-**
+
 ## How do you *GET* it?
-You can use the `jcenter()` or `mavenCentral()` repository.
+Use the `jcenter()` or `mavenCentral()` repository.
 ```groovy
   repositories {
     jcenter()
@@ -23,60 +22,73 @@ You can use the `jcenter()` or `mavenCentral()` repository.
 ```
 
 Then pick a module.
-##### Core:
+
+**Core**
 ```groovy
   dependencies {
     implementation "com.github.jonathanmerritt.rxassetmanager:core:x.y.z"
   }
 ```
 
-##### Core-ext:
+**Core-ext** - includes `:core` automatically.
 ```groovy
   dependencies {
-    // includes `:core` automatically.
     implementation "com.github.jonathanmerritt.rxassetmanager:core-ext:x.y.z"
   }
 ```
 
-**
+
 ## How do you *USE* it?
-First create an instance.
+Create an instance.
 ```kotlin
 val manager = RxAssetManager(context)
 ```
 
+Then open the asset as an InputStream for the given file name/path.
 
-Then to open a file as an InputStream just give it the file path and subscribe.
+**Core**
 ```kotlin
 manager.open("file.txt").subscribe {  }
 ```
+
+Or open as InputStreams for the given folder name/path.
+
+**Core-ext**
+```kotlin
+manager.listOpen("folder").subscribe {  }
+```
+
 *Please check the sample app for more examples.*
 
-**
+
 ## What does it *DO*?
 Miminally wraps the original android assetmanager into rxjava2 types.
 
-##### Core:
-Originally intended to be a 1:1 copy, it's only diverted from that slighty.
+**Core** - Intended to be a 1:1 copy, it's only diverted from that slighty.
 
 Function|Parameters|Description|Returns
 ---|---|---|---
 getLocales()|none|gets locales.|Flowable\<String>
 
-##### Core-ext:
-Extends core while adding more functions, mainly listing chains.
+**Core-ext** - Extends core while adding more functions, mainly listing chains.
 
 Function|Parameters|Description|Returns
 ---|---|---|---
 openString(String)|name = asset file name/path|opens asset file as a string.|Maybe\<String>
 
-**
+
 ## TODO
 - Add javadoc.
 - Add tests.
 - ...
 
-**
+
+## Credits
+- [RxRecipes][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
+- [RxJava][RXJAVA] by [Reactive-io][RXJAVA]
+- [Android][ANDROID] by [Google][GOOGLE]
+
+
 ## [License][LICENSE]
     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
 
@@ -105,3 +117,7 @@ openString(String)|name = asset file name/path|opens asset file as a string.|May
 [LICENSE]: https://github.com/JonathanMerritt/RxAssetManager/blob/master/LICENSE.txt
 [RX-RECIPES]: https://hackernoon.com/rxrecipes-wrap-your-way-to-rx-fd40eb5254b6
 [SCOTT-MESCHKE]: https://github.com/scottmeschke
+[RXJAVA]: https://github.com/ReactiveX/RxJava
+[REACTIVEIO]: http://reactivex.io/
+[ANDROID]: https://source.android.com/
+[GOOGLE]: https://android-developers.googleblog.com/
