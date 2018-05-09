@@ -5,52 +5,63 @@
 [![TRAVIS-CI][TRAVIS-CI-SVG]][TRAVIS-CI]
 [![ANDROID-ARSENAL][ANDROID-ARSENAL-SVG]][ANDROID-ARSENAL]
 
-## What is RxAssetManager?
-
+## What is *RXASSETMANAGER*?
 **An RxJava2 implementation of the Android AssetManager.**
 
 Inspired by the blog post [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
 
 _Any help or contribution is welcome._
 
-## Download
+## How do you *GET* it?
+You can use the `jcenter()` or `mavenCentral()` repository.
 ```groovy
   repositories {
     jcenter()
-    //OR
     mavenCentral()
   }
+```
+####
 
+Then pick a module.
+##### CORE:
+```groovy
   dependencies {
-    implementation "com.github.jonathanmerritt.rxassetmanager:core OR* core-ext:x.y.z"
+    implementation "com.github.jonathanmerritt.rxassetmanager:core:x.y.z"
   }
 ```
 
-*`core-ext` will include `core` automatically.
+##### CORE-EXT:
+```groovy
+  dependencies {
+    implementation "com.github.jonathanmerritt.rxassetmanager:core-ext:x.y.z"
+  }
+```
+*will include `core` automatically.*
 
 
-## Usage
-This example will either open or list and open any files as InputStreams.
-
-_Check the sample app for more detailed examples._
-
-#### Core
+## How do you *USE* it?
+First create an instance.
 ```kotlin
-RxAssetManager(context).open("assets/file.txt").subscribe {  }
+val manager = RxAssetManager(context)
 ```
 
-#### Core-Ext
+
+Then to open a file as an InputStream just give it the file path and subscribe.
 ```kotlin
-RxAssetManager(context).listOpen("assets/folder").subscribe {  }
+manager.open("file.txt").subscribe {  }
 ```
+*Please check the sample app for more examples.*
+
+## What does it *DO*?
+_soon_
+####
 
 ## TODO
 - Add javadoc.
 - Add tests.
 - ...
 
-## [Apache-2.0][LICENSE]
-
+## [License][LICENSE]
     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
 
     Licensed under the Apache License, Version 2.0 (the "License");
