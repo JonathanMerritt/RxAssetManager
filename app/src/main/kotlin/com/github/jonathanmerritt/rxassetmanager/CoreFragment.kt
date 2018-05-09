@@ -16,7 +16,6 @@
 
 package com.github.jonathanmerritt.rxassetmanager
 
-import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.extensions.click
 import kotlinx.android.synthetic.main.fragment_core.getLocals
 import kotlinx.android.synthetic.main.fragment_core.list
@@ -31,25 +30,23 @@ import kotlinx.android.synthetic.main.fragment_core.openTypefacePair
 import kotlinx.android.synthetic.main.fragment_core.openXmlResParser
 import kotlinx.android.synthetic.main.fragment_core.openXmlResParserPair
 
-class CoreFragment : RxAssetManagerFragment(R.layout.fragment_core) {
-  override fun onCreated(manager: IsRxAssetManager) {
-    getLocals click { manager.getLocales().subscribed() }
+class CoreFragment : RxAssetManagerFragment(R.layout.fragment_core, {
+  getLocals click { it.getLocales().subscribed() }
 
-    open click { manager.open(FILE).subscribed() }
-    openPair click { manager.openPair(FILE).subscribed() }
+  open click { it.open(FILE).subscribed() }
+  openPair click { it.openPair(FILE).subscribed() }
 
-    openTypeface click { (manager openTypeface FONT).subscribed() }
-    openTypefacePair click { (manager openTypefacePair FONT1).subscribed() }
+  openTypeface click { (it openTypeface FONT).subscribed() }
+  openTypefacePair click { (it openTypefacePair FONT1).subscribed() }
 
-    openFd click { (manager openFd FILE1).subscribed() }
-    openFdPair click { (manager openFdPair FILE1).subscribed() }
+  openFd click { (it openFd FILE1).subscribed() }
+  openFdPair click { (it openFdPair FILE1).subscribed() }
 
-    list click { manager.list().subscribed() }
+  list click { it.list().subscribed() }
 
-    openNonAssetFd click { manager.openNonAssetFd(name = MANIFEST).subscribed() }
-    openNonAssetFdPair click { manager.openNonAssetFdPair(name = MANIFEST).subscribed() }
+  openNonAssetFd click { it.openNonAssetFd(name = MANIFEST).subscribed() }
+  openNonAssetFdPair click { it.openNonAssetFdPair(name = MANIFEST).subscribed() }
 
-    openXmlResParser click { manager.openXmlResourceParser(name = MANIFEST).subscribed() }
-    openXmlResParserPair click { manager.openXmlResourceParserPair(name = MANIFEST).subscribed() }
-  }
-}
+  openXmlResParser click { it.openXmlResourceParser(name = MANIFEST).subscribed() }
+  openXmlResParserPair click { it.openXmlResourceParserPair(name = MANIFEST).subscribed() }
+})

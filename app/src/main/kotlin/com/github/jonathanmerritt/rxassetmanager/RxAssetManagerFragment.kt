@@ -36,15 +36,15 @@ import io.reactivex.schedulers.Schedulers.io
 
 abstract class RxAssetManagerFragment(
     private val layout: Int,
+    private val created: RxAssetManagerFragment.(IsRxAssetManager) -> Unit,
     private val disposables: CompositeDisposable = CompositeDisposable()) : Fragment() {
-  abstract fun onCreated(manager: IsRxAssetManager)
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
       inflater.inflate(layout, container, false)
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    created(this, RxAssetManager(context!!))
     super.onViewCreated(view, savedInstanceState)
-    onCreated(RxAssetManager(context!!))
   }
 
   override fun onStop() {
