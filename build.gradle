@@ -56,9 +56,6 @@ buildscript {
 
   // groups
   def grp = [:]
-  grp.support = 'com.android.support'
-  grp.constraint = "${grp.support}.constraint"
-  grp.test = "${grp.support}.test"
   grp.kotlin = 'org.jetbrains.kotlin'
   grp.rxjava2 = 'io.reactivex.rxjava2'
   ext.grp = grp
@@ -72,20 +69,19 @@ buildscript {
 
   // versions
   def ver = [:]
-  ver.support = '27.1.0'
+  ver.androidx = '1.0.0-alpha1'
   ver.constraint = '1.1.0'
   ver.kotlin = '1.2.41'
 
-  // android support
-  def support = [:]
-  support.appcompat = "$grp.support:appcompat-v7:$ver.support"
-  support.constraint = ["$grp.constraint:$mod.layout:$ver.constraint",
-                        "$grp.constraint:$mod.layout-solver:$ver.constraint"]
-  support.design = "$grp.support:design:$ver.support"
-
-  support.tests = ["$grp.test:runner:1.0.1", "$grp.test:rules:1.0.1", "$grp.support:$mod.annots:$ver.support"]
-  support.espresso = "${grp.test}.espresso:espresso-core:3.0.1"
-  dep.support = support
+  // androidx
+  def androidx = [:]
+  androidx.appcompat = "androidx.appcompat:appcompat:$ver.androidx"
+  androidx.constraint = ["androidx.constraintlayout:constraintlayout:$ver.constraint",
+                        "androidx.constraintlayout:constraintlayout-solver:$ver.constraint"]
+  androidx.material = "com.google.android.material:material:$ver.androidx"
+  androidx.viewpager = "androidx.viewpager:viewpager:$ver.androidx"
+  androidx.coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:$ver.androidx"
+  dep.androidx = androidx
 
   // jetbrains kotlin
   def kotlin = [:]

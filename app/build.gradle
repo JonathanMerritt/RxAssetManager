@@ -30,7 +30,7 @@ android {
 
     applicationId rep.id
 
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -56,9 +56,11 @@ dependencies {
   implementation fileTree(dir : 'libs', include : ['*.jar'])
   implementation project(':core-ext')
 
-  implementation dep.support.appcompat
-  implementation dep.support.constraint
-  implementation dep.support.design
+  implementation dep.androidx.appcompat
+  implementation dep.androidx.constraint
+  implementation dep.androidx.material
+  implementation dep.androidx.viewpager
+  implementation dep.androidx.coordinatorlayout
 
   implementation dep.kotlin.stdlib
 
@@ -66,9 +68,6 @@ dependencies {
 
   testImplementation dep.tests
   testImplementation dep.mockitoKotlin, { exclude group : grp.kotlin, module : mod.reflect }
-
-  androidTestImplementation dep.support.tests
-  androidTestImplementation dep.support.espresso, { exclude group : grp.support, module : mod.annots }
 
   testImplementation dep.kotlin.tests
 }
