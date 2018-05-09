@@ -43,9 +43,10 @@ buildscript {
 
   /* SDKS */
   def sdk = [:]
-  sdk.compile = 27
+  sdk.compile = 'android-P'
+  sdk.target = 27
   sdk.min = 17
-  sdk.tools = '27.0.3'
+  sdk.tools = '28.0.0-rc2'
   ext.sdk = sdk
 
   /* DEPENDENCIES */

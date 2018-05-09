@@ -23,7 +23,7 @@ android {
 
   defaultConfig {
     minSdkVersion sdk.min
-    targetSdkVersion sdk.compile
+    targetSdkVersion sdk.target
     versionCode ver.code
     versionName ver.name
 
