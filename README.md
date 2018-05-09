@@ -12,6 +12,7 @@ Inspired by the blog post [RxRecipes: Wrap your way to Rx][RX-RECIPES] by [Scott
 
 _Any help or contribution is welcome._
 
+**
 ## How do you *GET* it?
 You can use the `jcenter()` or `mavenCentral()` repository.
 ```groovy
@@ -22,22 +23,22 @@ You can use the `jcenter()` or `mavenCentral()` repository.
 ```
 
 Then pick a module.
-##### CORE:
+##### Core:
 ```groovy
   dependencies {
     implementation "com.github.jonathanmerritt.rxassetmanager:core:x.y.z"
   }
 ```
 
-##### CORE-EXT:
+##### Core-ext:
 ```groovy
   dependencies {
+    // includes `:core` automatically.
     implementation "com.github.jonathanmerritt.rxassetmanager:core-ext:x.y.z"
   }
 ```
-*will include `core` automatically.*
 
-
+**
 ## How do you *USE* it?
 First create an instance.
 ```kotlin
@@ -51,14 +52,31 @@ manager.open("file.txt").subscribe {  }
 ```
 *Please check the sample app for more examples.*
 
+**
 ## What does it *DO*?
-_soon_
+Miminally wraps the original android assetmanager into rxjava2 types.
 
+##### Core:
+Originally intended to be a 1:1 copy, it's only diverted from that slighty.
+
+Function|Parameters|Description|Returns
+---|---|---|---
+getLocales()|none|gets locales.|Flowable\<String>
+
+##### Core-ext:
+Extends core while adding more functions, mainly listing chains.
+
+Function|Parameters|Description|Returns
+---|---|---|---
+openString(String)|name = asset file name/path|opens asset file as a string.|Maybe\<String>
+
+**
 ## TODO
 - Add javadoc.
 - Add tests.
 - ...
 
+**
 ## [License][LICENSE]
     Copyright 2018 Jonathan Merritt 11R00TT00R11@GMAIL.COM
 
