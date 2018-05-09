@@ -51,8 +51,6 @@ buildscript {
 
   /* DEPENDENCIES */
   def dep = [:]
-  dep.tests = ['junit:junit:4.12', 'org.mockito:mockito-core:2.10.0', 'org.assertj:assertj-core:3.8.0']
-  dep.mockitoKotlin = 'com.nhaarman:mockito-kotlin-kt1.1:1.5.0'
 
   // groups
   def grp = [:]
@@ -60,11 +58,6 @@ buildscript {
   grp.kotlin = 'org.jetbrains.kotlin'
   grp.rxjava2 = 'io.reactivex.rxjava2'
   ext.grp = grp
-
-  // modules
-  def mod = [:]
-  mod.reflect = 'kotlin-reflect'
-  ext.mod = mod
 
   // versions
   def ver = [:]
@@ -90,7 +83,6 @@ buildscript {
   def kotlin = [:]
   kotlin.gradle = "$grp.kotlin:kotlin-gradle-plugin:$ver.kotlin"
   kotlin.stdlib = "$grp.kotlin:kotlin-stdlib:$ver.kotlin"
-  kotlin.tests = "$grp.kotlin:kotlin-test-junit:$ver.kotlin"
   dep.kotlin = kotlin
 
   // reactivex rxjava2

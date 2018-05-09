@@ -65,9 +65,4 @@ dependencies {
   implementation dep.kotlin.stdlib
 
   implementation dep.rxjava2
-
-  testImplementation dep.tests
-  testImplementation dep.mockitoKotlin, { exclude group : grp.kotlin, module : mod.reflect }
-
-  testImplementation dep.kotlin.tests
 }
