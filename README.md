@@ -70,18 +70,31 @@ Function|Parameters|Description|Pair|Returns
 ---|---|---|---|---
 `getLocales()`|none|Gets all locales.|no|Flowable\<String>
 `close()`|none|Closes the asset manager.|no|Completable
-`open(String, Int)`|`path`: asset file path, `mode`: file access mode|Opens an asset input stream.|yes|Maybe\<InputStream>
-`openTypeface(String)`|`path`: asset file path|Opens an asset font.|yes|Maybe\<Typeface>
-`openFd(String)`|`path`: asset file path|Opens an asset file descriptor.|yes|Maybe\<AssetFileDescriptor>
-`list(String)`|`path`: asset folder path|Lists asset files.|no|Flowable\<String>
-`openNonAssetFd(Int, String)`|`cookie`: non asset file cookie, `path`: non asset file path|Opens a non asset file.|yes|Maybe\<AssetFileDescriptor>
-`openXmlResourceParser(Int, String)`|`cookie`: xml file cookie, `path`: xml file path|Opens a xml resource parser.|yes|Maybe\<XmlResourceParser>
+`open(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens an asset input stream.|yes|Maybe\<InputStream>
+`openTypeface(String)`|**path**: asset file path|Opens an asset font.|yes|Maybe\<Typeface>
+`openFd(String)`|**path**: asset file path|Opens an asset file descriptor.|yes|Maybe\<AssetFileDescriptor>
+`list(String)`|**path**: asset folder path|Lists asset files.|no|Flowable\<String>
+`openNonAssetFd(Int, String)`|**cookie**: non asset file cookie, **path**: non asset file path|Opens a non asset file.|yes|Maybe\<AssetFileDescriptor>
+`openXmlResourceParser(Int, String)`|**cookie**: xml file cookie, **path**: xml file path|Opens a xml resource parser.|yes|Maybe\<XmlResourceParser>
 
 **Core-ext** - Extends core while adding more functions, mainly listing chains.
 
 Function|Parameters|Description|Pair|Returns
 ---|---|---|---|---
-`openString(String)`|`path`: asset file path|Opens asset file as string|yes|Maybe\<String>
+`openString(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as string|yes|Maybe\<String>
+`openBytes(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as a byte array|yes|Maybe\<ByteArray>
+`openSave(String, Int, String)`|**path**: asset file path, **mode**: file access mode, **to**: save to location|Opens and save asset file.|yes|Maybe\<File>
+`openBitmap(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as a bitmap|yes|Maybe\<Bitmap>
+`listAll(String, Sorting)`|**path**: asset folder path, **sorting**: comparator object|Lists asset files recursively.|no|Flowable\<String>
+`listOpen(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as input streams.|yes|Flowable\<InputStream>
+`listOpenString(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as strings.|yes|Flowable\<String>
+`listOpenBytes(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as byte arrays.|yes|Flowable\<ByteArray>
+`listOpenSave(String, Int, String, Boolean)`|**path**: asset folder path, **mode**: file access mode, **to**: save to location, **all**: list all files|Lists, opens and saves asset files.|yes|Flowable\<Files>
+`listOpenBitmap(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as bitmaps.|yes|Flowable\<Bitmap>
+`listOpenTypeface(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as type faces.|yes|Flowable\<Typeface>
+`listOpenFd(String, Boolean)`|**path**: asset folder path, **all**: list all files|Lists and opens asset files as file descriptors.|yes|Flowable\<AssetFileDescriptor>
+`listOpenNonAssetFd(Int, String, Boolean)`|**cookie**: non asset file cookie, **path**: non asset folder path, **all**: list all files|Lists and opens non asset files as file descriptors.|yes|Flowable\<AssetFileDescriptor>
+`listOpenXmlResourceParser(Int, String, Boolean)`|**cookie**: xml file cookie, **path**: xml folder path, **all**: list all files|Lists and opens files as xml resource parsers.|yes|Flowable\<XmlResourceParser>
 
 
 ## TODO
