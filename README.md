@@ -66,15 +66,27 @@ Miminally wraps the original android assetmanager into rxjava2 types.
 
 **Core** - Intended to be a 1:1 copy, it's only diverted from that slighty.
 
-Function|Parameters|Description|Returns
+Fun|Params|Desc|Returns
 ---|---|---|---
-getLocales()|none|gets locales.|Flowable\<String>
+`getLocales()`|none|Gets all locales.|Flowable\<String>
+`close()`|none|Closes the asset manager.|Completable
+`open(String, Int)`|`path`: asset file path, `mode`: file access mode|Opens an asset input stream.|Maybe\<InputStream>
+`openPair(String, Int)`|`path`: asset file path, `mode`: file access mode|Opens an asset input stream pair.|Maybe\<Pair<String, InputStream>>
+`openTypeface(String)`|`path`: asset file path|Opens an asset font.|Maybe\<Typeface>
+`openTypefacePair(String)`|`path`: asset file path|Opens an asset font pair.|Maybe\<Pair<String, Typeface>>
+`openFd(String)`|`path`: asset file path|Opens an asset file descriptor.|Maybe\<AssetFileDescriptor>
+`openFdPair(String)`|`path`: asset file path|Opens an asset file descriptor pair.|Maybe\<Pair<String, AssetFileDescriptor>>
+`list(String)`|`path`: asset folder path|Lists asset files.|Flowable\<String>
+`openNonAssetFd(Int, String)`|`cookie`: non asset file cookie, `path`: non asset file path|Opens a non asset file.|Maybe\<AssetFileDescriptor>
+`openNonAssetFdPair(Int, String)`|`cookie`: non asset file cookie, `path`: non asset file path|Opens a non asset file pair.|Maybe\<Pair<String, AssetFileDescriptor>>
+`openXmlResourceParser(Int, String)`|`cookie`: xml file cookie, `path`: xml file path|Opens a xml resource parser.|Maybe\<XmlResourceParser>
+`openXmlResourceParserPair(Int, String)`|`cookie`: xml file cookie, `path`: xml file path|Opens a xml resource parser pair.|Maybe\<Pair<String, XmlResourceParser>>
 
 **Core-ext** - Extends core while adding more functions, mainly listing chains.
 
-Function|Parameters|Description|Returns
+Fun|Params|Desc|Returns
 ---|---|---|---
-openString(String)|name = asset file name/path|opens asset file as a string.|Maybe\<String>
+`openString(String)`|`path`: asset file path|Opens asset file as string|Maybe\<String>
 
 
 ## TODO

@@ -53,23 +53,23 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
   override fun getLocales(): Flowable<String> = fromIterable(manager.locales.asIterable())
 
   /**
-   * Will close the asset manager.
+   * Closes the asset manager.
    * @return a completable.
    */
   override fun close(): Completable = fromAction(manager::close)
 
   /**
-   * Opens an asset file.
-   * @param path the assets file path.
-   * @param mode the access mode for the file.
+   * Opens an asset input stream.
+   * @param path asset file path.
+   * @param mode file access mode.
    * @return an input stream maybe.
    */
   override fun open(path: String, mode: Int): Maybe<InputStream> = fromCallable { manager.open(path, mode) }
 
   /**
-   * Opens an asset file.
-   * @param path the assets file path.
-   * @param mode the access mode for the file.
+   * Opens an asset input stream pair.
+   * @param path asset file path.
+   * @param mode file access mode.
    * @return a string input stream pair maybe.
    */
   override fun openPair(path: String, mode: Int): Maybe<Pair<String, InputStream>> =
@@ -77,29 +77,29 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
 
   /**
    * Opens an asset font.
-   * @param path the assets file path.
+   * @param path asset file path.
    * @return a typeface maybe.
    */
   override infix fun openTypeface(path: String): Maybe<Typeface> = fromCallable { createFromAsset(manager, path) }
 
   /**
-   * Opens an asset font.
-   * @param path the assets file path.
+   * Opens an asset font pair.
+   * @param path asset file path.
    * @return a string typeface pair maybe.
    */
   override infix fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> =
       openTypeface(path).map { path to it }
 
   /**
-   * Opens an asset file.
-   * @param path the assets file path.
+   * Opens an asset file descriptor.
+   * @param path asset file path.
    * @return an asset file descriptor maybe.
    */
   override infix fun openFd(path: String): Maybe<AssetFileDescriptor> = fromCallable { manager.openFd(path) }
 
   /**
-   * Opens an asset file.
-   * @param path the assets file path.
+   * Opens an asset file descriptor pair.
+   * @param path asset file path.
    * @return a string asset file descriptor pair maybe.
    */
   override infix fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> =
@@ -107,42 +107,42 @@ open class RxAssetManager(private val manager: AssetManager) : IsRxAssetManager 
 
   /**
    * Lists asset files.
-   * @param path the assets folder path.
+   * @param path assets folder path.
    * @return a string flowable.
    */
   override fun list(path: String): Flowable<String> = fromIterable(manager.list(path).asIterable())
 
   /**
    * Opens a non asset file.
-   * @param cookie cookie for the non assets file.
-   * @param path the non assets file path.
+   * @param cookie non asset file cookie.
+   * @param path non asset file path.
    * @return an asset file descriptor maybe.
    */
   override fun openNonAssetFd(cookie: Int, path: String): Maybe<AssetFileDescriptor> =
       fromCallable { manager.openNonAssetFd(cookie, path) }
 
   /**
-   * Opens a non asset file.
-   * @param cookie cookie for the non assets file.
-   * @param path the non assets file path.
+   * Opens a non asset file pair.
+   * @param cookie non asset file cookie.
+   * @param path non asset file path.
    * @return a string asset file descriptor pair maybe.
    */
   override fun openNonAssetFdPair(cookie: Int, path: String): Maybe<Pair<String, AssetFileDescriptor>> =
       fromCallable { path to manager.openNonAssetFd(cookie, path) }
 
   /**
-   * Opens a xml file.
-   * @param cookie cookie for the xml file.
-   * @param path the xml file path.
+   * Opens a xml resource parser.
+   * @param cookie xml file cookie.
+   * @param path xml file path.
    * @return an xml resource parser maybe.
    */
   override fun openXmlResourceParser(cookie: Int, path: String): Maybe<XmlResourceParser> =
       fromCallable { manager.openXmlResourceParser(cookie, path) }
 
   /**
-   * Opens a xml file.
-   * @param cookie cookie for the xml file.
-   * @param path the xml file path.
+   * Opens a xml resource parser pair.
+   * @param cookie xml file cookie.
+   * @param path xml file path.
    * @return a string xml resource parser pair maybe.
    */
   override fun openXmlResourceParserPair(cookie: Int, path: String): Maybe<Pair<String, XmlResourceParser>> =
