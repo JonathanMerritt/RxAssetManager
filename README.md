@@ -84,7 +84,7 @@ Function|Parameters|Description|Pair|Returns
 `openString(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as string|yes|Maybe\<String>
 `openBytes(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as a byte array|yes|Maybe\<ByteArray>
 `openSave(String, Int, String)`|**path**: asset file path, **mode**: file access mode, **to**: save to location|Opens and save asset file.|yes|Maybe\<File>
-`openBitmap(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as a bitmap|yes|Maybe\<Bitmap>
+`openBitmap(String, Int)`|**path**: asset file path, **mode**: file access mode|Opens asset file as a bitmap.|yes|Maybe\<Bitmap>
 `listAll(String, Sorting)`|**path**: asset folder path, **sorting**: comparator object|Lists asset files recursively.|no|Flowable\<String>
 `listOpen(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as input streams.|yes|Flowable\<InputStream>
 `listOpenString(String, Int, Boolean)`|**path**: asset folder path, **mode**: file access mode, **all**: list all files|Lists and opens asset files as strings.|yes|Flowable\<String>
@@ -105,7 +105,7 @@ Function|Parameters|Description|Pair|Returns
 
 ## Credits
 - [RxRecipes][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
-- [RxJava][RXJAVA] by [Reactive-io][RXJAVA]
+- [RxJava][RXJAVA] by [Reactivex-io][REACTIVEXIO]
 - [Android][ANDROID] by [Google][GOOGLE]
 
 
@@ -138,6 +138,6 @@ Function|Parameters|Description|Pair|Returns
 [RX-RECIPES]: https://hackernoon.com/rxrecipes-wrap-your-way-to-rx-fd40eb5254b6
 [SCOTT-MESCHKE]: https://github.com/scottmeschke
 [RXJAVA]: https://github.com/ReactiveX/RxJava
-[REACTIVEIO]: http://reactivex.io/
+[REACTIVEXIO]: http://reactivex.io/
 [ANDROID]: https://source.android.com/
 [GOOGLE]: https://android-developers.googleblog.com/
