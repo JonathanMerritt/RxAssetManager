@@ -97,11 +97,20 @@ Function|Parameters|Description|Pair|Returns
 `listOpenXmlResourceParser(Int, String, Boolean)`|**cookie**: xml file cookie, **path**: xml folder path, **all**: list all files|Lists and opens files as xml resource parsers.|yes|Flowable\<XmlResourceParser>
 
 
-## TODO
-- Add javadoc.
-- Add tests.
+## TODOs
+**Probable**
+- Figure out a better build configuration(maybe buildSrc and/or .kts).
+- Properly setup scripts for doc and source jars.
+- Add testing for the app and mocks for the lib.
+- Make docs descriptive and add comments.
+- Use an actual versioning structure(debug, release & dev, beta, production & flavors etc...).
+- Put sample app on google play.
 - ...
 
+**Possible**
+- Create an advanced fragment in the sample app, for more real examples.
+- Consider handling errors in the api(?).
+- ...
 
 ## Credits
 - [RxRecipes][RX-RECIPES] by [Scott Meschke][SCOTT-MESCHKE].
