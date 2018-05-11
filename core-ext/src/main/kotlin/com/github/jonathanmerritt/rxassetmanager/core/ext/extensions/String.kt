@@ -20,4 +20,4 @@ internal fun String.isXml() = endsWith(".xml")
 internal fun String.isFile() = contains(".")
 internal fun String.isImage() = endsWith(".jpg") || endsWith(".png") || endsWith(".bmp")
 internal fun String.isFont() = endsWith(".ttf") || endsWith(".otf")
-internal val String.depth get() = length.minus(replace("/", "").length)
+internal val String.depth get() = length - replace("/", "").length

@@ -28,17 +28,24 @@ import io.reactivex.Maybe.empty
 import java.io.InputStream
 
 interface IsRxAssetManager {
+  companion object {
+    const val MODE = ACCESS_STREAMING
+    const val PATH = ""
+    const val COOKIE = 0
+  }
+
   fun getLocales(): Flowable<String> = Flowable.empty()
   fun close(): Completable = complete()
-  fun open(path: String, mode: Int = ACCESS_STREAMING): Maybe<InputStream> = empty()
-  fun openPair(path: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, InputStream>> = empty()
+  fun open(path: String, mode: Int = MODE): Maybe<InputStream> = empty()
+  fun openPair(path: String, mode: Int = MODE): Maybe<Pair<String, InputStream>> = empty()
   infix fun openTypeface(path: String): Maybe<Typeface> = Maybe.empty()
   infix fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> = Maybe.empty()
   infix fun openFd(path: String): Maybe<AssetFileDescriptor> = empty()
   infix fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()
-  fun list(path: String = ""): Flowable<String> = Flowable.empty()
-  fun openNonAssetFd(cookie: Int = 0, path: String): Maybe<AssetFileDescriptor> = empty()
-  fun openNonAssetFdPair(cookie: Int = 0, path: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()
-  fun openXmlResourceParser(cookie: Int = 0, path: String): Maybe<XmlResourceParser> = empty()
-  fun openXmlResourceParserPair(cookie: Int = 0, path: String): Maybe<Pair<String, XmlResourceParser>> = empty()
+  fun list(path: String = PATH): Flowable<String> = Flowable.empty()
+  fun openNonAssetFd(cookie: Int = COOKIE, path: String): Maybe<AssetFileDescriptor> = empty()
+  fun openNonAssetFdPair(cookie: Int = COOKIE, path: String): Maybe<Pair<String, AssetFileDescriptor>> = empty()
+  fun openXmlResourceParser(cookie: Int = COOKIE, path: String): Maybe<XmlResourceParser> = empty()
+  fun openXmlResourceParserPair(cookie: Int = COOKIE, path: String): Maybe<Pair<String, XmlResourceParser>> =
+      empty()
 }

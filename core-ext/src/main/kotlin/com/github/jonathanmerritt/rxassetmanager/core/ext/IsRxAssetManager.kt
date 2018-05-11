@@ -17,10 +17,12 @@
 package com.github.jonathanmerritt.rxassetmanager.core.ext
 
 import android.content.res.AssetFileDescriptor
-import android.content.res.AssetManager.ACCESS_STREAMING
 import android.content.res.XmlResourceParser
 import android.graphics.Bitmap
 import android.graphics.Typeface
+import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager.Companion.COOKIE
+import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager.Companion.MODE
+import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager.Companion.PATH
 import io.reactivex.Flowable
 import io.reactivex.Flowable.empty
 import io.reactivex.Maybe
@@ -29,63 +31,62 @@ import java.io.InputStream
 import com.github.jonathanmerritt.rxassetmanager.core.IsRxAssetManager as isRxAssetManager
 
 interface IsRxAssetManager : isRxAssetManager {
-  fun openString(path: String, mode: Int = ACCESS_STREAMING): Maybe<String> = Maybe.empty()
-  fun openStringPair(path: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, String>> = Maybe.empty()
-  fun openBytes(path: String, mode: Int = ACCESS_STREAMING): Maybe<ByteArray> = Maybe.empty()
-  fun openBytesPair(path: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, ByteArray>> = Maybe.empty()
-  fun openSave(path: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<File> = Maybe.empty()
-  fun openSavePair(path: String, mode: Int = ACCESS_STREAMING, to: String): Maybe<Pair<String, File>> =
-      Maybe.empty()
+  companion object {
+    const val ALL = false
+  }
 
-  fun openBitmap(path: String, mode: Int = ACCESS_STREAMING): Maybe<Bitmap> = Maybe.empty()
-  fun openBitmapPair(path: String, mode: Int = ACCESS_STREAMING): Maybe<Pair<String, Bitmap>> = Maybe.empty()
+  fun openString(path: String, mode: Int = MODE): Maybe<String> = Maybe.empty()
+  fun openStringPair(path: String, mode: Int = MODE): Maybe<Pair<String, String>> = Maybe.empty()
+  fun openBytes(path: String, mode: Int = MODE): Maybe<ByteArray> = Maybe.empty()
+  fun openBytesPair(path: String, mode: Int = MODE): Maybe<Pair<String, ByteArray>> = Maybe.empty()
+  fun openSave(path: String, mode: Int = MODE, to: String): Maybe<File> = Maybe.empty()
+  fun openSavePair(path: String, mode: Int = MODE, to: String): Maybe<Pair<String, File>> = Maybe.empty()
 
-  fun listAll(path: String = "", sorting: Sorting = Normal): Flowable<String> = empty()
-  fun listOpen(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<InputStream> =
+  fun openBitmap(path: String, mode: Int = MODE): Maybe<Bitmap> = Maybe.empty()
+  fun openBitmapPair(path: String, mode: Int = MODE): Maybe<Pair<String, Bitmap>> = Maybe.empty()
+
+  fun listAll(path: String = PATH, sorting: Sorting = Normal): Flowable<String> = empty()
+  fun listOpen(path: String = PATH, mode: Int = MODE, all: Boolean = ALL): Flowable<InputStream> =
       empty()
 
-  fun listOpenPair(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
+  fun listOpenPair(path: String = PATH, mode: Int = MODE, all: Boolean = ALL):
       Flowable<Pair<String, InputStream>> = empty()
 
-  fun listOpenString(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<String> =
-      empty()
+  fun listOpenString(path: String = PATH, mode: Int = MODE, all: Boolean = ALL): Flowable<String> = empty()
 
-  fun listOpenStringPair(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
+  fun listOpenStringPair(path: String = PATH, mode: Int = MODE, all: Boolean = ALL):
       Flowable<Pair<String, String>> = empty()
 
-  fun listOpenBytes(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<ByteArray> =
-      empty()
+  fun listOpenBytes(path: String = PATH, mode: Int = MODE, all: Boolean = ALL): Flowable<ByteArray> = empty()
 
-  fun listOpenBytesPair(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
+  fun listOpenBytesPair(path: String = PATH, mode: Int = MODE, all: Boolean = ALL):
       Flowable<Pair<String, ByteArray>> = empty()
 
-  fun listOpenSave(path: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false):
-      Flowable<File> = empty()
+  fun listOpenSave(path: String = PATH, mode: Int = MODE, to: String, all: Boolean = ALL): Flowable<File> = empty()
 
-  fun listOpenSavePair(path: String = "", mode: Int = ACCESS_STREAMING, to: String, all: Boolean = false):
+  fun listOpenSavePair(path: String = PATH, mode: Int = MODE, to: String, all: Boolean = ALL):
       Flowable<Pair<String, File>> = empty()
 
-  fun listOpenBitmap(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false): Flowable<Bitmap> =
-      empty()
+  fun listOpenBitmap(path: String = PATH, mode: Int = MODE, all: Boolean = ALL): Flowable<Bitmap> = empty()
 
-  fun listOpenBitmapPair(path: String = "", mode: Int = ACCESS_STREAMING, all: Boolean = false):
+  fun listOpenBitmapPair(path: String = PATH, mode: Int = MODE, all: Boolean = ALL):
       Flowable<Pair<String, Bitmap>> = empty()
 
-  fun listOpenTypeface(path: String = "", all: Boolean = false): Flowable<Typeface> = empty()
-  fun listOpenTypefacePair(path: String = "", all: Boolean = false): Flowable<Pair<String, Typeface>> = empty()
-  fun listOpenFd(path: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> = empty()
-  fun listOpenFdPair(path: String = "", all: Boolean = false): Flowable<Pair<String, AssetFileDescriptor>> =
+  fun listOpenTypeface(path: String = PATH, all: Boolean = ALL): Flowable<Typeface> = empty()
+  fun listOpenTypefacePair(path: String = PATH, all: Boolean = ALL): Flowable<Pair<String, Typeface>> = empty()
+  fun listOpenFd(path: String = PATH, all: Boolean = ALL): Flowable<AssetFileDescriptor> = empty()
+  fun listOpenFdPair(path: String = PATH, all: Boolean = ALL): Flowable<Pair<String, AssetFileDescriptor>> =
       empty()
 
-  fun listOpenNonAssetFd(cookie: Int = 0, path: String = "", all: Boolean = false): Flowable<AssetFileDescriptor> =
-      empty()
+  fun listOpenNonAssetFd(cookie: Int = COOKIE, path: String = PATH,
+      all: Boolean = ALL): Flowable<AssetFileDescriptor> = empty()
 
-  fun listOpenNonAssetFdPair(cookie: Int = 0, path: String = "", all: Boolean = false):
+  fun listOpenNonAssetFdPair(cookie: Int = COOKIE, path: String = PATH, all: Boolean = ALL):
       Flowable<Pair<String, AssetFileDescriptor>> = empty()
 
-  fun listOpenXmlResourceParser(cookie: Int = 0, path: String = "", all: Boolean = false):
+  fun listOpenXmlResourceParser(cookie: Int = COOKIE, path: String = PATH, all: Boolean = ALL):
       Flowable<XmlResourceParser> = empty()
 
-  fun listOpenXmlResourceParserPair(cookie: Int = 0, path: String = "", all: Boolean = false):
+  fun listOpenXmlResourceParserPair(cookie: Int = COOKIE, path: String = PATH, all: Boolean = ALL):
       Flowable<Pair<String, XmlResourceParser>> = empty()
 }

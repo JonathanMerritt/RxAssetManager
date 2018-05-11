@@ -18,16 +18,16 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
 
 import com.github.jonathanmerritt.rxassetmanager.core.ext.extensions.depth
 
-sealed class Sorting : Comparator<String> {
-  override fun compare(o: String?, oo: String?) = if (o == null || oo == null) 0 else when (this) {
-    is Depth -> when {
-      o.depth == oo.depth -> 1
-      o.depth < oo.depth -> -1
-      else -> 0
-    }
-    is Normal -> 0
-  }
+
+sealed class Sorting(private val compares: (String, String) -> Int = { _, _ -> 0 }) : Comparator<String> {
+  override fun compare(s1: String?, s2: String?) = if (s1 == null || s2 == null) 0 else compares(s1, s2)
 }
 
-object Depth : Sorting()
 object Normal : Sorting()
+object Depth : Sorting({ s1, s2 ->
+  when {
+    s1.depth == s2.depth -> 1
+    s1.depth < s2.depth -> -1
+    else -> 0
+  }
+})
