@@ -31,12 +31,12 @@ dokka {
   }
 
   packageOptions {
-    prefix = "${rep.id}.core.R"
+    prefix = "${REP.id}.core.R"
     suppress = true
   }
 
   packageOptions {
-    prefix = "${rep.id}.core.ext.R"
+    prefix = "${REP.id}.core.ext.R"
     suppress = true
   }
 }

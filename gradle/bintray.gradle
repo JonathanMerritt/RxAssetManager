@@ -16,42 +16,42 @@
 
 apply plugin : "com.jfrog.bintray"
 
-version = ver.name
+version = VER.name
 
 bintray {
-  user = dev.name
-  key = dev.pass.bintray
+  user = DEV.name
+  key = DEV.pass.bintray
   configurations = ["archives"]
   publish = true
 
   pkg {
-    repo = rep.name
-    name = lib.name
-    desc = lib.desc
-    websiteUrl = "https://github.com/$dev.name/$rep.name/tree/master/$lib.name"
-    issueTrackerUrl = "https://github.com/$dev.name/$rep.name/issues"
-    vcsUrl = "scm:git:git://github.com/$dev.name/${rep.name}.git"
-    licenses = rep.licenses
-    labels = rep.labels
+    repo = REP.name
+    name = LIB.name
+    desc = LIB.desc
+    websiteUrl = "https://github.com/$DEV.name/$REP.name/tree/master/$LIB.name"
+    issueTrackerUrl = "https://github.com/$DEV.name/$REP.name/issues"
+    vcsUrl = "scm:git:git://github.com/$DEV.name/${REP.name}.git"
+    licenses = REP.licenses
+    labels = REP.labels
     publicDownloadNumbers = true
-    githubRepo = "$dev.name/$rep.name"
+    githubRepo = "$DEV.name/$REP.name"
     githubReleaseNotesFile = "RELEASES.md"
 
     version {
-      name = ver.name
+      name = VER.name
       released = new Date()
-      desc = "Check - https://github.com/$dev.name/$rep.name/releases"
-      vcsTag = ver.name
+      desc = "Check - https://github.com/$DEV.name/$REP.name/releases"
+      vcsTag = VER.name
 
       gpg {
         sign = true
-        passphrase = dev.pass.gpg
+        passphrase = DEV.pass.gpg
       }
 
       mavenCentralSync {
         sync = false
-        user = dev.name
-        password = dev.pass.maven
+        user = DEV.name
+        password = DEV.pass.maven
       }
     }
   }

@@ -19,16 +19,16 @@ apply plugin : "kotlin-android"
 apply plugin : "kotlin-android-extensions"
 
 android {
-  compileSdkVersion sdk.compile
-  buildToolsVersion sdk.tools
+  compileSdkVersion SDK.compile
+  buildToolsVersion SDK.tools
 
   defaultConfig {
-    minSdkVersion sdk.min
-    targetSdkVersion sdk.target
-    versionCode ver.code
-    versionName ver.name
+    minSdkVersion SDK.min
+    targetSdkVersion SDK.target
+    versionCode VER.code
+    versionName VER.name
 
-    applicationId rep.id
+    applicationId REP.id
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -56,13 +56,13 @@ dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
   implementation project(":core-ext")
 
-  implementation dep.androidx.appcompat
-  implementation dep.androidx.viewpager
-  implementation dep.androidx.coordinator
-  implementation dep.androidx.material
-  implementation dep.androidx.constraint
+  implementation DEP.androidx.appcompat
+  implementation DEP.androidx.viewpager
+  implementation DEP.androidx.coordinator
+  implementation DEP.androidx.material
+  implementation DEP.androidx.constraint
 
-  implementation dep.kotlin.stdlib
+  implementation DEP.kotlin.stdlib
 
-  implementation dep.rxjava2
+  implementation DEP.rxjava2
 }
