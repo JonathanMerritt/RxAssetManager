@@ -99,8 +99,7 @@ Function|Parameters|Description|Pair|Returns
 
 ## TODOs
 **Probable**
-- Figure out a better build configuration(maybe buildSrc and/or .kts).
-- Properly setup scripts for doc and source jars.
+- Properly setup scripts for doc and source jars. (*\*partially done*\*)
 - Add testing for the app and mocks for the lib.
 - Make docs descriptive and add comments.
 - Use an actual versioning structure(debug, release & dev, beta, production & flavors etc...).
@@ -108,6 +107,7 @@ Function|Parameters|Description|Pair|Returns
 - ...
 
 **Possible**
+- Figure out a better build configuration(maybe buildSrc and/or .kts).
 - Create an advanced fragment in the sample app, for more real examples.
 - Consider handling errors in the api(?).
 - ...
