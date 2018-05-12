@@ -14,8 +14,8 @@
  *     limitations under the License.
  */
 
-apply plugin : 'com.android.library'
-apply plugin : 'kotlin-android'
+apply plugin : "com.android.library"
+apply plugin : "kotlin-android"
 
 android {
   compileSdkVersion sdk.compile
@@ -27,7 +27,7 @@ android {
     versionCode ver.code
     versionName ver.name
 
-    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
@@ -37,15 +37,15 @@ android {
         removeUnusedResources false
         obfuscate false
         optimizeCode false
-        proguardFile 'proguard-rules.pro'
+        proguardFile "proguard-rules.pro"
       }
     }
   }
 
   sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-    test.java.srcDirs += 'src/test/kotlin'
-    androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    main.java.srcDirs += "src/main/kotlin"
+    test.java.srcDirs += "src/test/kotlin"
+    androidTest.java.srcDirs += "src/androidTest/kotlin"
   }
 
   compileOptions {
@@ -55,13 +55,13 @@ android {
 }
 
 dependencies {
-  implementation fileTree(dir : 'libs', include : ['*.jar'])
+  implementation fileTree(dir : "libs", include : ["*.jar"])
 
   implementation dep.kotlin.stdlib
 
   implementation dep.rxjava2
 }
 
-apply from : '../gradle/dokka.gradle'
-apply from : '../gradle/bintray.gradle'
-apply from : '../gradle/maven.gradle'
+apply from : "../gradle/dokka.gradle"
+apply from : "../gradle/bintray.gradle"
+apply from : "../gradle/maven.gradle"

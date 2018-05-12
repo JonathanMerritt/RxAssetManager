@@ -17,18 +17,18 @@
 buildscript {
   /* DEVELOPER */
   def dev = [:]
-  dev.name = 'jonathanmerritt'
-  dev.email = '11r00tt00r11@gmail.com'
+  dev.name = "jonathanmerritt"
+  dev.email = "11r00tt00r11@gmail.com"
 
   // properties
   def local = new Properties()
-  local.load(file('local.properties').newDataInputStream())
+  local.load(file("local.properties").newDataInputStream())
 
   // passwords
   def pass = [:]
-  pass.bintray = local.getProperty('pass.bintray')
-  pass.gpg = local.getProperty('pass.gpg')
-  pass.maven = local.getProperty('pass.maven')
+  pass.bintray = local.getProperty("pass.bintray")
+  pass.gpg = local.getProperty("pass.gpg")
+  pass.maven = local.getProperty("pass.maven")
   dev.pass = pass
   ext.dev = dev
 
@@ -36,17 +36,17 @@ buildscript {
   def rep = [:]
   rep.name = rootProject.name
   rep.id = "com.github.${dev.name}.${rep.name.toLowerCase()}"
-  rep.labels = ['android', 'android-library', 'asset', 'assets', 'assetmanager', 'assetsmanager', 'android-asset',
-                'android-assets', 'android-asset-manager', 'android-assets-manager']
-  rep.licenses = ['Apache-2.0']
+  rep.labels = ["android", "android-library", "asset", "assets", "assetmanager", "assetsmanager", "android-asset",
+                "android-assets", "android-asset-manager", "android-assets-manager"]
+  rep.licenses = ["Apache-2.0"]
   ext.rep = rep
 
   /* SDKS */
   def sdk = [:]
-  sdk.compile = 'android-P'
+  sdk.compile = "android-P"
   sdk.target = 27
   sdk.min = 17
-  sdk.tools = '28.0.0-rc2'
+  sdk.tools = "28.0.0-rc2"
   ext.sdk = sdk
 
   /* DEPENDENCIES */
@@ -54,20 +54,20 @@ buildscript {
 
   // groups
   def grp = [:]
-  grp.constraint = 'androidx.constraintlayout'
-  grp.kotlin = 'org.jetbrains.kotlin'
-  grp.rxjava2 = 'io.reactivex.rxjava2'
+  grp.constraint = "androidx.constraintlayout"
+  grp.kotlin = "org.jetbrains.kotlin"
+  grp.rxjava2 = "io.reactivex.rxjava2"
   ext.grp = grp
 
   // versions
   def ver = [:]
-  ver.androidx = '1.0.0-alpha1'
+  ver.androidx = "1.0.0-alpha1"
   ver.appcompat = ver.androidx
   ver.viewpager = ver.androidx
   ver.coordinator = ver.androidx
   ver.material = ver.androidx
-  ver.constraint = '1.1.0'
-  ver.kotlin = '1.2.41'
+  ver.constraint = "1.1.0"
+  ver.kotlin = "1.2.41"
 
   // androidx
   def androidx = [:]
@@ -97,11 +97,11 @@ buildscript {
   }
 
   dependencies {
-    classpath 'com.android.tools.build:gradle:3.2.0-alpha14'
-    classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-    classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
+    classpath "com.android.tools.build:gradle:3.2.0-alpha14"
+    classpath "com.github.dcendents:android-maven-gradle-plugin:2.0"
+    classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
     classpath dep.kotlin.gradle
-    classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16'
+    classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16"
   }
 }
 
@@ -121,8 +121,8 @@ subprojects {
 
     /* VERSION */
     def ver = [:]
-    ver.name = lib.name.contains('app') ? '2.0.0' : '0.6.0'
-    ver.code = ver.name.replace('.', '').concat(new Date().format('MMddyy')).toBigInteger()
+    ver.name = lib.name.contains("app") ? "2.0.0" : "0.6.0"
+    ver.code = ver.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
     ext.ver = ver
   }
 }

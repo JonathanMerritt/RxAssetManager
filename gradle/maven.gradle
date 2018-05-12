@@ -14,13 +14,13 @@
  *     limitations under the License.
  */
 
-apply plugin : 'com.github.dcendents.android-maven'
+apply plugin : "com.github.dcendents.android-maven"
 
 group = rep.id
 
 install.repositories.mavenInstaller {
   pom.project {
-    packaging 'aar'
+    packaging "aar"
     groupId rep.id
     artifactId lib.name
     name lib.name

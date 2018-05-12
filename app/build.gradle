@@ -14,9 +14,9 @@
  *     limitations under the License.
  */
 
-apply plugin : 'com.android.application'
-apply plugin : 'kotlin-android'
-apply plugin : 'kotlin-android-extensions'
+apply plugin : "com.android.application"
+apply plugin : "kotlin-android"
+apply plugin : "kotlin-android-extensions"
 
 android {
   compileSdkVersion sdk.compile
@@ -36,14 +36,14 @@ android {
   buildTypes {
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
     }
   }
 
   sourceSets {
-    main.java.srcDirs += 'src/main/kotlin'
-    test.java.srcDirs += 'src/test/kotlin'
-    androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    main.java.srcDirs += "src/main/kotlin"
+    test.java.srcDirs += "src/test/kotlin"
+    androidTest.java.srcDirs += "src/androidTest/kotlin"
   }
 
   compileOptions {
@@ -53,8 +53,8 @@ android {
 }
 
 dependencies {
-  implementation fileTree(dir : 'libs', include : ['*.jar'])
-  implementation project(':core-ext')
+  implementation fileTree(dir : "libs", include : ["*.jar"])
+  implementation project(":core-ext")
 
   implementation dep.androidx.appcompat
   implementation dep.androidx.viewpager

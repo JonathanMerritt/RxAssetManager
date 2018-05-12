@@ -14,14 +14,14 @@
  *     limitations under the License.
  */
 
-apply plugin : 'com.jfrog.bintray'
+apply plugin : "com.jfrog.bintray"
 
 version = ver.name
 
 bintray {
   user = dev.name
   key = dev.pass.bintray
-  configurations = ['archives']
+  configurations = ["archives"]
   publish = true
 
   pkg {
@@ -35,7 +35,7 @@ bintray {
     labels = rep.labels
     publicDownloadNumbers = true
     githubRepo = "$dev.name/$rep.name"
-    githubReleaseNotesFile = 'RELEASES.md'
+    githubReleaseNotesFile = "RELEASES.md"
 
     version {
       name = ver.name
