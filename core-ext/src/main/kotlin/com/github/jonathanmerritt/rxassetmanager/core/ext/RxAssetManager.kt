@@ -322,9 +322,11 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
       listFiles(path, all).filter(String::isXml).flatMapMaybe { openXmlResourceParserPair(cookie, it) }
 
 
+  // Will list or list all file paths.
   private fun listFiles(path: String, all: Boolean): Flowable<String> =
       (if (all) listAll(path, Depth) else listPath(path)).filter(String::isFile)
 
+  // Will list paths, then it either combines it into a new path or does nothing.
   private fun listPath(path: String): Flowable<String> =
       list(path).map { if (path.isBlank() || path == "/") it else "$path/$it" }
 }
