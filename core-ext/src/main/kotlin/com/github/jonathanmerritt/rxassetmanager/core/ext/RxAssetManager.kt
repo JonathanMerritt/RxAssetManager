@@ -328,5 +328,5 @@ class RxAssetManager : rxAssetManager, IsRxAssetManager {
 
   // Will list paths, then it either combines it into a new path or does nothing.
   private fun listPath(path: String): Flowable<String> =
-      list(path).map { if (path.isBlank() || path == "/") it else "$path/$it" }
+      list(path).map { if (path.isNotBlank() && path != "/") "$path/$it" else it }
 }

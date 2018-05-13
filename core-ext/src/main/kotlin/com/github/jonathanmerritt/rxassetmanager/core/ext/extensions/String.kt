@@ -16,7 +16,7 @@
 
 package com.github.jonathanmerritt.rxassetmanager.core.ext.extensions
 
-internal fun String.isXml() = endsWith(".xml")
-internal fun String.isFile() = contains(".")
-internal fun String.isImage() = endsWith(".jpg") || endsWith(".png") || endsWith(".bmp")
-internal fun String.isFont() = endsWith(".ttf") || endsWith(".otf")
+internal fun String.isXml() = isNotBlank() && endsWith(".xml")
+internal fun String.isFile() = isNotBlank() && contains(".")
+internal fun String.isImage() = isNotBlank() && (endsWith(".jpg") || endsWith(".png") || endsWith(".bmp"))
+internal fun String.isFont() = isNotBlank() && (endsWith(".ttf") || endsWith(".otf"))

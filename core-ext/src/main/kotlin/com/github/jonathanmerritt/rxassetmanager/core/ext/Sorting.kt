@@ -22,10 +22,10 @@ package com.github.jonathanmerritt.rxassetmanager.core.ext
  * This class implements a Comparator<String>, and compares file path/name strings based on its type.
  */
 sealed class Sorting : Comparator<String> {
-  override fun compare(s1: String, s2: String) = when (this) {
+  override fun compare(s1: String?, s2: String?) = if (s1 != null && s2 != null) when (this) {
+    is Normal -> 0
     is Depth -> compareValuesBy(s1, s2, { it.length - it.replace("/", "").length })
-    else -> 0
-  }
+  } else 0
 }
 
 /**
