@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
     setSupportActionBar(toolbar)
     tablayout.setupWithViewPager(pager.apply {
       adapter = object : FragmentStatePagerAdapter(supportFragmentManager) {
-        val pairs = arrayListOf(R.string.core to CoreFragment(), R.string.core_ext to CoreExtFragment())
+        val pairs = arrayOf(R.string.core to CoreFragment(), R.string.core_ext to CoreExtFragment())
         override fun getCount() = pairs.size
-        override fun getItem(position: Int) = pairs[position].second
         override fun getPageTitle(position: Int) = getString(pairs[position].first)
+        override fun getItem(position: Int) = pairs[position].second
       }
     })
   }
