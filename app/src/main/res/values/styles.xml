@@ -28,7 +28,8 @@
   <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.ActionBar"/>
 
   <style name="Button" parent="Widget.AppCompat.Button.Borderless.Colored">
-    <item name="android:layout_margin">6dp</item>
-    <item name="android:minLines">4</item>
+    <item name="android:layout_margin">4dp</item>
+    <item name="android:minLines">3</item>
+    <item name="android:textSize">16sp</item>
   </style>
 </resources>
