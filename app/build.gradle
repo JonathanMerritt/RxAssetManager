@@ -56,13 +56,13 @@ dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
   implementation project(":core-ext")
 
-  implementation DEP.androidx.appcompat
-  implementation DEP.androidx.viewpager
-  implementation DEP.androidx.coordinator
-  implementation DEP.androidx.material
-  implementation DEP.androidx.constraint
+  implementation ANDROIDX.appcompat
+  implementation ANDROIDX.viewpager
+  implementation ANDROIDX.coordinator
+  implementation ANDROIDX.material
+  implementation ANDROIDX.constraint
 
-  implementation DEP.kotlin.stdlib
+  implementation KOTLIN.stdlib
 
-  implementation DEP.rxjava2
+  implementation RXJAVA2
 }

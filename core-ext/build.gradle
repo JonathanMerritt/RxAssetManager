@@ -24,7 +24,7 @@ android {
   defaultConfig {
     minSdkVersion SDK.min
     targetSdkVersion SDK.target
-    versionCode VERSION.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
+    versionCode VERSION_CODE
     versionName VERSION
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -58,9 +58,9 @@ dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
   api project(":core")
 
-  implementation DEP.kotlin.stdlib
+  implementation KOTLIN.stdlib
 
-  implementation DEP.rxjava2
+  implementation RXJAVA2
 }
 
 apply from : "../gradle/dokka.gradle"
