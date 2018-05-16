@@ -16,36 +16,36 @@
 
 apply plugin : "com.github.dcendents.android-maven"
 
-group = REP.id
+group = GROUP
 
 install.repositories.mavenInstaller {
   pom.project {
     packaging "aar"
-    groupId REP.id
-    artifactId LIB.name
-    name LIB.name
-    description LIB.desc
-    url "https://github.com/$DEV.name/$REP.name/tree/master/$LIB.name"
+    groupId GROUP
+    artifactId project.name
+    name project.name
+    description DESC
+    url URL
 
     licenses {
       license {
-        name REP.licenses.join(", ")
-        url "https://github.com/$DEV.name/$REP.name/blob/master/LICENSE.txt"
+        name LICENCE
+        url LICENCE_URL
       }
     }
 
     developers {
       developer {
-        id DEV.name
-        name DEV.name
-        email DEV.email
+        id DEVELOPER
+        name DEVELOPER
+        email DEVELOPER_EMAIL
       }
     }
 
     scm {
-      connection "scm:git:git://github.com/$DEV.name/${REP.name}.git"
-      developerConnection "scm:git:git@github.com/$DEV.name/${REP.name}.git"
-      url "https://github.com/$DEV.name/$REP.name/tree/master/$LIB.name"
+      connection SCM
+      developerConnection SCM_DEV
+      url URL
     }
   }
 }

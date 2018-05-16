@@ -24,8 +24,8 @@ android {
   defaultConfig {
     minSdkVersion SDK.min
     targetSdkVersion SDK.target
-    versionCode VER.code
-    versionName VER.name
+    versionCode VERSION.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
+    versionName VERSION
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }

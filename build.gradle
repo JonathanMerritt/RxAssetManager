@@ -15,31 +15,11 @@
  */
 
 buildscript {
-  /* DEVELOPER */
-  def DEV = [:]
-  DEV.name = "jonathanmerritt"
-  DEV.email = "11r00tt00r11@gmail.com"
 
-  // properties
-  def p = new Properties()
-  p.load(file("local.properties").newDataInputStream())
-
-  // passwords
-  def pass = [:]
-  pass.bintray = p.getProperty("pass.bintray")
-  pass.gpg = p.getProperty("pass.gpg")
-  pass.maven = p.getProperty("pass.maven")
-  DEV.pass = pass
-  ext.DEV = DEV
-
-  /* REPOSITORY */
-  def REP = [:]
-  REP.name = rootProject.name
-  REP.id = "com.github.${DEV.name}.${REP.name.toLowerCase()}"
-  REP.labels = ["android", "android-library", "asset", "assets", "assetmanager", "assetsmanager", "android-asset",
-                "android-assets", "android-asset-manager", "android-assets-manager"]
-  REP.licenses = ["Apache-2.0"]
-  ext.REP = REP
+  // LOCAL PROPERTIES
+  def LOCAL = new Properties()
+  LOCAL.load(file("local.properties").newDataInputStream())
+  ext.LOCAL = LOCAL
 
   /* SDKS */
   def SDK = [:]
@@ -109,20 +89,6 @@ subprojects {
     google()
     jcenter()
     mavenCentral()
-  }
-
-  beforeEvaluate {
-    /* LIBRARY */
-    def LIB = [:]
-    LIB.name = name
-    LIB.desc = "${REP.name}s' $LIB.name library"
-    ext.LIB = LIB
-
-    /* VERSION */
-    def VER = [:]
-    VER.name = LIB.name.contains("app") ? "2.0.0" : "0.6.0"
-    VER.code = VER.name.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
-    ext.VER = VER
   }
 }
 

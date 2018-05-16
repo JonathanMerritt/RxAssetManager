@@ -25,10 +25,10 @@ android {
   defaultConfig {
     minSdkVersion SDK.min
     targetSdkVersion SDK.target
-    versionCode VER.code
-    versionName VER.name
+    versionCode 200
+    versionName "2.0.0"
 
-    applicationId REP.id
+    applicationId GROUP
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
