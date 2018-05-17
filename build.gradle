@@ -15,10 +15,10 @@
  */
 
 buildscript {
-  def LOCAL = new File("local.properties")
+  def local = new File("local.properties")
   Properties properties = new Properties()
-  if (LOCAL.exists()) properties.load(LOCAL.newDataInputStream())
-  ext.LOCAL = { properties?.getProperty it }
+  if (local.exists()) properties.load(local.newDataInputStream())
+  ext.PROPERTY = { properties?.getProperty it }
 
   ext.VERSION_CODE = VERSION.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
 
