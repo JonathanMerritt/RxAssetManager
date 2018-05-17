@@ -20,7 +20,7 @@ version = VERSION
 
 bintray {
   user = DEVELOPER
-  key = LOCAL("BINTRAY")
+  key = PROPERTY("BINTRAY")
   configurations = ["archives"]
   publish = true
 
@@ -43,13 +43,13 @@ bintray {
 
       gpg {
         sign = true
-        passphrase = LOCAL("GPG")
+        passphrase = PROPERTY("GPG")
       }
 
       mavenCentralSync {
         sync = false
         user = DEVELOPER
-        password = LOCAL("MAVEN")
+        password = PROPERTY("MAVEN")
       }
     }
   }
