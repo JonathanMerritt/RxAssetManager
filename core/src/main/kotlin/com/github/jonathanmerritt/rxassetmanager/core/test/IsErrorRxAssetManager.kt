@@ -30,22 +30,32 @@ import java.io.InputStream
 interface IsErrorRxAssetManager : IsRxAssetManager {
   object ErrorRxAssetManager : IsErrorRxAssetManager
 
-  val throwable get() = { Throwable(javaClass.simpleName) }
+  override fun getLocales(): Flowable<String> = Flowable.error(Throwable("getLocales()"))
+  override fun close(): Completable = Completable.error(Throwable("close()"))
+  override fun open(path: String, mode: Int): Maybe<InputStream> = error(
+      Throwable("open(path = $path, mode = $mode)"))
 
-  override fun getLocales(): Flowable<String> = Flowable.error(throwable)
-  override fun close(): Completable = Completable.error(throwable)
-  override fun open(path: String, mode: Int): Maybe<InputStream> = error(throwable)
-  override fun openPair(path: String, mode: Int): Maybe<Pair<String, InputStream>> = error(throwable)
-  override fun openTypeface(path: String): Maybe<Typeface> = error(throwable)
-  override fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> = error(throwable)
-  override fun openFd(path: String): Maybe<AssetFileDescriptor> = error(throwable)
-  override fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> = error(throwable)
-  override fun list(path: String): Flowable<String> = Flowable.error(throwable)
-  override fun openNonAssetFd(cookie: Int, path: String): Maybe<AssetFileDescriptor> = error(throwable)
+  override fun openPair(path: String, mode: Int): Maybe<Pair<String, InputStream>> = error(
+      Throwable("openPair(path = $path, mode = $mode)"))
+
+  override fun openTypeface(path: String): Maybe<Typeface> = error(Throwable("openTypeface(path = $path)"))
+  override fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> = error(
+      Throwable("openTypefacePair(path = $path)"))
+
+  override fun openFd(path: String): Maybe<AssetFileDescriptor> = error(Throwable("openFd(path = $path"))
+  override fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> = error(
+      Throwable("openFdPair(path = $path)"))
+
+  override fun list(path: String): Flowable<String> = Flowable.error(Throwable("list(path = $path)"))
+  override fun openNonAssetFd(cookie: Int, path: String): Maybe<AssetFileDescriptor> = error(
+      Throwable("openNonAssetFd(cookie = $cookie, path = $path)"))
+
   override fun openNonAssetFdPair(cookie: Int, path: String): Maybe<Pair<String, AssetFileDescriptor>> =
-      error(throwable)
+      error(Throwable("openNonAssetFdPair(cookie = $cookie, path = $path)"))
 
-  override fun openXmlResourceParser(cookie: Int, path: String): Maybe<XmlResourceParser> = error(throwable)
+  override fun openXmlResourceParser(cookie: Int, path: String): Maybe<XmlResourceParser> = error(
+      Throwable("openXmlResourceParser(cookie = $cookie, path = $path)"))
+
   override fun openXmlResourceParserPair(cookie: Int, path: String): Maybe<Pair<String, XmlResourceParser>> =
-      error(throwable)
+      error(Throwable("openXmlResourceParserPair(cookie = $cookie, path = $path)"))
 }

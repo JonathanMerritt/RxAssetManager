@@ -33,54 +33,86 @@ import com.github.jonathanmerritt.rxassetmanager.core.test.IsErrorRxAssetManager
 interface IsErrorRxAssetManager : isErrorRxAssetManager, IsRxAssetManager {
   object ErrorRxAssetManager : IsErrorRxAssetManager
 
-  override fun openString(path: String, mode: Int): Maybe<String> = Maybe.error(throwable)
-  override fun openStringPair(path: String, mode: Int): Maybe<Pair<String, String>> = Maybe.error(throwable)
-  override fun openBytes(path: String, mode: Int): Maybe<ByteArray> = Maybe.error(throwable)
-  override fun openBytesPair(path: String, mode: Int): Maybe<Pair<String, ByteArray>> = Maybe.error(throwable)
-  override fun openSave(path: String, mode: Int, to: String): Maybe<File> = Maybe.error(throwable)
-  override fun openSavePair(path: String, mode: Int, to: String): Maybe<Pair<String, File>> = Maybe.error(
-      throwable)
+  override fun openString(path: String, mode: Int): Maybe<String> =
+      Maybe.error(Throwable("openString(path = $path, mode = $mode)"))
 
-  override fun openBitmap(path: String, mode: Int): Maybe<Bitmap> = Maybe.error(throwable)
-  override fun openBitmapPair(path: String, mode: Int): Maybe<Pair<String, Bitmap>> = Maybe.error(throwable)
-  override fun listAll(path: String, sorting: Sorting): Flowable<String> = error(throwable)
-  override fun listOpen(path: String, mode: Int, all: Boolean): Flowable<InputStream> = error(throwable)
+  override fun openStringPair(path: String, mode: Int): Maybe<Pair<String, String>> =
+      Maybe.error(Throwable("openStringPair(path = $path, mode = $mode)"))
+
+  override fun openBytes(path: String, mode: Int): Maybe<ByteArray> =
+      Maybe.error(Throwable("openBytes(path = $path, mode = $mode)"))
+
+  override fun openBytesPair(path: String, mode: Int): Maybe<Pair<String, ByteArray>> =
+      Maybe.error(Throwable("openBytesPair(path = $path, mode = $mode)"))
+
+  override fun openSave(path: String, mode: Int, to: String): Maybe<File> =
+      Maybe.error(Throwable("openSave(path = $path, mode = $mode, to = $to)"))
+
+  override fun openSavePair(path: String, mode: Int, to: String): Maybe<Pair<String, File>> =
+      Maybe.error(Throwable("openSavePair(path = $path, mode = $mode, to = $to)"))
+
+  override fun openBitmap(path: String, mode: Int): Maybe<Bitmap> =
+      Maybe.error(Throwable("openBitmap(path = $path, mode = $mode)"))
+
+  override fun openBitmapPair(path: String, mode: Int): Maybe<Pair<String, Bitmap>> =
+      Maybe.error(Throwable("openBitmapPair(path = $path, mode = $mode)"))
+
+  override fun listAll(path: String, sorting: Sorting): Flowable<String> =
+      error(Throwable("listAll(path = $path, sorting = $sorting)"))
+
+  override fun listOpen(path: String, mode: Int, all: Boolean): Flowable<InputStream> =
+      error(Throwable("listOpen(path = $path, mode = $mode, all = $all)"))
+
   override fun listOpenPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, InputStream>> =
-      error(throwable)
+      error(Throwable("listOpenPair(path = $path, mode = $mode, all = $all)"))
 
-  override fun listOpenString(path: String, mode: Int, all: Boolean): Flowable<String> = error(throwable)
+  override fun listOpenString(path: String, mode: Int, all: Boolean): Flowable<String> =
+      error(Throwable("listOpenString(path = $path, mode = $mode, all = $all)"))
+
   override fun listOpenStringPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, String>> =
-      error(throwable)
+      error(Throwable("listOpenStringPair(path = $path, mode = $mode, all = $all)"))
 
-  override fun listOpenBytes(path: String, mode: Int, all: Boolean): Flowable<ByteArray> = error(throwable)
+  override fun listOpenBytes(path: String, mode: Int, all: Boolean): Flowable<ByteArray> =
+      error(Throwable("listOpenBytes(path = $path, mode = $mode, all = $all)"))
+
   override fun listOpenBytesPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, ByteArray>> =
-      error(throwable)
+      error(Throwable("listOpenBytesPair(path = $path, mode = $mode, all = $all)"))
 
-  override fun listOpenSave(path: String, mode: Int, to: String, all: Boolean): Flowable<File> = error(throwable)
+  override fun listOpenSave(path: String, mode: Int, to: String, all: Boolean): Flowable<File> =
+      error(Throwable("listOpenSave(path = $path, mode = $mode, to = $to, all = $all)"))
+
   override fun listOpenSavePair(path: String, mode: Int, to: String, all: Boolean): Flowable<Pair<String, File>> =
-      error(throwable)
+      error(Throwable("listOpenSavePair(path = $path, mode = $mode, to = $to, all = $all)"))
 
-  override fun listOpenBitmap(path: String, mode: Int, all: Boolean): Flowable<Bitmap> = error(throwable)
+  override fun listOpenBitmap(path: String, mode: Int, all: Boolean): Flowable<Bitmap> =
+      error(Throwable("listOpenBitmap(path = $path, mode = $mode, all = $all)"))
+
   override fun listOpenBitmapPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, Bitmap>> =
-      error(throwable)
+      error(Throwable("listOpenBitmapPair(path = $path, mode = $mode, all = $all)"))
 
-  override fun listOpenTypeface(path: String, all: Boolean): Flowable<Typeface> = error(throwable)
-  override fun listOpenTypefacePair(path: String, all: Boolean): Flowable<Pair<String, Typeface>> = error(
-      throwable)
+  override fun listOpenTypeface(path: String, all: Boolean): Flowable<Typeface> =
+      error(Throwable("listOpenTypeface(path = $path, all = $all)"))
 
-  override fun listOpenFd(path: String, all: Boolean): Flowable<AssetFileDescriptor> = error(throwable)
+  override fun listOpenTypefacePair(path: String, all: Boolean): Flowable<Pair<String, Typeface>> =
+      error(Throwable("listOpenTypefacePair(path = $path, all = $all)"))
+
+  override fun listOpenFd(path: String, all: Boolean): Flowable<AssetFileDescriptor> =
+      error(Throwable("listOpenFd(path = $path, all = $all)"))
+
   override fun listOpenFdPair(path: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
-      error(throwable)
+      error(Throwable("listOpenFdPair(path = $path, all = $all)"))
 
   override fun listOpenNonAssetFd(cookie: Int, path: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      error(throwable)
+      error(Throwable("listOpenNonAssetFd(cookie = $cookie, path = $path, all = $all)"))
 
-  override fun listOpenNonAssetFdPair(cookie: Int, path: String, all: Boolean):
-      Flowable<Pair<String, AssetFileDescriptor>> = error(throwable)
+  override fun listOpenNonAssetFdPair(cookie: Int, path: String,
+      all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
+      error(Throwable("listOpenNonAssetFdPair(cookie = $cookie, path = $path, all = $all)"))
 
   override fun listOpenXmlResourceParser(cookie: Int, path: String, all: Boolean): Flowable<XmlResourceParser> =
-      error(throwable)
+      error(Throwable("listOpenXmlResourceParser(cookie = $cookie, path = $path, all = $all)"))
 
-  override fun listOpenXmlResourceParserPair(cookie: Int, path: String, all: Boolean):
-      Flowable<Pair<String, XmlResourceParser>> = error(throwable)
+  override fun listOpenXmlResourceParserPair(cookie: Int, path: String,
+      all: Boolean): Flowable<Pair<String, XmlResourceParser>> =
+      error(Throwable("listOpenXmlResourceParserPair(cookie = $cookie, path = $path, all = $all)"))
 }
