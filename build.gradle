@@ -22,38 +22,6 @@ buildscript {
 
   ext.VERSION_CODE = VERSION.replace(".", "").concat(new Date().format("MMddyy")).toBigInteger()
 
-  def SDK = [:]
-  SDK.compile = "android-P"
-  SDK.target = 27
-  SDK.min = 17
-  SDK.tools = "28.0.0-rc2"
-  ext.SDK = SDK
-
-  def versions = [:]
-  versions.androidx = "1.0.0-alpha1"
-  versions.appcompat = versions.androidx
-  versions.viewpager = versions.androidx
-  versions.coordinator = versions.androidx
-  versions.material = versions.androidx
-  versions.constraint = "1.1.0"
-  versions.kotlin = "1.2.41"
-
-  def ANDROIDX = [:]
-  ANDROIDX.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
-  ANDROIDX.viewpager = "androidx.viewpager:viewpager:$versions.viewpager"
-  ANDROIDX.coordinator = "androidx.coordinatorlayout:coordinatorlayout:$versions.coordinator"
-  ANDROIDX.material = "com.google.android.material:material:$versions.material"
-  ANDROIDX.constraint = ["androidx.constraintlayout:constraintlayout:$versions.constraint",
-                         "androidx.constraintlayout:constraintlayout-solver:$versions.constraint"]
-  ext.ANDROIDX = ANDROIDX
-
-  def KOTLIN = [:]
-  KOTLIN.gradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-  KOTLIN.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
-  ext.KOTLIN = KOTLIN
-
-  ext.RXJAVA2 = ["io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1"]
-
   repositories {
     google()
     jcenter()
@@ -64,7 +32,7 @@ buildscript {
     classpath "com.android.tools.build:gradle:3.2.0-alpha15"
     classpath "com.github.dcendents:android-maven-gradle-plugin:2.0"
     classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0"
-    classpath KOTLIN.gradle
+    classpath Deps.kotlinPlugin
     classpath "org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.16"
   }
 }
