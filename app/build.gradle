@@ -19,12 +19,12 @@ apply plugin : "kotlin-android"
 apply plugin : "kotlin-android-extensions"
 
 android {
-  compileSdkVersion SDK.compile
-  buildToolsVersion SDK.tools
+  compileSdkVersion Sdks.compile
+  buildToolsVersion Sdks.tools
 
   defaultConfig {
-    minSdkVersion SDK.min
-    targetSdkVersion SDK.target
+    minSdkVersion Sdks.min
+    targetSdkVersion Sdks.target
     versionCode VERSION_CODE
     versionName VERSION
 
@@ -56,13 +56,13 @@ dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
   implementation project(":core-ext")
 
-  implementation ANDROIDX.appcompat
-  implementation ANDROIDX.viewpager
-  implementation ANDROIDX.coordinator
-  implementation ANDROIDX.material
-  implementation ANDROIDX.constraint
+  implementation Deps.appcompat
+  implementation Deps.viewpager
+  implementation Deps.coordinator
+  implementation Deps.material
+  implementation Deps.constraint
 
-  implementation KOTLIN.stdlib
+  implementation Deps.kotlin
 
-  implementation RXJAVA2
+  implementation Deps.rxjava
 }
