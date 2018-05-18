@@ -22,14 +22,10 @@ import android.graphics.Bitmap
 import android.graphics.Bitmap.Config.ARGB_8888
 import android.graphics.Bitmap.createBitmap
 import android.graphics.Typeface
-import android.graphics.Typeface.DEFAULT
 import com.github.jonathanmerritt.rxassetmanager.core.ext.IsRxAssetManager
 import com.github.jonathanmerritt.rxassetmanager.core.ext.Sorting
-import com.github.jonathanmerritt.rxassetmanager.core.test.IsSuccessRxAssetManager.Companion.EmptyAssetFileDescriptor
-import com.github.jonathanmerritt.rxassetmanager.core.test.IsSuccessRxAssetManager.Companion.EmptyInputStream
-import com.github.jonathanmerritt.rxassetmanager.core.test.IsSuccessRxAssetManager.Companion.EmptyXmlResourceParser
+import com.github.jonathanmerritt.rxassetmanager.core.test.IsSuccessRxAssetManager.Companion.successString
 import io.reactivex.Flowable
-import io.reactivex.Flowable.just
 import io.reactivex.Maybe
 import java.io.File
 import java.io.InputStream
@@ -40,76 +36,81 @@ interface IsSuccessRxAssetManager : isSuccessRxAssetManager, IsRxAssetManager {
   object SuccessRxAssetManager : IsSuccessRxAssetManager
 
   companion object {
-    val emptyBytes: ByteArray = byteArrayOf(0)
-    val emptyFile = File("emptyFile")
-    val emptyBitmap: Bitmap = createBitmap(1, 1, ARGB_8888)
+    val successBytes: ByteArray = byteArrayOf(0)
+    val successFile = File("successFile")
+    val successBitmap: Bitmap = createBitmap(1, 1, ARGB_8888)
   }
 
-  override fun openString(path: String, mode: Int): Maybe<String> = Maybe.just("")
-  override fun openStringPair(path: String, mode: Int): Maybe<Pair<String, String>> = Maybe.just(path to "")
-  override fun openBytes(path: String, mode: Int): Maybe<ByteArray> = Maybe.just(emptyBytes)
+  override fun openString(path: String, mode: Int): Maybe<String> = Maybe.just(successString)
+  override fun openStringPair(path: String, mode: Int): Maybe<Pair<String, String>> =
+      Maybe.just(path to successString)
+
+  override fun openBytes(path: String, mode: Int): Maybe<ByteArray> = Maybe.just(successBytes)
   override fun openBytesPair(path: String, mode: Int): Maybe<Pair<String, ByteArray>> =
-      Maybe.just(path to emptyBytes)
+      Maybe.just(path to successBytes)
 
-  override fun openSave(path: String, mode: Int, to: String): Maybe<File> = Maybe.just(emptyFile)
+  override fun openSave(path: String, mode: Int, to: String): Maybe<File> = Maybe.just(successFile)
   override fun openSavePair(path: String, mode: Int, to: String): Maybe<Pair<String, File>> =
-      Maybe.just(path to emptyFile)
+      Maybe.just(path to successFile)
 
-  override fun openBitmap(path: String, mode: Int): Maybe<Bitmap> = Maybe.just(emptyBitmap)
+  override fun openBitmap(path: String, mode: Int): Maybe<Bitmap> = Maybe.just(successBitmap)
   override fun openBitmapPair(path: String, mode: Int): Maybe<Pair<String, Bitmap>> =
-      Maybe.just(path to emptyBitmap)
+      Maybe.just(path to successBitmap)
 
-  override fun listAll(path: String, sorting: Sorting): Flowable<String> = just("", "")
+  override fun listAll(path: String, sorting: Sorting): Flowable<String> = list(path).repeat(4)
   override fun listOpen(path: String, mode: Int, all: Boolean): Flowable<InputStream> =
-      just(EmptyInputStream, EmptyInputStream)
+      listAll(path).flatMapMaybe { open(path, mode) }
 
   override fun listOpenPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, InputStream>> =
-      just(path to EmptyInputStream, path to EmptyInputStream)
+      listAll(path).flatMapMaybe { openPair(path, mode) }
 
-  override fun listOpenString(path: String, mode: Int, all: Boolean): Flowable<String> = just("", "")
+  override fun listOpenString(path: String, mode: Int, all: Boolean): Flowable<String> =
+      listAll(path).flatMapMaybe { openString(path, mode) }
+
   override fun listOpenStringPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, String>> =
-      just(path to "", path to "")
+      listAll(path).flatMapMaybe { openStringPair(path, mode) }
 
   override fun listOpenBytes(path: String, mode: Int, all: Boolean): Flowable<ByteArray> =
-      just(emptyBytes, emptyBytes)
+      listAll(path).flatMapMaybe { openBytes(path, mode) }
 
   override fun listOpenBytesPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, ByteArray>> =
-      just(path to emptyBytes, path to emptyBytes)
+      listAll(path).flatMapMaybe { openBytesPair(path, mode) }
 
   override fun listOpenSave(path: String, mode: Int, to: String, all: Boolean): Flowable<File> =
-      just(emptyFile, emptyFile)
+      listAll(path).flatMapMaybe { openSave(path, mode, to) }
 
   override fun listOpenSavePair(path: String, mode: Int, to: String, all: Boolean): Flowable<Pair<String, File>> =
-      just(path to emptyFile, path to emptyFile)
+      listAll(path).flatMapMaybe { openSavePair(path, mode, to) }
 
   override fun listOpenBitmap(path: String, mode: Int, all: Boolean): Flowable<Bitmap> =
-      just(emptyBitmap, emptyBitmap)
+      listAll(path).flatMapMaybe { openBitmap(path, mode) }
 
   override fun listOpenBitmapPair(path: String, mode: Int, all: Boolean): Flowable<Pair<String, Bitmap>> =
-      just(path to emptyBitmap, path to emptyBitmap)
+      listAll(path).flatMapMaybe { openBitmapPair(path, mode) }
 
-  override fun listOpenTypeface(path: String, all: Boolean): Flowable<Typeface> = just(DEFAULT, DEFAULT)
+  override fun listOpenTypeface(path: String, all: Boolean): Flowable<Typeface> =
+      listAll(path).flatMapMaybe(::openTypeface)
 
   override fun listOpenTypefacePair(path: String, all: Boolean): Flowable<Pair<String, Typeface>> =
-      just(path to DEFAULT, path to DEFAULT)
+      listAll(path).flatMapMaybe(::openTypefacePair)
 
   override fun listOpenFd(path: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      just(EmptyAssetFileDescriptor, EmptyAssetFileDescriptor)
+      listAll(path).flatMapMaybe(::openFd)
 
   override fun listOpenFdPair(path: String, all: Boolean): Flowable<Pair<String, AssetFileDescriptor>> =
-      just(path to EmptyAssetFileDescriptor, path to EmptyAssetFileDescriptor)
+      listAll(path).flatMapMaybe(::openFdPair)
 
   override fun listOpenNonAssetFd(cookie: Int, path: String, all: Boolean): Flowable<AssetFileDescriptor> =
-      just(EmptyAssetFileDescriptor, EmptyAssetFileDescriptor)
+      listAll(path).flatMapMaybe { openNonAssetFd(cookie, path) }
 
   override fun listOpenNonAssetFdPair(cookie: Int, path: String, all: Boolean):
       Flowable<Pair<String, AssetFileDescriptor>> =
-      just(path to EmptyAssetFileDescriptor, path to EmptyAssetFileDescriptor)
+      listAll(path).flatMapMaybe { openNonAssetFdPair(cookie, path) }
 
   override fun listOpenXmlResourceParser(cookie: Int, path: String, all: Boolean): Flowable<XmlResourceParser> =
-      just(EmptyXmlResourceParser, EmptyXmlResourceParser)
+      listAll(path).flatMapMaybe { openXmlResourceParser(cookie, path) }
 
   override fun listOpenXmlResourceParserPair(cookie: Int, path: String, all: Boolean):
       Flowable<Pair<String, XmlResourceParser>> =
-      just(path to EmptyXmlResourceParser, path to EmptyXmlResourceParser)
+      listAll(path).flatMapMaybe { openXmlResourceParserPair(cookie, path) }
 }

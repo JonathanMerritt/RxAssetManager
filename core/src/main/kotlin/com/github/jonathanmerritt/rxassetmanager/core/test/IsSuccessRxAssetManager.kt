@@ -34,12 +34,14 @@ interface IsSuccessRxAssetManager : IsRxAssetManager {
   object SuccessRxAssetManager : IsSuccessRxAssetManager
 
   companion object {
-    object EmptyInputStream : InputStream() {
+    const val successString = "successString"
+    object SuccessInputStream : InputStream() {
       override fun read() = 0
     }
 
-    object EmptyAssetFileDescriptor : AssetFileDescriptor(fromFd(0), 0L, 0L)
-    object EmptyXmlResourceParser : XmlResourceParser {
+    val successTypeface: Typeface = DEFAULT
+    object SuccessAssetFileDescriptor : AssetFileDescriptor(fromFd(0), 0L, 0L)
+    object SuccessXmlResourceParser : XmlResourceParser {
       override fun isWhitespace() = false
       override fun getAttributePrefix(p0: Int) = ""
       override fun getAttributeUnsignedIntValue(p0: String?, p1: String?, p2: Int) = 0
@@ -98,26 +100,28 @@ interface IsSuccessRxAssetManager : IsRxAssetManager {
     }
   }
 
-  override fun getLocales(): Flowable<String> = Flowable.just("", "")
+  override fun getLocales(): Flowable<String> = Flowable.just(successString).repeat(4)
   override fun close(): Completable = Completable.complete()
-  override fun open(path: String, mode: Int): Maybe<InputStream> = just(EmptyInputStream)
-  override fun openPair(path: String, mode: Int): Maybe<Pair<String, InputStream>> = just(path to EmptyInputStream)
-  override fun openTypeface(path: String): Maybe<Typeface> = just(DEFAULT)
-  override fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> = just(path to DEFAULT)
-  override fun openFd(path: String): Maybe<AssetFileDescriptor> = just(EmptyAssetFileDescriptor)
-  override fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> =
-      just(path to EmptyAssetFileDescriptor)
+  override fun open(path: String, mode: Int): Maybe<InputStream> = just(SuccessInputStream)
+  override fun openPair(path: String, mode: Int): Maybe<Pair<String, InputStream>> =
+      just(path to SuccessInputStream)
 
-  override fun list(path: String): Flowable<String> = Flowable.just("", "")
+  override fun openTypeface(path: String): Maybe<Typeface> = just(successTypeface)
+  override fun openTypefacePair(path: String): Maybe<Pair<String, Typeface>> = just(path to successTypeface)
+  override fun openFd(path: String): Maybe<AssetFileDescriptor> = just(SuccessAssetFileDescriptor)
+  override fun openFdPair(path: String): Maybe<Pair<String, AssetFileDescriptor>> =
+      just(path to SuccessAssetFileDescriptor)
+
+  override fun list(path: String): Flowable<String> = Flowable.just(successString).repeat(4)
   override fun openNonAssetFd(cookie: Int, path: String): Maybe<AssetFileDescriptor> =
-      just(EmptyAssetFileDescriptor)
+      just(SuccessAssetFileDescriptor)
 
   override fun openNonAssetFdPair(cookie: Int, path: String): Maybe<Pair<String, AssetFileDescriptor>> =
-      just(path to EmptyAssetFileDescriptor)
+      just(path to SuccessAssetFileDescriptor)
 
   override fun openXmlResourceParser(cookie: Int, path: String): Maybe<XmlResourceParser> =
-      just(EmptyXmlResourceParser)
+      just(SuccessXmlResourceParser)
 
   override fun openXmlResourceParserPair(cookie: Int, path: String): Maybe<Pair<String, XmlResourceParser>> =
-      just(path to EmptyXmlResourceParser)
+      just(path to SuccessXmlResourceParser)
 }
