@@ -35,13 +35,9 @@ private object ANDROID {
 
 @Suppress("unused")
 private object PASSKEY {
-  private val property: (String) -> String = {
-    Properties().apply { File("./local.properties").run { if (exists()) load(inputStream()) } }.getProperty(it)
-  }
-
-  private val BINTRAY = property("PASSKEY_BINTRAY")
-  private val GPG = property("PASSKEY_GPG")
-  private val MAVEN = property("PASSKEY_MAVEN")
+  private val BINTRAY = Property("PASSKEY_BINTRAY")
+  private val GPG = Property("PASSKEY_GPG")
+  private val MAVEN = Property("PASSKEY_MAVEN")
 }
 
 @Suppress("unused")
@@ -63,4 +59,9 @@ private object DEPENDENCY {
   private const val KOTLIN_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$vKOTLIN"
 
   private val RX_JAVAS = arrayOf("io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1")
+}
+
+private object Property: Properties() {
+ operator fun invoke(name: String): String = apply {
+   File("local.properties").run { if (exists()) inputStream().use(::load) } }.getProperty(name)
 }
