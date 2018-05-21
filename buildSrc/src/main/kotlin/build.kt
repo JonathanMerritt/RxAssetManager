@@ -62,10 +62,10 @@ private object DEPENDENCY {
   )
 
   private const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${VERSION.kotlin}"
+  private const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${VERSION.kotlin}"
   private const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${VERSION.kotlin}"
 
   private val rxjavas = arrayOf("io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1")
-
 
   private val tests = arrayOf(
       "junit:junit:4.12",

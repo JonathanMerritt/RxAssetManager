@@ -58,8 +58,10 @@ dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
 
   implementation DEPENDENCY.kotlin
+  testImplementation DEPENDENCY.kotlinTest
 
   implementation DEPENDENCY.rxjavas
+  testImplementation DEPENDENCY.tests
 }
 
 apply from : "../gradle/dokka.gradle"
