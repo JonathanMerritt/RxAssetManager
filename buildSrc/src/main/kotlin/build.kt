@@ -22,7 +22,7 @@ import java.util.Properties
 @Suppress("unused")
 private object VERSION {
   private const val NAME = "0.6.0"
-  private val CODE = NAME.replace(".", "").plus(now().format(BASIC_ISO_DATE)).toBigInteger()
+  private val CODE = (NAME.replace(".", "") + now().format(BASIC_ISO_DATE)).toBigInteger()
 }
 
 @Suppress("unused")
