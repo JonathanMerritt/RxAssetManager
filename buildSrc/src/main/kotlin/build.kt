@@ -55,24 +55,11 @@ private object DEPENDENCY {
   private val constraints = arrayOf("androidx.constraintlayout:constraintlayout:${VERSION.constraints}",
       "androidx.constraintlayout:constraintlayout-solver:${VERSION.constraints}"
   )
-  private const val espresso = "androidx.test.espresso:espresso-core:3.1.0-alpha2"
-
-  private val androidxTests = arrayOf(
-      "androidx.test:core:1.0.0-alpha2"
-  )
 
   private const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${VERSION.kotlin}"
-  private const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${VERSION.kotlin}"
   private const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${VERSION.kotlin}"
 
   private val rxjavas = arrayOf("io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1")
-
-  private val tests = arrayOf(
-      "junit:junit:4.12",
-      "org.mockito:mockito-core:2.10.0",
-      "org.assertj:assertj-core:3.8.0",
-      "com.nhaarman:mockito-kotlin-kt1.1:1.5.0"
-  )
 }
 
 private object Property: Properties() {
