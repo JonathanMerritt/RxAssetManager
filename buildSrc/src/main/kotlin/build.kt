@@ -1,7 +1,6 @@
-import java.io.File
+
 import java.time.LocalDateTime.now
 import java.time.format.DateTimeFormatter.BASIC_ISO_DATE
-import java.util.Properties
 
 /*
  *     Copyright 2018 Jonathan Merritt
@@ -66,8 +65,3 @@ object DEPENDENCY {
   )
 }
 
-private object Property : Properties() {
-  operator fun invoke(name: String): String = apply {
-    File("local.properties").run { if (exists()) inputStream().use(::load) }
-  }.getProperty(name)
-}
