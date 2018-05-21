@@ -21,55 +21,53 @@ import java.util.Properties
 
 @Suppress("unused")
 private object VERSION {
-  private const val NAME = "0.6.0"
-  private val CODE = NAME.replace(".", "").plus(now().format(BASIC_ISO_DATE)).toBigInteger()
+  private const val name = "0.6.0"
+  private val code = (name.replace(".", "") + now().format(BASIC_ISO_DATE)).toBigInteger()
 }
 
 @Suppress("unused")
 private object ANDROID {
-  private const val COMPILE = "android-P"
-  private const val TARGET = 27
-  private const val MIN = 17
-  private const val TOOLS = "28.0.0-rc2"
+  private const val compile = "android-P"
+  private const val target = 27
+  private const val min = 17
+  private const val buildTools = "28.0.0-rc2"
 }
 
 @Suppress("unused")
 private object PASSKEY {
-  private val BINTRAY = Property("PASSKEY_BINTRAY")
-  private val GPG = Property("PASSKEY_GPG")
-  private val MAVEN = Property("PASSKEY_MAVEN")
+  private val bintray = Property("PASSKEY_BINTRAY")
+  private val gpg = Property("PASSKEY_GPG")
+  private val maven = Property("PASSKEY_MAVEN")
 }
 
 @Suppress("unused")
 private object DEPENDENCY {
-  private const val vANDROID_X = "1.0.0-alpha1"
-  private const val vCONSTRAINTS = "1.1.0"
-  private const val vKOTLIN = "1.2.41"
+  internal object VERSION {
+    internal const val androidx = "1.0.0-alpha1"
+    internal const val constraints = "1.1.0"
+    internal const val kotlin = "1.2.41"
+  }
 
-  private const val APP_COMPAT = "androidx.appcompat:appcompat:$vANDROID_X"
-  private const val VIEW_PAGER = "androidx.viewpager:viewpager:$vANDROID_X"
-  private const val COORDINATOR = "androidx.coordinatorlayout:coordinatorlayout:$vANDROID_X"
-  private const val MATERIAL = "com.google.android.material:material:$vANDROID_X"
-  private val CONSTRAINTS = arrayOf(
-      "androidx.constraintlayout:constraintlayout:$vCONSTRAINTS",
-      "androidx.constraintlayout:constraintlayout-solver:$vCONSTRAINTS"
+  private const val appcompat = "androidx.appcompat:appcompat:${VERSION.androidx}"
+  private const val viewpager = "androidx.viewpager:viewpager:${VERSION.androidx}"
+  private const val coordinator = "androidx.coordinatorlayout:coordinatorlayout:${VERSION.androidx}"
+  private const val material = "com.google.android.material:material:${VERSION.androidx}"
+  private val constraints = arrayOf("androidx.constraintlayout:constraintlayout:${VERSION.constraints}",
+      "androidx.constraintlayout:constraintlayout-solver:${VERSION.constraints}"
   )
-  private const val ESPRESSO = "androidx.test.espresso:espresso-core:3.1.0-alpha2"
+  private const val espresso = "androidx.test.espresso:espresso-core:3.1.0-alpha2"
 
-  private val ANDROID_X_TESTS = arrayOf(
+  private val androidxTests = arrayOf(
       "androidx.test:core:1.0.0-alpha2"
   )
 
-  private const val KOTLIN = "org.jetbrains.kotlin:kotlin-stdlib:$vKOTLIN"
-  private const val KOTLIN_TEST= "org.jetbrains.kotlin:kotlin-test-junit:$vKOTLIN"
-  private const val KOTLIN_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:$vKOTLIN"
+  private const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${VERSION.kotlin}"
+  private const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${VERSION.kotlin}"
 
-  private val RX_JAVAS = arrayOf(
-      "io.reactivex.rxjava2:rxjava:2.1.7",
-      "io.reactivex.rxjava2:rxandroid:2.0.1"
-  )
+  private val rxjavas = arrayOf("io.reactivex.rxjava2:rxjava:2.1.7", "io.reactivex.rxjava2:rxandroid:2.0.1")
 
-  private val TESTS = arrayOf(
+
+  private val tests = arrayOf(
       "junit:junit:4.12",
       "org.mockito:mockito-core:2.10.0",
       "org.assertj:assertj-core:3.8.0",

@@ -16,11 +16,11 @@
 
 apply plugin : "com.jfrog.bintray"
 
-version = VERSION.NAME
+version = VERSION.name
 
 bintray {
   user = DEVELOPER
-  key = PASSKEY.BINTRAY
+  key = PASSKEY.bintray
   configurations = ["archives"]
   publish = true
 
@@ -36,20 +36,20 @@ bintray {
     publicDownloadNumbers = true
 
     version {
-      name = VERSION.NAME
+      name = VERSION.name
       released = new Date()
       desc = "Check - $URL/releases"
-      vcsTag = VERSION.NAME
+      vcsTag = VERSION.name
 
       gpg {
         sign = true
-        passphrase = PASSKEY.GPG
+        passphrase = PASSKEY.gpg
       }
 
       mavenCentralSync {
         sync = false
         user = DEVELOPER
-        password = PASSKEY.MAVEN
+        password = PASSKEY.maven
       }
     }
   }
