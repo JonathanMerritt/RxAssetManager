@@ -58,9 +58,9 @@ dependencies {
 
   implementation DEPENDENCY.appcompat
   implementation DEPENDENCY.viewpager
-  implementation DEPENDENCY.coordinator
+  implementation DEPENDENCY.coordinatorlayout
   implementation DEPENDENCY.material
-  implementation DEPENDENCY.constraints
+  implementation DEPENDENCY.constraintlayouts
 
   implementation DEPENDENCY.kotlin
 

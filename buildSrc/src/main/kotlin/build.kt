@@ -42,18 +42,21 @@ object PASSKEY {
 @Suppress("unused")
 object DEPENDENCY {
   object VERSION {
-    const val androidx = "1.0.0-alpha1"
-    const val constraints = "1.1.0"
+    const val appcompat = "1.0.0-alpha1"
+    const val viewpager = appcompat
+    const val coordinatorlayout = appcompat
+    const val material = appcompat
+    const val constraintlayout = "1.1.0"
     const val kotlin = "1.2.41"
   }
 
-  const val appcompat = "androidx.appcompat:appcompat:${VERSION.androidx}"
-  const val viewpager = "androidx.viewpager:viewpager:${VERSION.androidx}"
-  const val coordinator = "androidx.coordinatorlayout:coordinatorlayout:${VERSION.androidx}"
-  const val material = "com.google.android.material:material:${VERSION.androidx}"
-  val constraints = arrayOf(
-      "androidx.constraintlayout:constraintlayout:${VERSION.constraints}",
-      "androidx.constraintlayout:constraintlayout-solver:${VERSION.constraints}"
+  const val appcompat = "androidx.appcompat:appcompat:${VERSION.appcompat}"
+  const val viewpager = "androidx.viewpager:viewpager:${VERSION.viewpager}"
+  const val coordinatorlayout = "androidx.coordinatorlayout:coordinatorlayout:${VERSION.coordinatorlayout}"
+  const val material = "com.google.android.material:material:${VERSION.material}"
+  val constraintlayouts = arrayOf(
+      "androidx.constraintlayout:constraintlayout:${VERSION.constraintlayout}",
+      "androidx.constraintlayout:constraintlayout-solver:${VERSION.constraintlayout}"
   )
 
   const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${VERSION.kotlin}"
