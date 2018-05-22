@@ -17,8 +17,12 @@ import java.util.Properties
  *     limitations under the License.
  */
 
-object Property : Properties() {
-  operator fun invoke(name: String): String = apply {
-    File("local.properties").run { if (exists()) inputStream().use(::load) }
-  }.getProperty(name)
+sealed class Local : Properties() {
+  init {
+    apply { File("local.properties").run { if (exists()) inputStream().use(::load) } }
+  }
+
+  object Property : Local() {
+    operator fun invoke(name: String): String = getProperty(name)
+  }
 }
