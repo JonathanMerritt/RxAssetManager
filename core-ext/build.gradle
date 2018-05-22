@@ -58,9 +58,13 @@ dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
   api project(":core")
 
+  androidTestImplementation TESTDEPENDENCY.androidxTests
+
   implementation DEPENDENCY.kotlin
+  testImplementation TESTDEPENDENCY.kotlinTest
 
   implementation DEPENDENCY.rxjavas
+  testImplementation TESTDEPENDENCY.tests
 }
 
 apply from : "../gradle/dokka.gradle"

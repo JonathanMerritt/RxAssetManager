@@ -18,17 +18,20 @@
 @Suppress("unused")
 object TESTDEPENDENCY {
   object VERSION {
-    const val test = "1.0.0-alpha2"
+    const val core = "1.0.0-alpha2"
+    const val runner = "1.1.0-alpha2"
+    const val rules = runner
+
   }
 
   val androidxTests = arrayOf(
-      "androidx.test:core:${VERSION.test}",
-      "androidx.test:runner:${VERSION.test}",
-      "androidx.test:rules:${VERSION.test}"
+      "androidx.test:core:${VERSION.core}",
+      "androidx.test:runner:${VERSION.runner}",
+      "androidx.test:rules:${VERSION.rules}"
   )
   const val espresso = "androidx.test.espresso:espresso-core:3.1.0-alpha2"
 
-  const val kotlinTest = "org.jetbrains.kotlin:kotlin-test:${DEPENDENCY.VERSION.kotlin}"
+  const val kotlinTest = "org.jetbrains.kotlin:kotlin-test-junit:${DEPENDENCY.VERSION.kotlin}"
 
   val tests = arrayOf(
       "junit:junit:4.12",

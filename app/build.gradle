@@ -61,8 +61,11 @@ dependencies {
   implementation DEPENDENCY.coordinatorlayout
   implementation DEPENDENCY.material
   implementation DEPENDENCY.constraintlayouts
+  androidTestImplementation TESTDEPENDENCY.androidxTests
 
   implementation DEPENDENCY.kotlin
+  testImplementation TESTDEPENDENCY.kotlinTest
 
   implementation DEPENDENCY.rxjavas
+  testImplementation TESTDEPENDENCY.tests
 }

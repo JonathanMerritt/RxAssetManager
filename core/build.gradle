@@ -57,6 +57,8 @@ android {
 dependencies {
   implementation fileTree(dir : "libs", include : ["*.jar"])
 
+  androidTestImplementation TESTDEPENDENCY.androidxTests
+
   implementation DEPENDENCY.kotlin
   testImplementation TESTDEPENDENCY.kotlinTest
 
