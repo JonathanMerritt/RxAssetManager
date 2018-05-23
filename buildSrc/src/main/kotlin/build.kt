@@ -60,7 +60,7 @@ object DEPENDENCY {
       "androidx.constraintlayout:constraintlayout-solver:${VERSION.constraintlayout}"
   )
 
-  const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib:${VERSION.kotlin}"
+  const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${VERSION.kotlin}"
   const val kotlinPlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${VERSION.kotlin}"
 
   val rxjavas = arrayOf(
